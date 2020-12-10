@@ -1,3 +1,5 @@
+// https://vn.spoj.com/PTIT/problems/P136SUMC/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,40 +19,24 @@ void print(T &x)
         cout << it << " ";
     }
     cout << "\n";
-}
-
-ll a, b, MOD;
-
-ll solve(ll b)
+};
+ll rev(ll a)
 {
-    if (b == 0)
+    ll tmp = 0;
+    while (a > 0)
     {
-        if (a == 0)
-            return 0;
-        else
-            return 1;
+        tmp *= 10;
+        tmp += a % 10;
+        a /= 10;
     }
-    if (b == 1)
-    {
-        return a % MOD;
-    }
-    ll tmp = (solve(b / 2) % MOD);
-    if (b % 2 == 0)
-    {
-
-        return (tmp * tmp) % MOD;
-    }
-    else
-    {
-        return (((tmp * tmp) % MOD) * (a % MOD)) % MOD;
-    }
+    return tmp;
 }
 
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cin >> a >> b >> MOD;
-    ll ans = solve(b);
-    cout << ans;
+    ll a, b;
+    cin >> a >> b;
+    cout << max(rev(a), rev(b));
 }

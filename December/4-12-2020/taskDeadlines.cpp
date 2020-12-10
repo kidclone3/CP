@@ -17,40 +17,28 @@ void print(T &x)
         cout << it << " ";
     }
     cout << "\n";
-}
+};
 
-ll a, b, MOD;
-
-ll solve(ll b)
-{
-    if (b == 0)
-    {
-        if (a == 0)
-            return 0;
-        else
-            return 1;
-    }
-    if (b == 1)
-    {
-        return a % MOD;
-    }
-    ll tmp = (solve(b / 2) % MOD);
-    if (b % 2 == 0)
-    {
-
-        return (tmp * tmp) % MOD;
-    }
-    else
-    {
-        return (((tmp * tmp) % MOD) * (a % MOD)) % MOD;
-    }
-}
-
+vector<pair<ll, ll>> vt;
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cin >> a >> b >> MOD;
-    ll ans = solve(b);
-    cout << ans;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        ll a, b;
+        cin >> a >> b;
+        vt.pb({a, b});
+    }
+    sort(all(vt));
+    ll t, sum;
+    t = sum = 0;
+    for (auto &it : vt)
+    {
+        t += it.first;
+        sum += it.second - t;
+    }
+    cout << sum;
 }

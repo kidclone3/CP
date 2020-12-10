@@ -19,22 +19,17 @@ void print(T &x)
     cout << "\n";
 }
 
-ll a, b, MOD;
+const ll MOD = 1000000007;
 
-ll solve(ll b)
+ll solve(ll a, ll b)
 {
     if (b == 0)
-    {
-        if (a == 0)
-            return 0;
-        else
-            return 1;
-    }
+        return 1;
     if (b == 1)
     {
         return a % MOD;
     }
-    ll tmp = (solve(b / 2) % MOD);
+    ll tmp = (solve(a, b / 2) % MOD);
     if (b % 2 == 0)
     {
 
@@ -50,7 +45,14 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cin >> a >> b >> MOD;
-    ll ans = solve(b);
-    cout << ans;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        ll a, b, c;
+        cin >> a >> b >> c;
+        ll ans1 = solve(b, c);
+        ll ans2 = solve(a, ans1);
+        cout << ans2 << "\n";
+    }
 }
