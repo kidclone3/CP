@@ -20,9 +20,23 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int a, b;
+int k;
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    cin >> a >> b >> k;
+    ll ans = 0;
+    for (int i = sqrt(a) - 1; i*i <= b; ++i) {
+        for (int j = pow(a, 0.3333333333) - 1; j*j*j <= b; ++j) {
+            if (i*i >= a && j*j*j >=a) {
+            if (abs(i*i - j*j*j) <= k)
+            {
+                ans ++;
+            }
+            }
+        }
+    }
+    cout<<ans;
 }

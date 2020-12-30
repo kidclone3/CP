@@ -48,11 +48,11 @@ ll partition(vi &room, vi &mark, ll left, ll right)
         {
             i++;
             swap(room[i], room[j]);
-            swap(mark[i], mark[j]);
+            // swap(mark[i], mark[j]);
         }
     }
     swap(room[i + 1], room[right]);
-    swap(mark[i + 1], mark[right]);
+    // swap(mark[i + 1], mark[right]);
     return i + 1;
 }
 void qsort(vi &room, vi &mark, ll left, ll right)

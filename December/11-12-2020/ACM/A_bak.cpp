@@ -5,8 +5,6 @@ using namespace std;
 #define vi vector<int>
 #define ll long long
 #define all(x) x.begin(), x.end()
-#define F_OR(i, a, b, step) for (int i=(a); (step)>0? i<(b) : i>(b); i+=(step))
-#define EACH(x, a) for(auto& x: a)
 #define BUG(x)                    \
     {                             \
         cout << #x << " = " << x; \
@@ -25,4 +23,14 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int n;
+    cin>>n;
+    bitset<8> m(n);
+    int k=0;
+    for(int i=1; i<=n; ++i) {
+        k^=i;
+    }
+    bitset<8> kk(k);
+    cout<<kk<<" "<<k<<"\n";
+    cout<<m;
 }
