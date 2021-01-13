@@ -23,6 +23,7 @@ void print(T &x)
 
 int main()
 {
+<<<<<<< HEAD
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     vector<int> arr = {1,5,2,4,3};
@@ -39,3 +40,17 @@ int main()
     cout<<"\n";
     print(arr);
 }
+=======
+    int a = 8;
+    a = 9;
+    cin >> a;
+    bool x = 0 & 1;
+    cout << x;
+    // int b = ceil(pow(a, 0.33333));
+    // cout << b;
+}
+// No chua ra cua so de nhap du lieu :(
+// magic :D
+// không ctrl C được luôn
+// ủ/a sao không nhập được
+>>>>>>> 3834b015461c5890a8e1fb2fc84e9b0c349e74bd
