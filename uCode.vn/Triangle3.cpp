@@ -21,21 +21,24 @@ void print(T &x)
     cout << "\n";
 };
 
+void solve(int a, int b, int c) {
+    if ( (a+b) <= c || (a+c) <= b || (b+c) <= a) {
+        cout<<"-1.00";
+    }
+    else {
+        float p = (a + b + c) / 2.0;
+        float res = sqrt(p * (p - a) * (p - b) * (p - c));
+        cout.precision(2);
+        cout.setf(ios::fixed, ios::floatfield);
+        cout << res;
+    }
+}
+
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    vector<int> arr = {1,5,2,4,3};
-    // print(arr);
-    // sort(arr.begin(), arr.end());
-    // sort(all(arr));
-    F_OR(i, 0, arr.size(), 1) {
-        cout<<arr[i]<<" ";
-    }
-    cout<<"\n";
-    for (auto it:arr) {
-        cout<<it<<" ";
-    }
-    cout<<"\n";
-    print(arr);
+    int a,b,c; 
+    cin >> a >> b >> c;
+    solve(a, b, c);
 }

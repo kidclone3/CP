@@ -20,21 +20,22 @@ void print(T &x)
     }
     cout << "\n";
 };
-int a, b;
-int k;
+ll a, b;
+ll k;
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     cin >> a >> b >> k;
     ll ans = 0;
-    for (int i = sqrt(a) - 1; i*i <= b; ++i) {
-        for (int j = pow(a, 0.3333333333) - 1; j*j*j <= b; ++j) {
-            if (i*i >= a && j*j*j >=a) {
-            if (abs(i*i - j*j*j) <= k)
-            {
-                ans ++;
-            }
+    ll xa = ceil(sqrt(a));
+    ll ya = ceil(pow(a, 1.0/3));
+    ll xb = floor(sqrt(b));
+    ll yb = floor(pow(b, 1.0/3));
+    for (ll i = xa; i<= xb; ++i) {
+        for (ll j = ya; j<= yb; ++i) {
+            if (abs(i - j) <=k) {
+                ans++;
             }
         }
     }

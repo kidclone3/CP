@@ -20,22 +20,26 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int a[1000+5][1000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    vector<int> arr = {1,5,2,4,3};
-    // print(arr);
-    // sort(arr.begin(), arr.end());
-    // sort(all(arr));
-    F_OR(i, 0, arr.size(), 1) {
-        cout<<arr[i]<<" ";
+    int n;
+    cin >> n;
+    F_OR(i, 0, n, 1) {
+        F_OR(j, 0, n, 1) {
+            cin>>a[i][j];
+        }
     }
-    cout<<"\n";
-    for (auto it:arr) {
-        cout<<it<<" ";
+    ll sum = 0;
+    F_OR(i, 0, n, 1) {
+        F_OR(j, 0, n, 1) {
+            if (j > i && j < n-1-i) {
+                sum+=a[i][j];
+            }
+        }
+        if (i == n/2) break;
     }
-    cout<<"\n";
-    print(arr);
+    cout << sum;
 }

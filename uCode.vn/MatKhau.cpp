@@ -27,6 +27,14 @@ ll mod (ll ans) {
     }
     return ans;
 }
+ll StringToInt(string a) {
+    ll res =0;
+    for (auto & it:a) {
+        res*=10;
+        res += it - '0';
+    }
+    return res;
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
@@ -41,17 +49,17 @@ int main()
         }
         else {
             if (temp != "") {
-                ans = mod(ans);
-                ans *= stol(temp);
-                ans = mod(ans);
+                ans %= MOD;
+                ans *= StringToInt(temp) % MOD;
+                ans %= MOD;
                 temp = "";
             }
         }
     }
     if (temp != "") {
-        ans = mod(ans);
-        ans *= stol(temp);
-        ans = mod(ans);
+        ans %= MOD;
+        ans *= StringToInt(temp) % MOD;
+        ans %= MOD;
     }
     cout << ans;
 }

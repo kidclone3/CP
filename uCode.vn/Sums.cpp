@@ -20,22 +20,20 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int a[100000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    vector<int> arr = {1,5,2,4,3};
-    // print(arr);
-    // sort(arr.begin(), arr.end());
-    // sort(all(arr));
-    F_OR(i, 0, arr.size(), 1) {
-        cout<<arr[i]<<" ";
+    int n, s;
+    cin >> n >> s;
+    F_OR(i, 0, n, 1) {
+        cin>>a[i];
     }
-    cout<<"\n";
-    for (auto it:arr) {
-        cout<<it<<" ";
+    sort(a,a+n);
+    int i=0;
+    int j=n-1;
+    while (true) {
+        if (a[i] + a[j] >)
     }
-    cout<<"\n";
-    print(arr);
 }

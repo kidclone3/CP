@@ -20,22 +20,32 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int a[1000+5], f[1000+5];
+bool check(int a, int b) {
+    if ((a>0 && b<0) || (a<0 && b>0)) {
+        return true;
+    }
+    return false;
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    vector<int> arr = {1,5,2,4,3};
-    // print(arr);
-    // sort(arr.begin(), arr.end());
-    // sort(all(arr));
-    F_OR(i, 0, arr.size(), 1) {
-        cout<<arr[i]<<" ";
+    int n;
+    int M=0;
+    cin>>n; 
+    F_OR(i, 0, n, 1) {
+        cin>>a[i];
     }
-    cout<<"\n";
-    for (auto it:arr) {
-        cout<<it<<" ";
+    f[0]=1;
+    F_OR(i, 1, n, 1) {
+        if (check(a[i], a[i-1])) {
+            f[i]=f[i-1] + 1;
+        }
+        else {
+            f[i]= 1;
+        }
+        M=max(M, f[i]);
     }
-    cout<<"\n";
-    print(arr);
+    cout<<M;
 }
