@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+
 #define pb push_back
 #define vi vector<int>
 #define ll long long
@@ -20,21 +20,31 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int a[1000 + 5][1000 + 5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int N = 1000;
-    // cin >> N;
-    // process(0);
-    string s="";
-    F_OR(i,1, N, 1) {
-        s+=to_string(i);
+    int n;
+    cin >> n;
+    F_OR(i, 1, n + 1, 1)
+    {
+        F_OR(j, 1, n + 1, 1)
+        {
+            cin >> a[i][j];
+        }
     }
-    int n; cin >> n;
-    F_OR(i, n-3, n+3, 1) {
-        cout<<s[i-1];
+    int x, y;
+    cin >> x >> y;
+    int ans = 0;
+    // Duyet nhung o cung hang, cot.
+    F_OR(i, 1, n+1, 1) {
+        if (i!=x) {
+            ans += a[i][y];
+        }
+        if (i!=y) {
+            ans += a[x][i];
+        }
     }
-    cout<<"\n"<<s[n-1];
+    cout << ans;
 }
