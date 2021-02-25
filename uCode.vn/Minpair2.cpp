@@ -20,15 +20,30 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
+ll a[100000+5];
+ll solve (ll *a, int n) {
+    if (a[0] < 0) {
+        if (a[n-1] < 0)
+        {
+            return a[n-1] * a[n-2];
+        }
+        else {
+            return a[0] * a[n-1];
+        }
     }
-    else return gcd (b, a%b);
+    else {
+        return a[0] * a[1];
+    }
 }
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    int n;
+    cin >> n;
+    F_OR(i, 0, n, 1) {
+        cin >> a[i];
+    }
+    sort(a, a+n);
+    cout << solve (a, n);
 }

@@ -20,15 +20,18 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
-}
+ll a[100000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    int n;
+    cin >> n;
+    F_OR(i, 0, n, 1) {
+        cin >> a[i];
+    }
+    sort(a,a+n);
+    ll tail = a[n-1] * a[n-2];
+    ll head = a[0] * a[1];
+    cout << max(head, tail);
 }

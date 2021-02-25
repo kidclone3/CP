@@ -21,14 +21,23 @@ void print(T &x)
     cout << "\n";
 };
 ll gcd (ll a, ll b) {
-    if (b==0) {
+    if (b == 0) 
+    {
         return a;
     }
-    else return gcd (b, a%b);
+    return gcd(b, a%b);
 }
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    vector<ll> vt;
+    ll a, b, c;
+    cin >> a >> b >> c;
+    vt.pb(a);
+    vt.pb(b);
+    vt.pb(c);
+    sort(all(vt));
+    ll tmp = gcd(vt[2], vt[1]);
+    cout << gcd(max(vt[0], tmp), min(vt[0], tmp));
 }

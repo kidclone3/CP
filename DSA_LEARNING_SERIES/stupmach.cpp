@@ -20,15 +20,24 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
-}
+ll a[1000000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        ll sum = 0;
+        ll m = LLONG_MAX;
+        F_OR(i, 0, n, 1) {
+            cin >> a[i];
+            m= min(m, a[i]);
+            sum+=m;
+        }
+        cout << sum <<"\n";
+    }
+
 }

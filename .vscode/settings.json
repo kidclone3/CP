@@ -83,4 +83,5 @@
         "stop_token": "cpp"
     },
     "editor.fontLigatures": true,
+    "vim.useSystemClipboard": true,
 }

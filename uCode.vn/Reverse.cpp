@@ -20,15 +20,19 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
-}
+
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    string n;
+    cin >> n;
+    string ans = "";
+    F_OR(i, n.size()-1, -1, -1) {
+        ans+=n[i];
+    }
+    while (*ans.begin() == '0') {
+        ans.erase(ans.begin());
+    }
+    cout<<ans;
 }

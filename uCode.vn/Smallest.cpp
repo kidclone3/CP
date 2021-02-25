@@ -20,15 +20,19 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
-}
+int a[100000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
-}
+    int n;
+    cin >> n;
+    multiset<pair<int,int>> pp;
+    F_OR(i, 0, n, 1) {
+        cin >> a[i];
+        pp.insert(make_pair(a[i], i+1));
+    }
+    auto it = pp.begin();
+    cout << it++->second <<" "<< it->second;
+
+} 

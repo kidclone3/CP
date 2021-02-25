@@ -20,15 +20,22 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
-}
+ll f[1000+5];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    int n,q;
+    cin >> n >> q;
+    F_OR(i, 0, q, 1) {
+    	int l, r;
+	ll k;
+	cin >> l >> r >> k;
+	f[l] +=k;
+	f[r+1] -=k;
+    }
+    F_OR(i, 1, n+1, 1) {
+	    f[i]+=f[i-1];
+	    cout << f[i]<< " ";
+    }	
 }

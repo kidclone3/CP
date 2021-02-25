@@ -30,5 +30,21 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    ll n, a, b;
+    cin >> n >> a >> b;
+    ll gcd_ab = gcd(a, b);
+    ll ans = 0;
+    if (gcd_ab == 1){
+        ans = n/a + n/b;
+    }
+    else {
+        ll lcm_ab = (a*b) / gcd_ab;
+        if (lcm_ab > 0) {
+            ans = n/a + n/b;
+        }
+        else {
+            ans = n/a + n/b - n/lcm_ab;
+        }
+    }
+    cout << ans;
 }

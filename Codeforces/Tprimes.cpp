@@ -20,15 +20,28 @@ void print(T &x)
     }
     cout << "\n";
 };
-ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
+bool a[10000000+5];
+vector<int> spawn;
+void sieve(int n) {
+    if (n < 2) return;
+    a[0] = a[1] = 0;
+    for (int i=2; i*i < n; ++i) {
+        if (a[i] == 0) {
+            for (int j = i*2; j <= n; j += i) {
+                a[j] = 1;
+            }
+        }
     }
-    else return gcd (b, a%b);
+    for (int i=2; i<=n; ++i) {
+        if (a[i] == 0) {
+            spawn.pb(i);
+        }
+    }
 }
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    sieve(10000000);
+    cout<<spawn.size();
 }

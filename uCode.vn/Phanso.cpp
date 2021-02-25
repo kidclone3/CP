@@ -21,14 +21,22 @@ void print(T &x)
     cout << "\n";
 };
 ll gcd (ll a, ll b) {
-    if (b==0) {
-        return a;
-    }
-    else return gcd (b, a%b);
+    if (b==0) return a;
+    return (gcd(b, a%b));
 }
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    cout << gcd (8,6);
+    ll a, b, c, d;
+    cin >> a >> b >> c >> d;
+    // numberator: Tu so
+    // denominator: Mau so
+    ll numberator, denominator;
+    numberator = a * d + b * c;
+    denominator = b * d;
+    ll div = gcd(max(numberator, denominator), min(numberator, denominator));
+    numberator /= div;
+    denominator /=div;
+    cout << numberator << " " << denominator;
 }
