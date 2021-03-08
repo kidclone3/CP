@@ -20,9 +20,18 @@ void print(T &x)
     }
     cout << "\n";
 };
+int k = INT_MAX;
+bool check(int target, int k) {
+    bitset<30> bt(target);
+    string tmp = bt.to_string();
+    for()
 
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int x;
+    cin >> x;
+    
 }

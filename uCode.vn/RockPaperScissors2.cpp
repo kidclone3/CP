@@ -20,9 +20,33 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+int isWin(string a, string b) {
+    int ans = 0;
+    F_OR(i, 0, a.size(), 1) {
+        if (a[i] == b[i]) ans++;
+        if (a[i] == 'R' && b[i] == 'S') ans+=2;
+        if (a[i] == 'S' && b[i] == 'P') ans+=2;
+        if (a[i] == 'P' && b[i] == 'R') ans+=2;
+    }
+    return ans;
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int n;
+    cin >> n;
+    string ucoder;
+    cin >> ucoder;
+    int q;
+    cin >> q;
+    vector<string> myvector;
+    ll ans = 0;
+    F_OR(i, 0, q, 1) {
+        string tmp;
+        cin >> tmp;
+        myvector.pb(tmp);
+        ans+=isWin(ucoder, tmp);
+    }
+    cout << ans;
 }

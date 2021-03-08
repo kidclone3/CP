@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #define pb push_back
 #define vi vector<int>
 #define ll long long
@@ -20,37 +19,43 @@ void print(T &x)
     }
     cout << "\n";
 };
+ll power(ll base, ll k) {
+    if (k==1) return base;
+    if (k==0) return 1;
+    ll tmp = power(base, k/2);
+    if (k&1) {
+        return tmp*tmp*base;
+    }
+    else return tmp*tmp;
+}
+char solve(ll k) {
+    int n = 1;
+    ll up= power(10, n-1) * 9 * n;
+    while (k>=up) {
+        k -= up;
+        n++;
+        up= power(10, n-1) * 9 * n;
+    }
+    if (k==0) return '9';
+    ll down = power(10, n-1);
+    ll ans = down + (k-1) / n;
+    k -= (k-1)/n * n;
+    string s = to_string(ans); 
+    // cout << s <<"\n";
+    return s[k-1];
 
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-   
-    vector <ll> sz; // length of the string in i th digit
-    sz.pb(0);
-    ll sum = 0;
-    F_OR(i, 1, 18, 1) {
-        sum += (ll)9 * (ll) pow(10, i-1) * i;
-        sz.pb(sum);
-    }
-    // print(sz);
+    // freopen("inp.txt", "r", stdin);
+    // freopen("2.txt", "w", stdout);
     int q;
     cin >> q;
-    for (int i = 0; i<q; ++i) {
-        ll inp;
-        cin >> inp;
-        ll k = inp;
-        int digit = lower_bound(all(sz), inp) - sz.begin();
-        // cout<<digit<<'\n';
-        if (digit==1) {
-            cout<< inp <<"\n";
-            continue;
-        }
-        k -= sz[digit-1];
-        k++;
-        ll temp = (ll) pow(10, digit-1) + k/digit - 1;
-        string s = to_string(temp);
-        cout<< s[k % digit] << '\n';
-
+    while(q--) {
+        ll k;
+        cin >> k;
+        cout << solve(k) << "\n";
     }
 }

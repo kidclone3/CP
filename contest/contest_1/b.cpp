@@ -25,4 +25,16 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    string s;
+    cin >> s;
+    // cout << s <<"\n";
+    int i = 0, j = s.size() -1 ;
+    while (s[i] != 'A') {
+        i++;
+    }
+    while (s[j] != 'Z') {
+        j--;
+    }
+ // cout << i << " " << j << "\n";
+    cout << j - i + 1;
 }

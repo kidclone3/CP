@@ -25,4 +25,26 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    ll a, b, c, d, x;
+    cin >> a >> b >> c >> d >> x;
+    ll l1, l2, ll1, ll2;
+    l1 = x / (a+b) * (a-b);
+    l2 = x / (c+d) * (c-d);
+    ll1 = x % (a+b);
+    ll2 = x % (c+d);
+    if (ll1 <= a) {
+        l1 += ll1;
+    }
+    else {
+        l1 += 2*a - ll1;
+    }
+    if (ll2 <= c) {
+        l2 += ll2;
+    }
+    else {
+        l2 += 2*c - ll2;
+    }
+    if (l1 > l2) cout << "Ucoder";
+    else if (l1 == l2) cout << "Tied";
+    else cout << "Ucodi";
 }

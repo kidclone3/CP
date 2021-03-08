@@ -25,4 +25,18 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    string n, m;
+    cin >> n >> m;
+    vector<int> firstChar;
+    F_OR(i, 0, n.size()- m.size() + 1, 1) {
+        if (n[i] == m[0]) {
+            firstChar.pb(i);
+        }
+    }
+    int count = 0;
+    EACH(it, firstChar) {
+        if (m==n.substr(it, m.size())) count++;
+    }
+    cout << count;
+    
 }

@@ -25,4 +25,12 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    string n, m;
+    cin >> n >> m;
+    map<string, int> mymap;
+    F_OR(i, 0, n.size()- m.size() + 1, 1) {
+        string tmp = n.substr(i, m.size());
+        mymap[tmp]++;
+    }
+    cout<<mymap[m];
 }
