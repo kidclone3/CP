@@ -1,2 +1,1 @@
-# Master
-Đây mới là phần code MUAHAHAHAHA
+#Welcome to Duy's codes. Have a good experience with bunch of templated codes.
