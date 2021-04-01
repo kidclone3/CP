@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch cb03",
+            "request": "launch",
+            "mainClass": "luyencode.cb03",
+            "projectName": "code_dbe333cb"
+        },
+        {
+            "type": "java",
             "name": "Launch data",
             "request": "launch",
             "mainClass": "java.data",

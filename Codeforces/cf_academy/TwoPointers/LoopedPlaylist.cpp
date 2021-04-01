@@ -5,8 +5,8 @@ using namespace std;
 #define vi vector<int>
 #define ll long long
 #define all(x) x.begin(), x.end()
-#define F_OR(i, a, b, step) for (int i=(a); (step)>0? i<(b) : i>(b); i+=(step))
-#define EACH(x, a) for(auto& x: a)
+#define F_OR(i, a, b, step) for (int i = (a); (step) > 0 ? i < (b) : i > (b); i += (step))
+#define EACH(x, a) for (auto &x : a)
 #define BUG(x)                    \
     {                             \
         cout << #x << " = " << x; \
@@ -21,36 +21,36 @@ void print(T &x)
     cout << "\n";
 };
 
-int main()
+int main(int argc, char const *argv[])
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int n;
-    ll k;
-    cin >> n >> k;
-    vector<ll> a(n);
-    F_OR(i, 0, n, 1) {
+
+    long long int n, p;
+    cin >> n >> p;
+    long long int a[n];
+    for (int i = 0; i < n; i++)
+    {
         cin >> a[i];
     }
-    ll ans = 0;
-    int m_min = INT_MAX, pos, l=0;
-    F_OR(r, 0, n ,1) {
-        ans += a[r];
-        while(ans-a[l] >= k) {
-            ans-=a[l];
-            if ((r-l+1)<m_min) {
-                m_min = r-l+1;
-                pos=l;
-            }
-            l++;
+
+    long long int r = 0;
+    long long int sum = 0;
+    long long int s = 0;
+    for (int l = 0; l < n; l++)
+    {
+        while ( r < n && s+a[r] <=p)
+        {
+            s += a[r];
+            r++;
         }
-        if (ans>=k) {
-            if ((r-l+1)<m_min) {
-                m_min = r-l+1;
-            }
-            pos=l;
-        }
+
+        // if (s >= p)
+        // {
+            long long int dau = 1;
+            long long int cuoi = r-l;
+            long long int so = cuoi - dau + 1;
+            sum+=(dau+cuoi)*so/2;
+        // }
+        s -= a[l];
     }
-    if (m_min == INT_MAX) cout<<"-1";
-    else cout<< pos + 1 << " " << m_min;
+    cout << sum;
 }
