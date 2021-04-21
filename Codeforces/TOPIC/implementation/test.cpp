@@ -24,44 +24,27 @@ void print(T &x)
     }
     cout << "\n";
 };
+
 void solve();
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     // IO;
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    solve();
 }
 void solve() {
     int n;
     cin >> n;
-    int a[n];
-    map<int, int> mp;
-    FOR(i, n) {
-        cin >> a[i];
-        mp[a[i]]++;
+    bool hate = 1;
+    string s = "";
+    while(n) {
+        if (hate) s+= "I hate";
+        else s+= "I love";
+        if (n != 1) s+= " that ";
+        else s+= " it ";
+        hate = !hate;
+        n--;
     }
-    if (n == 1) {
-        cout << 0 <<"\n";
-        return;
-    }
-    int ans = 0;
-    EACH(it, mp) {
-        if (it.second >= 1) {
-            if (it.second - 1 >= mp.size()) {
-                ans = max(ans, (int) mp.size());
-            }
-            else if (it.second >= mp.size() - 1) {
-                ans = max(ans, (int) mp.size() - 1);
-            }
-            else {
-                ans = max(ans, it.second);
-            }
-        }
-    }
-    cout << ans <<'\n';
+    cout << s;
 }
