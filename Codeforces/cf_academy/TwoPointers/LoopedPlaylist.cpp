@@ -5,8 +5,8 @@ using namespace std;
 #define vi vector<int>
 #define ll long long
 #define all(x) x.begin(), x.end()
-#define F_OR(i, a, b, step) for (int i = (a); (step) > 0 ? i < (b) : i > (b); i += (step))
-#define EACH(x, a) for (auto &x : a)
+#define F_OR(i, a, b, step) for (int i=(a); (step)>0? i<(b) : i>(b); i+=(step))
+#define EACH(x, a) for(auto& x: a)
 #define BUG(x)                    \
     {                             \
         cout << #x << " = " << x; \
@@ -20,37 +20,42 @@ void print(T &x)
     }
     cout << "\n";
 };
-
-int main(int argc, char const *argv[])
+const int N = 1e3 + 5;
+ll a[N];
+int main()
 {
-
-    long long int n, p;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    // freopen("input.txt", "r", stdin);
+    int n;
+    ll p;
     cin >> n >> p;
-    long long int a[n];
-    for (int i = 0; i < n; i++)
-    {
+    ll sum = 0;
+    F_OR(i, 0, n, 1) {
         cin >> a[i];
+        sum+=a[i];
     }
-
-    long long int r = 0;
-    long long int sum = 0;
-    long long int s = 0;
-    for (int l = 0; l < n; l++)
-    {
-        while ( r < n && s+a[r] <=p)
-        {
-            s += a[r];
-            r++;
+    ll pp = p/sum;
+    p %= sum;
+    int l = 0;
+    int l_min, length;
+    l_min = INT_MAX;
+    length = INT_MAX;
+    ll sum2 = 0;
+    F_OR(r, 0, 2*n, 1) {
+        sum2+=a[r%n];
+        while(sum2 - (ll) a[l%n] >= p) {
+            sum2-= (ll) a[l%n];
+            l++;
         }
-
-        // if (s >= p)
-        // {
-            long long int dau = 1;
-            long long int cuoi = r-l;
-            long long int so = cuoi - dau + 1;
-            sum+=(dau+cuoi)*so/2;
-        // }
-        s -= a[l];
+        if (sum2>=p) {
+            if (length > r-l+1) {
+                l_min = l%n;
+                length = r-l+1;
+            }
+        }
     }
-    cout << sum;
+    cout<<l_min + 1 << " " << length + pp*n;
+    
+
 }

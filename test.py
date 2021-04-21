@@ -1,2 +1,4 @@
-a, b = [int(i) for i in input().split()]
-print(a+b)
+n = int(input())
+sum = 0
+for i in range (1, n+1):
+

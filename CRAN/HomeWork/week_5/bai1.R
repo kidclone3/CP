@@ -22,6 +22,9 @@ data2 = input[input$Segment=="Midmarket", ]
 #c. Lập bảng tần số cho product
 productTable = table(input$Product)
 print(productTable)
+print(sizeof(productTable))
 
 #d. Tính tổng doanh thu (Gross.sales) của từng loại mặt hàng (Product). 
-aggregate()
+product = input[, c(3,8)]
+productName = productTable[1,]
+

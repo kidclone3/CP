@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -21,28 +20,31 @@ void print(T &x)
     }
     cout << "\n";
 };
-
+const int N = 1e5+5;
+ll a[N];
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // freopen("input.txt", "r", stdin);
     int n;
     ll s;
     cin >> n >> s;
-    vector<ll> a(n);
-    F_OR(i, 0, n ,1) {
+    F_OR(i, 0, n, 1) {
         cin >> a[i];
     }
-    ll sum = 0LL, res = 0LL;
-    int l = 0;
-    F_OR(r, 0, n, 1) {
-        if(a[r] <= s) res++;
-        sum+=a[r];
-        while(sum >= s) {
-            sum-=a[l];
+    ll sum =0; 
+    ll l = 0;
+    ll res = 0;
+    for(ll r = 0; r < n; ++r) {
+        sum += a[r];
+        while(sum>s) {
+            sum -= a[l];
             l++;
         }
-        if (sum <= s) res+= (ll)((r-l + 1) + 2) * (r-l) / 2; 
+        if (sum<=s) {
+            res += (r-l+1) * (r-l + 2) / 2;
+        }
     }
     cout<<res;
 }

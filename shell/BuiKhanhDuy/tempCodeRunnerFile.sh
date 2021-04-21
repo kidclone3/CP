@@ -1,0 +1,1 @@
+cat file.txt | grep -E -i "^T.*(this is an exercise){2}$"
