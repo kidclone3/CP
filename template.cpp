@@ -5,8 +5,8 @@ using namespace std;
 #define vi vector<int>
 #define ll long long
 #define all(x) x.begin(), x.end()
-#define F_OR(i, a) for (int i = 0; i < (a); ++i) 
-#define F_OR(i, a, b) for (int i=(a); i < (b); ++i)
+#define FOR(i, a) for (int i = 0; i < (a); ++i) 
+#define F0R(i, a, b) for (int i=(a); i < (b); ++i)
 #define F_OR(i, a, b, step) for (int i=(a); (step)>0? i<(b) : i>(b); i+=(step))
 #define EACH(x, a) for(auto& x: a)
 #define BUG(x)                    \
