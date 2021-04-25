@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/82/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,23 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    vector<string> ans = {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+    int j = 0;
+    // n -= 5 * (1 << i);
+    int ii = 0;
+    while( n - (5 * (1 << ii)) > 0) {
+        n -= (5 * (1 << ii++));
+    }
+    // i++;
+    while(n > (1<<ii)) {
+        n-= (1 << ii);
+        j++;
+    }
+    cout << ans[j];
 }

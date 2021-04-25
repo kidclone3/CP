@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/483/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,24 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    ll l,r;
+    cin >> l >> r;
+    if (r-l+1 <=1) {
+        cout << "-1";
+        return;
+    } 
+    for (ll i = l; i<= r-2; i++) {
+        for (ll j = i+1; j <= r-1; j++) {
+            for (ll z = j+1; z <= r; z++) {
+                if (__gcd(i, j) == 1 && __gcd(j, z) == 1 && __gcd(i, z) != 1) {
+                    cout << i << " " << j << " " <<z;
+                    return;
+                }
+            }
+        }
+    }
+    cout << "-1";
 }

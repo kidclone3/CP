@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1333/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,46 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    int a[n], b[n];
+    map<int, int> mp;
+    FOR(i, n) {
+        cin >> a[i];
+    } 
+    FOR(i, n) {
+        cin >> b[i];
+    }
+    if (a[0] != b[0]) {
+        cout << "NO\n";
+        return;
+    }
+    FOR(i, n) {
+        if (a[i] == b[i]) {
+            mp[a[i]]++;
+            continue;
+        }
+        if (a[i] > b[i]) {
+            if (mp[-1] == 0) {
+                cout << "NO\n";
+                return;
+            }
+        }
+        if (a[i] < b[i]) {
+            if (mp[1] == 0) {
+                cout << "NO\n";
+                return;
+            }
+        }
+        mp[a[i]] ++;
+    }
+    cout << "YES\n";
 }

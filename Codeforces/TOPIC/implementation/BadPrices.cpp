@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1213/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,28 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
 void solve() {
-    
+    int n ;
+    cin >> n;
+    vector<int> a(n);
+    FOR(i, n) {
+        cin >> a[i];
+    } 
+    reverse(all(a));
+    int mx = INT_MAX;
+    int ans = 0;
+    EACH(it, a) {
+        if (it > mx) ans++;
+        else {
+            mx = it;
+        }
+    }
+    cout << ans <<"\n";
 }

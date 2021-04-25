@@ -29,7 +29,19 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    solve();
 }
 void solve() {
-    
+    int c[5]; 
+    int sum = 0;
+    FOR(i, 5) {
+        cin >> c[i];
+        sum += c[i];
+    }
+    if (sum == 0) {
+        cout << -1;
+        return;
+    }
+    (sum % 5) ? (cout << "-1") : (cout << sum / 5);
 }

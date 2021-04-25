@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/651/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,21 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    solve();
 }
 void solve() {
-    
+    int a, b;
+    cin >> a >> b;
+    int ans = 0;
+    while(true) {
+        int mn, mx;
+        mn = min(a,b);
+        mx = max(a,b);
+        if (mn == 0 || mx < 2) break;
+        a = mn + 1;
+        b = mx - 2;
+        ans++;
+    } 
+    cout << ans;
 }

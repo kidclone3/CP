@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/463/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,33 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    int a[n+1];
+    int ans = 0;
+    int h = 0;
+    FOR1(i, n) {
+        cin >> a[i];
+    } 
+    ans = a[1];
+    a[0] = a[1];
+    // h = a[0];
+    F_OR(i, 0, n, 1) {
+        if (a[i] - a[i+1] >= 0) {
+            h+= a[i] - a[i+1];
+        }
+        else {
+            if (a[i] + h >= a[i+1]) {
+                h -= a[i+1] - a[i];
+            }
+            else {
+                ans+= a[i+1] - a[i] - h;
+                h = 0;
+            }
+        }
+    }
+    cout << ans;
 }

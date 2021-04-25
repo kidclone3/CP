@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1481/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -24,12 +25,44 @@ void print(T &x)
     }
     cout << "\n";
 };
+
 void solve();
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
 void solve() {
-    
+    int n, k;
+    cin >> n >> k;
+    int a[n+1];
+    FOR1(i, n) {
+        cin >> a[i];
+    } 
+    while(k) {
+        bool stopped = false;
+        int last = 0;
+        F_OR(i, 1, n, 1) {
+            if (a[i] < a[i+1]) {
+                a[i] ++;
+                k--;
+                if (k==0) last = i;
+                stopped = true;
+                break;
+            }
+        }
+        if (k==0) {
+            cout << last <<'\n';
+            return;
+        }
+        if (stopped) continue;
+        cout << "-1\n";
+        return;
+    }
+    // cout << "-1\n";
 }

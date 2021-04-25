@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/719/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,38 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    int a[n];
+    FOR(i, n) {
+        cin >> a[i];
+    } 
+    if (n==1) {
+        if (a[0] == 15) {
+            cout << "DOWN";
+            return;
+        }
+        else if (a[0] == 0) {
+            cout << "UP";
+            return;
+        }
+        else {
+            cout << "-1";
+            return;
+        }
+    }
+    else {
+        bool now;
+        // 0 = Down, 1 = Up;
+        F_OR(i, 0, n, 1) {
+            if (a[i] > a[i-1]) now = 1;
+            else now = 0;
+        }
+        if (a[n-1] == 15) now = 0;
+        if (a[n-1] == 0) now = 1;
+        cout << (now ? "UP" : "DOWN");
+    }
 }

@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/492/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,19 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    ll n, l;
+    cin >> n >> l;
+    vector<ll> a(n);
+    FOR(i, n) {
+        cin >> a[i];
+    } 
+    sort(all(a));
+    ll maxdist = LLONG_MIN;
+    FOR(i, n-1) {
+        maxdist = max(maxdist, a[i+1] - a[i]);
+    }
+    printf("%.10f", max((double) maxdist/2, (double) max(a[0], l-a[n-1])));
 }

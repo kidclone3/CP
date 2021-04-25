@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/467/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -29,7 +30,21 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    solve();
 }
 void solve() {
-    
+    int n, m, k;
+    cin >> n >> m >> k;
+    int a[m];
+    FOR(i, m) {
+        cin >> a[i];
+    } 
+    int fedor;
+    cin >> fedor;
+    int ans = 0;
+    FOR(i, m) {
+        if (__builtin_popcount(fedor ^ a[i]) <= k) ans++;
+    }
+    cout << ans;
 }

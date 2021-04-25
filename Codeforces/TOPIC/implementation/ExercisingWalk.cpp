@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1332/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -24,12 +25,35 @@ void print(T &x)
     }
     cout << "\n";
 };
-void solve();
+bool solve();
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // IO;
+    int t;
+    cin >> t;
+    while(t--) {
+        cout << (solve() ? "YES\n" : "NO\n");
+    }
 }
-void solve() {
-    
+bool solve() {
+    ll a, b, c, d;
+    ll x, y, x1, y1, x2, y2;
+    cin >> a >> b >> c >> d;
+    cin >> x >> y >> x1 >> y1 >> x2 >> y2;
+    x += b-a;
+    y += d-c;
+    // Phan thua theo truc x phai nam trong [x1, x2]
+    // Phan thua theo truc y phai nam trong [y1, y2]
+    if (a+b > 0 && x1 == x2) {
+        return false;
+    }
+    else if (c + d > 0 && y1 == y2) {
+        return false;
+    }
+    else if (x1 <= x && x <= x2 && y1 <= y && y <= y2) {
+        return true;
+    }
+    else return false;
 }

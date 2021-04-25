@@ -1,3 +1,4 @@
+// https://oj.vnoi.info/problem/binary
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -24,12 +25,38 @@ void print(T &x)
     }
     cout << "\n";
 };
-void solve();
+const int N = 100;
+int c[N][N];
+void solve(int n, int k);
+int nCk(int n, int k) {
+    if (k == 0 || k == n) {
+        c[n][k] = 1;
+        return 1; 
+    }
+    if (k==1 || k == n-1) {
+        c[n][k] == n;
+        return n;
+    }
+    if (c[n][k] != 0) return c[n][k];
+    else {
+        c[n][k] = nCk(n-1, k-1) + nCk(n-1, k);
+        return c[n][k];
+    }
+
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-}
-void solve() {
+    // IO;
+    int n, k;
+    while(cin >> n >> k) {
+        solve(n, k);
+    }
     
+}
+void solve(int n, int k) {
+    int i = 0;
+    while((1<<(i+1)) < n) i++;
+    cout << nCk(i, k) << "\n";
 }
