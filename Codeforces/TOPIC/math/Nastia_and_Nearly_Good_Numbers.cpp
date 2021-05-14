@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/1521/problem/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -34,7 +35,30 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
 void solve() {
-    
+    ll a, b;
+    cin >> a >> b;
+    if (b == 1) {
+        cout << "NO\n";
+        return;
+    }
+        cout << "YES\n";
+        if (a == b && a == 1) {
+            cout << "1 2 3";
+        }
+        else if (b == 2) {
+            cout << a <<" "<< a * 3 << " " << a * 4 << "\n";
+        }
+        else if (b == 1) {
+            cout << a << " " << a*2 << " " << a * 3 << "\n";
+        }
+        else {
+            cout << a << " " << a*(b-1) << " " << a * b << "\n";
+        }
 }

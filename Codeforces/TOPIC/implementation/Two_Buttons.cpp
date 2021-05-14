@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/520/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 #define GET5(a, b, c, d, e, ...) e
 #define F_ORC(...) GET5(__VA_ARGS__, F_OR4, F_OR3, F_OR2, F_OR1)
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
+#define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
 template <class T>
 #define IO                                  \
@@ -34,7 +36,22 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    int n, m;
+    cin >> n >> m;
+    // thuat toan cha can` dung dfs;
+    int ans = 0;
+    while(m != n) {
+        if (m > n && !(m&1)) {
+            m/=2;
+        }
+        else {
+            m++;
+        }
+        ans++;
+    }
+    cout << ans;
 }
+

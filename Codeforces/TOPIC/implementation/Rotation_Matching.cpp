@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1365/C
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -34,7 +35,33 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    map<int, int> mp1, mp2, mp3;
+    FOR(n) {
+        int tmp;
+        cin >> tmp;
+        mp1[tmp] = i;
+    }
+    FOR(n) {
+        int tmp2;
+        cin >> tmp2;
+        mp2[tmp2] = i;
+    }
+    EACH(it, mp1) {
+        if (it.second >= mp2[it.first]) {
+            mp3[it.second - mp2[it.first]]++;
+        }
+        else {
+            mp3[it.second + n - mp2[it.first]]++;
+        }
+    }
+    int mx = -1e9;
+    EACH(it, mp3) {
+        mx = max(mx, it.second); 
+    }
+    cout << mx;
 }

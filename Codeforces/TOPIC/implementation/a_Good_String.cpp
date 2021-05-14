@@ -30,11 +30,30 @@ void print(T &x)
     cout << "\n";
 };
 void solve();
+int f(string s, char c) {
+    if (s.size() == 1) {
+        return !(s[0] == c);
+    }
+    string s1(s.begin(), s.begin() + s.size()/2);
+    string s2(s.begin() + s.size()/2, s.end());
+    int ans1 = s1.size() - count(all(s1), c) + f(s2, c+1);
+    int ans2 = s2.size() - count(all(s2), c) + f(s1, c+1);
+    return min(ans1, ans2);
+}
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    cout << f(s, 'a') <<"\n";
 }

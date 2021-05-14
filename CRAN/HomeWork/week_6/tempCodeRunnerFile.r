@@ -1,0 +1,1 @@
+barplot(table(cong$sex), main = "Bieu do cot cho gioi tinh", ylab = "So lan xuat hien")

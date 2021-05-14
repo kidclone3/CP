@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1175/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -25,16 +26,43 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it.first << " " << it.second <<'\n';
     }
     cout << "\n";
 };
 void solve();
+const ll INF = 1LL << 32LL;
 int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    int l;
+    cin >> l;
+    ll curr = 0;
+    stack<ll> st;
+    st.push(1);
+    FOR(l) {
+        string s;
+        cin >> s;
+        if (s == "for") {
+            ll x;
+            cin >> x;
+            st.push(min(INF, st.top() * x));
+        }
+        else if (s == "end") {
+            st.pop();
+        }
+        else {
+            curr += st.top();
+        }
+    }
+    if (curr >= INF) {
+        cout << "OVERFLOW!!!";
+    }
+    else {
+        cout << curr;
+    }
 }

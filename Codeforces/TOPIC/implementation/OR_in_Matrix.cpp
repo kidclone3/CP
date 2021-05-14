@@ -34,7 +34,47 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    // cout << (solve() ? "YES" : "NO");
+    solve();
 }
 void solve() {
-    
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> a(n, vector<int> (m, 1));
+    int b[n][m];
+    FOR(i, n) {
+        FOR(j, m) {
+            cin >> b[i][j];
+            if (b[i][j] == 0) {
+                FOR(z, n) {
+                    a[z][j] = 0;
+                }
+                FOR(z, m) {
+                    a[i][z] = 0;
+                }
+            }
+        }
+    }
+    // EACH(it, a) {
+    //     print(it);
+    // }
+    FOR(i, n) {
+        FOR(j, m) {
+            int tmp = 0;
+            FOR(z, n) {
+                tmp |= a[z][j];
+            }
+            FOR(z, m) {
+                tmp |= a[i][z];
+            }
+            if (tmp != b[i][j]) {
+                cout << "NO";
+                return;
+            };
+        }
+    }
+    cout << "YES\n";
+    EACH(it, a) {
+        print(it);
+    }
 }
