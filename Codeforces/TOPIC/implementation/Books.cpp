@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/279/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -35,7 +36,29 @@ int main()
 {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
+    solve();
 }
 void solve() {
-    
+    ll n, t;
+    cin >> n >> t;
+    vector<ll> dp(n, 0);
+    vector<ll> a(n);
+    FOR(i, n) {
+        cin >> a[i];
+    }
+    dp[0] = a[0];
+    FOR(i, 1, n) {
+        dp[i] = dp[i-1] + a[i];
+    }
+    // ta can xu ly a1 truoc.
+    int tmp = upper_bound(all(dp), t) - dp.begin();
+    int ans = tmp;
+    t += dp[0];
+    FOR(i, 1, n) {
+        int tmp2 = upper_bound(all(dp), t) - dp.begin();
+        tmp2 -= i;
+        ans = max(ans, tmp2);
+        t = t - dp[i-1] + dp[i];
+    }
+    cout << ans;
 }

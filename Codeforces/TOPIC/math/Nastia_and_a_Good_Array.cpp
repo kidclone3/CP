@@ -1,7 +1,7 @@
 // https://codeforces.com/contest/1521/problem/B
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 #define pb push_back
 #define vi vector<int>
 #define ll long long
@@ -43,8 +43,8 @@ int main()
 }
 void solve() {
     int n;
-    // ll mx = 1e9 + 7;
-    ll mx = 1073676287;
+    ll mx = 1e9 + 7;
+    ll mx2 = 1073676287;
     cin >> n;    
     vector<ll> a(n);
     FOR(n) {
@@ -56,37 +56,34 @@ void solve() {
     }
     vector<ll> b = a;
     vector<tuple<ll, ll, ll, ll>> ans;
-    // if (__gcd(b[0], b[1]) != 1) {
-    //     if (b[0] == min(b[0], b[1])) {
-    //         b[1] = mx;
-    //         ans.pb({0, 1, b[0], mx});
-    //     }
-    //     else {
-    //         b[0] = mx;
-    //         ans.pb({0, 1, mx, b[1]});
-    //     }
-    // }
-    for (int i = 0; i < n-1; ++i) {
-        if (__gcd(b[i], b[i+1]) != 1) {
-            // if (b[i] == min(b[i-1], b[i])) {
-            //     if (b[i-2] == mx) {
-            //         b[i-1] = mx2;
-            //         ans.pb({i-1, i, mx2, b[i]});
-            //     }
-            //     else {
-            //         b[i-1] = mx;
-            //         ans.pb({i-1, i, mx, b[i]});
-            //     }
-            //     // cout << "i\t" << i << "\n";
-            // }
-            // else {
-            //     b[i] = mx;
-            //     ans.pb({i, i-1, mx, b[i-1]});
-            //     // cout << "i-1\n" << i << "\n";
-            // }
-            b[i] = min (b[i], b[i+1]);
-            b[i+1] = mx;
-            ans.pb({i, i+1, b[i], mx});
+    if (__gcd(b[0], b[1]) != 1) {
+        if (b[0] == min(b[0], b[1])) {
+            b[1] = mx;
+            ans.pb({0, 1, b[0], mx});
+        }
+        else {
+            b[0] = mx;
+            ans.pb({0, 1, mx, b[1]});
+        }
+    }
+    for (int i = 2; i < n; ++i) {
+        if (__gcd(b[i], b[i-1]) != 1) {
+            if (b[i] == min(b[i-1], b[i])) {
+                if (b[i-2] == mx) {
+                    b[i-1] = mx2;
+                    ans.pb({i-1, i, mx2, b[i]});
+                }
+                else {
+                    b[i-1] = mx;
+                    ans.pb({i-1, i, mx, b[i]});
+                }
+                // cout << "i\t" << i << "\n";
+            }
+            else {
+                b[i] = mx;
+                ans.pb({i, i-1, mx, b[i-1]});
+                // cout << "i-1\n" << i << "\n";
+            }
         }
     }
     cout << ans.size() << "\n";
