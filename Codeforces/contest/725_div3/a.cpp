@@ -1,4 +1,3 @@
-// https://codeforces.com/problemset/problem/1363/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,12 +16,13 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
@@ -34,8 +34,7 @@ void print(T &x)
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+    IOS;
     int t;
     cin >> t;
     while(t--) {
@@ -43,19 +42,27 @@ int main()
     }
 }
 void solve() {
-    string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int mx = 0, mn = 1e9;
+    int p1, p2;
+    FOR(n) {
+        cin >> a[i];
+        if (a[i] > mx) {
+            mx = a[i];
+            p1=i;
+        }
+        if (a[i] < mn) {
+            mn = a[i];
+            p2=i;
+        }
     }
-    cout << ans << '\n';
-    
+    if (p1 > p2) {
+        
+            cout << min(min(p1+1, (n-p1) + (p2+1)), n-p2) <<"\n";
+    }
+    else{
+        cout << min(min(p2 + 1, (n-p2) + (p1+1)), n-p1) << '\n';
+    }
 }

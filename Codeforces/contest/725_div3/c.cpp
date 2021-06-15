@@ -1,4 +1,3 @@
-// https://codeforces.com/problemset/problem/1363/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,12 +16,13 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
@@ -34,8 +34,7 @@ void print(T &x)
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+    IOS;
     int t;
     cin >> t;
     while(t--) {
@@ -43,19 +42,21 @@ int main()
     }
 }
 void solve() {
-    string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
+    ll n, l, r;
+    cin >> n >> l >> r;
+    vector<ll> a(n);
+    FOR(n) {
+        cin >> a[i];
     }
-    cout << ans << '\n';
-    
+    sort(all(a));
+    ll ans=0;
+    FOR(i, n-1) {
+        if (2 * a[i] > r) break;
+        auto it1 = lower_bound(a.begin() + i + 1, a.end(), l-a[i]);
+        if(it1 == a.end()) continue;
+        auto it2 = upper_bound(a.begin() + i + 1, a.end(), r-a[i]);
+        if (it2 == a.end() || *it2 > r-a[i]) it2--;
+        ans += (it2 - it1 + 1);
+    }
+    cout << ans << "\n";
 }

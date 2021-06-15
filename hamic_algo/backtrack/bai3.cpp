@@ -1,4 +1,3 @@
-// https://codeforces.com/problemset/problem/1363/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,45 +16,44 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it << "\n";
     }
     cout << "\n";
 };
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    IOS;
+    solve();
 }
 void solve() {
     string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
+    cin >> s;
+    set<string> ans;
+    // We can make bruteforce here.
+    for(int i = 1; i < (int) pow(2, (int) s.size()); ++i) {
+        string tmp = "";
+        int j = 0;
+        while((1<<j) <= i) {
+            if (i & (1<<j)) {
+                tmp.push_back(s[j]);
+            }
+            j++;
+        }
+        ans.insert(tmp);
     }
-    cout << ans << '\n';
-    
+    // cout << s << "\n";
+    cout << ans.size() << "\n";
+    print(ans);
 }

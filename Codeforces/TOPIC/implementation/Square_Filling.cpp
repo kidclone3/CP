@@ -1,4 +1,3 @@
-// https://codeforces.com/problemset/problem/1363/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,12 +16,13 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
@@ -34,28 +34,40 @@ void print(T &x)
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    IOS;
+    solve();
 }
 void solve() {
-    string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
+    int n, m;
+    cin >> n >> m;
+    vector<vector<int>> a(n, vector<int>(m, 0));
+    vector<vector<int>> b(n, vector<int>(m, 0));
+    FOR(i, n) {
+        FOR(j, m) {
+            cin >> a[i][j];
+        }
     }
-    cout << ans << '\n';
-    
+    if (a == b) {
+        cout << "0";
+        return;
+    }
+    vector<pair<int, int>> ans;
+    FOR(i, n-1) {
+        FOR(j, m-1) {
+            if (a[i][j] == a[i][j+1] && a[i][j] == a[i+1][j] && a[i+1][j] == a[i+1][j+1] && a[i][j] == 1) {
+                b[i][j] = b[i+1][j] = b[i][j+1] = b[i+1][j+1] = 1;
+                ans.push_back({i+1, j+1});
+            }
+        }
+    }
+    if (a==b) {
+        cout << ans.size() << '\n';
+        EACH(it, ans) {
+            cout << it.first << " " << it.second <<"\n";
+        }
+    }
+    else {
+        cout << "-1";
+    }
+
 }

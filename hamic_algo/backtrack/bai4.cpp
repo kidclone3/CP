@@ -1,4 +1,3 @@
-// https://codeforces.com/problemset/problem/1363/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,45 +16,56 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it << "\n";
     }
     cout << "\n";
 };
+int N;
+string s("");
+vector<string> ans;
+void out() {
+    int sum = 0;
+    int cnt = count(all(s), '(');
+    if (cnt != (int) s.size() / 2) return;
+    EACH(it, s) {
+        if (sum < 0) return;
+        if (it == '(') sum++;
+        else sum--;
+    }
+    if (sum == 0) ans.push_back(s);
+}
+void backtrack(int n) {
+    if (n == 2 * N) {
+        out();
+    }
+    else {
+        for(char i = '('; i <= ')'; ++i) {
+            s.push_back(i);
+            backtrack(n+1);
+            s.pop_back();
+        }
+    }
+}
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    IOS;
+    solve();
 }
 void solve() {
-    string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
-    }
-    cout << ans << '\n';
-    
+    cin >> N;   
+    backtrack(0);
+    cout << ans.size() << "\n";
+    print(ans);
 }

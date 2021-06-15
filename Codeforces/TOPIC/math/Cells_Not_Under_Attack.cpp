@@ -1,4 +1,4 @@
-// https://codeforces.com/problemset/problem/1363/B
+// https://codeforces.com/problemset/problem/701/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -17,12 +17,13 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-template <class T>
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
         freopen("output.txt", "w", stdout); \
     }
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+template <class T>
 void print(T &x)
 {
     for (auto &it : x)
@@ -34,28 +35,30 @@ void print(T &x)
 void solve();
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    int t;
-    cin >> t;
-    while(t--) {
-        solve();
-    }
+    IOS;
+    solve();
 }
 void solve() {
-    string s;
-    cin >> s; 
-    int suf0, suf1;
-    suf0 = count(all(s), '0');
-    suf1 = count(all(s), '1');
-    int ans = min(suf0, suf1); // Make whole string 0/1
-    int pref0, pref1;
-    pref0 = pref1 = 0;
-    EACH(it, s) {
-        pref0 += (it == '0'), suf0 -= (it == '0');
-        pref1 += (it == '1'), suf1 -= (it == '1');
-        ans = min(ans, min(pref0 + suf1, pref1 + suf0));
-    }
-    cout << ans << '\n';
-    
+    ll n, m;
+    cin >> n >> m;
+    set<ll> rows, cols;
+    ll attackedCeils = 0;
+    FOR(m) {
+        ll x, y;
+        cin >> x >> y;
+        if (rows.find(x) != rows.end() && cols.find(y) != cols.end()) {
+        }
+        else if (rows.find(x) != rows.end()) {
+            attackedCeils += n - (ll) rows.size();
+        }
+        else if (cols.find(y) != cols.end()) {
+            attackedCeils += n - (ll) cols.size();
+        }
+        else {
+            attackedCeils += 2 * n - 1 - (ll)cols.size() - (ll)rows.size();
+        }
+        rows.insert(x);
+        cols.insert(y);
+        cout << (attackedCeils <= n*n ? n * n - attackedCeils : 0)<< " ";
+    } 
 }

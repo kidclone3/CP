@@ -39,7 +39,7 @@ find_phone_number() {
     echo "Xong. Ket qua duoc luu vao file \"phone_list.txt\""
 
 }
-kdialog --backtitle "Bai tap 1" --title "Menu" 1 "Check folder" 2 "Counting files and folder" 3 "Counting processes running" 4 "Printing lines with \"th\"" 5 "Find all things with letter \"b\"" 6 "Find all numbers divisible to 5" 7 "Find HCM phone numbers" 0 "exit" 2>/tmp/menuitem.$$
+dialog --backtitle "Bai tap 1" --title "Menu" 1 "Check folder" 2 "Counting files and folder" 3 "Counting processes running" 4 "Printing lines with \"th\"" 5 "Find all things with letter \"b\"" 6 "Find all numbers divisible to 5" 7 "Find HCM phone numbers" 0 "exit" 2>/tmp/menuitem.$$
 inp=`cat /tmp/menuitem.$$`
 # while(true)
 # do

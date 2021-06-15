@@ -1,3 +1,4 @@
+// https://cses.fi/problemset/task/1158
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -27,15 +28,52 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it.first << " " << it.second << "\n";
     }
     cout << "\n";
 };
+const int X = 1e5 + 5;
+const int N = 1e3 +5;
+int dp[X][N];
 void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n, x;
+    cin >> n >> x;
+    vector<int> h(n), s(n);
+    int mn = INT_MAX;
+    FOR(n) {
+        cin >> h[i];
+        mn = min(mn, h[i]);
+    } 
+    vector<pair<int, int>> tmp(n);
+    FOR(n) {
+        cin >> s[i];
+        tmp[i] = {h[i], s[i]};
+    }
+    sort(all(tmp));
+    FOR(n) {
+        tie(h[i], s[i]) = tmp[i];
+    }
+    for (int i = mn; i <= x; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (i - h[j] >= 0) {
+                if (dp[i-h[j]][n] + s[j] > dp[i][n] && dp[i-h[j]][j] == 0) {
+                    dp[i][j] = 1;
+                    dp[i-h[j]][j] = 1;
+                    dp[i][n] = dp[i-h[j]][n] + s[j];
+                    // cout << j << " " << dp[i][n] << "\n";
+                }
+            }
+        }
+    }
+    int mx = 0;
+    for(int i = x; i >= 1; --i) {
+        mx = max(mx, dp[i][n]);
+    }
+    cout << mx;
 }

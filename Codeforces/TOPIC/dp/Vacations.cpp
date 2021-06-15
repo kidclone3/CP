@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/698/problem/A
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -35,7 +36,41 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    FOR(i, n) {
+        cin >> a[i];
+    }
+    vector<vector<int>> dp(n, vector(3, (int) 1e9)) ;
+    dp[0][0] = 1;
+    if (a[0] == 3) {
+        dp[0][1] = dp[0][2] = 0;
+    }
+    else if (a[0] == 0){
+        
+    }
+    else {
+        dp[0][a[0]] = 0;
+    }
+    for (int i = 1 ; i < n; ++i) {
+        dp[i][0] = 1 + min({dp[i-1][0], dp[i-1][1], dp[i-1][2]});
+        if (a[i] == 0) {
+            dp[i][0] = dp[i][1] = dp[i][2] = 1 + min({dp[i-1][0], dp[i-1][1], dp[i-1][2]});
+        }
+        if (a[i] == 1) {
+            dp[i][1] = min(dp[i-1][0], dp[i-1][2]);
+        }
+        if (a[i] == 2) {
+            dp[i][2] = min(dp[i-1][0], dp[i-1][1]);
+        }
+        if (a[i] == 3) {
+            dp[i][1] = min(dp[i-1][0], dp[i-1][2]);
+            dp[i][2] = min(dp[i-1][0], dp[i-1][1]);
+        }
+    }
+    cout << min({dp[n-1][0], dp[n-1][1], dp[n-1][2]});
 }

@@ -6,18 +6,7 @@ using namespace std;
 
 int main() {
     
-	int a[] = {2, 3, 1, 5 , 4};
-    vector<int> b = {2, 3, 1, 5, 4};
-    sort(a, a+3);
-    sort(b.begin(), b.begin() + 3);
-    cout << "a:\n";
-    for (int i = 0; i < 5; i++) {
-        cout << a[i] << " " ;
-    }
-    cout << "\nb:\n";
-    for (int it : b) {
-        cout << it << " ";
-    }
+    
     // for (auto it : b) {
     //     cout << it << " ";
     // }
