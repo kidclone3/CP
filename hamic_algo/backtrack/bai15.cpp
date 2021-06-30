@@ -3,9 +3,7 @@ using namespace std;
 
 #define pb push_back
 #define vi vector<int>
-#define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -37,7 +35,38 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    string s;
+    cin >> s;
+    int n = s.size();
+    int j = n-1;
+    int cnt = 0;
+    FOR(i, n) {
+        if (s[i] == 'C') {
+            while(j > i && s[j] == 'C') {
+                j--;
+            }
+            if (j > i) {
+                swap(s[i], s[j]);
+                cnt++;
+            }
+            else break;
+        }
+    } 
+    j = n-1;
+    FOR(i, n) {
+        if (s[i] == 'B') {
+            while(j > i && s[j] != 'A') {
+                j--;
+            }
+            if (j > i) {
+                swap(s[i], s[j]);
+                cnt++;
+            }
+            else break;
+        }
+    }
+    cout << cnt;
 }

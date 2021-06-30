@@ -3,9 +3,7 @@ using namespace std;
 
 #define pb push_back
 #define vi vector<int>
-#define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -33,11 +31,50 @@ void print(T &x)
     }
     cout << "\n";
 };
+int n, m;
 void solve();
+int backtrack_itr(int i, int sum, vector<vi> a);
+
 int main()
 {
     IOS;
+    solve();   
+}
+int backtrack_itr(int i, int sum, vector<vi> a) {
+    int sum1 = sum;
+        for(int j = 0; (1 << j) <= i; ++j) {
+            if ((1<<j) & i) {
+                if (j < n) {
+                    // neu < n thi la chuyen doi o rows
+                    FOR(z, m) {
+                        sum1 += (!a[j][z] ? 1 : -1);
+                        a[j][z] ^= 1;
+                    }
+                }
+                else {
+                    FOR(z, n) {
+                        sum1 += (!a[z][j-n] ? 1 : -1);
+                        a[z][j-n] ^= 1;
+                    }
+                }
+            }
+        }
+    return sum1;
 }
 void solve() {
-    
+    cin >> n >> m;
+    vector<vi> a(n, vi(m));
+    int sum = 0;
+    FOR(n) {
+        FOR(j, m) {
+            cin >> a[i][j];
+            sum += a[i][j];
+        }
+    }
+    int mx = sum;
+    for (int i = 1; i < (1<<(n+m)); i++)
+    {
+        mx = max(mx, backtrack_itr(i, sum, a));
+    }
+    cout << mx;
 }

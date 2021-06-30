@@ -3,9 +3,7 @@ using namespace std;
 
 #define pb push_back
 #define vi vector<int>
-#define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -37,7 +35,40 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n, d;
+    cin >> n >> d;
+    vi a(n);
+    multiset<int> st;
+    FOR(n) {
+        cin >> a[i];
+        st.insert(a[i]);
+    } 
+    sort(all(a));
+    if (a.back() > d) {
+        cout << -1;
+        return;
+    }
+    vector<vi> ans;
+    for(auto it = st.rbegin(); it != st.rend(); ++it) {
+        int sum = d - *it;
+        vi tmp;
+        tmp.push_back(*it);
+        auto next = st.upper_bound(sum);
+        while (next != st.begin()) {
+            next--;
+            sum -= *next;
+            tmp.push_back(*next);
+            st.erase(next);
+            next = st.upper_bound(sum);
+        }
+        sort(all(tmp));
+        ans.push_back(tmp);
+    }
+    cout << ans.size() << "\n";
+    EACH(it, ans) {
+        print(it);
+    }
 }

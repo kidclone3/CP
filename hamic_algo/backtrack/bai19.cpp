@@ -37,7 +37,27 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    FOR(i, (1<<20))  {
+        int tmp = 1;
+        for(int j = 1; (1<<j) <= i; ++j) {
+            if ((1<<j) & i) {
+                tmp *= 2;
+            }
+            else tmp /= 3;
+        }
+        if (tmp == n) {
+            string ans = "1";
+            for(int j = 1; (1<<j) <= i; ++j) {
+                if ((1<<j) & i) ans+="*2";
+                else ans+="/3";
+            }   
+            cout << ans << '\n';
+            return; 
+        }
+    }
 }

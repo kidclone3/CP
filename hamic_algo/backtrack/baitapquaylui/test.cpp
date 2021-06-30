@@ -5,7 +5,6 @@ using namespace std;
 #define vi vector<int>
 #define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -33,10 +32,26 @@ void print(T &x)
     }
     cout << "\n";
 };
+pair<int, int> operator+ (const pair<int, int>& a, const pair<int, int>& b) {
+    // const pair<int, int> ans = 
+    return make_pair(a.first + b.first, a.second + b.second); 
+}
+pair<int, int> operator+= (pair<int, int>& a, const pair<int, int>& b) {
+    // const pair<int, int> ans = 
+    // return make_pair(a.first + b.first, a.second + b.second); 
+    a.first += b.first;
+    a.second += b.second;
+    return a;
+}
 void solve();
 int main()
 {
     IOS;
+    pair<int, int> p1 = {1, 2}, p2 = {2, 3}; //, p3 = p1 + p2;
+    auto p3 = p1 += p2;
+    cout << p3.first << " " << p3.second << "\n"; 
+    cout << p1.first << " " << p1.second; 
+
 }
 void solve() {
     

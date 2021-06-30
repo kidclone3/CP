@@ -37,7 +37,44 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n, k;
+    cin >> n >> k;
+    vector<pair<int, pii>> a(n);
+    FOR(n) {
+        int l, r;
+        cin >> l >> r;
+        a[i] = {r, {l, i}};
+        // theo thứ tự bi, ai, i
+    }
+    sort(all(a));
+    // Tách ra 1 mảng b cho khỏe
+    vi b(n);
+    FOR(n) {
+        b[i] = a[i].first;
+    }
+    // đầu tiên cần tìm vị trí của r.
+    int r = upper_bound(all(b), b[0] + k) - b.begin() - 1;
+    multiset<pii> st; // chứa ai trong đoạn b[i], b[i]+k
+    FOR(i, r+1) {
+        st.insert(a[i].second);
+    }
+    int mx = st.rbegin()->first - st.begin()->first;
+    pii pos ={st.begin()->second, st.rbegin()->second};
+    // Ok, bắt đầu dùng two pointer.
+    FOR(i, 1, n){
+        st.erase(a[i-1].second);
+        int rr = upper_bound(all(b), b[i] + k) - b.begin() - 1;
+        for(; r <= rr; ++r) {
+            st.insert(a[r].second);
+        }
+        int tmp = st.rbegin()->first - st.begin()->first;        
+        if (tmp > mx) {
+            mx = tmp;
+            pos ={st.begin()->second, st.rbegin()->second};
+        }
+    }
+    cout << pos.first << " " << pos.second;
 }

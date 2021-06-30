@@ -32,28 +32,58 @@ void print(T &x)
     cout << "\n";
 };
 void solve();
+int N;
+vector<string> grid;
+bool check(int x, int y) {
+    int dx[] = {0, -1, 1};
+    int dy[] = {-1, -1, -1};
+    auto inside = [&] (int i, int j) {
+        return 0 <= i && i < N && 0 <= j && j < N;
+    };
+    FOR(z, 3) {
+        int i = x, j = y;
+        while(inside(i, j)) {
+            if (grid[i][j] == '1') return false;
+            i += dx[z];
+            j += dy[z];
+        }
+    }
+    return true;
+}
+vector<vector<string>> ans;
+void out(){
+    ans.push_back(grid);
+}
+void backtrack(int k) {
+    if (k == N) {
+        out();
+    }
+    else {
+        FOR(i, N) {
+            // We will put the queen from left to right, up to bottom.
+            if (grid[i][k] == '0') {
+                if (check(i, k)) {
+                    grid[i][k] = '1';
+                    backtrack(k+1);
+                    grid[i][k] = '0';
+                }
+            }
+        }
+    }
+}
+
 int main()
 {
     IOS;
+    // Bài toán xếp 8 quân hậu nổi tiếng
     solve();
 }
 void solve() {
-    string s;
-    cin >> s;
-    set<string> ans;
-    // We can make bruteforce here.
-    for(int i = 1; i < (1<<(int)s.size()); ++i) {
-        string tmp = "";
-        int j = 0;
-        while((1<<j) <= i) {
-            if (i & (1<<j)) {
-                tmp.push_back(s[j]);
-            }
-            j++;
-        }
-        ans.insert(tmp);
+    cin >> N;
+    grid.resize(N, string(N, '0'));
+    backtrack(0);
+    cout << ans.size() << '\n';
+    EACH(it, ans) {
+        print(it);
     }
-    // cout << s << "\n";
-    cout << ans.size() << "\n";
-    print(ans);
 }

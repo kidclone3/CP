@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main() {
-    int r = 0;
-    while(r--) {
-        cout << "YES\n";
-    }
+    int i = (1>0 & 1 > 0 & );
+    cout << i;
 }

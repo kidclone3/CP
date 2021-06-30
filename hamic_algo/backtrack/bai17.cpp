@@ -5,7 +5,7 @@ using namespace std;
 #define vi vector<int>
 #define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
+#define pii pair<int,int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -29,15 +29,44 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << "{" << it.first << ", " << it.second << "}, ";
     }
     cout << "\n";
 };
+int operator/ (int a, pii b) {
+    double tmp = 1.0*b.first/b.second;
+    return (int) ceil(a/tmp);
+}
+pii operator-= (pii& _p1, const pii& _p2) {
+    int top = _p1.first * _p2.second - _p1.second * _p2.first;
+    int bot = _p1.second * _p2.second;
+    int tmp = __gcd(top, bot);
+    top /= tmp, bot /= tmp;
+    _p1 = {top, bot};
+    return {top, bot};
+}
 void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    pii inp;
+    cin >> inp.first >> inp.second;
+    vector<pii> ans;
+    if (inp.first == 1) ans.push_back(inp);
+    else {
+        while(true) {
+            int bot = 1 / inp;
+            ans.push_back({1, bot});
+            inp -= {1, bot};
+            if (inp.first == 1) {
+                ans.push_back(inp);
+                break;
+            }
+        }
+    }
+    cout << ans.size() << "\n";
+    print(ans);
 }

@@ -5,7 +5,6 @@ using namespace std;
 #define vi vector<int>
 #define vb vector<bool>
 #define ll long long
-#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -34,10 +33,38 @@ void print(T &x)
     cout << "\n";
 };
 void solve();
+int N, K;
+vi tmp;
+vector<vi> ans;
+vb check;
+void out() {
+    ans.push_back(tmp);
+}
+void combination(int k, int start) {
+    if (k == K) {
+        out();
+    }
+    FOR(i, start, N) {
+        if (!check[i]) {
+            tmp.push_back(i+1);
+            check[i] = 1;
+            combination(k+1, i+1);
+            check[i] = 0;
+            tmp.pop_back();
+        }
+    }
+}
+
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    // Liet ke to hop nCk.
+    cin >> N >> K;
+    check.resize(N);
+    combination(0, 0);
+    cout << ans.size() <<'\n';
+    EACH(it, ans) print(it);
 }

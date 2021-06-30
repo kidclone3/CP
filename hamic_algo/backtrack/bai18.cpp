@@ -33,11 +33,36 @@ void print(T &x)
     }
     cout << "\n";
 };
+int n;
 void solve();
+unordered_set<int> analysis;
+ll ans = 0;
+void out() {
+    ll tmp = 1LL;
+    int tmp2 = 0;
+    EACH(it, analysis) {
+        tmp*=(ll)it;
+        tmp2 += it;
+    }
+    if (tmp2 == n) ans = max(ans, tmp);
+}
+void backtrack(int sum) {
+    if (sum == 0) {
+        out();
+    }
+    for(int i = sum; i > 0; --i) {
+        analysis.insert(i);
+        backtrack(sum-i);
+        analysis.erase(i);
+    }
+}
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    cin >> n;
+    backtrack(n);
+    cout << ans;
 }

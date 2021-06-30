@@ -12,7 +12,7 @@ public class De5_bai1{
         //        System.out.println(ans);
         return 2*x*x*x * cos3x(x, n) - 4*x*x + 3*x * cos3x(x, n) - 12; // sửa giá trị trả về - nhưng cần đúng kiểu
     }
-    public static double cos3x(double x, int n) { // tính và trả về coh(3x)
+    public static double cos3x(double x, int n) { // tính và trả về cos(3x)
         // bổ sung mã lệnh
         double ans = 1.0;
         double tmp = -1 * (3*x) * (3*x) / 2;

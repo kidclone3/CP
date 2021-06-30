@@ -37,7 +37,13 @@ void solve();
 int main()
 {
     IOS;
+    solve();
 }
 void solve() {
-    
+    int n;
+    cin >> n;
+    vector<pii> a;
+    FOR(n) {
+        cin >> a[i].first >> a[i].second;
+    } 
 }
