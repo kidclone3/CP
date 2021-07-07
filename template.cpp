@@ -33,6 +33,16 @@ void print(T &x)
     }
     cout << "\n";
 };
+template <class T>
+void printPair(T &x)
+{
+    for (auto &it : x)
+    {
+        cout << "(" << it.first << ", " << it.second <<") ";
+    }
+    cout << "\n";
+};
+
 void solve();
 int main()
 {

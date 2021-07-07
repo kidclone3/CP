@@ -84,4 +84,5 @@
     },
     "editor.fontLigatures": true,
     "vim.useSystemClipboard": true,
+    "python.pythonPath": "/usr/bin/python",
 }
