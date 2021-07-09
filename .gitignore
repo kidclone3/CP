@@ -48,4 +48,4 @@
 *.out
 
 #etc
-*.png
+# *.png
