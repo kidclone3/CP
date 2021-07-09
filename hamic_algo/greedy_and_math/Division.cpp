@@ -48,5 +48,45 @@ void solve() {
         cout << p << "\n";
         return;
     }
-    
+    ll q2 = q;
+    vector<pair<ll, ll>> uoc;
+    for (ll i = 2; i*i <= q2; ++i) {
+        if (q2 % i == 0) {
+            ll cnt = 0;
+            while(q2 % i == 0) {
+                q2/=i;
+                cnt++;
+            }
+            uoc.push_back({i, cnt});
+        }
+    }
+    if (q2 > 1) uoc.push_back({q2, 1});
+    q2 = q;
+    ll mn = 1e18;
+    EACH(it, uoc) {
+        // p = it^a1 * K
+        // q = it^a2 * G
+        // a1 >= a2 => Neu X = it^(a2-1) * K => ko chia het cho q.
+        // => p can chia 1 so it^(a1 - a2 + 1), va no la nho nhat.
+        ll p2 = p;
+        ll a1 = 0;
+        while(p2 % it.first == 0) {
+            p2 /= it.first;
+            a1 ++;
+        }
+        // a2 = it.second
+        ll tmp = 1;
+        FOR(i, a1-it.second + 1) {
+            tmp *= it.first;
+        }
+        
+        mn = min(mn, tmp);
+    }
+    if ((p / mn) % q != 0) {
+        cout << p/mn << "\n";
+    }
+    else {
+        while(p % q == 0) p/= q;
+        cout << p <<"\n";
+    }
 }

@@ -6,25 +6,26 @@ def rescale_frame(frame, scale = 0.75):
 
     return cv2.resize(frame, (width, height), interpolation= cv2.INTER_AREA)
 
-img = cv2.imread('photos/example.jpg')
+img = cv2.imread('photos/water_melon.jpg')
 
-img_rescale = rescale_frame(img)
+img_rescale = rescale_frame(img, 0.6)
 
 cv2.imshow('Photo', img)
 cv2.imshow('Photo rescale', img_rescale)
+cv2.imwrite('photos/water_melon_rescale.jpg', img_rescale)
 
-# cv2.waitKey(0)
+cv2.waitKey(0)
 
-video = cv2.VideoCapture('videos/accident.mp4')
+# video = cv2.VideoCapture('videos/accident.mp4')
 
-while True:
-    isTrue, frame = video.read()
-    frame_resize = rescale_frame(frame)
+# while True:
+#     isTrue, frame = video.read()
+#     frame_resize = rescale_frame(frame)
 
-    cv2.imshow('frame', frame)
-    cv2.imshow('frame rescale', frame_resize)
+#     cv2.imshow('frame', frame)
+#     cv2.imshow('frame rescale', frame_resize)
 
-    if cv2.waitKey(20) & 0xFF == ord('d'):
-        break
-video.release()
-cv2.destroyAllWindows()
+#     if cv2.waitKey(20) & 0xFF == ord('d'):
+#         break
+# video.release()
+# cv2.destroyAllWindows()
