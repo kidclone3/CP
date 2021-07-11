@@ -43,11 +43,34 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    solve();
+}
+void solve() {
+    string s;
+    priority_queue<int> pq;
+    while(cin >> s) {
+        if (s[0] == '+') {
+            if (pq.size() < 15000) {
+                pq.push(stoi(s.substr(1, s.size() - 1), nullptr, 10));
+            }
+        }
+        else {
+            if (pq.empty()) continue;
+            int v = pq.top();
+            while(!pq.empty() && pq.top() == v) pq.pop();
+        }
+    }
+    set<int> ans;
+    while(!pq.empty()) {
+        ans.insert(pq.top());
+        pq.pop();
+    }
+    cout << ans.size() << "\n";
+    for(auto it = ans.rbegin(); it != ans.rend(); ++it) {
+        cout << *it << '\n';
+    }
 }

@@ -43,11 +43,52 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
+void solve();
+// int leftMost(int x) {
+//     int i = 0;
+//     while(x) {
+//         x >>= 1;
+//         i++;
+//     }
+//     if (i >= 30) return INT_MAX;
+//     return (1<<i);
+// }
+int mostAnd(int a, int b) {
+    if (b < a) {
+        b += (1<<30);
+    }
+    int i = 0;
+    int ans = 0;
+    for(; (1 << i) <= a; ++i) {
+        if (a&(1<<i) && !(b & (1<<i))) {
+            ans += (1<<i);
+        }
+    }
+    return ans;
 }
-
 int main()
 {
     IOS;
+    int t;
+    cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    int n;
+    cin >> n;
+    vi x(n), y(n);
+    y[0] = 0;
+    FOR(n) cin >> x[i];
+    FOR(i, 1, n) {
+        int tmp = x[i-1] ^ y[i-1];
+        if ((tmp & x[i]) == tmp) {
+            y[i] = 0;
+            continue;
+        }
+        // int tmp1 = leftMost(x[i]);
+        int tmp2 = mostAnd(tmp, x[i]);
+        y[i] = min(tmp ^ x[i], tmp2);
+        // cout << tmp << " " << tmp2 << "\n";
+    } 
+    print(y);
 }

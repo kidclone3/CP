@@ -43,11 +43,36 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    vector<ll> c(n+1, INT_MAX), left(n+1, INT_MAX), right(n+1, INT_MAX);
+    vi a(k);
+    FOR(k)  cin >> a[i];
+    FOR(k) {
+        ll b; cin >> b;
+        c[a[i]] = b;
+    } 
+    ll p = INT_MAX;
+    // Process from left to right
+    FOR(i, 1, n+1) {
+        p = min(p+1, c[i]);
+        left[i] = p;
+    }
+    // Process from right to left;
+    p = INT_MAX;
+    FOR(i, n, 0, -1) {
+        p = min(p+1, c[i]);
+        right[i] = p;
+    }
+    FOR(i, 1, n+1) {
+        cout << min(left[i], right[i]) << " \n"[i==n];
+    }
 }

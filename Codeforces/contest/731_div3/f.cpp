@@ -42,12 +42,42 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-void solve(){
-
+void solve();
+bool check(vi a) {
+    int n = a.size(); 
+    int cnt = 0;
+    FOR(i, 1, n) {
+        if (a[i] == a[i-1]) cnt++;
+    }
+    return cnt == n-1;
 }
-
 int main()
 {
     IOS;
+    int t;
+    cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    int n;
+    cin >> n;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    if (check(a)) {
+        cout << "0\n";
+        return;
+    }
+    int cnt = 0;
+    while(true) {
+        cnt++;
+        int tmp = a[0];
+        FOR(i, n) {
+            if (i == n-1) {
+                a[i] = __gcd(a[i], tmp);
+            }
+            else a[i] = __gcd(a[i], a[i+1]);
+        }
+        if (check(a)) break;
+    }   
+    cout << cnt << '\n';
 }

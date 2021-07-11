@@ -43,11 +43,42 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    string ss;
+    cin >> ss;
+    int n = ss.size();
+    vector<int> a(30, -1);
+    FOR(i, n) {
+        a[ss[i] - 'a'] = i;
+    }
+    int left = INT_MAX, right = INT_MIN;
+    string s = "";
+    FOR(i, 26) {
+        if (a[i] != -1)
+            if (a[i] > right) {
+                char ch = 'a' + i;
+                s = s+ch;
+                right = a[i];
+            }
+            else if (a[i] < left) {
+                char ch = 'a' + i;
+                s = ch+s;
+                left = a[i];
+            }
+            else {
+                cout << "NO\n";
+                return;
+            }
+        else {
+            break;
+        }
+    }
+    cout << (s == ss ? "YES\n" : "NO\n");
 }

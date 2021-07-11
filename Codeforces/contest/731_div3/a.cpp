@@ -43,11 +43,42 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    int t;
+    cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    pair<int, int> a,b,f;
+    cin >> a.first >> a.second;
+    cin >> b.first >> b.second;
+    cin >> f.first >> f.second;
+
+    if (a.first == b.first) {
+        if (a.first == f.first && min(a.second, b.second) <= f.second && f.second <= max(a.second, b.second)) {
+            cout << abs(a.second - b.second) + 2 << '\n';
+            return;
+        }
+        else {
+            cout << abs(a.second - b.second) << '\n';
+            return;
+        }
+    }
+    else if(a.second == b.second) {
+        if (a.second == f.second && min(a.first, b.first) <= f.first && f.first <= max(a.first, b.first)) {
+            cout << abs(a.first - b.first) + 2 <<'\n';
+            return;
+        }
+        else {
+            cout << abs(a.first - b.first) << '\n';
+            return;
+        }
+    }
+    else {
+        cout << abs(a.first - b.first) + abs(a.second - b.second) <<'\n';
+        return;
+    }
 }

@@ -43,11 +43,49 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    int t;
+    cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    int k, n, m;
+    cin >> k >> n >> m;
+    vi a(n), b(m);
+    FOR(n) cin >> a[i];
+    FOR(m) cin >> b[i];
+    vector<int> ans;
+    for(int i = 0, j = 0; i < n || j < m;) {
+        // if (a[i] > k && b[i] > k) {
+        //     ans.clear();
+        //     ans.push_back(-1);
+        //     break;
+        // }
+        if (i < n && a[i] == 0) {
+            ans.push_back(0);
+            k++;
+            i++;
+        }
+        else if (j < m && b[j] == 0) {
+            ans.push_back(0);
+            k++;
+            j++;
+        }
+        else if (i < n && a[i] <= k) {
+            ans.push_back(a[i]);
+            i++;
+        }
+        else if (j < m && b[j] <= k) {
+            ans.push_back(b[j]);
+            j++;
+        }
+        else {
+            ans.clear();
+            ans.push_back(-1);
+            break;}
+    }
+    print(ans);
 }

@@ -1,0 +1,1 @@
+This folder has problems like its name. But, mainly problems here are segment tree. At least it is!

@@ -43,11 +43,25 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    solve();
+}
+void solve() {
+    int n;
+    cin >> n;
+    vi a(n);
+    FOR(n) cin >> a[i]; 
+    int x = 5 * 1e5;
+    cout << n+1 << '\n';
+    FOR(n) a[i] += x;
+    cout << "1 " << n << " " << x << "\n";
+    FOR(n) {
+        int tmp = a[i] - (i + 1);
+        cout << "2 " << i+1 << " " << tmp <<'\n';
+        a[i] %= tmp;
+    }
+
 }

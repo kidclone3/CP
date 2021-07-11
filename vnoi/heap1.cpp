@@ -43,11 +43,30 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-
-}
-
+void solve();
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
+}
+void solve() {
+    int n;
+    cin >> n;   
+    priority_queue<ll, vector<ll>, greater<ll>> pq;
+    ll len = 0LL;
+    FOR(n) {
+        ll tmp;
+        cin >> tmp;
+        pq.push(tmp);
+        len += tmp;
+    }
+    ll ans = 0;
+    while(pq.size() > 1) {
+        ll a = pq.top(); pq.pop();
+        ll b = pq.top(); pq.pop();
+        ans += a+b;
+        pq.push(a+b);
+    }
+    cout << ans << '\n';
 }

@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/380/problem/C
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -43,7 +44,7 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
+void solve() {
 
 }
 
@@ -51,3 +52,4 @@ int main()
 {
     IOS;
 }
+
