@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1408/B
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,51 +43,42 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int n, k;
-vi a, b;
-vector<pii> aa;
-void solve();
+
+void solve(){
+    int n, k;
+    cin >> n >> k;
+    vi a(n);
+    set<int> st1;
+    int ans = 1;
+    FOR(n) {
+        cin >> a[i];
+        st1.insert(a[i]);
+    }
+    if (st1.size() <= k) {
+        cout << "1\n";
+        return;
+    }
+    else if (k == 1 && *st1.begin() == 0) {
+        cout << "-1\n";
+        return;
+    }
+    else {
+        while(st1.size() > k) {
+            ans++;
+            auto it = st1.begin();
+            advance(it, k-1);
+            FOR(n) if (a[i] <= *it) a[i] = 0;
+                    else a[i] -= *it;
+            st1.clear();
+            st1.insert(a.begin(), a.end());
+        }
+    }
+    cout << ans <<'\n';
+}
+
 int main()
 {
     IOS;
-    int t;
-    cin >> t;
-    while(t--) solve();
-}
-void solve() {
-    cin >> n >> k;
-    a.resize(k);
-    b.resize(k);
-    aa.resize(k);
-    multiset<int> left, right;
-    FOR(k) cin >> a[i]; 
-    FOR(k) {
-        cin >> b[i]; 
-        aa[i] = {a[i], b[i]};
-    }
-    sort(all(aa));
-    FOR(k) { 
-        tie(a[i], b[i]) = aa[i];
-        right.insert(b[i] + a[i]-1);
-    }
-    // print(a);
-    // int _l = n-1;
-    // int _r = 0;
-    FOR(i, 1, n+1) {
-        int tmp = INT_MAX;
-        if (!left.empty()) tmp = min(tmp, *left.begin() - (n-i));
-        if (!right.empty()) tmp = min(tmp, *right.begin() - (i-1));
-        auto tmp1 = lower_bound(all(a), i);
-        if (tmp1 != a.end() && *tmp1 == i) {
-            int index = tmp1 - a.begin();
-            tmp = min(tmp, b[index]); 
-            auto tmp2 = right.lower_bound(b[index] + i-1);
-            right.erase(tmp2);
-            left.insert(b[index] + n - i);
-        }
-        // _l--;
-        // _r--;
-        cout << tmp << " ";
-    }
-    cout << '\n';
+    int t; cin >> t;
+    while(t--)  solve();
 }

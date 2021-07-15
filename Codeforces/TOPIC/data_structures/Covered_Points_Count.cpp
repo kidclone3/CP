@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1000/C
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,51 +43,38 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int n, k;
-vi a, b;
-vector<pii> aa;
-void solve();
+
+void solve(){
+    int n;
+    cin >> n;
+    map<ll, ll> mp1, mp2;
+    FOR(n) {
+        ll a, b;
+        cin >> a >> b;
+        mp1[a] ++;
+        mp1[b+1] --;
+    }
+    ll pos = mp1.begin()->first;
+    ll tmp = mp1.begin()->second;
+    bool head = true;
+    EACH(it, mp1) {
+        if (head) {
+            head = false;
+            continue;
+        }
+        it.second += tmp;
+        tmp = it.second;
+        mp2[mp1[pos]] += it.first - pos;
+        // if (it.second == mp1[pos]) mp2[mp1[pos]] ++;
+        pos = it.first;
+    }
+    FOR(i, 1, n+1) {
+        cout << mp2[i] << " \n"[i==n];
+    }
+}
+
 int main()
 {
     IOS;
-    int t;
-    cin >> t;
-    while(t--) solve();
-}
-void solve() {
-    cin >> n >> k;
-    a.resize(k);
-    b.resize(k);
-    aa.resize(k);
-    multiset<int> left, right;
-    FOR(k) cin >> a[i]; 
-    FOR(k) {
-        cin >> b[i]; 
-        aa[i] = {a[i], b[i]};
-    }
-    sort(all(aa));
-    FOR(k) { 
-        tie(a[i], b[i]) = aa[i];
-        right.insert(b[i] + a[i]-1);
-    }
-    // print(a);
-    // int _l = n-1;
-    // int _r = 0;
-    FOR(i, 1, n+1) {
-        int tmp = INT_MAX;
-        if (!left.empty()) tmp = min(tmp, *left.begin() - (n-i));
-        if (!right.empty()) tmp = min(tmp, *right.begin() - (i-1));
-        auto tmp1 = lower_bound(all(a), i);
-        if (tmp1 != a.end() && *tmp1 == i) {
-            int index = tmp1 - a.begin();
-            tmp = min(tmp, b[index]); 
-            auto tmp2 = right.lower_bound(b[index] + i-1);
-            right.erase(tmp2);
-            left.insert(b[index] + n - i);
-        }
-        // _l--;
-        // _r--;
-        cout << tmp << " ";
-    }
-    cout << '\n';
+    solve();
 }

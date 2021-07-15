@@ -87,7 +87,7 @@ def blob_detect(image,                  #-- The frame (cv standard)
          
         # Filter by Circularity
         params.filterByCircularity = True
-        params.minCircularity = 0.1
+        params.minCircularity = 0.5
          
         # Filter by Convexity
         params.filterByConvexity = True

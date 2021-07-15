@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/1005/E1
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -45,8 +46,8 @@ void printPair(T &x)
 struct Median{
     multiset<ll> left, right;
     size_t size;
-    Median(size_t sz) {
-        size = sz;
+    Median() {
+
     }
     void add(ll x) {
         if (!right.empty() && x >= *right.begin()) {
@@ -56,7 +57,7 @@ struct Median{
         balance();
     }
     void balance() {
-        if (left.size() + right.size() == size) {
+        size = left.size() + right.size();
             while(left.size() < size / 2) {
                 left.insert(*right.begin());
                 right.erase(right.begin());
@@ -65,50 +66,39 @@ struct Median{
                 right.insert(*left.rbegin());
                 left.erase(--left.end());
             }
-        }
-    }
-    void remove(ll x) {
-        auto it1 = left.lower_bound(x);
-        auto it2 = right.lower_bound(x);
-        if (it1 != left.end() && *it1 == x) {
-            left.erase(it1);
-        }
-        else {
-            right.erase(it2);
-        }
-        balance();
     }
     ll mid() {
-        if (left.size() + right.size() < size) return 0LL;
+        size = left.size() + right.size();
         if (size & 1) return *right.begin();
         return *left.rbegin();
     }
 };
-const ll MOD = 65536;
-ll solve();
+void solve(){
+    int n, m;
+    cin >> n >> m;
+    vi a(n);
+    int pos;
+    FOR(n) {
+        cin >> a[i];
+        if (a[i] == m) pos = i;
+    }
+    Median median;
+    ll ans = 0;
+    int i = pos-1, j = pos;
+    while(i >= 0 && j < n) {
+        median.add(a[j++]);
+        if (median.mid() == (ll) m) ans++;
+        if (j >= n) break;
+        median.add(a[j++]);
+        if (median.mid() == (ll) m) ans++; 
+        median.add(a[i--]);
+        if (median.mid() == (ll) m) ans++;
+    }
+    cout << ans;
+}
+
 int main()
 {
     IOS;
-    int t;
-    cin >> t;
-    FOR(t) cout << "Case #" << i+1 <<": " << solve() << "\n";
-}
-ll solve() {
-    ll seed, mul, add, n, k;
-    cin >> seed >> mul >> add >> n >> k;
-    Median median(k);
-    vector<ll> a(n);
-    a[0] = seed;
-    FOR(i, 1, n)    a[i] = (a[i-1] * mul + add) % MOD;
-    FOR(i, 0, k) {
-        median.add(a[i]);
-    }
-    ll sum = 0LL;
-    FOR(i, k, n) {
-        sum += median.mid();
-        median.remove(a[i-k]);
-        median.add(a[i]);
-    }
-    sum += median.mid();
-    return sum;
+    solve();
 }

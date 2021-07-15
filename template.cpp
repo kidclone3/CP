@@ -3,6 +3,7 @@ using namespace std;
 
 #define pb push_back
 #define vi vector<int>
+#define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
 #define pii pair<int, int>

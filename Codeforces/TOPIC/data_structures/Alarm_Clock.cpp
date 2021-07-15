@@ -1,3 +1,4 @@
+// https://codeforces.com/problemset/problem/898/D
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -42,51 +43,26 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int n, k;
-vi a, b;
-vector<pii> aa;
-void solve();
+
+void solve(){
+    int n, m, k;
+    cin >> n >> m >> k;
+    vi a(n);
+    FOR(n) cin >> a[i]; 
+    sort(all(a));
+    int ans = 0;
+
+    priority_queue<int,vi,greater<int>> pq;
+    FOR(n) {
+        if (!pq.empty() && pq.top() < a[i] - (m-1)) pq.pop();
+        if (pq.size() >= k-1) ans++;
+        else pq.push(a[i]);
+    }
+    cout << ans;
+}
+
 int main()
 {
     IOS;
-    int t;
-    cin >> t;
-    while(t--) solve();
-}
-void solve() {
-    cin >> n >> k;
-    a.resize(k);
-    b.resize(k);
-    aa.resize(k);
-    multiset<int> left, right;
-    FOR(k) cin >> a[i]; 
-    FOR(k) {
-        cin >> b[i]; 
-        aa[i] = {a[i], b[i]};
-    }
-    sort(all(aa));
-    FOR(k) { 
-        tie(a[i], b[i]) = aa[i];
-        right.insert(b[i] + a[i]-1);
-    }
-    // print(a);
-    // int _l = n-1;
-    // int _r = 0;
-    FOR(i, 1, n+1) {
-        int tmp = INT_MAX;
-        if (!left.empty()) tmp = min(tmp, *left.begin() - (n-i));
-        if (!right.empty()) tmp = min(tmp, *right.begin() - (i-1));
-        auto tmp1 = lower_bound(all(a), i);
-        if (tmp1 != a.end() && *tmp1 == i) {
-            int index = tmp1 - a.begin();
-            tmp = min(tmp, b[index]); 
-            auto tmp2 = right.lower_bound(b[index] + i-1);
-            right.erase(tmp2);
-            left.insert(b[index] + n - i);
-        }
-        // _l--;
-        // _r--;
-        cout << tmp << " ";
-    }
-    cout << '\n';
+    solve();
 }
