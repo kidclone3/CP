@@ -64,9 +64,14 @@ def main():
 
     range_filter = args['filter'].upper()
 
+    blur = 7
     if args['image']:
         image = cv2.imread(args['image'])
 
+        if blur > 0:
+            image = cv2.GaussianBlur(image, (blur, blur), sigmaX= 7, sigmaY= 7)
+
+        image = cv2.pyrMeanShiftFiltering(image, 10, 15)
         if range_filter == 'RGB':
             frame_to_thresh = image.copy()
         else:

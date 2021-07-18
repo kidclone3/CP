@@ -39,6 +39,7 @@ markers = markers + 1
 markers[unknown==255] = 0
 
 markers = cv2.watershed(img, markers)
+print(len(markers))
 img[markers == -1] = [0, 255, 0]
 
 cv2.imshow('Contour', img)
