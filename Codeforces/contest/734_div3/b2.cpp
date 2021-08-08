@@ -44,32 +44,41 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
-    }
-    cout << ans;
 
+void solve(){
+    int n, k; cin >> n >> k;
+    vi a(n), dp(n, -1);
+    // map<int, set<int>> mp;
+    map<int, int> mp;
+    set<pair<int, int>> st[k];
+    int sz = 0;
+    FOR(n) {
+        cin >> a[i];
+        mp[a[i]]++;
+        if (mp[a[i]] <= k) sz++;
+    }
+    sz /= k;
+    priority_queue<pair<size_t, int>, vector<pair<size_t, int>>, greater<pair<size_t, int>>> pq;
+    FOR(k) {
+        pq.push({0, i});
+    }
+    FOR(n) {
+        auto tmp = pq.top();
+        auto it = st[tmp.second].lower_bound(make_pair(a[i], 0));
+        if (it == st[tmp.second].end() || a[i] != it->first) {
+            dp[i] = tmp.second + 1;
+            st[tmp.second].insert({a[i], i});
+        }
+        else {
+            
+        }
+    }
+    print(dp);
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

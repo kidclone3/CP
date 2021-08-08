@@ -101,8 +101,8 @@ def detect_using_webcam():
 
     while 1:
         start = time.time()
-        # img = vs.read()
-        img = cv2.imread('balls/ball_2.jpg')
+        img = vs.read()
+        # img = cv2.imread('balls/ball_2.jpg')
         # cv2.imshow('Original', img)
         blob_detect(img, 800, green_min, green_max, webcam=True)
         stop = time.time()

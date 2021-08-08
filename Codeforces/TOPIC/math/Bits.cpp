@@ -45,31 +45,25 @@ void printPair(T &x)
 };
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
+    ll l, r;
+    cin >> l >> r;
+    // int j = 0;
+    // int cnt = popcount(l);
+    for (int j = 0; j < 63; ++j) {
+        if (!(l & (1LL << j))) {
+            if (l + (1LL<<j) <= r) {
+                l += 1LL << j;
+            }
+            else break;
         }
-    else {
-        ans = 1LL* (1+n) * n / 2;
     }
-    cout << ans;
-
+    cout << l << "\n";
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t;
+    cin >> t;
+    while(t--) solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

@@ -44,27 +44,41 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
-    }
-    cout << ans;
+// const ll mod = 1e9+7;
 
+ll gcd_extend(ll a, ll b, ll *x, ll *y) {
+  if (b == 0) {
+    *x = 1;
+    *y = 0;
+    return a;
+  }
+  ll x1, y1;
+  ll gcd = gcd_extend(b, a%b,  &x1, &y1);
+  *x = y1;
+  *y = x1 - (a / b) * y1;
+  return gcd;
+}
+
+ll modulo_inverse_euclidean(ll n, ll m) {
+  ll x, y;
+  if (gcd_extend(n, m, &x, &y) != 1) return -1; // not exist
+  return (x % m  + m) % m; // vì x có thể âm 
+}
+
+void solve(){
+    ll k, n, mod;
+    cin >> k >> n >> mod;
+    
+    ll top = 1LL;
+    ll down = 1LL;
+    for (ll i = 1; i <= k; ++i) {
+        (top *= n-k+i) %= mod;
+        (down *= i) %= mod;
+    }
+    // cout << top << " " << down << "\n";
+    // Nghich dao modulo;
+    // ll x = (down % mod + mod) % mod;
+    cout << (top * modulo_inverse_euclidean(down, mod)) % mod;
 }
 
 int main()
@@ -72,4 +86,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

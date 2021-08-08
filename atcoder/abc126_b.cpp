@@ -44,27 +44,26 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
-    }
-    cout << ans;
+bool valid(int a) {
+    return 0 < a && a < 13;
+}
 
+void solve(){
+    string s;
+    cin >> s;
+    int fi, se;
+    fi = stoi(s.substr(0, 2));
+    se = stoi(s.substr(2, 2));
+    if (valid(fi) && valid(se)) {
+        cout << "AMBIGUOUS";
+    }
+    else if (valid(fi)) {
+        cout << "MMYY";
+    }
+    else if (valid(se)) {
+        cout << "YYMM";
+    }
+    else cout << "NA";
 }
 
 int main()
@@ -72,4 +71,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

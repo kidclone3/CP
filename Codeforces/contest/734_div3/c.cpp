@@ -43,33 +43,30 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
+struct node{
+    vector<int> let(5, 0);
+    node() {}
+};
+int c_count (char x, string s) {
+    return count(all(s), x);
+}
 void solve(){
     int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
+    cin >> n;
+    vector<string> a(n);
+    vector<node> b(n);
+    vector<int> c(5,0);
+    FOR(n) {
+        cin >> a[i];
+        FOR(j, 5) {
+            c[j] += count(all(a[i]), 'a'+j);
         }
-    else {
-        ans = 1LL* (1+n) * n / 2;
     }
-    cout << ans;
-
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

@@ -45,26 +45,39 @@ void printPair(T &x)
 };
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
+    int n, m, ans = 0;
+    scanf("%d%d", &n, &m);
+    set<int> bulbs[m];
+    int p[m];
+    FOR(m) {
+        int sz;
+        scanf("%d", &sz);
+        FOR(j, sz) {
+            int tmp; scanf("%d", &tmp);
+            bulbs[i].insert(tmp-1);
         }
-    else {
-        ans = 1LL* (1+n) * n / 2;
     }
-    cout << ans;
-
+    FOR(m) {
+        scanf("%d", p+i);
+    }
+    // N switches, N bulbs
+    for (int i = 0; i < (1<<n); ++i) {
+        vi bulb_state(m, 0);
+        for (int j = 0; (1<<j) <= i; ++j) {
+            if (i&(1<<j)) {
+                FOR(k, m) {
+                    if (bulbs[k].count(j)) bulb_state[k]++;
+                }
+            }
+        }
+        int check = 1;
+        // print(bulb_state);
+        FOR(j, m) {
+            check &= (bulb_state[j] % 2 == p[j]);
+        }
+        ans += check;
+    }
+    printf("%d", ans);
 }
 
 int main()
@@ -72,4 +85,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

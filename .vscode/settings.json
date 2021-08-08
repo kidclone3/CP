@@ -80,7 +80,8 @@
         "numbers": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "stop_token": "cpp"
+        "stop_token": "cpp",
+        "queue": "cpp"
     },
     "editor.fontLigatures": true,
     "vim.useSystemClipboard": true,

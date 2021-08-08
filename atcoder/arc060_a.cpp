@@ -44,27 +44,36 @@ void printPair(T &x)
     cout << "\n";
 };
 
-void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
-    }
-    cout << ans;
+const int maxn = 60;
+ll dp[maxn][maxn][maxn * maxn];
 
+void solve(){
+    int n, a;
+    cin >> n >> a;
+    vi x(n+1);
+    FOR1(n) {
+        cin >> x[i];
+        // X = max(X, x[i]);
+    }
+    // print(x);
+    // dp[i][j][s] = số cách chọn j phần tử từ 1 đến i sao cho tổng của chúng = s.
+    dp[0][0][0] = dp[1][0][0] = 1LL;
+    for(int i = 1; i <= n; ++i) {
+        for(int j = 0; j <= i; ++j) {
+            for(int s = 2500; s >= 0; --s) {
+                dp[i][j][s] = dp[i-1][j][s];
+                if (j && s >= x[i]) dp[i][j][s] += dp[i-1][j-1][s-x[i]];
+                // cout << dp[i][j][s] << " ";
+            }
+        }
+    }
+    ll ans = 0LL;
+    // cout << dp[3][1][8] <<"\n";
+    FOR(k, 1, n+1) {
+        // cout << dp[n][k][k*a] << "\n";
+        ans += dp[n][k][k*a];
+    }
+    cout << ans << "\n";
 }
 
 int main()
@@ -72,4 +81,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

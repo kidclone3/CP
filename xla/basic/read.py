@@ -7,7 +7,7 @@ import cv2
 # cv2.waitKey(0)
 # print(img.shape)
 
-capture = cv2.VideoCapture('videos/wtf.mp4')
+capture = cv2.VideoCapture('../videos/wtf.mp4')
 
 while True:
     isTrue, frame = capture.read()

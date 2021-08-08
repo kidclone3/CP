@@ -45,31 +45,34 @@ void printPair(T &x)
 };
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
+    int n, m, k;
+    cin >> n >> m >> k;
+    if (!(n&1) && !(m&1)) {
+        cout << "YES\n";
+        return;
     }
-    cout << ans;
-
+    if (n == 1 && k!= m/2) {
+        cout << "NO\n";
+        return;
+    }
+    if (n&1) {
+        if (k % n && (k%n) % 2 == 0) {
+            cout << "NO\n";
+            return;
+        }
+    }
+    if (m&1) {
+        if (k > n*(m-1)/2) {
+            cout << "NO\n";
+            return;
+        }
+    }
+    cout << "YES\n";
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

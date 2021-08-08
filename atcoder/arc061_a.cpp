@@ -43,28 +43,52 @@ void printPair(T &x)
     }
     cout << "\n";
 };
+int n;
+vl nums;
+vi plusses;
+ll ans = 0LL;
+void out() {
+    ll tmp = 0LL;
+    // print(plusses);
+    for(int i = 0; i < n-1; ++i) {
+        tmp*= 10LL;
+        tmp+= nums[i];
+        if (plusses[i]) {
+            ans += tmp;
+            tmp = 0LL;
+        }
+    }
+    tmp*=10LL;
+    tmp += nums[n-1];
+    ans += tmp;
+    // cout << "\t" << ans << "\n";
+}
+
+void backtrack(int pos, int len, int k) {
+    if (len == k) {
+        out();
+        return;
+    }
+    for (int i = pos; i < n-1; ++i) {
+        plusses[i] = 1;
+        // print(plusses);
+        // cout << "\t\t" << len <<"\n";
+        backtrack(i+1, len+1, k);
+        plusses[i] = 0;
+    }
+}
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
+    string s; cin >> s;
+    EACH(it, s) nums.push_back((it - '0')*1LL);
+    n = nums.size();
+    // print(nums);
+    // k = number of "+".
+    for (int k = 0; k < n; ++k) {
+        plusses.resize(n, 0);
+        backtrack(0, 0, k);
     }
     cout << ans;
-
 }
 
 int main()
@@ -72,4 +96,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

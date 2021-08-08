@@ -45,26 +45,28 @@ void printPair(T &x)
 };
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
+    ll n; cin >> n;
+    string s = to_string(n);
+    int c_0, c_1;
+    c_0 = count(all(s), '0');
+    c_1 = count(all(s), '1');
+    if (c_0 + c_1 == (int) s.size()) {
+        cout << "1";
+        return;
+    }
+    int ans = 0;
+    while(n) {
+        s = to_string(n);
+        string ss(s.size(), '1');
+        int mn = INT_MAX;
+        FOR(i, (int) s.size()) {
+            if (s[i] == '0') ss[i] = '0';
+            else mn = min(mn, s[i] - '0');
         }
-    else {
-        ans = 1LL* (1+n) * n / 2;
+        ans += mn;
+        n -= mn * stoll(ss);
     }
     cout << ans;
-
 }
 
 int main()
@@ -72,4 +74,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

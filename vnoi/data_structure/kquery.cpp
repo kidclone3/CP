@@ -44,27 +44,46 @@ void printPair(T &x)
     cout << "\n";
 };
 
+const int MAXN = 3*1e4+5;
+vi st[4*MAXN], a(MAXN);
+
+void build(int id, int l, int r) {
+    // if (i < l || i > r) return;
+    if (l == r) {
+        st[id].push_back(a[l]);
+        return;
+    }
+    int mid = (l+r)/2;
+    build(2*id, l, mid);
+    build(2*id+1, mid+1, r);
+
+    st[id].resize(st[2*id].size() + st[2*id+1].size());
+    merge(all(st[2*id]), all(st[2*id+1]), st[id].begin());
+}
+
+int get(int id, int l, int r, int q_l, int q_r, int k) {
+    if (q_r < l || r < q_l) return 0;
+    if (q_l <= l && r <= q_r) 
+        return st[id].size() - (upper_bound(all(st[id]), k) - st[id].begin());
+    int mid = (l+r)/2;
+    return get(2*id, l, mid, q_l, q_r, k) + get(2*id+1, mid+1, r, q_l, q_r, k);
+}
+
 void solve(){
     int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
+    cin >> n;
+    FOR(n) {
+        cin >> a[i];
     }
-    cout << ans;
-
+    build(1, 0, n-1);
+    // FOR(n) print(st[i]);
+    int q; cin >> q;
+    FOR(q) {
+        int l, r, k;
+        cin >> l >> r >> k;
+        l--, r--;
+        cout << get(1, 0, n-1, l, r, k) << "\n";
+    }
 }
 
 int main()
@@ -72,4 +91,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

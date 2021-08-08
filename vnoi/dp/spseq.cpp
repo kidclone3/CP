@@ -43,28 +43,45 @@ void printPair(T &x)
     }
     cout << "\n";
 };
+const int maxn = 100000+5;
+int a[maxn], lis[maxn], lds[maxn], x[maxn];
+int n;
+
+void _lis() {
+    fill(x+1, x+n+1, INT_MAX);
+    x[0] = INT_MIN;
+    FOR(n) {
+        int pos = lower_bound(x, x+n+1, a[i]) - x;
+        lis[i] = pos;
+        x[pos] = a[i];
+        // cout << lis[i] << " "
+    }
+}
+
+void _lds() {
+    fill(x+1, x+n+1, INT_MAX);
+    x[0] = INT_MIN;
+    FOR(i, n-1, -1, -1) {
+        int pos = lower_bound(x, x+n+1, a[i]) - x;
+        lds[i] = pos;
+        x[pos] = a[i];
+    }
+}
+
 
 void solve(){
-    int n;
-    ll x;
-    cin >> n >> x;
-    vl a(n), dp(n+5, 0LL);
-    map<ll, ll> mp;
-    ll ans = 0LL;
-    FOR(n) cin >> a[i];
-    dp[0] = a[0];
-    mp[0] = 1;
-    if (x)
-        FOR(i, n) {
-            if (i)  dp[i] = a[i] + dp[i-1];
-            ans += mp[dp[i]-x];
-            mp[dp[i]]++;
-        }
-    else {
-        ans = 1LL* (1+n) * n / 2;
+    cin >> n;
+    lis[0] = 1;
+    FOR(n) {
+        cin >> a[i];
     }
-    cout << ans;
-
+// This is LIS, LDS problem
+    _lis(); _lds();
+    int ans = 0; 
+    FOR(n) {
+        ans = max(min(lis[i], lds[i]) * 2 - 1, ans);
+    }
+    cout << ans<<'\n';
 }
 
 int main()
@@ -72,4 +89,3 @@ int main()
     IOS;
     solve();
 }
-// xin chào, trong này không bị lỗi tiếng việt à. Nhìn quả dấu có vẻ ngon nghẻ nhỉ?

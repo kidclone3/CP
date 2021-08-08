@@ -1,65 +1,60 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string x;
-string s = "abacaba";
-void solve();
-bool check(string s1);
-bool generate_answer(int i);
+int n;
+string s;
+string a = "abacaba";
 
-int main() {
-    int t;
-    cin >> t;
-    while(t--) solve();
-}
-
-bool check(string s1) {
-    for(int i = 0; i < 7; ++i) {
-        if (s1[i] != s[i] && s1[i] != '?') return false;
+bool isEqual(string& b) {
+    for (int i = 0; i < 7; ++i) {
+        if (b[i] != a[i] && b[i] != '?')  return false;
     }
     return true;
 }
 
-bool generate_answer(int i){
-    string x1 = x.substr(0, i);
-    string x3 = x.substr(i+7, (int) x.length() - (i + 7));
-    for(int j = 0; j < (int) x1.length(); ++j) {
-        if (x1[j] == '?') x1[j] = 'd';
+string process(int idx) {
+    string s1 = s.substr(0, idx);
+    string s3 = s.substr(idx+7, n-(idx+7));
+    for (int i = 0; i < (int) s1.size(); ++i) {
+        if (s1[i] == '?') s1[i] = 'z';
     }
-    for(int j = 0; j < (int) x3.length(); ++j) {
-        if (x3[j] == '?') x3[j] = 'd';
+    for (int i = 0; i < (int) s3.size(); ++i) {
+        if (s3[i] == '?') s3[i] = 'z';
     }
-
-    string tmp = x1 + s + x3;
+    string ss = s1 + a + s3;
     int cnt = 0;
-
-    for(int j = 0; j < (int) tmp.size() - 6; ++j) {
-        string tmp2 = tmp.substr(j, 7);
-        if (check(tmp2)) cnt++;
-    }
+    for (int i = 0; i < n - 6; ++i) {
+        string b = ss.substr(i, 7);
+        if (isEqual(b)) {
+            cnt++;
+        }
+    } 
     if (cnt == 1) {
-        cout << "Yes\n";
-        cout << tmp << "\n";
-        return true;
+        return ss;
     }
-    return false;
+    else return "-1";
 }
 
 void solve() {
-    int n;
     cin >> n;
-    cin >> x;
-    vector<int> ucv;
-    for(int i = 0; i < n - 6; ++i) {
-        string s1 = x.substr(i, 7);
-        if (check(s1)) {
-            ucv.push_back(i);
+    cin >> s;
+    for (int i = 0; i < n - 6; ++i) {
+        string b = s.substr(i, 7);
+        if (isEqual(b)) {
+            string ss = process(i);
+            if (ss != "-1") {
+                cout << "YES\n";
+                cout << ss <<'\n';
+                return;
+            }
         }
     }
-    for(int i : ucv) {
-        if (generate_answer(i)) {
-            return;
-        }
+    cout << "NO\n";
+}
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
     }
-    cout << "No\n";
 }
