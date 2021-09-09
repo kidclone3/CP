@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,40 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+int dx[8] = {-1, 0, 1, 1, 1, 0, -1, -1};
+int dy[8] = {1, 1, 1, 0, -1, -1, -1, 0};
 void solve(){
-
+    vector<string> grid(55, string(55, '.'));
+    int n, m;
+    cin >> n >> m;
+    FOR(i, 1, n+1) {
+        FOR(j, 1, m+1) {
+            cin >> grid[i][j];
+        }
+    }
+    FOR(i, 1, n+1) {
+        FOR(j, 1, m+1) {
+            if (grid[i][j] == '.') {
+                int cnt = 0;
+                FOR(z, 8) {
+                    int x = i + dx[z];
+                    int y = j + dy[z];
+                    if (grid[x][y] == '#') cnt++;
+                }
+                grid[i][j] = '0' + cnt;
+            }
+        }
+    }
+    FOR(i, 1, n+1) {
+        FOR(j, 1, m+1) {
+            cout << grid[i][j];
+        }
+        cout << "\n "[i==n];
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

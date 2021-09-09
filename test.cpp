@@ -1,20 +1,36 @@
-#include <stdio.h>
-int main(){
-    int t ;
-    scanf("%d", &t);
-    for (int i=0; i<t; i++)
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    string s;
+    getline(cin, s);
+    // cin.ignore(32767, '\n');
+    while (t--)
     {
-        int n;float sum=0;
-        scanf("%d", &n);
-        if (n % 2 == 0){
-            for (float j=2.0; j<n;j= j+2.0)
-                sum = sum + 1.0/j;
+        
+        getline(cin, s);
+        int i = 0;
+        // Kiểm tra xem có dấu cách ở đầu dòng hay ko.
+        for(; i < (int) s.size() && s[i] == ' '; ++i);
+        if (i == s.size()) {
+            cout << 0;
+            continue;
         }
-        else {
-            for (int j=1.0; j<n;j= j+2.0)
-                sum = sum + 1.0/j;
+        // Kiểm tra xem có dấu cách ở cuối dòng hay ko.
+        int n = s.size()-1;
+        for(; n >= 0 && s[n] == ' '; --n);
+        if (i == s.size() || n == -1) {
+            cout << 0;
+            continue;
         }
-            printf("%f\n", sum);
+        int dem = 0;
+        for (;i <= n; i++)
+        {
+            if (s[i] != ' ' && (s[i + 1] == ' ' || s[i+1] == '\t' || i == n))
+                dem++;
+        }
+        cout << dem << "\n";
     }
-    return 0;
 }

@@ -47,11 +47,64 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e5+5;
+int n, m; 
+vector<vi> adj;
+vi colour;
+bitset<N> visited;
+bool failed;
+void bfs(int x) {
+    colour[x] = 1;
+    queue<int> q;
+    q.push(x);
+    while(!q.empty()) {
+        int a = q.front();
+        q.pop();
+        if (visited[a]) continue;
+        visited[a] = true;
+        EACH(it, adj[a]) {
+            if (colour[it] == colour[a]) {
+                failed = true;
+                return;
+            }
+            if (!colour[it])
+                colour[it] = colour[a] == 1 ? 2 : 1;
+            q.push(it);
+        }
+    }
+}
 
+void solve(){
+    failed = false;
+    adj.clear();
+    adj.resize(n+5);
+    colour.clear(); colour.resize(n+5);
+    visited.reset();
+    FOR(m) {
+        int l, r; cin >> l >> r;
+        adj[l].push_back(r);
+        adj[r].push_back(l);
+    }
+    // vi ans(N);
+    FOR(n) {
+        if (!visited[i]) {
+            bfs(i);
+        }
+        if (failed) break;
+    }
+    if (failed) cout << "NOT BICOLORABLE.\n";
+    else {
+        cout << "BICOLORABLE.\n";
+    }
 }
 
 int main()
 {
     IOS;
+    while(true) {
+        cin >> n;
+        if (n == 0) break;
+        cin >> m;
+        solve();
+    }
 }

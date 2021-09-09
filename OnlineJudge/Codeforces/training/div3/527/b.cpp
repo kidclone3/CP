@@ -48,10 +48,23 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    priority_queue<int> pq;
+    FOR(n) {
+        int tmp; cin >> tmp;
+        pq.push(tmp);
+    }
+    int ans = 0;
+    while(!pq.empty()) {
+        int a = pq.top(); pq.pop();
+        int b = pq.top(); pq.pop();
+        ans += abs(a-b);
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

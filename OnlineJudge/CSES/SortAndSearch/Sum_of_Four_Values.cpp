@@ -48,10 +48,38 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; ll x;
+    cin >> n >> x;
+    vl a(n);
+    FOR(n) {
+        cin >> a[i];
+    }
+    map<ll, ii> mp;
+    FOR(i, 0, n-1) {
+        FOR(j, i+1, n) {
+            mp[a[i]+a[j]] = {i, j};
+        }
+    }
+    FOR(i, 0, n-1) {
+        FOR(j, i+1, n) {
+            if (mp.find(x-(a[i]+a[j])) != mp.end()) {
+                ii tmp = mp[x-a[i]-a[j]];
+                if (i != tmp.first && i != tmp.second && j != tmp.first && j != tmp.second) {
+                    // vi ans = {i+1, j+1, tmp.first+1, tmp.second+1};
+                    vi ans(4);
+                    ans[0] = i+1; ans[1] = j+1; ans[2] = tmp.first+1; ans[3] = tmp.second+1;
+                    sort(all(ans));
+                    print(ans);
+                    return;
+                }
+            }
+        }
+    }
+    cout << "IMPOSSIBLE";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -47,11 +47,52 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e5+5;
+vi adj[N];
+vi colour(N);
+bitset<N> visited;
+bool failed = false;
+void bfs(int x) {
+    colour[x] = 1;
+    queue<int> q;
+    q.push(x);
+    while(!q.empty()) {
+        int a = q.front();
+        q.pop();
+        if (visited[a]) continue;
+        visited[a] = true;
+        EACH(it, adj[a]) {
+            if (colour[it] == colour[a]) {
+                failed = true;
+                return;
+            }
+            colour[it] = colour[a] == 1 ? 2 : 1;
+            q.push(it);
+        }
+    }
+}
 
+void solve(){
+    int n, m; cin >> n >> m;
+    FOR(m) {
+        int l, r; cin >> l >> r;
+        adj[l].push_back(r);
+        adj[r].push_back(l);
+    }
+    // vi ans(N);
+    FOR1(n) {
+        if (!visited[i]) {
+            bfs(i);
+        }
+    }
+    if (failed) cout << "IMPOSSIBLE";
+    else {
+        FOR1(n) cout << colour[i] << " \n"[i==n];
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

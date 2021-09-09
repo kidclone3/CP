@@ -48,10 +48,29 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    int n; cin >> n;
+    string a;
+    cin >> a;
+    if (n == 1) cout << "-1 -1\n";
+    else {
+        FOR(i, n-1) {
+            if (a[i] == 'a' && a[i+1] == 'b') {
+                cout << i+1 << " " << i+2 << "\n";
+                return;
+            }
+            if (a[i] == 'b' && a[i+1] == 'a') {
+                cout << i+1 << " " << i+2 << "\n";
+                return;
+            }
+        }
+        cout << "-1 -1\n";
+    }
 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

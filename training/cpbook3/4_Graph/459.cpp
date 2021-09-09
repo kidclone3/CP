@@ -44,14 +44,57 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+vector<string> inp;
+int n;
+char ch; 
+vb visited;
+vector<vector<int>> adj;
+void dfs(int i) {
+    visited[i] = true;
+    EACH(it, adj[i]) {
+        if (!visited[it]) {
+            dfs(it);
+        }
+    }
+}
 void solve(){
-
+    n = ch - 'A' + 1;
+    adj.clear(); visited.clear();
+    adj.resize(n+5);
+    visited.resize(n+5);
+    EACH(it, inp) {
+        adj[it[0]-'A'].push_back(it[1]-'A');
+        adj[it[1]-'A'].push_back(it[0]-'A');
+    }
+    int cnt = 0;
+    FOR(n) {
+        if (!visited[i]) {
+            cnt++;
+            dfs(i);
+        }
+    }
+    cout << cnt << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; 
+    // scanf("%d", &t);
+    cin >> t;
+    string s; 
+    FOR(t) {
+        // getchar();
+        inp.clear();
+        if (i) cout << "\n";
+        cin >> ch;
+        cin.ignore(33333, '\n');
+        while(getline(cin, s))
+            {
+                if (!cin || s.size() <= 1) break;
+                inp.push_back(s);
+            }
+        // print(inp);
+        solve();
+    }
 }

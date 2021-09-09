@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,37 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n, x;
+    cin >> n >> x;
+    // mp.first = pages, mp.second = price
+    unordered_map<int, int> mp;
+    // 0 page, 0 price.
+    mp[0]=0;
+    vector<int> price(n), page(n);
+    FOR(n) cin >> price[i];
+    FOR(n) cin >> page[i];
+    FOR(n) {
+        vector<int> vt(mp.size());
+        int j = 0;
+        EACH(it, mp) vt[j++] = it.first;
+        EACH(it, vt) {
+            int fi = it + page[i];
+            int se = mp[it] + price[i];
+            if (se <= x) {
+                if (!mp.count(fi)) mp[fi] = se;
+                else mp[fi] = min(mp[fi], se);
+            }
+        }
+    }
+    int ans = -1;
+    EACH(it, mp) ans = max(ans, it.first);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

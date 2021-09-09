@@ -47,11 +47,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 3e5+5;
+int pref[N+5];
 void solve(){
-
+    int a, b; cin >> a >> b;
+    int ans = pref[a-1];
+    if (ans == b) cout << a <<"\n";
+    else {
+        if ((ans ^ b) != a) cout << a + 1 << "\n";
+        else cout << a + 2 << "\n";
+    }
 }
 
 int main()
 {
     IOS;
+    FOR(i, 1, N) {
+        pref[i] = pref[i-1]^i;
+    }
+    int t; cin >> t;
+    while(t--) solve();
 }

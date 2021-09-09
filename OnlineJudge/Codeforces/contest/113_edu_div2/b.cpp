@@ -48,10 +48,58 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    string s; cin >> s;
+    vector<string> ans(n, string(n, ' '));
+    bitset<55> state;
+    queue<ii> q;
+    FOR(i, n) {
+        FOR(j, n) {
+            if (i == j) ans[i][i] = 'X';
+            else if (s[i] == '1' || s[j] == '1') {
+                ans[i][j] = ans[j][i] = '=';
+            }
+            else if (s[i] == '2' && s[j] == '2') {
+                q.push({i, j});
+            }
+        }
+    }
+    while(!q.empty()) {
+        int i, j;
+        tie(i, j) = q.front(); q.pop();
+        if (state[i] && state[j]) continue;
+        if (state[i] && ans[i][j] == ' ') {
+            ans[i][j] = '-';
+            ans[j][i] = '+';
+            state[j] = true;
+        }
+        else if (state[j] && ans[i][j] == ' ') {
+            ans[i][j] = '+';
+            ans[j][i] = '-';
+            state[i] = true;
+        }
+        else if (!state[i] && !state[j]) {
+            ans[i][j] = '+';
+            ans[j][i] = '-';
+            state[i] = true;
+        }
+    }
+    FOR(n) {
+        if (s[i] == '2' && !state[i]) {
+            cout << "NO\n";
+            return;
+        }
+    }
+    FOR(i, n) {
+        FOR(j, n) if (ans[i][j] == ' ') ans[i][j] = '=';
+    }
+    cout << "YES\n";
+    FOR(n) cout << ans[i] << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

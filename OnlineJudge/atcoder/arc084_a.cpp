@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,31 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    vl a(n), b(n), c(n);
+    FOR(n) cin >> a[i];
+    FOR(n) cin >> b[i];
+    FOR(n) cin >> c[i];
+    sort(all(a));
+    sort(all(b));
+    sort(all(c));
+    ll ans = 0LL;
+    int upper = 0; // pointer for the upper part.
+    FOR(mid, 0, n) {
+        // Start mid from 0 to n.
+        auto low = lower_bound(all(a), b[mid]) - a.begin();
+        if (low == n || a[low] >= b[mid]) low--; 
+        while(upper < n && c[upper] <= b[mid]) upper++;
+        if (upper == n) break;
+        ans += 1LL*(low+1)*(n-upper);
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

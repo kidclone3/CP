@@ -40,18 +40,51 @@ void printPair(T &x)
 {
     for (auto &it : x)
     {
-        cout << "(" << it.first << ", " << it.second <<") ";
+        cout << it.first << " " << it.second <<"\n";
     }
-    cout << "\n";
+    // cout << "\n";
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e5+5;
+vi adj[N];
+bitset<N> visited;
 
+void dfs(int i) {
+    visited[i] = true;
+    EACH(it, adj[i]) {
+        if (visited[it]) continue;
+        dfs(it);
+    }
+}
+
+void solve(){
+    int n, m; cin >> n >> m;
+    FOR(m) {
+        int l, r; cin >> l >> r;
+        adj[l].push_back(r);
+        adj[r].push_back(l);
+    }
+    int cnt = 0;
+    int last = -1;
+    vii ans;
+    FOR1(n) {
+        if(!visited[i]) {
+            dfs(i);
+            if (cnt) {
+                ans.push_back({last, i});
+            }
+            last = i;
+            cnt++;
+        }
+    }
+    cout << ans.size() << "\n";
+    printPair(ans);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

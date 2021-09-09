@@ -47,11 +47,58 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e5+5;
+vi adj[N];
+vi distances(N, 1e9);
+bitset<N> visited;
+vi path(N);
+int last = -1;
+void dijkstra() {
+    priority_queue<ii> q;
+    distances[1] = 0;
+    q.push({0, 1});
+    // Xet dinh dau tien: 1.
+    while(!q.empty()) {
+        int a = q.top().second;
+        q.pop();
+        if (visited[a]) continue;
+        visited[a] = true;
+        EACH(it, adj[a]) {
+            if (distances[a] + 1 < distances[it]) {
+                distances[it] = distances[a]+1;
+                path[it] = a;
+                q.push({-distances[it], it});
+            }
+        }
+    }
+}
 
+void solve(){
+    int n, m; cin >> n >> m;
+    FOR(m) {
+        int l, r; cin >> l >> r;
+        adj[l].push_back(r);
+        adj[r].push_back(l);
+    }
+    dijkstra();
+    path[1] = -1;
+    // FOR1(n) cout << path[i] << " \n"[i==n];
+    if (!path[n]) cout << "IMPOSSIBLE";
+    else {
+        vi ans = {n};
+        int it = path[n];
+        while(it != -1) {
+            ans.push_back(it);
+            it = path[it];
+        }
+        cout << ans.size() << "\n"; 
+        reverse(all(ans));
+        print(ans);
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

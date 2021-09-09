@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,35 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
+int l, n;
+int a[55];
+int dp[55][55];
+int cut(int left, int right) {
+    if (dp[left][right] != -1) return dp[left][right];
+    if (right - left <= 1) return dp[left][right] = 0; // because there is no more cut between this.
+    int *ans = &dp[left][right];
+    *ans = 1e9;
+    FOR(i, left+1, right) {
+        *ans = min(*ans, cut(left, i) + cut(i, right) + (a[right] - a[left]));
+    }
+    return *ans;
 
+}
 void solve(){
-
+    memset(dp, -1, sizeof dp);
+    FOR1(n) cin >> a[i];
+    a[n+1] = l;
+    cout << "The minimum cutting is " << cut(0, n+1) << ".\n";
+    // FOR(n+2) FOR(j, n+2) cout << dp[i][j] << " \n"[j==n+1];
 }
 
 int main()
 {
     IOS;
+    while(true) {
+        cin >> l;
+        if (!l) break;
+        cin >> n;
+        solve();
+    }
 }

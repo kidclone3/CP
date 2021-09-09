@@ -47,11 +47,46 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 2* 100 + 5;
+vector<string> a;
+string ans;
+int n;
+vi pairs[N];
+bool check(string &pref, string &suff) {
+    string s = pref + suff.substr(n - 2);
+    ans.resize(2*n-2, ' ');
+    vb visited(2*n-2, 0);
+    FOR(i, 1, n) {
+        int p1 = pairs[i][0];
+        int p2 = pairs[i][1];
+        string str1 = s.substr(0, i);
+        string str2 = s.substr(n - i, i);
+        if (a[p1] == str1 && a[p2] == str2) {
+            ans[p1] = 'P'; ans[p2] = 'S';
+        }
+        else if (a[p2] == str1 && a[p1] == str2) {
+            ans[p1] = 'S'; ans[p2] = 'P';
+        }
+        else return false;
+    }
+    return true;
+}
 
+void solve(){
+    cin >> n;
+    a.resize(2*n-2);
+    vector<string> big;
+    FOR(2*n - 2) {
+        cin >> a[i]; 
+        pairs[(int) a[i].size()].push_back(i);
+        if (a[i].size() == (size_t) n - 1) big.push_back(a[i]);
+    }
+    if (check(big[0], big[1])) cout << ans;
+    else if (check(big[1], big[0])) cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

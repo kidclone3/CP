@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,33 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+int n, m;
+const int N = 20000+5;
+int heads[N], knights[N];
 void solve(){
-
+    // vi heads(n), knights(m);
+    FOR(n) scanf("%d", heads+i);
+    FOR(m) scanf("%d", knights+i);
+        int ans = 0;
+        sort(heads, heads+n);
+        sort(knights, knights+m);
+        int i, j; i = j = 0;
+        while(i < n && j < m) {
+            while(j < m && knights[j] < heads[i]) j++;
+            if(j == m) break;
+            ans += knights[j];
+            i++; j++;
+        }
+    if (i == n) printf("%d\n", ans);
+    else printf("Loowater is doomed!\n");
 }
 
 int main()
 {
     IOS;
+    while(true) {
+        scanf("%d%d", &n, &m);
+        if (n == m && n == 0) break;
+        solve();
+    }
 }

@@ -47,11 +47,53 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+vi a;
+bitset<105> p;
 
+bool dfs(int x, int dest) {
+    int x1 = x;
+    while(p[x] && x < dest) x++;
+    if (x == dest) {
+        a.erase(a.begin() + x1);
+        return true;
+    }
+    return false;
+}
+
+void solve(){
+    p.reset();
+    int n, m; cin >> n >> m;
+    a.resize(n+5);
+    FOR1(n) cin >> a[i];
+    FOR(m) {
+        int tmp; cin >> tmp;
+        p[tmp] = 1;
+    }
+    int r = n;
+    
+    while(r) {
+        ii mx = {-1, -1};
+        FOR(i, 1, r+1)  {
+            if (a[i] >= mx.first) mx = {a[i], i};
+        }
+        if (mx.second == r) {
+            r--;
+            // continue;
+        }
+        else {
+            if (dfs(mx.second, r)) r--;
+            else {
+                cout << "NO\n";
+                return;
+            }
+        }
+    }
+    cout << "YES\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

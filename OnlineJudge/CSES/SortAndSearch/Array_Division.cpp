@@ -47,11 +47,41 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int n, k;
 void solve(){
-
+    cin >> n >> k;
+    vl a(n);
+    FOR(n) cin >> a[i];
+    auto works = [&] (ll mid) {
+        ll sum = 0LL;
+        int groups = 0;
+        FOR(i, n) {
+            if (a[i]>mid) return false;
+            if (a[i] + sum > mid) {
+                ++groups;
+                sum = 0LL;
+            }
+            sum += a[i];
+        }
+        if (sum > 0LL) ++groups;
+        // if (groups <= k) cout << groups << "\n";
+        return groups <= k;
+    };
+    ll lo = 0LL, hi = (ll) 1e18, ans = 0LL;
+    while(lo <= hi) {
+        ll mid = (lo+hi)/2LL;
+        if (works(mid)) {
+            hi = mid-1LL;
+            // cout << lo << "\t" << hi << "\n";
+            ans = mid;
+        }
+        else lo = mid+1LL;
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

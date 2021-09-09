@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,44 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+const int N = 1e5+5;
+const int M = 100+5;
+const ll mod = 1e9+7;
+ll dp[N][M];
 void solve(){
+    int n, m; cin >> n >> m;
+    vl a(n);
+    FOR(n) cin >> a[i];
+    FOR(i, 1, n) {
+        if (a[i] && a[i-1] && abs(a[i]-a[i-1]) > 1) {
+            cout << 0;
+            return;
+        }
+    }
+    if (a[0] == 0) {
+            FOR(j, 1, m+1) dp[0][j] = 1LL;
+    }
+    else dp[0][a[0]] = 1LL;
+    FOR(i, 1, n) {
+        if (a[i] == 0) {
+            FOR(j, 1, m+1) {
+                dp[i][j] = (dp[i-1][j-1] + dp[i-1][j] + dp[i-1][j+1]) % mod;
+                // else dp[i][j] = (dp[i-1][j] + dp[i-1][j+1]) % mod;
+            }
+        }
+        else {
+            dp[i][a[i]] = (dp[i-1][a[i]-1] + dp[i-1][a[i]] + dp[i-1][a[i]+1]) % mod;
+        }
+    }
+    // FOR(i, 0, n) FOR(j, 0, m+1) cout << dp[i][j] << " \n"[j==m];
 
+    ll ans = 0LL;
+    FOR(j, 0, m+1) ans = (ans + dp[n-1][j]) % mod;
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

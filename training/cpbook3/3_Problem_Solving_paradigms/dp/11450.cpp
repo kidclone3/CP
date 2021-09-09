@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,46 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+const int maxM = 205; 
+const int maxC = 25;
+bool dp[maxC][maxM];
 void solve(){
-
+    // M = budget, C = numbers of garments
+    int M, C; cin >> M >> C;
+    vector<vector<int>> garments(C);
+    FOR(C) {
+        int n; cin >> n;
+        FOR(j, n) {
+            int tmp;
+            cin >> tmp;
+            garments[i].push_back(tmp);
+        }
+    }
+    memset(dp, false, sizeof dp);
+    // Initialize:
+    EACH(it, garments[0]) {
+        if (M >= it) {
+            dp[0][M-it] = true;
+        }
+    }
+    FOR(g, 1, C) {
+        FOR(money, 0, M) if (dp[g-1][money]) {
+            EACH(it, garments[g]) {
+                if (money >= it) dp[g][money-it] = true;
+            }
+        }
+    }
+    int money = 0;
+    for(; money <= M && !dp[C-1][money]; money++);
+    if (money == M+1) cout << "no solution\n";
+    else cout << M - money << '\n';
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) {
+        solve();
+    }
 }

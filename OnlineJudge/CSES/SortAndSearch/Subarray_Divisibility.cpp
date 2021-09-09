@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,28 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    ll n; cin >> n;
+    ll ans = 0LL;
+    vl a(n), dp(n, 0LL);
+    map<ll, ll> mp;
+    FOR(n) cin >> a[i];
+    dp[0] = (a[0] % n + n) %n;
+    mp[dp[0]]++;
+    if (dp[0] == 0) ans++;
+    FOR(i, 1, n) {
+        dp[i] = ((dp[i-1] + a[i]) % n + n) % n;
+        ans += mp[dp[i]];
+        if (dp[i] == 0) ans++;
+        mp[dp[i]]++;
+    }
+    // print(dp);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

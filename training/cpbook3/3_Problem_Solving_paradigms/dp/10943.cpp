@@ -6,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -44,14 +43,40 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
+int n, k;
+const int mod = 1e6;
+int dp[150][150];
+
+int dq(int n_i, int k_i) {
+    if (k_i <= 0) return 0;
+    if (k_i == 1) return dp[n_i][1] = 1;
+    if (dp[n_i][k_i] != -1) return dp[n_i][k_i];
+    else {
+        int *ans = &dp[n_i][k_i];
+        *ans = 0;
+        FOR(i, 0, n_i+1) {
+            *ans = (*ans + dq(n_i-i,k_i-1)) % mod;
+        }   
+        return *ans;
+    }
+}
 
 void solve(){
-
+    memset(dp, -1, sizeof dp);
+    cout << dq(n, k) <<"\n";
+    // FOR(i, n+1) {
+    //     FOR(j, k+1) {
+    //         cout << dp[i][j] << " \n"[j==k];
+    //     }
+    // }
 }
 
 int main()
 {
     IOS;
+    while(true) {
+        cin >> n >> k;
+        if (n == k && n == 0) break;
+        solve();
+    }
 }
