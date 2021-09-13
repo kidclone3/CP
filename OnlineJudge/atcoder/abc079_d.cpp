@@ -46,31 +46,25 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-const ll mod = 998244353;
+
+const int N = 10;
+int c[N][N];
 
 void solve(){
-    ll n; cin >> n;
-    vl a(n);
-    FOR(n) cin >> a[i];
-    int mx = *max_element(all(a));
-    int cmx = count(all(a), mx);
-    int k = count(all(a), mx-1);
-    ll ans = 1;
-    ll sub = 1;
-    for (int i = 1; i < n+1; i++)
-    {
-        ans = ans * (ll)i % mod;
-        if (i != k+1) sub = sub * i % mod;
+    int h, w; cin >> h >> w;
+    FOR(i, N) FOR(j, N) cin >> c[i][j];
+    int ans = 0;
+    // Floyd-warshall algorithm
+    FOR(k, N) FOR(i, N) FOR(j, N)   c[i][j] = min(c[i][j], c[i][k] + c[k][j]);
+    FOR(i, h) FOR(j, w) {
+        int tmp; cin >> tmp;
+        if (abs(tmp) != 1) ans += c[tmp][1];
     }
-    if (cmx == 1) ans = (ans - sub + mod) % mod;
-    cout << ans << "\n";
-}   
+    cout << ans;
+}
 
 int main()
 {
     IOS;
-
-
-    int t; cin >> t;
-    while(t--) solve();
+    solve();
 }

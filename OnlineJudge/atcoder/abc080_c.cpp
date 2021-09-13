@@ -46,31 +46,38 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-const ll mod = 998244353;
+
+const int N = 140;
+int F[N][15];
+ll P[N][15];
 
 void solve(){
-    ll n; cin >> n;
-    vl a(n);
-    FOR(n) cin >> a[i];
-    int mx = *max_element(all(a));
-    int cmx = count(all(a), mx);
-    int k = count(all(a), mx-1);
-    ll ans = 1;
-    ll sub = 1;
-    for (int i = 1; i < n+1; i++)
-    {
-        ans = ans * (ll)i % mod;
-        if (i != k+1) sub = sub * i % mod;
+    // Bài này mình hiểu sai đề. 
+    // Nếu chọn bán ở 1 buổi => tất cả các shop có mở ở buổi đó đều phải bán
+    // Test mẫu gây hiểu nhầm thành chọn buổi tùy ý với mỗi cửa hàng khác nhau :((
+    int n; cin >> n;
+    FOR(i, n) FOR(j, 10) cin >> F[i][j];
+    FOR(i, n) FOR(j, 11) cin >> P[i][j];
+    // Bruteforce
+    int ans = INT_MIN;
+    FOR(b, 1, 1<<10) {
+        int cc = 0;
+        FOR(i, n) {
+            int c = 0;
+            FOR(j, 10) {
+                if (((1<<j)&b) && F[i][j]) {
+                    c++;
+                }
+            }
+            cc += P[i][c];
+        }
+        ans = max(ans, cc);
     }
-    if (cmx == 1) ans = (ans - sub + mod) % mod;
-    cout << ans << "\n";
-}   
+    cout << ans;
+}
 
 int main()
 {
     IOS;
-
-
-    int t; cin >> t;
-    while(t--) solve();
+    solve();
 }

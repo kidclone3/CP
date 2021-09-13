@@ -46,31 +46,42 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-const ll mod = 998244353;
+
+const int N = 550, K = 15;
+int dp[N][N*K];
 
 void solve(){
-    ll n; cin >> n;
-    vl a(n);
-    FOR(n) cin >> a[i];
-    int mx = *max_element(all(a));
-    int cmx = count(all(a), mx);
-    int k = count(all(a), mx-1);
-    ll ans = 1;
-    ll sub = 1;
-    for (int i = 1; i < n+1; i++)
-    {
-        ans = ans * (ll)i % mod;
-        if (i != k+1) sub = sub * i % mod;
+    int n, k; cin >> n >> k;
+    vi h(k+1, 0);
+    map<int, int> c, f;
+    FOR(k*n) {
+        int x; cin >> x;
+        c[x]++;
     }
-    if (cmx == 1) ans = (ans - sub + mod) % mod;
-    cout << ans << "\n";
-}   
+    FOR(n) {
+        int x; cin >> x;
+        f[x]++;
+    }
+    FOR1(k) {
+        cin >> h[i];
+    }
+    FOR(n+1) {
+        FOR(j, 0, k*n+1) {
+            FOR(curr, 0, k+1) {
+                dp[i+1][j+curr] = max(dp[i+1][j+curr], dp[i][j]+h[curr]);
+            }
+        }
+    }
+    // printPair(f);
+    int ans = 0;
+    FOR(i, 1, (int) 1e5+1) {
+        ans += dp[f[i]][c[i]];
+    }
+    cout << ans;
+}
 
 int main()
 {
     IOS;
-
-
-    int t; cin >> t;
-    while(t--) solve();
+    solve();
 }

@@ -46,31 +46,58 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-const ll mod = 998244353;
+
+vi adj[5000+5];
+bitset<5000+5> visited;
+vi topo;
+void dfs(int x) {
+    visited[x] = true;
+    EACH(u, adj[x]) {
+        if (visited[u]) continue;
+        dfs(u);
+    }
+    topo.push_back(x);
+}
+void dfs1(int x) {
+    visited[x] = true;
+    EACH(u, adj[x]) {
+        if (visited[u]) continue;
+        dfs1(u);
+    }
+}
 
 void solve(){
-    ll n; cin >> n;
-    vl a(n);
-    FOR(n) cin >> a[i];
-    int mx = *max_element(all(a));
-    int cmx = count(all(a), mx);
-    int k = count(all(a), mx-1);
-    ll ans = 1;
-    ll sub = 1;
-    for (int i = 1; i < n+1; i++)
-    {
-        ans = ans * (ll)i % mod;
-        if (i != k+1) sub = sub * i % mod;
+    int n, m, cap;
+    cin >> n >> m >> cap;
+    FOR(m) {
+        int l, r;
+        cin >> l >> r;
+        adj[l].push_back(r);
     }
-    if (cmx == 1) ans = (ans - sub + mod) % mod;
-    cout << ans << "\n";
-}   
+    // dfs(cap);
+    int ans = 0;
+    FOR1(n) {
+        if (i != cap && !visited[i]) {
+            dfs(i);
+        }
+    }
+    reverse(all(topo));
+    // print(topo);
+    visited.reset();
+    // cout << visited.size() << "\n";
+    dfs1(cap);
+    EACH(it, topo) {
+        if (!visited[it]) {
+            ans++;
+            adj[cap].push_back(it);
+            dfs1(cap);
+        }
+    }
+    cout << ans;
+}
 
 int main()
 {
     IOS;
-
-
-    int t; cin >> t;
-    while(t--) solve();
+    solve();
 }

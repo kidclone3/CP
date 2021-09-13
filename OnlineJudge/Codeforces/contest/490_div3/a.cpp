@@ -46,31 +46,26 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-const ll mod = 998244353;
 
 void solve(){
-    ll n; cin >> n;
-    vl a(n);
+    int n, k;
+    cin >> n >> k;
+    vi a(n);
     FOR(n) cin >> a[i];
-    int mx = *max_element(all(a));
-    int cmx = count(all(a), mx);
-    int k = count(all(a), mx-1);
-    ll ans = 1;
-    ll sub = 1;
-    for (int i = 1; i < n+1; i++)
-    {
-        ans = ans * (ll)i % mod;
-        if (i != k+1) sub = sub * i % mod;
+    int ans = 0;
+    int i = 0;
+    while (i < n && a[i] <= k) i++;
+    ans += i;
+    int j = n-1;
+    while (j >= i && a[j] <= k) {
+        j--;
+        ans++;
     }
-    if (cmx == 1) ans = (ans - sub + mod) % mod;
-    cout << ans << "\n";
-}   
+    cout << ans;
+}
 
 int main()
 {
     IOS;
-
-
-    int t; cin >> t;
-    while(t--) solve();
+    solve();
 }
