@@ -1,5 +1,6 @@
 import random
-n = 1000
+n = 100000
 print(n)
 for i in range(0, n):
-    print(random.randint(888888888888888888, 9999999999999999999+1))
+    tmp = random.randint(0, 1)
+    print(tmp, end = ' ')
