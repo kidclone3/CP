@@ -50,11 +50,42 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+vector<string> grid;
 
+void solve(){
+    int n = grid.size();
+    int dp[n][n];
+    FOR(i, n) FOR(j, n) {
+        dp[i][j] = grid[i][j] - '0';
+        if (i && j) dp[i][j] -= dp[i-1][j-1];
+        if (i) dp[i][j] += dp[i-1][j];
+        if (j) dp[i][j] += dp[i][j-1];
+    }
+    // FOR(i, n) FOR(j, n) cout << dp[i][j] << " \n"[j==n-1];
+    int maxRect = 0;
+    FOR(x1, n) FOR(y1, n) FOR(x2, n) FOR(y2, n) {
+        int sumRect = dp[x2][y2];
+        if (x1) sumRect -= dp[x1-1][y2];
+        if (y1) sumRect -= dp[x2][y1-1];
+        if (x1 && y1) sumRect += dp[x1-1][y1-1];
+        if (sumRect == abs(x2-x1+1) * abs(y2-y1+1)) maxRect = max(maxRect, sumRect);
+    }
+    cout << maxRect << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) {
+        string s; cin >> s;
+        grid.push_back(s);
+        FOR(i, s.size() - 1) {
+            cin >> s;
+            grid.push_back(s);
+        }
+        solve();
+        if (t > 0) cout << "\n";
+        grid.clear();
+    }
 }

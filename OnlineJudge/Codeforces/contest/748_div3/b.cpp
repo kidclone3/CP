@@ -51,10 +51,29 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    string s; cin >> s;
+    int n = s.size();
+    reverse(all(s));
+    int five, zero, two, seven;
+    five = zero = two = seven = 0;
+    while (five + 1 <n && s[five] != '5') five++;
+    while(zero + 1 < n && s[zero] != '0') zero++;
+    int zero2 = zero + 1;
+    while (zero2 + 1 < n && s[zero2] != '0' && s[zero2] != '5') zero2++;
+    two = seven = five+1;
+    while (two + 1 < n && s[two] != '2') two ++;
+    while (seven + 1 < n && s[seven] != '7') seven++;
+    vi ans;
+    if (seven < n) ans.push_back(seven - 1);
+    if (two < n) ans.push_back(two - 1);
+    if (zero2 < n) ans.push_back(zero2 - 1);
+    cout << *min_element(all(ans)) << "\n";
 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

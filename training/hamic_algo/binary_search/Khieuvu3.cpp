@@ -51,10 +51,19 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n, k; cin >> n >> k;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    int ans = 0;
+    FOR(i, n) {
+        if (binary_search(all(a), a[i]+k)) ans++;
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

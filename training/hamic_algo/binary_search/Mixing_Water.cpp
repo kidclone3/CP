@@ -51,10 +51,28 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    ll h, c, t;
+    cin >> h >> c >> t;
+    // My error was too much lay on implementation, but not see the real calculus behind this problem.
+    // My implementation about binary search is wrong by all side, but I still wasted time to implement it :((
+    if (h + c - 2 * t >= 0) return void(cout << 2 <<'\n');
+    else {
+        // (k+1)*h + k*c = (2*k+1)*t
+        // k(2*t-h-c) = h-t
+        // k = (2*t-h-c)/(h-t)
+        ll a = h-t;
+        ll b = 2*t - c - h;
+        ll k = 2* (a / b) + 1; // we find the upperbound and lowerbound of real K. 
+        // this k is 2*k+1 above
+        ll val1 = abs((k+1)/2*h + k/2 * c - k * t);
+        ll val2 = abs((k+3)/2*h + (k+2)/2 * c - (k+2)*t);
+        cout << (val1 * (k+2) <= val2 * k ? k : k+2) << "\n";
+    }
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

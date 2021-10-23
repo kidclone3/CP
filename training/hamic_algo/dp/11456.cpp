@@ -50,11 +50,31 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int MAXN = 2e3+5;
+int a[MAXN], mUp[MAXN], mDown[MAXN];
 
+void solve(){
+    int n; cin >> n; 
+    FOR(n) cin >> a[i];
+    FOR(i, n-1, -1, -1) {
+        mUp[i] = 1;
+        mDown[i] = 1;
+        FOR(j, i+1, n, 1) {
+            if (a[i] < a[j]) mUp[i] = max(mUp[i], mUp[j] + 1);
+            if (a[i] > a[j]) mDown[i] = max(mDown[i], mDown[j]+1);
+        }
+    }
+    int ans = 0;
+    FOR(n) {
+        ans = max(ans, mUp[i] + mDown[i]-1);
+    }
+    cout << ans << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
+    solve();
 }

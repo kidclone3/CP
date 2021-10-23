@@ -51,10 +51,24 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    int mn = *min_element(all(a));
+    int gcd = 0;
+    FOR(n) {
+        if (a[i] != mn) {
+            gcd = __gcd(gcd, a[i] - mn);
+        }
+    }
+    if (gcd == 0) gcd = -1;
+    cout << gcd << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
+
 }

@@ -50,11 +50,32 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+typedef tree<int, null_type, less_equal<int>, rb_tree_tag, tree_order_statistics_node_update> orderset;
 
+void solve(){
+    orderset st;
+    int n; cin >> n;
+    vi a(n), b(n);
+    FOR(n) cin >> a[i];
+    FOR(n) cin >> b[i];
+    ll ans = 0LL;
+    FOR(n) {
+        // cout << st.size() << "\n";
+        int tmp = a[i] - b[i];
+        if (!st.empty()) {
+            // ans += st.size() - st.order_of_key(-tmp);
+            if (tmp == 0) {
+                ans += (ll) st.size() - st.order_of_key(1);
+            } else  ans += (ll) st.size() - st.order_of_key(-tmp+1);
+        }
+        st.insert(tmp);
+    }
+    // print(st);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -51,10 +51,21 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+	int n; cin >> n;
+	vector<double> p(n);
+	FOR(n) cin >> p[i];
+	vector<vector<double>> dp(n+5, vector<double>(n+5, 0));
+	FOR(n+5) dp[i][0] = 1;
+	int leastHeads = n/2 + 1;
+	FOR(i, 1, n+1) FOR(j, 1, leastHeads + 1) {
+		dp[i][j] = dp[i-1][j-1] * p[i-1] + dp[i-1][j] * (1-p[i-1]);
+	}
+	cout << fixed << setprecision(10) << dp[n][leastHeads];
 }
 
 int main()
 {
     IOS;
+	solve();
 }
+

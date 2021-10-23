@@ -51,10 +51,41 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    int n; char ch;
+    cin >> n >> ch;
+    string s; cin >> s;
+    if (count(all(s), ch) == n) return void(cout << "0\n");
+    if (s[n-1] == ch) {
+        return void(cout << "1\n" << n << "\n");
+    }
 
+    vi b;
+    FOR(i, n/2+1, n) {
+        if (s[i] == ch) {
+            return void(cout << "1\n" << i+1 << "\n");
+        }
+        
+    }
+    FOR(i, 0, n/2) {
+        if (s[i] != ch) b.push_back(i+1);
+    }
+    FOR(i, n/2, -1, -1) {
+        if (s[i] == ch) {
+            bool check = true;
+            EACH(it, b) if (it % (i+1) == 0) {
+                check = false;
+                break;
+            }
+            if (check) return void(cout << "1\n" << i+1 << "\n");
+        }
+    }
+    return void(cout << "2\n" << n << " " << n-1 << "\n");
+    
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

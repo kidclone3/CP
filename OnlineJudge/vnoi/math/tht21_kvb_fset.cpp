@@ -50,11 +50,57 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int maxN = 1e6+5;
+vi prime(maxN, 0);
 
+void sieve() {
+    prime[0] = prime[1] = 1;
+    for(int i = 2; i*i <=maxN; ++i) {
+        if (prime[i] == 0) {
+            for(int j = 2*i; j <= maxN; j+=i) prime[j] = i;
+            prime[i] = i;
+        }
+    }
+    for(int i = 1; i <= maxN; ++i) {
+        if (prime[i] == 0) prime[i] = i;
+    }
 }
+ll getMask(ll x) {
+    ll res = 1;
+    while(x > 1) {
+        ll k = prime[x];
+        ll cnt = 0;
+        while (x % k == 0 && x > 1) {
+            cnt++;
+            x /= k;
+        }
+        if (cnt & 1) res *= k;
+    }
+    return res;
+}
+ll cnt[maxN];
+void solve(){
+    int n; ll m; cin >> n >> m;
+    sieve();
+    FOR(i, 1, n+1) {
+        // cout << getMask(i) << " ";
+        ++cnt[getMask(i)];
+    }
+    // cout << "\n";
+    ll ans = 1;
+    FOR(n+1) {
+        if (cnt[i] != 0) {
+            ans *= cnt[i] + 1;
+            ans %= m;
+        }
+        // cout << cnt[i] << " "q;
+    }
+    // cout << "\n";
+    cout << ans;
+}  
 
 int main()
 {
     IOS;
+    solve();
 }

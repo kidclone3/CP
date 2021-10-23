@@ -29,32 +29,58 @@ using namespace std;
         freopen("output.txt", "w", stdout); \
     }
 #define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-template <class T>
-void print(T &x)
-{
-    for (auto &it : x)
-    {
-        cout << it << " ";
-    }
-    cout << "\n";
-};
-template <class T>
-void printPair(T &x)
-{
-    for (auto &it : x)
-    {
-        cout << "(" << it.first << ", " << it.second <<") ";
-    }
-    cout << "\n";
-};
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int maxN = 5e6+5;
+vi prime(maxN, 0);
 
+void sieve() {
+    prime[0] = prime[1] = 1;
+    for(int i = 3; i*i <=maxN; ++i) {
+        if (prime[i] == 0) {
+            for(int j = 2*i; j <= maxN; j+=i) prime[j] = i;
+            prime[i] = i;
+        }
+    }
+    for(int i = 1; i <= maxN; ++i) {
+        if (prime[i] == 0) {
+            prime[i] = i;
+        }
+        if (i % 2 == 0) prime[i] = 2;
+    }
 }
+ll getMask(ll x) {
+    ll res = 1;
+    while(x > 1) {
+        ll k = prime[x];
+        ll cnt = 0;
+        while (x % k == 0 && x > 1) {
+            cnt++;
+            x /= k;
+        }
+        if (cnt & 1) res *= k;
+    }
+    return res;
+}
+ll cnt[maxN];
+void solve(){
+    int n; cin >> n;
+    sieve();
+    FOR(i, 1, n+1) {
+        ++cnt[getMask(i)];
+    }
+    ll ans = 0;
+    FOR(n+1) {
+        if (cnt[i] >= 3) {
+            ll tmp = cnt[i];
+            ll add = ((tmp - 2) * (tmp -1 ) * tmp) / 6;
+            ans += add;
+        }
+    }
+    cout << ans;
+}  
 
 int main()
 {
     IOS;
+    solve();
 }

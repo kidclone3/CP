@@ -1,7 +1,5 @@
+// http://ntucoder.net/Problem/Details/4408
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
 using namespace std;
 
 #define pb push_back
@@ -51,10 +49,27 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; ll k;
+    cin >> n >> k;
+    vector<pair<ll, ll>> a(n); FOR(n) cin >> a[i].first >> a[i].second;
+    sort(all(a));
+    ll sum = 0;
+    ll mx = 0;
+    int l = 0;
+    for(int r = 0; r < n; ++r) {
+        sum += a[r].second;
+        while (a[r].first - a[l].first > 2 * k) {
+            sum -= a[l].second;
+            l++;
+        }
+        mx = max(mx, sum);
+    }
+    // printPair(a);
+    cout << mx;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

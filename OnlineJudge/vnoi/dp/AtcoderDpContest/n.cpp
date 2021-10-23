@@ -50,11 +50,36 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+int MAXN = 400;
 
+void solve(){
+    int n; cin >> n;
+    vl a(n), p(n);
+    FOR(n) cin >> a[i];
+    FOR(n) {
+        if (i) p[i] = p[i-1] + a[i];
+        else p[i] = a[i];
+    }
+    auto query = [&](int l, int r) -> ll {
+        return p[r] - (l == 0 ? 0 : p[l-1]) ;
+    };
+    ll dp[MAXN][MAXN];
+    FOR(n-1) dp[i][i+1] = a[i] + a[i+1];
+    FOR(n) dp[i][i] = 0;
+    FOR(i, n-1, -1, -1) {
+        FOR(j, i+2, n) {
+            ll best = 1e18;
+            FOR(k, i, j) {
+                best = min(best, dp[i][k] + dp[k+1][j]);
+            }
+            dp[i][j] = query(i, j) + best;
+        }
+    }
+    cout << dp[0][n-1] << "\n";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

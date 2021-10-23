@@ -51,10 +51,43 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    int n; cin >> n;
+    vector<vi> a(n, vi (n)), dp(n, vi(n, 0));
+    int maxRect = INT_MIN;
+    FOR(n) FOR(j, n) {
+        cin >> a[i][j]; 
+        dp[i][j] = a[i][j];
+        if (j) dp[i][j] += dp[i][j-1];
+    }
+    // Rubbish, we will use kadane
+    // FOR(x1, n) FOR(y1, n) FOR(x2, x1, n) FOR(y2, y1, n) {
+    //     int subRect = dp[x2][y2];
+    //     if (x1) subRect -= dp[x1-1][y2];
+    //     if (y1) subRect -= dp[x2][y1-1];
+    //     if (x1 && y1) subRect += dp[x1-1][y1-1];
+    //     maxRect = max(maxRect, subRect);
+    // }
 
+    auto query = [&] (int row, int left, int right) -> int {
+        return dp[row][right] - (left ? dp[row][left-1] : 0);
+    };
+    FOR(left, n) {
+        FOR(right, left, n) {
+            int subRect = 0;
+            int maxSubRect = INT_MIN;
+            FOR(i, n) {
+                subRect += query(i, left, right);
+                maxSubRect = max(maxSubRect, subRect);
+                subRect = max(subRect, 0);
+            }
+            maxRect = max(maxRect, maxSubRect);
+        }
+    }
+    cout << maxRect << "\n";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

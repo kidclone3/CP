@@ -50,11 +50,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int maxK = 1e5+5;
 
+void solve(){
+	int n, k; cin >> n >> k;
+	bitset<maxK> dp;
+	vi a(n);
+	FOR(n) cin >> a[i];
+	FOR(i, 1, k+1) {
+		EACH(j, a) {
+			if(i >= j && !dp[i-j]) dp[i] = 1;
+		}
+	}
+	cout << (dp[k] ? "First" : "Second");
 }
 
 int main()
 {
     IOS;
+	solve();
 }
+

@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
 using namespace std;
 
 #define pb push_back
@@ -9,8 +6,7 @@ using namespace std;
 #define vl vector<long long>
 #define vb vector<bool>
 #define ll long long
-#define ii pair<int, int>
-#define vii vector<ii>
+#define pii pair<int, int>
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -47,14 +43,27 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
-
+int n; 
 void solve(){
-
+    ll ans = -1e18;
+    vl a(n);
+    FOR(n) cin >> a[i];
+    ll curr = 0LL;
+    FOR(i, 0, n) {
+        curr += a[i];
+        ans = max(ans, curr);
+        if (curr < 0) curr = 0LL;
+    }
+    if (ans > 0) cout << "The maximum winning streak is " << ans << ".\n";
+    else cout << "Losing streak.\n";
 }
 
 int main()
 {
     IOS;
+    while(true) {
+        cin >> n;
+        if (n == 0) break;
+        solve();
+    }
 }

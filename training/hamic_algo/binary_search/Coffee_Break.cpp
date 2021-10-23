@@ -1,3 +1,4 @@
+// https://codeforces.com/gym/101911/problem/A
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -50,11 +51,38 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+gp_hash_table<int, int> mp;
 
+void solve(){
+    int n, m, d; cin >> n >> m >> d;
+    vi a(n), b(n);
+    queue<int> q;
+    FOR(n) {
+        cin >> a[i];
+        b[i] = a[i];
+    }
+    sort(all(b));
+    FOR(n) q.push(b[i]);
+    int last = -1;
+    int day = 1;
+    while(!q.empty()) {
+        int now = q.front(); q.pop();
+        if (now < last || mp[now] == -1) day++;
+        if (last == -1 || last + d + 1 <= now || mp[now] == -1) {
+            mp[now] = day;
+            last = now;
+        }
+        else {
+            mp[now] = -1;
+            q.push(now);
+        }
+    }
+    cout << day << "\n";
+    FOR(n) cout << mp[a[i]] << " ";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

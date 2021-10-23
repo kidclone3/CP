@@ -50,11 +50,42 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+double h, c, t;
+double f(ll k) {
+    
+    return (1.0*k*h + (k-1)*c)/(2.0*k-1);
+}
+
 void solve(){
+    cin >> h >> c >> t;
+    if (2*t <= h+c) return void(cout << "2\n");
+    ll l = 1, r = 1e9;
+    double minDiff = 1e9;
+    ll ans = 0;
+    while (l <= r) {
+        ll mid = (l+r)/2;
+        double temp = f(mid) - t;
+        if (abs(temp) < minDiff) {
+            ans = mid;
+            minDiff = abs(temp);
+        }
+        if (temp > 0) l = mid + 1;
+        else r = mid - 1;
+    }
+    FOR(i, max(0LL, l-5), l+5) {
+        double temp = abs(f(i) - t);
+        if (temp <= minDiff) {
+            ans = min(ans, i*1LL);
+            minDiff = temp;
+        }
+    }
+    cout << 2*ans-1 << "\n";
 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

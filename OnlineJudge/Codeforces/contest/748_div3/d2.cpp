@@ -51,10 +51,22 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    int mx = -1e9;
+    FOR(i, n/2) {
+        int gcd = 0;
+        FOR(j, i, n) {
+            gcd = _
+        }
+    }
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

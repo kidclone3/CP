@@ -51,10 +51,26 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    ll n; cin >> n;
+    if (n % 1) {
+        ll r= (n+1)/2;
+        return void(cout << r - 1 << " " << r << "\n");
+    }
+    ll cnt = 1;
+    while(n % 2 == 0) {
+        cnt <<= 1LL;
+        n /= 2;
+    }
+    cnt <<= 1LL;
+    ll r, l;
+    r = (n + cnt - 1)/2;
+    l = n - r;
+    cout << l << " " << r << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

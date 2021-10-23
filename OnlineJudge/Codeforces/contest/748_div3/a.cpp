@@ -51,10 +51,26 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    vi a(3);
+    FOR(3) cin >> a[i];
+    auto mx_e = max_element(all(a));
+    int mx = *mx_e;
+    if (count(all(a), mx) == 3) {
+        FOR(3) a[i] = 1;
+    }
+    else if (count(all(a), mx) == 2) {
+        FOR(3) if (a[i] < mx) a[i] = mx - a[i] + 1;
+        else a[i] = 1;
+    } else {
+        FOR(3) if (a[i] < mx ) a[i] = mx - a[i] + 1;
+        else a[i] = 0;
+    }
+    print(a);
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t-- ) solve();
 }

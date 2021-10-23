@@ -51,10 +51,26 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    vi a;
+    int tmp;
+    vi dp(a.size() + 5, INT_MAX);
+    while(cin >> tmp) {
+        a.push_back(tmp);
+        auto lb = lower_bound(dp.begin(), dp.end(), tmp);
+        *lb = tmp;
+    }
+    int sz = 0;
+    FOR(i, dp.size()) {
+        if (dp[i] == INT_MAX) break;
+        sz++;
+    }
+    cout << sz << "\n-\n";
+    FOR(i, sz) cout << dp[i] << "\n";
 
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -50,11 +50,30 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const ll mod = 1e9+7;
 
+long long pow_mod(long long a, long long n, long long mod) {
+    long long ans = 1LL;
+    for (long long i = n; i; i >>= 1) {
+        if (i&1) ans = ans * a % mod;
+        a = a * a % mod;
+    }
+    return ans;
+}
+
+void solve(){
+    ll k; cin >> k;
+    ll ans = 0;
+    FOR(i, 1, k) {
+        ans += (1LL << i);
+    }
+    ans = pow_mod(4, ans, mod);
+    ans = 6 * ans % mod;
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }
