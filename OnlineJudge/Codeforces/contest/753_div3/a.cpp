@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -54,10 +53,25 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    string mp; cin >> mp;
+    map<char, int> mpp;
+    FOR(mp.size()) {
+        mpp[mp[i]] = i;
+    }
+    string s; cin >> s;
+    int ans = 0;
+    FOR(s.size()) {
+        if (i) {
+            ans += abs(mpp[s[i]]-mpp[s[i-1]]);
+        }
+    }
+    cout << ans << "\n";
 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

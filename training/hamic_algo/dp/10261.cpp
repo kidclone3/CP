@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -53,11 +52,54 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int MAXLEN = 100*100;
+
 void solve(){
+    int len; cin >> len;
+    len *= 100;
+    vi cars;
+    int in; cin >> in;
+    while(in != 0) {
+        cars.push_back(in);
+        cin >> in;
+    }
+    int n = cars.size();
+    vector<vi> f(n+1, vi(2*len+5, 0));
+    int m = 0;
+    f[0][len] = 1;
+    int sum = 0;
+    FOR(i, 1, n+1) {
+        sum += cars[i-1];
+        if (sum > 2 * len) break;
+        m = i;
+        FOR(j, 1, len + 1) {
+            int l2 = 2 * len - j - sum;
+            if (cars[i-1] <= j && f[i-1][j-cars[i-1]] == 1) f[i][j - cars[i-1]] = 1;
+            if (cars[i-1] <= l2 && f[i-1][j] != 0) f[i][j] = 2;
+            
+        }
+    }
+    cout << m << "\n";
+    // now is trace back
+    if (m == 0) return;
+    vector<int> trace;
+    int l1 = 0;
+    for(; f[m][l1] == 0; ++l1);
+    cout << f[m][l1] << " " << l1 << "\n";
+    for(; m > 0; --m) {
+        trace.push_back(f[m][l1]);
+        if (f[m][l1] == 1) l1 += cars[m-1];
+        cout << l1 << " ";
+    }
+    cout << "\n";
+    reverse(all(trace));
+    print(trace);
 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

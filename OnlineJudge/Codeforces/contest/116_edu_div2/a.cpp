@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -53,11 +52,52 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+string change(vector<int> pos, string s) {
+    EACH(i, pos) {
+        s[i] = s[i] == 'a' ? 'b' : 'a';
+    }
+    return s;
+}
+bool check(string s) {
+    int ab, ba; ab = ba = 0;
+    FOR(i, s.size() - 1) {
+        string tmp = s.substr(i, 2);
+        if (tmp == "ab") ab++;
+        else if (tmp == "ba") ba++;
+    }
+    return ab==ba;
+}
 
+void solve(){
+    string s; cin >> s;
+    int n = s.size();
+    int ab, ba;
+    ab = ba = 0;
+
+    for(int i = 0; i < n-1; i++) {
+        string tmp = s.substr(i, 2);
+        if (tmp == "ab") ab++;
+        else if (tmp == "ba") ba++;
+    }
+    // cout << ab << " " << ba << "\n";
+    if (ab == ba || n == 1) {
+        cout << s << "\n";
+        return;
+    }
+    vector<vi> pos = {{0}, {n-1}, {0,1}, {n-2, n-1}};
+    EACH(it, pos) {
+        string tmp = change(it, s);
+        if (check(tmp)) {
+            cout << tmp << "\n";
+            return;
+        }
+    }
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
+        solve();
 }

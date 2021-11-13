@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -54,10 +53,29 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    ll x, n; cin >> x >> n;
+    ll n_4 = (n/4)*4;
+    ll k4_0, k4_1, k4_2, k4_3;
+    k4_0 = k4_1 = k4_2 = k4_3 = 0LL;
+    if (n >= 4) {
+        k4_0 = (0 + n_4) * (n/4+1) / 2;
+        k4_1 = (1 + (n/4-1) * 4 + 1) * (n/4) / 2;
+        k4_2 = (2 + (n/4-1) * 4 + 2) * (n/4) / 2;
+        k4_3 = (3 + (n/4-1) * 4 + 3) * (n/4) / 2;
+    }
+    if (n >= n_4+1) k4_1 += n_4+1;
+    if (n >= n_4+2) k4_2 += n_4+2;
+    if (n >= n_4+3) k4_3 += n_4+3;
+    ll ans = k4_0 + k4_1 - k4_2 - k4_3;
+    if (abs(x) % 2 == 0) ans = - ans;
+    cout << x << ' ' << ans << "\n";
+    cout << x + ans << "\n";
+    cout << x - ans;
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

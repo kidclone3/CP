@@ -4,7 +4,7 @@ There are many parts of problems here:
 
 - Part I: Maximum Sum Array (both 1D and 2D)
 - Part II: Longest Increasing Array (kadane, normal LIS)
-
+- Part III: Knap sack problems.
 
 
 Problems:

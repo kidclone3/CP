@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -54,10 +53,30 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n, m; cin >> n >> m;
+    string s; cin >> s;
+    int min_bx = 0, min_by = 0, max_bx = 0, max_by = 0;
+    int bx = 0, by = 0;
+    EACH(c, s) {
+        if (c == 'L') min_bx = min(min_bx, --bx);
+        else if (c == 'R') max_bx = max(max_bx, ++bx);
+        else if (c == 'U') min_by = min(min_by, --by);
+        else max_by = max(max_by, ++by);
+        if (max_bx - min_bx >= m) {
+            if (bx == min_bx) ++min_bx;
+            break;
+        }
+        if (max_by - min_by >= n) {
+            if (by == min_by) ++min_by;
+            break;
+        }
+    }
+    cout << 1 - min_by << " " << 1 - min_bx << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -53,11 +52,54 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int maxT = 1005;
+int t, w, n;
 
+void solve(){
+    vii a(n);
+    FOR(n) {
+        cin >> a[i].fi >> a[i].se;
+    }
+    int dp[n+5][maxT];
+    memset(dp, 0, sizeof dp);
+    FOR(i, 1, n+1, 1) {
+        FOR(j, 1, t+1, 1) {
+            int dist = 3*w*a[i-1].fi;
+            if (dist <= j) {
+                dp[i][j] = max(a[i-1].se + dp[i-1][j-dist], dp[i-1][j]);
+            } else {
+                dp[i][j] = dp[i-1][j];
+            }
+            
+        }
+    }
+
+    cout << dp[n][t] << "\n";
+
+    vii path;     
+    int res = dp[n][t];
+    int j = t;
+    for(int i = n; i > 0 && res > 0 && j > 0; --i) {
+        if (res == dp[i-1][j]) continue;
+        else {
+            path.push_back(a[i-1]);
+            res -= a[i-1].se;
+            j -= 3*w*a[i-1].fi;
+        }
+    }
+    cout << path.size() << "\n";
+    reverse(all(path));
+    EACH(it, path) cout << it.fi << " " << it.se << "\n";
 }
 
 int main()
 {
     IOS;
+    int cnt = 0;
+    while(cin >> t) {
+        if (cnt) cout << "\n";
+        cin >> w >> n;
+        solve();
+        cnt++;
+    }
 }

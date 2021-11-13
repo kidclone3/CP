@@ -13,7 +13,6 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
-#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
 #define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
@@ -53,11 +52,37 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int maxW = 100;
 
+void solve(){
+    int sum = 0;
+    int n; cin >> n;
+    vii a(n);
+    FOR(n) cin >> a[i].fi >> a[i].se;
+    int g; cin >> g;
+    vi member(g);
+    FOR(g) cin >> member[i];
+    bitset<maxW+5> possible;
+    vi dp(maxW+5, 0);
+    possible.reset();
+    possible[0] = true;
+    FOR(i, n) 
+        FOR(j, maxW, -1, -1) {
+            if (possible[j] && j + a[i].se <= maxW) {
+                possible[j+a[i].se] = true;
+                dp[j+a[i].se] = max(dp[j+a[i].se], dp[j] + a[i].fi);
+            }
+        }
+    EACH(w, member) {
+        sum += *max_element(dp.begin(), dp.begin() + w + 1);
+    }
+    // print(dp);
+    cout << sum << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }
