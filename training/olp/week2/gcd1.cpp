@@ -54,11 +54,31 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
 
+void solve(){
+    int n; cin >> n;
+    multiset<int> a;
+    auto query = [&] () -> int {
+        int gcd = 0;
+        EACH(it, a) {
+            gcd = __gcd(gcd, it);
+        }
+        return gcd;
+    };
+    FOR(n) {
+        int q, x;
+        cin >> q >> x;
+        if (q == 1) a.insert(x);
+        else {
+            auto it = a.lower_bound(x);
+            a.erase(it);
+        }
+        cout << query() << "\n";
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

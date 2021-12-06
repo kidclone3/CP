@@ -12,8 +12,8 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
-                "-fsanitize=address",
-                "-fsanitize=undefined",
+                // "-fsanitize=address",
+                // "-fsanitize=undefined",
                 "-D_GLIBCXX_DEBUG"
             ],
             "options": {

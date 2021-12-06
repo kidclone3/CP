@@ -4,8 +4,6 @@
 using namespace __gnu_pbds;
 using namespace std;
 
-#pragma GCC optimize("O3,unroll-loops")
-
 #define pb push_back
 #define vi vector<int>
 #define vl vector<long long>
@@ -15,9 +13,10 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
+#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
-#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(int) (b) : i > (int) (b); i+=(s))
+#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
 #define F_OR1(n) F_OR(i, 0, n, 1)
 #define F_OR2(i, e) F_OR(i, 0, e, 1)
 #define F_OR3(i, b, e) F_OR(i, b, e, 1)
@@ -54,11 +53,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+int n;
+int coin[] = {1, 5, 10, 25, 50};
 
+
+void solve(){
+    int dp[n+5];
+    memset(dp, 0, sizeof dp);
+    dp[0] = 1;
+    FOR(i, 5) {
+        FOR(j, 1, n+1) {
+            if (j >= coin[i]) dp[j] += dp[j-coin[i]];
+        }
+    }
+    cout << dp[n] << "\n";
 }
 
 int main()
 {
     IOS;
+    while(cin>>n) solve();
 }

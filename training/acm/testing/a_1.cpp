@@ -54,11 +54,35 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int n; 
 void solve(){
-
+    vi inp(3*n);
+    FOR(3*n) cin >> inp[i];
+    sort(all(inp));
+    vi aa,bb,cc;
+    for(int i = 0; i < 3*n; i++) {
+        if (i < n) bb.pb(inp[i]);
+        else {
+            cc.pb(inp[i]);
+            i++;
+            aa.pb(inp[i]);
+        }
+    }
+    reverse(all(aa));
+    reverse(all(cc));
+    ll ans = 0;
+    FOR(i, n) {
+        ans += (aa[i]-bb[i]) * cc[i];
+    }
+    cout << ans << "\n";
+    // print(aa);
+    // print(bb);
+    // print(cc);
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t; cin >> n;
+    while(t--) solve();
 }

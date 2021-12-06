@@ -54,11 +54,37 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
 
+void solve(){
+    ll n, m; cin >> n >> m;
+    vl factor;
+    vl cnt1;
+    for(ll i = 2; i*i <= m; i++) {
+        if (m % i == 0) {
+            ll _cnt = 0;
+            while(m % i == 0) m/=i, _cnt++;
+            factor.push_back(i);
+            cnt1.push_back(_cnt);    
+        }
+    }
+    if (m > 1) factor.push_back(m), cnt1.push_back(1);
+    // print(factor);
+    // print(cnt1);
+    ll k = LLONG_MAX;
+    FOR(i, factor.size()) {
+        ll tmp = n;
+        ll _cnt = 0;
+        while(tmp > 1) {
+            _cnt += tmp / factor[i];
+            tmp /= factor[i]; 
+        }   
+        k = min(k, _cnt/cnt1[i]);
+    }
+    cout << (k > 0 ? k : -1);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

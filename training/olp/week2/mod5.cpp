@@ -15,9 +15,10 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
+#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
-#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(int) (b) : i > (int) (b); i+=(s))
+#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
 #define F_OR1(n) F_OR(i, 0, n, 1)
 #define F_OR2(i, e) F_OR(i, 0, e, 1)
 #define F_OR3(i, b, e) F_OR(i, b, e, 1)
@@ -54,11 +55,34 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+ll MOD = 1000000000000000009;
 
+ll addMod(ll a, ll b, ll m = MOD) {return ((a+b) % m + m) % m;}
+
+ll mulMod(ll a, ll b, ll m = MOD) {
+    ll res = 0;
+    for(a %= m, b %= m; b; a = addMod(a, a, m), b >>= 1)
+        if (b & 1) res = addMod(res, a, m);
+    return res;
+}
+
+ll powMod(ll x, ll n, ll m = MOD) {
+    ll res = 1;
+    for(x %= m; n; x = mulMod(x, x, m), n >>= 1)
+        if (n & 1) res = mulMod(res, x, m);
+    return res;
+}
+
+void solve(){
+    ll a, b; cin >> a >> b;
+    ll m = MOD;
+    // cout << a << " " << b << " " << m << "\n";
+    ll b_inv = powMod(b, m-2, m);
+    cout << mulMod(a, b_inv, m);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

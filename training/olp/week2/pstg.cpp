@@ -4,7 +4,7 @@
 using namespace __gnu_pbds;
 using namespace std;
 
-#pragma GCC optimize("O3,unroll-loops")
+// #pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -54,11 +54,36 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+ll phi(ll n) {
+    ll res = n;
+    for(ll i = 2; i*i <= n; ++i) {
+        if (n % i == 0) {
+            while(n % i == 0) n/=i;
+            res -= res/i;
+        }
+    }
+    if (n > 1) res -= res/n;
+    return res;
+}
 
+bool isPrime(ll n) {
+    if (n <= 1) return 0;
+    if (n <= 3) return 1;
+    if (n % 2 == 0 || n % 3 == 0) return 0;
+    for (ll i = 5; i*i <= n; i+=6) {
+        if (n % i == 0 || n % (i+2) == 0) return 0;
+    }
+    return 1;
+}
+
+void solve(){
+    ll x; cin >> x;
+    if (isPrime(x)) cout << x-1;
+    else cout << phi(x);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

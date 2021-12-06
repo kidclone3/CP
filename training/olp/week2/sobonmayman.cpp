@@ -54,11 +54,55 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e7+5;
+vi primes;
+vi lpf;
 
+void sieve() {
+    primes.assign(1, 2);
+    lpf.assign(N+1, 2);
+    lpf[1] = -2;
+    for(int i = 3; i <= N; i+=2) {
+        if (lpf[i] == 2) primes.push_back(lpf[i] = i);
+        for(int j = 0; j < (int) primes.size() && primes[j] <= lpf[i] && primes[j]*i <= N; j++) 
+            lpf[primes[j]*i] = primes[j];
+    }
+}
+
+vi pre(N+5, 0);
+
+bool check4Div(int x) {
+    int ans = 1;
+    while (x > 1) {
+        int p = lpf[x], f = 0;
+        do {
+            x/=p, f++;
+            if ((f+1)*ans > 4) return false;
+        }
+        while(lpf[x] == p);
+        ans *= f+1;
+        if (ans > 4) return false;
+    }
+    return ans == 4 ? true : false;
+}
+
+void preCal() {
+    FOR(N) {
+        pre[i] = check4Div(i);
+        if (i != 0) pre[i] += pre[i-1];
+    }
+}
+
+void solve(){
+    int l, r; cin >> l >> r;
+    cout << pre[r] - pre[l-1] << "\n"; 
 }
 
 int main()
 {
     IOS;
+    sieve();
+    preCal();
+    int t; cin >> t;
+    while(t--) solve();
 }

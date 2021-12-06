@@ -55,10 +55,32 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    int n; cin >> n;
+    vii a(n);
+    map<ll, ll> mp_doc, mp_ngang;
+    map<pair<ll, ll>, ll> mp;
+    FOR(n) {
+        cin >> a[i].fi >> a[i].se;
+        mp_ngang[a[i].fi]++;
+        mp_doc[a[i].se]++;
+        mp[a[i]]++;
+    }
+    ll ans = 0LL;
+    EACH(it, mp_doc) {
+        ans += it.se * (it.se-1) / 2;
+    }
+    EACH(it, mp_ngang) {
+        ans += it.se * (it.se-1)/2;
+    }
+    EACH(it, mp) ans -= it.se * (it.se - 1) / 2;
+    // printPair(mp_doc);
+    // printPair(mp_ngang);
+    cout << ans;
 
 }
 
 int main()
 {
     IOS;
+    solve();
 }

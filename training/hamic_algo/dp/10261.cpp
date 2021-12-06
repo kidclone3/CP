@@ -52,54 +52,81 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-const int MAXLEN = 100*100;
+const int MAXLEN = 100*100 + 5;
 
 void solve(){
-    int len; cin >> len;
-    len *= 100;
+    int L; cin >> L;
+    L *= 100;
     vi cars;
-    int in; cin >> in;
-    while(in != 0) {
-        cars.push_back(in);
-        cin >> in;
+    while(1) {
+        int curlen;
+        cin >> curlen;
+        if (curlen == 0) break;
+        else cars.push_back(curlen);
     }
     int n = cars.size();
-    vector<vi> f(n+1, vi(2*len+5, 0));
-    int m = 0;
-    f[0][len] = 1;
-    int sum = 0;
-    FOR(i, 1, n+1) {
-        sum += cars[i-1];
-        if (sum > 2 * len) break;
-        m = i;
-        FOR(j, 1, len + 1) {
-            int l2 = 2 * len - j - sum;
-            if (cars[i-1] <= j && f[i-1][j-cars[i-1]] == 1) f[i][j - cars[i-1]] = 1;
-            if (cars[i-1] <= l2 && f[i-1][j] != 0) f[i][j] = 2;
-            
+    vector<vi> pre(n+5, vi(L+5, -1));
+    vector<bitset<MAXLEN>> dp(2);
+    dp[0][0] = true;
+    // we while use saving trick, however I didn't understand it much
+    int t = 0, pt;
+    int lastlen = 0;
+    int sumlen = 0; 
+    int i = 0;
+    int N = 0; // how many cars we could store.
+
+    // if (cars.empty()) return void(cout << "0\n");
+    EACH(curlen, cars) {
+        pt = t, t ^= 1;
+        sumlen += curlen;
+        i++;
+        dp[t].reset(); // initialize new row for dp table
+        bool canload = false;
+        FOR(len, 0, L+1) {  // enumerate all possible length of the port side.
+            if (dp[pt][len] == false) continue; // there is no solution for this state, ignore
+            if (len + curlen <= L && sumlen - (len + curlen) <= L) {// port and starboard are ok. 
+                dp[t][len + curlen] = true;
+                pre[i][len + curlen] = 0;
+                lastlen = len + curlen;
+                canload = true;
+            }
+
+            if (sumlen - len <= L) {
+                dp[t][len] = true;
+                pre[i][len] = 1;
+                lastlen = len;
+                canload = true;
+            }
+        }
+        if (!canload) break;
+        else N = i;
+    }
+    cout << N << "\n";
+    // cout << lastlen <<'\n';
+    vi answer;
+    FOR(j, N, 0, -1) {
+        if (pre[j][lastlen] == 0) {
+            lastlen -= cars[j-1];
+            answer.push_back(0);
+        } else if (pre[j][lastlen] == 1) {
+            answer.push_back(1);
         }
     }
-    cout << m << "\n";
-    // now is trace back
-    if (m == 0) return;
-    vector<int> trace;
-    int l1 = 0;
-    for(; f[m][l1] == 0; ++l1);
-    cout << f[m][l1] << " " << l1 << "\n";
-    for(; m > 0; --m) {
-        trace.push_back(f[m][l1]);
-        if (f[m][l1] == 1) l1 += cars[m-1];
-        cout << l1 << " ";
+    reverse(all(answer));
+    int head = 0;
+    if (!answer.empty()) head = answer[0];
+    EACH(it, answer) {
+        // cout << (it == 0 ? "starboard" : "port") << "\n";
+        cout << (it == head ? "port" : "starboard") << "\n";
     }
-    cout << "\n";
-    reverse(all(trace));
-    print(trace);
-
 }
 
 int main()
 {
     IOS;
     int t; cin >> t;
-    while(t--) solve();
+    while(t--) {
+        solve();
+        if (t) cout << "\n";
+    }
 }

@@ -55,10 +55,35 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    vector<pair<ll, ll>> pos(n);
+    FOR(n) cin >> pos[i].first >> pos[i].second;
+    vector<double> dis(n, 0.0);
+    auto distance = [&] (pair<ll, ll> &x1, pair<ll, ll> &x2) -> double {
+        return abs(x1.fi-x2.fi) + abs(x1.se - x2.se);
+    };
+    FOR(i, n) {
+        FOR(j, n) {
+            dis[i] += distance(pos[i], pos[j]);
+        }
+    }
+    pair<ll, ll> ans;
+    double mn = 1e18;
+    FOR(n) {
+        if(dis[i] < mn) {
+            mn = dis[i];
+            ans = pos[i];
+        } else if(abs(dis[i] - mn) < 1e-6) {
+            if (pos[i].fi < ans.fi) ans = pos[i];
+            else if(pos[i].se < ans.se) ans = pos[i];
+        }
+    }
+    // print(dis);
+    cout << ans.fi << " " << ans.se;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

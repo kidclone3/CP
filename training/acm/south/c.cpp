@@ -55,10 +55,36 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    string s; cin >> s;
+    int n = s.size();
+    int k; cin >> k;
+    vi sum(n-1);
+    int mn = INT_MAX;
+    int pos = 0;
+    FOR(i, n-1) {
+        sum[i] = s[i] + s[i+1];
+        if (sum[i] < mn) {
+            mn = sum[i];
+            pos = i;
+        }
+    }
+    // print(sum);
+    char a, b;
+    if (s[pos] < s[pos+1]) {
+        a = s[pos];
+        b = s[pos+1];
+    } else {
+        a = s[pos+1];
+        b = s[pos];
+    }
+    FOR(i, k) {
+        if (i & 1) cout << b; else cout << a;
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

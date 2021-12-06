@@ -55,10 +55,59 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
+    // int a; cin >> a;
+    int n; cin >> n;
+    map<int, ll> mp1, mp0;
+    int st1, st0;
+    int cnt;
+    ll suma = 0;
+    FOR(n) {
+        int a; cin >> a;
+        suma += a;
+        // st1 = st0 = 0;
+        // 10100010101
+        cnt = 0;
+        while (a) {
+            if (a & 1) {
+                a -= 1;
+                mp1[cnt] ++;
+                cnt+=2;
+            } else {
+                a >>= 1;
+                mp0[cnt] += a;
+                if (a&1) {
+                    mp1[cnt+1] ++;
+                    a--;
+                }
+                cnt += 2;
+            }
+        }
+    }
+    string s; cin >> s;
+    cout << "MP1\n";
+    printPair(mp1);
+    cout << "MP2\n";
+    printPair(mp0);
 
+    st1 = st0 = 0;
+    cnt = 0;
+    FOR(s.size()) {
+        if (s[i] == '0') {
+            suma -= mp0[st0];
+            st0 += 2;
+        }
+        else {
+            if (i == 0 || (i && s[i-1] == '0')) {
+                suma -= mp1[st1] + mp1[st1+1];
+                st1 += 2;
+            }
+        }
+        cout << suma << "\n";
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

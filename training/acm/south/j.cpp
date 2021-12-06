@@ -55,10 +55,57 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n, m; cin >> n >> m;
+    vector<string> grid(n);
+    FOR(n) cin >> grid[i];
+    vector<vi> left(n, vector<int> (m, 0));
+    vector<vi> right(n, vector<int> (m, 0));
+    vector<vi> up(n, vector<int> (m, 0));
+    vector<vi> down(n, vector<int> (m, 0));
+    FOR(i, n) FOR(j, m) {
+        if (grid[i][j] == '1') {
+            left[i][j] = up[i][j] = 1;
+            if (j && grid[i][j-1] == '1') left[i][j] += left[i][j-1];
+            if (i && grid[i-1][j] == '1') up[i][j] += up[i-1][j];
+        }
+    }
+    FOR(i, n-1, -1, -1) FOR(j, m-1, -1, -1) {
+        if (grid[i][j] == '1') {
+            right[i][j] = down[i][j] = 1;
+            if (j != m-1 && grid[i][j+1] == '1') right[i][j] += right[i][j+1];
+            if (i != n-1 && grid[i+1][j] == '1') down[i][j] += down[i+1][j];
+        }
+    }
+    int ans = 0;
+    pair<int, int> pos;
+    FOR(i, n) FOR(j, m) {
+        int r = min({up[i][j], down[i][j], left[i][j], right[i][j]});
+        if (r > ans) {
+            ans = r;
+            pos = {i, j};
+        }
+    }
+    if (ans == 0) cout << "-1";
+    else {
+        cout << (ans-1)*4+1 << '\n';
+        cout << pos.fi+1 << " " << pos.se + 1;
+    }
+    // cout << "left\n";
+    // FOR(i, n) FOR(j, m) cout << left[i][j] << " \n"[j==m-1];
+    // cout << "\n";
+    // cout << "Right\n";
+    // FOR(i, n) FOR(j, m) cout << right[i][j] << " \n"[j==m-1];
+    // cout << "\n";
+    // cout << "Up\n";
+    // FOR(i, n) FOR(j, m) cout << up[i][j] << " \n"[j==m-1];
+    // cout << "\n";
+    // cout << "Down\n";
+    // FOR(i, n) FOR(j, m) cout << down[i][j] << " \n"[j==m-1];
+    // cout << "\n";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

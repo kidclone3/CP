@@ -4,7 +4,7 @@
 using namespace __gnu_pbds;
 using namespace std;
 
-#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3")
 
 #define pb push_back
 #define vi vector<int>
@@ -15,9 +15,10 @@ using namespace std;
 #define vii vector<ii>
 #define fi first
 #define se second
+#define sz (int)(x).size()
 #define all(x) x.begin(), x.end()
 #define FORIT(i, s) for (auto it=(s.begin()); it!=(s.end()); ++it)
-#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(int) (b) : i > (int) (b); i+=(s))
+#define F_OR(i, a, b, s) for (int i=(a); (s)>0? i<(b) : i>(b); i+=(s))
 #define F_OR1(n) F_OR(i, 0, n, 1)
 #define F_OR2(i, e) F_OR(i, 0, e, 1)
 #define F_OR3(i, b, e) F_OR(i, b, e, 1)
@@ -54,11 +55,55 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e6 + 5;
+vi prime;
+vi lpf; //lowest prime factor
 
+void sieve() {
+    prime.assign(1, 2);
+    lpf.assign(N+1, 2);
+
+    lpf[1] = -2;
+    for (int i = 3; i <= N; i += 2) {
+        if (lpf[i] == 2) prime.push_back(lpf[i] = i); // which has lpf = 2 also prime itself
+        for (int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && prime[j] * i <= N; ++j) {
+            lpf[prime[j]*i] = prime[j];
+        }
+    }
+}
+
+int G[N];
+
+void solve(){
+    int n; cin >> n;
+    bool ok = false;
+    memset(G, 0, sizeof G);
+    FOR(i, 2*n) {
+        int x; cin >> x;
+        if (ok) continue;
+        while(x > 1) {
+            int p = lpf[x], f = 0;
+            do x /= p, ++f;
+            while (lpf[x] == p);
+            if (p == 2 || p == 5) continue;
+            if (i < n) 
+                G[p] -= f;
+            else {
+                G[p] += f;
+                if (G[p] > 0) {// f[p] - d[p] > 0 
+                    ok = true;
+                    break;
+                }
+            }
+        }
+    }
+    cout << (ok ? "repeating" : "finite") << "\n";
 }
 
 int main()
 {
     IOS;
+    sieve();
+    int t; cin >> t;
+    while(t--) solve();
 }

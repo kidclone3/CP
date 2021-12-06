@@ -54,11 +54,48 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
+const int N = 1e6+6;
+vi primes;
+vi lpf(N+1, 2);
 
+void sieve() {
+    primes.assign(1,2);
+    lpf[1] = -2;
+    for (int i = 3; i <= N; i+=2) {
+        if(lpf[i] == 2) primes.push_back(lpf[i] = i);
+        for(int j = 0; j < (int) primes.size() && primes[j] <= lpf[i] && primes[j]*i <= N; ++j)
+            lpf[primes[j]*i] = primes[j];
+    }
+}
+
+void solve(){
+    int l, r;
+    cin >> l >> r;
+    unordered_map<string, ll> mp;
+    auto hash = [&](int x) -> string {
+        string ans = "";
+        EACH(it, primes) {
+            if (it*it > x) break;
+            bool ok = false;
+            while(x % it == 0) ok = true, x/=it;
+            if (ok) ans = ans + to_string(it) + " ";
+        }
+        if (x > 1) ans = ans + to_string(x) + " ";
+        return ans;
+    };
+    for(int i = l; i <= r; ++i) {
+        mp[hash(i)]++;
+    }
+    ll ans = 0;
+    // printPair(mp);
+    EACH(it, mp) ans += it.second*(it.second-1)/2;
+    cout << ans << "\n";
 }
 
 int main()
 {
     IOS;
+    sieve();
+    int t; cin >> t;
+    while(t--) solve();
 }

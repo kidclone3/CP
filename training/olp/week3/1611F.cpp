@@ -55,10 +55,37 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n, sum; cin >> n >> sum;
+    vi a(n), s(n+5, 0);
+    FOR(n) {
+        cin >> a[i];
+    }
+    FOR(i, 1, n+1)  s[i] = s[i-1] + a[i-1];
+    FOR(i, 1, n+1) s[i] = -s[i];
+    int l = 1;
+    int mxLen = 0;
+    pair<int, int> ans;
+    multiset<int, greater<int>> mn;
+    FOR(r, 1, n+1) {
+        mn.insert(s[r-1]);
+        while (l <= r && s[r] - *mn.begin() > sum) {
+            mn.erase(mn.find(s[l-1]));
+            l++;
+        }
+        if (r - l + 1 > mxLen) {
+                mxLen = r-l+1;
+                ans = {l, r};
+            }
+    }
+    // print(s);
+    if (mxLen == 0 || s[ans.se] - s[ans.fi-1] > sum) cout << "-1";
+    else cout << ans.fi << " " << ans.se;
+    cout << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }

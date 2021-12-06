@@ -55,10 +55,30 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve(){
-
+    int n; cin >> n;
+    vi a(n);
+    vi even, negative;
+    FOR(n) {
+        cin >> a[i];
+        if (a[i] % 2 ==0) even.push_back(i);
+        if (a[i] < 0) negative.pb(i);
+    }
+    if (negative.size() % 2 ==0)    return void(cout << n);
+    auto check = [&](int start, int end) -> bool {
+        FOR(i, start, end+1) {
+            if (a[i] % 2 == 0) return true; 
+        }
+        return false;
+    };
+    int ans = 0;
+    if (negative.back() == 0 || negative[0] == n-1) return void(cout << n-1);
+    if (check(0, negative.back()-1)) ans = max(ans, negative.back());
+    if (check(negative[0]+1, n-1)) ans = max(ans, n - negative[0]-1);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }
