@@ -54,56 +54,33 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int check[4];
-vi test;
-int n;
-vi a;
-vl res;
-void out() {
-    vi aa, bb, cc;
-    FOR(i, 3*n) {
-        if (test[i] == 1) aa.push_back(a[i]);
-        if (test[i] == 2) bb.pb(a[i]);
-        if (test[i] == 3) cc.pb(a[i]);
-    }
-    ll ans = 0;
-    FOR(n) {
-        ans += (aa[i] - bb[i]) * cc[i];
-    }
-    res.pb(ans);
+const double r = 3 + sqrt(11);
+
+ll mod_double(double a, ll b) {
+    double tmp = floor(a/b);
+    double ans = a - tmp * b;
+    return ans;
 }
-void backtrack(int i) {
-    if (i == 3*n) {
-        out();
-        return;
+ll pow_m(ll t, double m) {
+    double ans = 1.0;
+    double i = 1+r;
+    for(; t > 0; i = fmod(i*i, m), t >>= 1) {
+        cout << "i "<< i << "\n";
+        if (t &1) ans = fmod(ans * i, m);
+        cout << "m " << m << "\n";
+        cout << "ans " << ans << "\n";
     }
-    for(int j = 1; j<= 3; ++j) {
-        if (check[j] + 1 <= n) {
-            test[i] = j;
-            check[j]++;
-            backtrack(i+1);
-            check[j]--;
-        }
-    }
+    return ans;
 }
 
-void solve(){
-    a.clear();
-    a.resize(3*n);
-    memset(check, 0, sizeof check);
-    test.resize(3*n, 0);
-    res.clear();
-    FOR(3*n) cin >> a[i];
-    vi tmp=
-    backtrack(0);
-    ll mx = LLONG_MIN;
-    EACH(it, res) mx = max(mx, it);
-    cout << mx <<'\n';
+void solve() {
+    ll t, m; cin >> t >> m;
+    cout << pow_m(t, m);
+    // cout << DBL_MAX;
 }
 
 int main()
 {
     IOS;
-    int t; cin >> t; cin >> n;
-    while(t--) solve();
+    solve();
 }

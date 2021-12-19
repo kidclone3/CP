@@ -59,10 +59,25 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    int n, k; cin >> n >> k;
+    int a[n+5];
+    int dp[n+5];
+    dp[0] = 0;
+    FOR1(n) cin >> a[i], dp[i] = (dp[i-1] + a[i]) % k; 
+    map<int, int> mp;
+    mp[0] = 0;
+    int ans = 0;
+    FOR1(n) {
+        if (dp[i] != 0 && mp[dp[i]] == 0) mp[dp[i]] = i;
+        else ans = max(ans, i - mp[dp[i]]);
+    }
+    // vi test(dp, dp+n+1);
+    // print(test);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,6 +27,10 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
+#define BUG(x)                    \
+    {                             \
+        cout << #x << " = " << x; \
+    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -54,32 +58,30 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve(){
-    int n; cin >> n;
-    vector<pair<ll, ll>> pos(n);
-    FOR(n) cin >> pos[i].first >> pos[i].second;
-    vector<double> dis(n, 0.0);
-    auto distance = [&] (pair<ll, ll> &x1, pair<ll, ll> &x2) -> double {
-        return abs(x1.fi-x2.fi) + abs(x1.se - x2.se);
-    };
-    FOR(i, n) {
-        FOR(j, n) {
-            dis[i] += distance(pos[i], pos[j]);
+bool check(string s, int len) {
+    int n = s.size();
+    for(int i = len; i < n; ++i) {
+        if (s[i] != s[i-len]) return false;
+    }
+    return true;
+}
+
+void solve() {
+    string s; cin >> s;
+    int n = s.size();
+    vi uoc;
+    for(int i = 1; i*i <= n; ++i) {
+        if (n % i == 0) {
+            uoc.push_back(i);
+            if (i != n/i) uoc.push_back(n/i);
         }
     }
-    pair<ll, ll> ans;
-    double mn = 1e18;
-    FOR(n) {
-        if(dis[i] < mn) {
-            mn = dis[i];
-            ans = pos[i];
-        } else if(abs(dis[i] - mn) < 1e-6) {
-            if (pos[i].fi < ans.fi) ans = pos[i];
-            else if(pos[i].se < ans.se) ans = pos[i];
+    sort(all(uoc));
+    EACH(it, uoc) {
+        if (check(s, it)) {
+            return cout << n / it << s.substr(0, it), void();
         }
     }
-    // print(dis);
-    cout << ans.fi << " " << ans.se;
 }
 
 int main()

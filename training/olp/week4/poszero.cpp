@@ -59,10 +59,19 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
+    string s; cin >> s;
+    int n = s.size();
     
+    FOR(i, n-1, -1, -1) {
+        if (s[i] == '0') {
+            cout << i+1;
+            break;
+        }
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

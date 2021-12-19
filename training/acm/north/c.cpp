@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,6 +27,10 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
+#define BUG(x)                    \
+    {                             \
+        cout << #x << " = " << x; \
+    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -54,35 +58,21 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int n; 
-void solve(){
-    vi inp(3*n);
-    FOR(3*n) cin >> inp[i];
-    sort(all(inp));
-    vi aa,bb,cc;
-    for(int i = 0; i < 3*n; i++) {
-        if (i < n) bb.pb(inp[i]);
-        else {
-            cc.pb(inp[i]);
-            i++;
-            aa.pb(inp[i]);
-        }
-    }
-    reverse(all(aa));
-    reverse(all(cc));
-    ll ans = 0;
-    FOR(i, n) {
-        ans += (aa[i]-bb[i]) * cc[i];
-    }
-    cout << ans << "\n";
-    // print(aa);
-    // print(bb);
-    // print(cc);
+const int N = 1e4;
+vi a(N);
+
+void solve() {
 }
 
 int main()
 {
     IOS;
-    int t; cin >> t; cin >> n;
+    // vi a = {0,0,1,1}
+    a[0] = 0;
+    a[1] = 0;
+    a[2] = 1;
+    a[3] = 1;
+    for(int i = 4; i < N; ++i) a[i] = a[i-1] + a[i-2];
+    int t; cin >> t;
     while(t--) solve();
 }

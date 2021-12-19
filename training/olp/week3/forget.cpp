@@ -59,10 +59,31 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    int n; cin >> n;
+    map<int, vi> mp;
+    FOR1(n) {
+        int x; cin >> x;
+        mp[x].pb(i);
+    } 
+    EACH(it, mp) sort(all(it.second));
+    ll ans = 0;
+    EACH(it, mp) {
+        ll sum = 0;
+        FOR(j, it.second.size()) {
+            if(j == 0) {sum += (ll) it.second[j]; continue;}
+            else {
+                ans += (ll) (j*it.second[j]-sum);
+            }
+            sum += it.second[j];
+        }
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+
+    solve();
 }
+// ,tex = e^{\frac{1+x^4}{x}}\frac{x^2}{3x^4-1}

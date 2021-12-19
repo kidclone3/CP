@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,28 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    int n; cin >> n;
+    vector<pair<ll, ll>> a(n);
+    ll curr = 0;
+    FOR(n) cin >> a[i].fi >> a[i].se, curr = min(curr, a[i].fi);
+    sort(all(a));
+    ll ans = 0LL;
+    FOR(n) {
+        if (a[i].fi <= curr && curr <= a[i].se) {
+            ans += a[i].se - curr;
+            curr = a[i].se;
+        }
+        else if (a[i].fi > curr) {
+            ans += a[i].se - a[i].fi;
+            curr = a[i].se;
+        }
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

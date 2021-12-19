@@ -58,11 +58,55 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+const int N = 5*1e6+5;
+
+vi prime;
+vi lpf(N+5, 2);
+
+void sieve() {
+    prime.assign(1,2);
+    lpf[1] = -2;
+    for(int i = 3; i <= N; i+=2) {
+        if (lpf[i] == 2) prime.push_back(lpf[i] = i);
+        for(int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && i * prime[j] <= N; ++j) {
+            lpf[prime[j]*i] = prime[j];
+        }
+    }
 }
 
+int mask(int x) {
+    int ans = 1;
+    while(x > 1) {
+        int p = lpf[x], cnt = 0;
+        do x /= p, cnt++;
+        while(lpf[x] == p);
+        if (cnt & 1) ans *= p;
+    }
+    return ans;
+}
+
+ll f(ll x) {return 1LL * x * (x-1) / 2;}
+
+void solve() {
+    int n; cin >> n;
+    vector<int> mp(N, 0);
+    // map<int, int> mp;
+    ll res = 0LL;
+    FOR1(n) {
+        res += f(mp[mask(i)]++);
+        // mp[mask(i)]++;
+    }
+    // EACH(it, mp) {
+    //     res += f(it.second);
+    // }
+    // printPair(mp);
+    cout << res;
+}
 int main()
 {
     IOS;
+    sieve();
+    solve();
+    // int tmp = 1e6+7;
+    // cout << lpf[tmp];
 }

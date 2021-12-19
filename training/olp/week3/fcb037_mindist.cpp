@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,21 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    int n; cin >> n;
+    vi a(n+1);
+    map<int, int> mp;
+    int mn = INT_MAX;
+    FOR1(n) {
+        cin >> a[i];
+        if (mp[a[i]] != 0) mn = min(mn, i - mp[a[i]]);
+        mp[a[i]] = i;
+    }
+    cout << (mn == INT_MAX ? -1 : mn);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,25 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    vl preCal = {0};
+    ll tmp = 0LL;
+    for(ll i = 1LL; i < 500; ++i) {
+        ll step = i - (tmp % i);
+        tmp += step;
+        // cout << step << " " << tmp << "\n";
+        FOR(j, 1, i+1) {
+            preCal.pb(tmp);
+            if (j != i) tmp += i;
+        }
+    }
+
+    int n; cin >> n;
+    cout << preCal[n];
 }
 
 int main()
 {
     IOS;
+    solve();
 }

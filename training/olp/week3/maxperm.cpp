@@ -58,11 +58,40 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+vi gen;
+const int N = 1e6+5;
+int n;
+
+string tmp ="";
+string s;
+bitset<N> check;
+void backtrack(int x) {
+    if (x==n) {
+        gen.push_back(stoi(tmp));
+        return;
+    }
+    for(int i = 0; i <n; ++i) {
+        if (!check[i]) {
+            tmp.pb(s[i]);
+            check[i] = true;
+            backtrack(x+1);
+            tmp.pop_back();
+            check[i] = false;
+        }
+    }
+}
+
 void solve() {
-    
+    cin >> s;
+    n = s.size();
+    backtrack(0);
+    sort(all(gen));
+    auto it = upper_bound(all(gen), stoi(s));
+    cout << *it;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

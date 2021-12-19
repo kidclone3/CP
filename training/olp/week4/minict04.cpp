@@ -58,11 +58,44 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+vi prime;
+vi lpf(N+5, 2);
+void sieve() {
+    prime.assign(1, 2);
+    lpf[1] = -2;
+    for(int i = 3; i < N; i+=2) {
+        if (lpf[i] == 2) prime.pb(lpf[i] = i);
+        for(int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && i*prime[j] <= N; ++j) {
+            lpf[i*prime[j]] = prime[j];
+        }
+    }
+}
+
+int n;
+int sum = 0;
+int ans = 0;
+void backtrack(int i, int cnt) {
+    if (sum > n) return;
+    if (sum == n) ans = max(ans, cnt);
+    FOR(j, i, prime.size()) {
+        if (sum + prime[i] > n) break;
+        sum += prime[i];
+        backtrack(i+1, cnt+1);
+        sum -= prime[i];
+    }
+}
+
 void solve() {
-    
+    cin >> n;
+    backtrack(0, 0);
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    sieve();
+    // cout << lpf[6];
+    solve();
 }

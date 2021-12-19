@@ -59,10 +59,22 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    ll l, r; cin >> l >> r;
+    for(ll i = 2;; i++) {
+        double tmp = floor(log2(r)/log2(i));
+        double tmp2 = pow(i, tmp);
+        // cout << tmp2 << "\n";
+        if (l <= tmp2 && tmp2 <= r) {
+            cout << (ll) tmp << "\n";
+            break;
+        }
+    }
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--) solve();
 }
+// 1000000000000

@@ -58,11 +58,27 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int m = 1000000007;
+
+int fastmod(ll a) {
+    return a > m ? a % m : a;
+}
+
 void solve() {
-    
+    int n; cin >> n;
+    int suma = 0;
+    int ans = 0;
+    int x = 0;
+    FOR(n) {
+        cin >> x;
+        ans = fastmod((1LL*ans + fastmod(1LL*suma*x)));
+        suma = fastmod(1LL*suma + x);
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

@@ -58,11 +58,29 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const ll N = 1000000000000000001ll;
+vl p = {0,2,3,5,7,11,13,17,19,23,29,31,37,41,43,47};
+ll res = N, n;
+
+void backtrack(int i, ll ans, int cnt) {
+    if (cnt > n) return;
+    if (cnt == n) res = min(res, ans);
+    for(int j = 1; ; ++j) {
+        if (ans * p[i] > res) break;
+        ans *= p[i];
+        if (ans < 0) break;
+        backtrack(i+1, ans, cnt*(j+1));
+    }
+}
+
 void solve() {
-    
+    cin >> n; 
+    backtrack(1,1LL,1);
+    cout << res;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

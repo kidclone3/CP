@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,27 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    int n, m; cin >> n >> m;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    ll ans = 0;
+    FOR(i, 0, n) {
+        if (a[i] >= m) break;
+        auto lb = upper_bound(a.begin(), a.end(), m - a[i]);
+        if (lb == a.end() || *lb > m-a[i]) {
+            if (lb == a.begin()) continue;
+            --lb;
+        }
+        ans += (ll) (lb - a.begin()) + 1;
+        if (*lb >= a[i]) ans--;
+    }
+    cout << ans /2;
 }
 
 int main()
 {
     IOS;
+    solve();
 }

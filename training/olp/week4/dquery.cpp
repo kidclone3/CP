@@ -58,11 +58,50 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+struct dat {
+    int i, j, type, id;
+};
+
+const int N = 1e5+5, Q = 1e5+5, A = 1e6+5;
+int n, q, res[Q], last_pos[A], bit[N];
+dat a[N+Q];
+
+bool cmp(dat u, dat v) {
+    return (u.j < v.j || (u.j == v.j && u.type < v.type));
+}
+
+void update(int x, int k) {
+    for(x; x <= n; x+= x&-x) bit[x] += k;
+}
+
+int get(int x) {
+    int ans = 0;
+    for(x; x > 0; x-= x & -x) ans += bit[x];
+    return ans;
+}
+
 void solve() {
-    
+    cin >> n;     cin >> q;
+    FOR1(n) cin >> a[i].i, a[i].j = i, a[i].type = -1;
+
+    FOR1(q) cin >> a[i+n].i >> a[i+n].j, a[i+n].id = i;
+
+    sort(a+1, a+n+q+1, cmp);
+
+    FOR1(n+q) {
+        if (a[i].type == -1) {
+            update(a[i].j, 1); // Add size of array to 1
+            if (last_pos[a[i].i] > 0) update(last_pos[a[i].i], -1); 
+            last_pos[a[i].i] = a[i].j;
+        } else {
+            res[a[i].id] = get(a[i].j) - get(a[i].i-1);
+        }
+    }
+    FOR1(q) cout << res[i] << "\n";
 }
 
 int main()
 {
     IOS;
+    solve();
 }

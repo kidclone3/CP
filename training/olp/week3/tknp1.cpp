@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,18 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    int n, k; cin >> n>> k;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    FOR(k) {
+        int x; cin >> x;
+        cout << (binary_search(all(a), x) ? "YES" : "NO") <<"\n";
+    }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

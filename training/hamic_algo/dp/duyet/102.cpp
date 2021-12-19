@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,46 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+string inp;
+vi a;
+int sum;
+void split() {
+    stringstream ss(inp);
+    string word;
+    while(ss >> word) {
+        a.push_back(stoi(word));
+        sum += a.back();
+    }
+}
+
+void solve(){
+    sum = 0;
+    a.clear();
+    split();
+    string tmp = "BCG";
+    vector<pair<int, string>> ans;
+    do {
+        int tmp3 = sum;
+        FOR(3) {
+            // cout << tmp << "\n";
+            if (tmp[i] == 'B') {
+                tmp3 -= a[3*i];
+            } else if (tmp[i] == 'G') {
+                tmp3 -= a[3*i+1];
+            } else if (tmp[i] == 'C') {
+                tmp3 -= a[3*i+2];
+            }
+        }
+        ans.push_back({tmp3, tmp});
+    } while(next_permutation(all(tmp)));
+    sort(all(ans));
+    cout << ans[0].second << " " << ans[0].fi << "\n";
+    // print(a);
+    // printPair(ans);
 }
 
 int main()
 {
     IOS;
+    while(getline(cin, inp)) solve();
 }

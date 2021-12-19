@@ -59,10 +59,17 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    ll n; cin >> n;
+    string s = to_string(n);
+    reverse(all(s));
+    ll n2 = stoll(s);
+    cout << (__gcd(n, n2)==1 ? "YES" : "NO") << "\n";
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
+    solve();
 }

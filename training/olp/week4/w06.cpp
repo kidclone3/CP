@@ -59,10 +59,17 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    int n, m; cin >> n >> m;
+    int gcd = __gcd(n,m);
+    set<int> st;
+    for(int i = 1; i*i <= gcd; ++i) {
+        if (gcd % i == 0) st.insert(gcd/i), st.insert(i);
+    }
+    print(st);
 }
 
 int main()
 {
     IOS;
+    solve();
 }

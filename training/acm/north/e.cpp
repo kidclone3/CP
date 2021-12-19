@@ -58,11 +58,62 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+vi prime = {2, 3, 5, 7, 11, 13};
+// , 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137};
+
+ll n, x = 0LL;
+int cnt = 0;
+
+bool check(ll k) {
+    string s = to_string(k);
+    int ans = 0;
+    EACH(it, s) ans += it-'0';
+    auto it = lower_bound(all(prime), ans);
+    return *it == ans;
+}
+
+set<ll> c;
+
+void backtrack(int i, int left) {
+    if (i > 15) return;
+    // if(x >= n) return;
+    if (left < 0) return;
+    if (left == 0) {
+        // c.push_back(x);
+        // c.insert(x);
+        // cout << x <<" ";
+        cnt++;
+    }
+    for(int j = 0; j <= 9; ++j) {
+        if (!i && !j) continue;        
+        if (left - j < 0) break;
+        x *= 10;
+        x += j;
+        backtrack(i+1, left - j);
+        x /= 10;
+    }
+}
+
 void solve() {
-    
+    // cin >> n;    
+    // cout << n;
+    // backtrack(0, 2);
+    // FOR(i, 0, 21) {
+        // n = i;
+        x = 0LL;
+        EACH(it, prime) {
+            cnt = 0LL;
+            backtrack(0, it);        
+            cout << cnt << "\n";
+        }
+        // print(c);
+        // cout << cnt << ", ";
+        
+    // }
 }
 
 int main()
 {
     IOS;
+    solve();
 }

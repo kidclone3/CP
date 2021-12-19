@@ -59,10 +59,13 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 void solve() {
-    
+    string s = "00011" ;
+    do {
+        cout << s << "\n";
+    } while(next_permutation(all(s)));
 }
 
-int main()
-{
+int main() {
     IOS;
+    solve();
 }

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 #pragma GCC optimize("O3,unroll-loops")
@@ -27,10 +27,6 @@ using namespace std;
 #define FOR(...) F_ORC(__VA_ARGS__)(__VA_ARGS__)
 #define FOR1(n) F_OR(i, 1, n+1, 1)
 #define EACH(x, a) for(auto& x: a)
-#define BUG(x)                    \
-    {                             \
-        cout << #x << " = " << x; \
-    }
 #define IO                                  \
     {                                       \
         freopen("input.txt", "r", stdin);   \
@@ -58,11 +54,29 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-void solve() {
-    
+void solve(){
+    int n; cin >> n;
+    vi x(n), l(n);
+    vii a(n);
+    FOR(n) {
+        cin >> x[i] >> l[i];
+        a[i] = {x[i]+l[i], x[i]-l[i]};
+    }
+    sort(all(a));
+    int curr = 0; 
+    int ans = n;
+    FOR(i, n) {
+        if (i == curr) continue;
+        if (a[i].se >= a[curr].fi) curr = i;
+        else {
+            ans--;
+        }
+    }
+    cout << ans;
 }
 
 int main()
 {
     IOS;
+    solve();
 }
