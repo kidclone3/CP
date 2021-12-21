@@ -4,9 +4,7 @@
 // using namespace __gnu_pbds;
 using namespace std;
 
-
-// Disable this pragma by default because of debugging
-// #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -60,8 +58,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+void solve() {
+    ll n, k;
+    cin >> n >> k;
+    if (k == n) return cout << "oo", void();
+    ll nn = n - k;
+    vl uoc;
+    for(ll i = 1; i*i <= nn; ++i) {
+        if (nn % i == 0) {
+            uoc.pb(i);
+            if (i != nn/i) uoc.pb(nn/i);
+        }
+    }
+    // print(uoc);
+    int ans = 0;
+    EACH(it, uoc) {
+        if (n % it == k) ans++;
+    }
+    cout << ans;
 }
 
 int main()

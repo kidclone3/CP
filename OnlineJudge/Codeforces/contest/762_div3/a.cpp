@@ -60,12 +60,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+void solve() {
+    string s; cin >> s;
+    if (s.size() % 2 == 1) return cout << "NO\n", void();
+    int l = s.size()/2;
+        bool ok = true;
+        FOR(i, 0, s.size()-l) {
+            if (s[i] != s[i+l]) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) return cout << "YES\n", void();
+    cout << "NO\n";
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }

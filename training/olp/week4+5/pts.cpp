@@ -60,8 +60,16 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+void solve() {
+    ll n; cin >> n;
+    n *= 2;
+    FOR(k, sqrt(n), 1, -1) {
+        if (n % k == 0) {
+            ll tmp = n/k + 1 - k;
+            if (tmp > 0 && tmp % 2 == 0) return cout << k, void();
+        }
+    }
+    cout << 0;
 }
 
 int main()

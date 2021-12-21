@@ -60,12 +60,52 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+void solve() {
+    int n; cin >> n;
+    vi cnt(n+1, 0);
+    vi a(n); 
+    FOR(n) cin >> a[i], cnt[a[i]]++;
+
+    vi b(all(a));
+    sort(all(b));
+
+    // c is ans;
+    vi c(n+1, -1);
+    set<int> st;
+    for(int i = 0, j = 0; i <= n; ++i) {
+        if (b[j] == i && st.size() == i) {
+            st.insert(i);
+            while(j < n && b[j] == i) j++;
+            c[i] = cnt[i];
+        }
+        else if (b[j] > i) {
+            if (st.size() == i) c[i] = 0;
+            else break;
+        } 
+        else break;
+    }
+    c[n] = 0;
+    for(int i = 0; i < n; ++i) {
+        if (b[i] == i) continue;
+        else if (b[i] < i) {
+            c[n] += i-b[i];
+        } else {
+            c[n] = -1;
+            break;
+        }
+    }
+    print(c);
+    // EACH(it, a) {
+    //     auto it2 = lower_bound(all(b), it) - b.begin();
+    //     if (it2 < it) cout << -1;
+    //     else cout << 
+    // }
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
 }

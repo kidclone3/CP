@@ -60,12 +60,44 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+bool cmp(vi &a, vi &b) {
+    FOR(i, a.size()) {
+        if (a[i] > b[i]) return true;
+        if (a[i] < b[i]) return false;
+    }
+    return true;
+}
+
+void solve() {
+    int n, m;
+    cin >> m >> n;
+    vector<vi> a(m, vi(n));
+    FOR(m) FOR(j, n) {
+        cin >> a[i][j]; 
+    }        
+    vi ans;
+    if (n-1 >= m) {
+        FOR(m) FOR(j, n) ans.pb(a[i][j]);
+    } else {
+        FOR(m) {
+            sort(all(a[i]));
+            reverse(all(a[i]));
+            print(a[i]);
+        }
+        sort(all(a), cmp);
+        
+        FOR(n-1) FOR(j, n) {
+            ans.pb(a[i][j]);
+        }
+    }
+    sort(all(ans));
+    reverse(all(ans));
+    cout << ans[n-1] << "\n";
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }

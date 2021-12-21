@@ -4,9 +4,7 @@
 // using namespace __gnu_pbds;
 using namespace std;
 
-
-// Disable this pragma by default because of debugging
-// #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -60,8 +58,52 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    return 0; 
+ll addMod(ll a, ll b, ll m) {return ((a+b) % m + m) % m;}
+
+ll mulMod(ll a, ll b, ll m) {
+    ll ans = 0;
+    for(a %= m, b %= m; b; a = addMod(a, a, m), b >>= 1)
+    if (b & 1) ans = addMod(ans, a, m);
+    return ans;
+}
+
+ll powMod(ll x, ll n, ll m) {
+    ll ans = 1;
+    for(x %= m; n; x = mulMod(x, x, m), n >>=1) 
+        if (n &1) ans = mulMod(ans, x, m);
+    return ans;
+}
+
+// ll phi(ll x) {
+//     ll cnt = 0;
+//     for(ll i = 2; i*i <= x; ++i) {
+//         if (x % i == 0) {
+//             cnt ++;
+//             if (i != x/i) cnt++;
+//         }
+//     }
+//     return cnt;
+// }
+
+struct Triple {
+    ll d,x,y;
+};
+
+Triple extendedEuclid(ll A, ll B) {
+    if (B == 0) return {A, 1, 0};
+    else {
+        Triple ext = extendedEuclid(B, A%B);
+        return {ext.d, ext.y, ext.x - (A/B) * ext.y};
+    }
+}
+
+void solve() {
+    ll a, b, c, d;
+    cin >> a >> b >> c >> d;
+    ll top = powMod(a, b, d);
+    Triple tmp = extendedEuclid(c, d);
+    ll x = addMod(tmp.x, d, d);
+    cout << mulMod(top, x, d);
 }
 
 int main()
