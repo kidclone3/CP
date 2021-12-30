@@ -60,11 +60,50 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    
-    return 0; 
+
+
+const int N = 1e5+5;
+struct Data {
+    int i, j, k, id, type;
+};
+
+Data a[N];
+int n, q, res[N], bit[N];
+
+bool cmp(Data &u, Data &v) {
+    return (u.k > v.k or (u.k == v.k and u.type > v.type));
 }
 
+void update(int x) {
+    for(; x <= n; x += x & (-x)) bit[x]++;
+}
+
+int get(int x) {
+    int ans = 0;
+    for(; x > 0; x -= x & (-x)) ans += bit[x];
+    return ans;
+}
+
+int solve() {
+    cin >> n;
+    FOR1(n) {
+        cin >> a[i].k;
+        a[i].i = a[i].j = i;
+        a[i].type = -1;
+    }
+    cin >> q;
+    FOR1(q) {
+        cin >> a[i+n].i >> a[i+n].j >> a[i+n].k;
+        a[i+n].id = i;
+    }
+    sort(a, a+n+q, cmp);
+    FOR1(n+q) {
+        if (a[i].type == -1) update(a[i].k);
+        else res[a[i].id] = get(a[i].j) - get(a[i].i-1);
+    }
+    FOR1(q) cout << res[i] << "\n";
+    return 0; 
+}
 int main()
 {
     IOS;

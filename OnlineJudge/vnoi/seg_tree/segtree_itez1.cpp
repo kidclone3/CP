@@ -57,11 +57,48 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
+
+const int N = 1e5+5;
+
+int ST[4*N];
+
+void update(int id, int l, int r, int i, int v) {
+    if (i < l || i > r) return;
+    if (l == r) {
+        ST[id] = v; 
+        return;
+    }
+
+    int mid = (l+r)/2;
+    update(2*id, l, mid, i, v);
+    update(2*id+1, mid+1, r, i, v);
+    ST[id] = max(ST[2*id], ST[2*id+1]);
+}
+
+int get(int id, int l, int r, int u, int v) {
+    if (v < l || r < u) return INT_MIN;
+    if (u <= l && r <= v) return ST[id];
+
+    int mid = (l+r)/2;
+    return max(get(2*id, l, mid, u, v), get(2*id+1, mid+1, r, u, v));
+}
 
 int solve() {
-    
+    int n; cin >> n;
+    FOR1(n) {
+        int x; cin >> x;
+        update(1, 1, n, i, x);
+    }
+    int q; cin >> q;
+    FOR(q) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        if (a == 1) {
+            update(1, 1, n, b, c);
+        } else {
+            cout << get(1, 1, n, b, c) << "\n";
+        }
+    }
     return 0; 
 }
 

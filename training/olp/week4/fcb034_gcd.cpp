@@ -60,8 +60,24 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int M = 5e6+5;
+int cc[M], np[M];
+
 int solve() {
-    
+    int n; cin >> n;
+    vi a(n);
+    int gcd = 0;
+    FOR(n) cin >> a[i], gcd = __gcd(gcd, a[i]);
+    FOR(n) ++cc[a[i]/gcd];
+    int ans = 0;
+    for(int i = 2; i < M; ++i) {
+        if (!np[i]) {
+            int tmp = 0;
+            for(int j = i; j < M; j+=i) np[j] = 1, tmp += cc[j];
+            ans = max(ans, tmp);
+        }
+    }
+    cout << (ans ? n - ans : -1);
     return 0; 
 }
 

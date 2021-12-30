@@ -60,8 +60,21 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+ll powMod(ll x, ll n, ll m) {
+    ll ans = 1;
+    for(x %= m; n; x = x*x % m, n >>= 1) {
+        if (n & 1) ans = ans * x % m;
+    }
+    return ans;
+}
+
+const ll mod = 1000000007;
+
 int solve() {
-    
+    ll n; cin >> n;
+    ll top = powMod(3, n, mod-1);
+    ll ans = powMod(3, top, mod);
+    cout << ans;
     return 0; 
 }
 

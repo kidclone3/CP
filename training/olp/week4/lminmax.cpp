@@ -59,9 +59,42 @@ void printPair(T &x)
 };
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
+// tree < int ,  null_type ,  less_equal<int> ,  rb_tree_tag ,  tree_order_statistics_node_update > ordered_set;
+
 
 int solve() {
-    
+    int n, d; 
+    // cin >> n >> d;
+    scanf("%d%d", &n, &d);
+    // vi a(n);
+    int a[n];
+    FOR(n) 
+        // cin >> a[i];
+        scanf("%d", a+i);
+    multiset<int> st;
+    // ordered_set<int> st;
+    int l = 0;
+    int ans = 1;
+
+    auto check = [&]() -> bool {
+        // int first = *ordered_set.find_by_order(0);
+        // int second = *ordered_set.find_by_order(ordered_set.size()-1);
+        // return *(--ordered_set.end()) - *ordered_set.begin() <= d;
+        return *(--st.end()) - *st.begin() <= d;
+    };
+    FOR(n) {
+        st.insert(a[i]);
+        // ordered_set.insert(a[i]);
+        while(l <= i && !check()) {
+            st.erase(st.find(a[l++]));
+            // ordered_set.erase(--ordered_set.lower_bound(a[l++]));
+        }
+        // cout << ordered_set.size() <<'\n';
+        ans = max(ans, i-l+1);
+    }
+    // print(st);
+    // cout << ans;
+    printf("%d", ans);
     return 0; 
 }
 

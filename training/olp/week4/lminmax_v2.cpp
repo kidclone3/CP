@@ -60,8 +60,65 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
+class newQueue {
+    public:
+    // {element, {minEle, maxEle}}
+    stack<pair<int, ii>> s1, s2;
+    int minEle, maxEle;
+    void insert(int x) {
+        minEle = maxEle = x;
+        if (!s1.empty()) {
+            auto tmp = s1.top();
+            minEle = min(minEle, tmp.se.fi);
+            maxEle = max(maxEle, tmp.se.se);
+        }
+        s1.push({x, {minEle, maxEle}});
+    }
+
+    void findPeek() {
+        if (s1.empty() || s2.empty()) {
+            minEle = s1.empty() ? s2.top().se.fi : s1.top().se.fi;
+            maxEle = s1.empty() ? s2.top().se.se : s1.top().se.se;
+        } else {
+            minEle = min(s1.top().se.fi, s2.top().se.fi);
+            maxEle = max(s1.top().se.se, s2.top().se.se);
+        }
+        // return {minEle, maxEle};
+    }
+    bool isValid(int d) {
+        findPeek();
+        return maxEle - minEle <= d;
+    }
     
+    void remove() {
+        if (s2.empty()) {
+            while(!s1.empty()) {
+                int element = s1.top().fi;
+                s1.pop();
+                minEle = s2.empty() ? element : min(element, s2.top().se.fi);
+                maxEle = s2.empty() ? element : max(element, s2.top().se.se);
+                s2.push({element, {minEle, maxEle}});
+            }
+        }
+        s2.pop();
+    }
+} st;
+
+int solve() {
+    int n, q; cin >> n >> q;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    int ans = 1;
+    int l = 0;
+    FOR(n) {
+        st.insert(a[i]);
+        while(l < i && !st.isValid(q)) {
+                st.remove();
+                l++;
+        }
+        ans = max(ans, i-l+1);
+    }
+    cout << ans;
     return 0; 
 }
 

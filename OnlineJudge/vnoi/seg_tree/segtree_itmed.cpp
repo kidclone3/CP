@@ -60,8 +60,47 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+
+ll ST[4*N];
+
+void update(int id, int l, int r, int i, ll val) {
+    if (r < i || i < l) return;
+    if (l == r) {
+        ST[id] = val;
+        return;
+    }
+
+    int mid = (l+r)/2;
+    update(2*id, l, mid, i, val);
+    update(2*id+1, mid+1, r, i, val);
+    ST[id] = max(ST[2*id], ST[2*id+1]);
+}
+
+ll getMax(int id, int l, int r, int u, int v) {
+    if (r < u || v < l) return LLONG_MIN;
+    if (u <= l && r <= v) return ST[id];
+
+    int mid = (l+r)/2;
+    return max(getMax(2*id, l, mid, u, v), getMax(2*id+1, mid+1, r, u, v));
+}
+
 int solve() {
-    
+    int n, k; cin >> n >> k;
+    vl f(n+1);
+    vl a(n+1);
+    FOR1(n) {
+        cin >> a[i];
+        update(1, 1, n, i, a[i]);
+    }
+    f[n] = a[n];
+    FOR(i, n-1, 0, -1) {
+        int r = min(i+k, n);
+        f[i] = max(getMax(1, 1, n, i+1, r), 0LL) + a[i];
+        update(1, 1, n, i, f[i]);
+    }
+    ll ans = getMax(1, 1, n, 1, n);
+    cout << (ans > 0 ? ans : 0);
     return 0; 
 }
 

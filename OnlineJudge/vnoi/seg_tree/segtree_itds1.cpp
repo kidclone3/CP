@@ -6,7 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -60,8 +60,61 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+
+multiset<int> ST[4*N];
+
+int arr[N];
+
+void update(int id, int l, int r, int i, int val, int rev) {
+    if (r < i || i < l) return;
+    if (l == r) {
+        if (rev != -1)
+            ST[id].erase(ST[id].find(rev));
+        ST[id].insert(val);
+        return;
+    }
+    if (l <= i && i <= r) {
+        if (rev != -1)
+            ST[id].erase(ST[id].find(rev));
+        ST[id].insert(val);
+        // return;
+    }
+    int mid = (l+r)/2;
+    update(2*id, l, mid, i, val, rev);
+    update(2*id+1, mid + 1, r, i, val, rev);
+}
+
+int get(int id, int l, int r, int u, int v, int k) {
+    if (r < u || v < l) return INT_MAX;
+    if (u <= l && r <= v) {
+        auto it = ST[id].lower_bound(k);
+        return it == ST[id].end() ? INT_MAX : *it;
+    }
+    int mid = (l+r)/2;
+    return min(get(2*id, l, mid, u, v, k), get(2*id+1, mid+1, r, u, v, k));
+}
+
 int solve() {
-    
+    int n, m; cin >> n >> m;
+    FOR1(n) {
+        cin >> arr[i];
+        update(1, 1, n, i, arr[i], -1);
+    }
+    FOR(m) {
+        int a,b,c,d;
+        cin >> a;
+        if (a == 1) {
+            cin >> b >> c;
+            update(1, 1, n, b, c, arr[b]);
+            arr[b] = c;
+        } else {
+            cin >> b >> c >> d;
+            int ans = get(1, 1, n, b, c, d);
+            cout << (ans == INT_MAX ? -1 : ans) << "\n";
+        }
+    }
+    // FOR(n+1) cout << arr[i] << " ";
     return 0; 
 }
 

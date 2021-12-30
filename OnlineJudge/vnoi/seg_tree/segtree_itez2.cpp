@@ -60,8 +60,40 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+
+ll ST[4*N];
+
+void update(int id, int l, int r, int i, ll v) {
+    if (i < l || i > r) return;
+    if (l == r) {
+        ST[id] = v; 
+        return;
+    }
+
+    int mid = (l+r)/2;
+    update(2*id, l, mid, i, v);
+    update(2*id+1, mid+1, r, i, v);
+    ST[id] = ST[2*id] + ST[2*id+1];
+}
+
+ll get(int id, int l, int r, int u, int v) {
+    if (v < l || r < u) return 0LL;
+    if (u <= l && r <= v) return ST[id];
+
+    int mid = (l+r)/2;
+    return get(2*id, l, mid, u, v) + get(2*id+1, mid+1, r, u, v);
+}
+
 int solve() {
-    
+    memset(ST, 0, sizeof ST);
+    int n, q; cin >> n >> q;
+    FOR(q) {
+        ll a, b, c;
+        cin >> a >> b >> c;
+        if (a == 1) update(1, 1, n, b, c);
+        else cout << get(1, 1, n, b, c) << "\n";
+    }
     return 0; 
 }
 

@@ -60,13 +60,65 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 105;
+vi prime;
+vi lpf(N, 2);
+
+void sieve() {
+    prime.assign(1, 2);
+    lpf[1] = -2;
+    for(int i = 3; i <N; i += 2) {
+        if (lpf[i] == 2) prime.pb(lpf[i] = i);
+        for(int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && i * prime[j] < N; ++j) {
+            lpf[i*prime[j]] = prime[j];
+        }
+    }
+}
+
 int solve() {
-    
+    int n; cin >> n;
+    vl a(N, 0LL);
+    FOR(n) {
+        ll l, r; cin >> l >> r;
+        while(l > 1) {
+            ll p = lpf[l], cnt = 0LL;
+            do l /= p, cnt++;
+            while(p == lpf[l]);
+            a[p] += cnt * r;
+        }
+    }
+    auto check = [&](ll x) -> bool {
+        FOR(i, N) if (a[i]) {
+            ll tmp = x, cnt = 0;
+            while(tmp) {
+                cnt += tmp / i;
+                tmp /= i;
+            }
+            if (cnt < a[i]) return false;
+        }
+        return true;
+    };
+    // FOR(10) cout << i << " " << a[i] << "\n";
+    ll l = 1;
+    ll r = 1e18;
+    // ll r = 100;
+    ll mid;
+    while (l <= r) {
+        mid = (l+r)/2;
+        if (check(mid)) r = mid - 1;
+        else l = mid + 1;
+    }
+    // while(!check(l))l++;
+    cout << l << "\n";
+    // FOR(i, l, l+10) if (check(i)) return cout << l << "\n", 0;
     return 0; 
 }
 
 int main()
 {
     IOS;
+    sieve();
+    int t; cin >> t;
+    while(t--)
     solve();
 }

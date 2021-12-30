@@ -60,8 +60,31 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+bool check (const set<char> &s1, const set<char> &s2){
+    EACH(it, s1) {
+        if (s2.find(it) != s2.end()) return true;
+    }
+    return false;
+}
+
 int solve() {
+    int n; cin >> n;
+    map<set<char>, int> mp;
+    FOR(n) {
+        string s; cin >> s;
+        set<char> tmp(all(s));
+        mp[tmp]++;
+    }
+    ll ans = 0;
     
+    for(auto it1 = mp.begin(); it1 != mp.end(); ++it1) {
+        ans += (ll) it1->second * (it1->se - 1) / 2;
+        for(auto it2 = it1; it2 != mp.end(); ++it2) {
+            if (it1 == it2) continue;
+            if (check(it1->first, it2->first)) ans += (ll) it1->se * it2->se;
+        }
+    }
+    cout << ans;
     return 0; 
 }
 

@@ -60,8 +60,70 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+struct Node {
+    ll lazy = 0LL;
+    ll val = 0LL;
+} nodes[4*N];
+
+void down(int id) {
+    ll t = nodes[id].lazy;
+    nodes[2*id].lazy += t;
+    nodes[2*id].val += t;
+
+    nodes[2*id+1].lazy += t;
+    nodes[2*id+1].val += t;
+
+    nodes[id].lazy = 0LL;
+}
+
+void update(int id, int l, int r, int u, int v, ll val) {
+    if (v < l || r < u) return;
+    if (u <= l && r <= v) {
+        nodes[id].lazy += val;
+        nodes[id].val += val;
+        return;
+    }
+
+    int mid = (l+r)/2;
+
+    down(id);
+
+    update(2*id, l, mid, u, v, val);
+    update(2*id + 1, mid+1, r, u, v, val);
+
+    nodes[id].val = max(nodes[2*id].val, nodes[2*id+1].val);
+}
+
+ll get(int id, int l, int r, int u, int v) {
+    if (v < l || r < u) return LLONG_MIN;
+    if (u <= l && r <= v) return nodes[id].val;
+
+    int mid = (l+r)/2;
+    down(id);
+
+    return max(get(2*id, l, mid, u, v), get(2*id+1, mid+1, r, u, v));
+}
+
 int solve() {
-    
+    int n; cin >> n;
+    FOR1(n) {
+        ll x; cin >> x;
+        update(1, 1, n, i, i, x);
+    }
+    int q; cin >> q;
+    FOR(q) {
+        ll a, b, c, d;
+        cin >> a;
+        if (a==1) {
+            cin >> b >> c >> d;
+            update(1, 1, n, b, c, d);
+        }
+        else {
+            cin >> b >> c;
+            cout << get(1, 1, n, b, c) << "\n";
+        }
+    }
     return 0; 
 }
 

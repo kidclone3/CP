@@ -60,8 +60,35 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+struct Triple {
+    ll d, x, y;
+};
+
+Triple extendEuclid(ll A, ll B) {
+    if (B == 0) return {A, 1, 0};
+    else {
+        Triple ext = extendEuclid(B, A % B);
+        return {ext.d, ext.y, ext.x - (A/B)*ext.y};
+    }
+}
+
 int solve() {
-    
+    ll n, p; cin >> n >> p;
+    vl a(n);
+    map<ll, ll> mp;
+    ll ans = 0;
+    FOR(n) {
+        cin >> a[i];
+        ll x = (a[i]-1 + p) % p;
+        Triple inv = extendEuclid(x, p);
+        if (inv.d == 1) {
+            inv.x = (inv.x % p + p)%p;
+            ans += mp[inv.x];
+            mp[x]++;
+        }
+        // cout << inv.d << " " << inv.x << " " << inv.y << "\n";
+    }
+    cout << ans;
     return 0; 
 }
 
@@ -69,4 +96,5 @@ int main()
 {
     IOS;
     solve();
+    
 }

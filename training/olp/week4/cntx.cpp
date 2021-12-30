@@ -61,12 +61,21 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    ll n, x; cin >> n >> x;
+    ll ans = 0;
+    FOR(i, 1, n+1) {
+        if (x % i == 0 && x / i <= n) {
+            ans++;
+        }
+    }
+    cout << ans << "\n";
     return 0; 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
 }
