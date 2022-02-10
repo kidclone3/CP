@@ -57,29 +57,47 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e6+6;
+const int BASE = 131;
+const ll MOD = 1e9+7;
+ll L[N], R[N];
+
+
+void hashLeft(const string &s) {
+    int n = s.size();
+    ll p = 1LL;
+    FOR(i, n) {
+        // cout << p << "\n";
+        L[i+1] = (L[i] + (1LL* (s[i] - 'a' + 1) * p))%MOD;
+        p = p * BASE % MOD;
+    }
+}
+
+void hashRight(string s) {
+    reverse(all(s));
+    int n = s.size();
+    // int p = 1;
+    FOR(i, n) {
+        R[i+1] = R[i]*BASE % MOD + (s[i] - 'a' + 1);
+        R[i+1] %= MOD;
+        // p *= 131;
+        // p %= MOD;
+    }
+}
+
 int solve() {
+    string s; 
+    cin >> s;
+    hashLeft(s);
+    hashRight(s);
+    FOR1(s.size()-1) if (L[i] == R[i]) {
+        cout << i << " ";
+    }
+    // cout << "\n";
+    // cout << L[9] << " " << R[9];
     
     return 0; 
 }

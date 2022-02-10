@@ -57,30 +57,66 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+const int MOD = 1e9+7;
+vi f(N), g(N), d(N), c(N);
+
+ii T[N];
+
+ii getMax(int x) {
+    ii res(0, 1);
+    while (x > 0) {
+        if (T[x].first > res.first) res = T[x];
+        else if (T[x].first == res.first) res.second = (res.second + T[x].second) % MOD;
+        x -= x&-x;
+    }
+    return res;
+}
+
+void update(int x, int fi, int gi) {
+    while(x < N) {
+        if (T[x].first < fi) T[x] = {fi, gi};
+        else if (T[x].first == fi) T[x].second = (T[x].second + gi) % MOD;
+        x += x&-x;
+    }
+}
+
 int solve() {
-    
+    int n; cin >> n;
+    vi a(n); FOR(n) cin >> a[i];
+    set<int> tmp(all(a));
+    vi b(all(tmp));
+    // Rời rạc hóa
+    FOR(n) {
+        auto lb = lower_bound(all(b), a[i]) - b.begin()+1;
+        a[i] = lb;
+    }
+    // print(a);
+    // Dùng BIT
+    int mx = 0, ans = 0;
+    for(int i = 0; i < n; ++i) {
+        ii r = getMax(a[i] - 1);
+        ii res = getMax(a[i]);
+        // ii res_old = res;
+        if (res.first < r.first + 1) {
+            res.first = r.first + 1;
+            res.second = r.second;
+        } else if (res.fi == r.fi + 1) {
+            res.se = r.se;
+        }
+        update(a[i], res.fi, res.se);
+        // res = getMax(a[i]);
+    }
+    for(int i = 1; i <= b.size(); ++i) {
+        ii res = getMax(i);
+        if (res.fi > mx) mx = res.fi, ans = res.se;
+        else if (res.fi == mx) ans = max(ans, res.se);
+    }
+    // FOR1(n) cout << d[i] << " " << c[i] << "\n"[i==n];
+    cout << ans;
     return 0; 
 }
 

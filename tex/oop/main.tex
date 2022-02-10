@@ -1,0 +1,326 @@
+\documentclass[14pt]{article}
+
+% Language setting
+\usepackage[utf8]{vietnam}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3.5cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{hyperref}
+\usepackage[smartEllipses]{markdown}
+\usepackage{titlesec}
+\titleformat*{\subsection}{\fontsize{20pt}{0pt}\selectfont \bfseries} % Heading 1
+\titleformat*{\subsection}{\fontsize{18pt}{0pt}\selectfont \bfseries} % Heading 2
+\titleformat*{\subsection}{\fontsize{12pt}{0pt}\selectfont \bfseries} % Heading 3
+
+\usepackage[vietnamese.licr]{babel}	% Khai báo ngôn ngữ Vietnamese
+\usepackage{listings}			% Sử dụng gói lệnh listings đề chèn code
+\usepackage{tvietlistings}		% Sử dụng Tiếng Việt trong gói listings
+\usepackage{color}		% Sử dụng màu trong LaTeX
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{
+%   frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+
+
+% \lstset{frame=tb,
+%   language=TeX,
+%   aboveskip=3mm,
+%   belowskip=3mm,
+%   showstringspaces=false,
+%   basicstyle={\small\ttfamily},
+%   numbers=left,
+%   numberstyle=\tiny\color{gray},
+%   breaklines=true,
+%   captionpos=t,
+%   breakatwhitespace=true,
+%   tabsize=2
+% }
+
+\newmdenv[linecolor=gray,skipabove=\topsep,skipbelow=\topsep,
+leftmargin=-5pt,rightmargin=-5pt,
+innerleftmargin=5pt,innerrightmargin=5pt]{mybox}
+
+\renewcommand{\baselinestretch}{1.2} % Giãn dòng 1.2
+\usepackage{indentfirst}
+\begin{document}
+\include{coverPage}
+\cleardoublepage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\section{Tổng quan về Design Pattern}
+\subsection{Khái niệm}
+Design Pattern là một kỹ thuật quan trọng trong lập trình hướng đối tượng(OOP). Design pattern là các giải pháp tổng thể đã được tối ưu hóa, được tái sử dụng cho các vấn đề thường gặp trong thiết kế phần mềm. Nó cung cấp cho chúng ta các "mẫu thiết kế", giải pháp để giải quyết các vấn đề chung, thường gặp trong lập trình.
+
+Với sự đúc kết và công nhận từ nhiều nhà nghiên cứu, Design Pattern là mẫu chuẩn tối ưu nhất, có thể áp dụng để giải quyết không chỉ một vấn đề mà nhiều vấn đề có tính chất tương tự nhau, lặp đi lặp lại nhiều lần trong lập trình OOP.
+
+Design Pattern không dành riêng cho một ngôn ngữ lập trình cụ thể nào. Nó có thể được áp dụng trong hầu hết các ngôn ngữ lập trình OOP như: PHP, Java, Python và nhiều ngôn ngữ khác.
+
+\subsection{Tại sao nên sử dụng Design Pattern?}
+Đầu tiên, chúng ta phải nói đến tác dụng tăng tốc độ phát triển phần mềm. Design pattern cung cấp những giải pháp ở dạng tổng quát, đã được tối ưu hóa, giúp tăng tốc độ phát triển phần mềm bằng cách đưa ra các mô hình test, mô hình phát triển đã qua kiểm nghiệm. Việc này giúp tiết kiệm rất nhiều thời gian so với việc tự viết ra những giải  pháp chưa thực sụ tối ưu.
+
+Design Pattern giúp hạn chế lỗi tiềm ẩn. Việc sử dụng giải pháp đã được kiểm chứng chắc chắn sẽ ít rủi ro hơn là tự mình thử nghiệm giải pháp mới.
+
+Không chỉ thế, Design Pattern sẽ hỗ trợ tái sử dụng mã lệnh. Các mẫu thiết kế có thể được sử dụng nhiều lần mà không xảy ra lỗi. Chúng ta cũng dễ dàng mở rộng, nâng cấp và bảo trì để đáp ứng được các yêu cầu thay đổi liên tục của dự án.
+
+Sử dụng Design Pattern giúp cho code dễ đọc, dễ hiểu hơn. Vì nó đã theo khuôn mẫu nên nó giúp cho các lập trình viên tìm được tiếng nói chung, có thể hiểu code của người khác một cách nhanh chóng.
+
+\subsection{Để học Design Pattern cần có gì?}
+\noindent Muốn học Design Pattern, bạn cần phải có kiến thức vững chắc về lập trình OOP, cụ thể là:
+
+\begin{itemize}
+\item 4 đặc tính: Trừu tượng, Đóng gói, Đa hình, Kế thừa.
+ \item 3 khái niệm: abstract class, interface và static.
+ \item Tư duy hoàn toàn theo OOP.
+\end{itemize}
+\subsection{Phân loại}
+Hệ thống các mẫu Design pattern hiện có gồm 23 mẫu được định nghĩa trong cuốn “Design patterns Elements of Reusable Object Oriented Software” và được chia thành 3 nhóm:
+\begin{itemize}
+    \item  Creational Pattern (Nhóm khởi tạo)
+    
+Những design pattern loại này cung cấp một giải pháp để tạo ra và che giấu được logic của việc tạo ra object, thay vì sử dụng method new. Điều này giúp cho chương trình trở nên mềm dẻo hơn trong việc quyết định object nào cần được tạo ra trong những tình huống được đưa ra.
+
+Gồm 5 design pattern:
+
+    \begin{enumerate}
+        \item  Abstract Factory
+        \item  Builder
+        \item Factory
+        \item  Prototype
+        \item Singleton
+
+    \end{enumerate}
+    \item  Structural Pattern (Nhóm cấu trúc )
+    
+Những Design pattern loại này liên quan tới class và các thành phần của object. Nó dùng để thiết lập, định nghĩa quan hệ giữa các đối tượng.
+
+Gồm 7 design pattern:
+
+    \begin{enumerate}
+        \item  Adapter
+        \item  Bridge
+        \item Composite
+        \item  Decorator
+        \item Facade
+         \item Flyweight
+          \item Proxy
+
+    \end{enumerate}
+     \item  Behavioral Pattern (Nhóm tương tác/ hành vi)
+    
+Nhóm này dùng trong thực hiện các hành vi của đối tượng, sự giao tiếp giữa các object với nhau.
+
+Gồm 11 design pattern:
+
+    \begin{enumerate}
+        \item Chain of responsibility
+        \item  Command
+        \item Interpreter
+        \item  Iterator
+        \item Mediator
+        \item  Memento
+        \item  Observer
+        \item State
+        \item  Strategy
+        \item  Template method
+        \item Visitor
+    \end{enumerate}
+    
+\end{itemize}
+
+\section{ Một số Design Patterns}
+\subsection{Singleton}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\textit{“The Singleton Pattern ensures a class has only one instance, and provides a global point of access to it.”}
+\begin{flushright}
+(Head First Design Pattern)
+\end{flushright}
+
+Singleton là 1 trong 5 design pattern của nhóm Creational Design Pattern. Singleton pattern là một design pattern mà nó đảm bảo rằng một class chỉ có duy nhất một instance và nó cung cấp một cách toàn cục để truy cập tới instance đó.
+
+Mục đích sử dụng Singleton là đảm bảo rằng 1 class chỉ có 1 instance duy nhất và class này luôn sẵn sàng để sử dụng ở bất kỳ thời điểm hoặc vị trí nào trong phần mềm ứng dụng. Singleton cũng giúp cho quản lý truy cập tốt hơn vì chỉ có một instance duy nhất. Có thể quản lý số lượng instance của một lớp trong giới hạn chỉ định.
+
+Một Singleton Pattern bao gồm các thành phần cơ bản sau:
+\begin{itemize}
+    \item Hàm constructor phải có access modifier là private để hạn chế truy cập từ class bên ngoài.
+    \item Khai báo private static variable để lưu trữ instance của class Singleton.
+    \item Định nghĩa một thuộc tính là private static và đó là instance duy nhất của class này.
+    \item Định nghĩa public static getInstance() dùng để khởi tạo đối tượng (hàm accessor). Phương thức getInstance() sẽ kiểm tra xem lớp đó có instance nào chưa, nếu chưa (== null) thì sẽ tạo một đối tượng mới, nếu có rồi thì sẽ trả về đối tượng đó.
+    \item Thực hiện lazy initialization trong hàm accessor: chỉ khi gọi mới khởi tạo instance.
+    \item Client chỉ có thể gọi hàm accessor khi muốn có instance của class
+\end{itemize}
+\subsubsection{ Code minh họa}
+\begin{enumerate}
+
+\item Singleton.java: Singleton
+\begin{mybox}
+\begin{lstlisting}
+public final class Singleton {
+ 
+ // Biến uniqueInstance là biến static, là instance duy nhất của class Singleton.
+ private static Singleton uniqueInstance;
+ public String value;
+ 
+ private Singleton(String value) {
+   // Contructor Singleton() được khai báo là private
+   // để hạn chế khả năng truy cập của các class bên ngoài.
+   // Chỉ Singleton mới có thể khởi tạo lớp này.
+   // Đoạn code dưới đây sẽ bắt thread phải chờ 1s trước khi gán giá trị.
+   try {
+     Thread.sleep(1000);
+   } catch (InterruptedException ex) {
+     ex.printStackTrace();
+   }
+   this.value = value;
+ }
+ 
+ public static Singleton getInstance(String value) {
+   // Nếu instance đang là null thì khởi tạo,
+   // ngược lại sẽ trả về nó.
+   if (uniqueInstance == null) {
+     uniqueInstance = new Singleton(value);
+   }
+   return uniqueInstance;
+ }
+}
+
+\end{lstlisting}
+\end{mybox}
+
+\item  DemoSingleThread.java: Client code
+\begin{mybox}
+\begin{lstlisting}
+public class DemoSingleThread {
+ 
+//  Class này để kiểm tra xem Singleton có thật sự hoạt động hay không,
+//  có thật sự chỉ tồn tại 1 instance hay không?
+ public static void main(String[] args) {
+   System.out.println(
+       "If you see the same value, then singleton was reused (yay!)"
+           + "\n"
+           + "If you see different values, then 2 singletons were created (booo!!)"
+           + "\n\n"
+           + "RESULT:"
+           + "\n");
+   Singleton singleton = Singleton.getInstance("FOO");
+   Singleton anotherSingleton = Singleton.getInstance("BAR");
+   System.out.println(singleton.value);
+   System.out.println(anotherSingleton.value);
+ }
+}
+\end{lstlisting}
+\end{mybox}
+
+\item  OutputDemoSingleThread.txt: Execution result
+\begin{mybox}
+\begin{lstlisting}
+If you see the same value, then singleton was reused (yay!)
+If you see different values, then 2 singletons were created (booo!!)
+RESULT:
+ 
+FOO
+FOO
+\end{lstlisting}
+\end{mybox}
+
+
+\end{enumerate}
+
+\subsubsection{ Ưu, nhược điểm}
+\begin{table}[]
+\begin{tabular}{|l|l|}
+\hline
+Ưu điểm & Nhược điểm \\ \hline
+     ff   &      fff      \\ \hline
+\end{tabular}
+\end{table}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Observer}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Factory}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Iterator}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Decorator}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Adapter}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Command}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Bridge}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Strategy}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\subsection{Builder}
+\subsubsection{ Định nghĩa, mục đích sử dụng và mô hình cấu trúc}
+\subsubsection{ Code minh họahọa}
+\subsubsection{ Ưu, nhược điểm}
+\subsubsection{ Ứng dụng trong thực tế}
+
+\end{document}

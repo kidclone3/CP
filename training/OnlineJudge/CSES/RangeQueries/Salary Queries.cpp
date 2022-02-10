@@ -6,7 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// #pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -79,8 +79,82 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2*1e6+5;
+
+int n, q;
+int sz;
+ll T[N];
+
+void update(int i, int val) {
+    for(; i <= sz; i += i & (-i)) 
+        T[i] += val;
+}
+
+ll get(int i) {
+    ll res = 0LL;
+    for(; i > 0; i -= i&(-i)) 
+        res += T[i];
+    return res;
+}
+
 int solve() {
-    
+    cin >> n >> q;
+    vi arr(n);
+    // Cần rời rạc hóa, nên các truy vấn phải xử lý offline.
+    vi st; // Dùng set để rr hóa cho khỏe.
+    // set<int> st;
+    FOR(n) {
+        cin >> arr[i];
+        st.push_back(arr[i]);
+    }
+    vector<vi> queries(q);
+    FOR(q) {
+        char ch;
+        int a, b;
+        cin >> ch >> a >> b;
+        if (ch == '?') {
+            st.push_back(a);
+            st.push_back(b);
+            queries[i] = {0, a, b};
+        } else {
+            queries[i] = {1, a, b};
+            st.push_back(b);
+        }
+    }
+    // print(st);
+    sort(all(st));
+    // print(st);
+    unordered_map<int, int, custom_hash> mp;
+    int i = 1;
+    EACH(it, st) {
+        if (mp[it] == 0)
+            mp[it] = i++;
+    }
+
+    // printPair(mp);
+    sz = mp.size() + 5;
+    // EACH(it, st) update(mp[it], 1);
+    // cout << sz << '\n';
+    // Preprocessing has done!
+    FOR(n) {
+        update(mp[arr[i]], 1);
+    }
+    FOR(q) {
+        if (queries[i][0]) {
+            int k = queries[i][1];
+            int val = queries[i][2];
+            update(mp[arr[k-1]], -1);
+            update(mp[val], 1);
+            arr[k-1] = val;
+        } else {
+            int l, r;
+            l = queries[i][1];
+            r = queries[i][2];
+            int ans = get(mp[r]) - get(mp[l]-1);
+            cout << ans << '\n';
+        }
+    }
+    cout << " ";
     return 0; 
 }
 

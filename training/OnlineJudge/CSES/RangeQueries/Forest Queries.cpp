@@ -58,29 +58,59 @@ void printPair(T &x)
     cout << "\n";
 };
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
 // template <class T>
 // using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e3+5;
+int t[N][N];
+int n, q;
+
+void update(int i, int j) {
+    for(; i <= n; i += i & (-i)) {
+        for(int v = j; v <= n; v += v & (-v)) {
+            t[i][v] ++;
+        }
+    }
+}
+
+int get(int i, int j) {
+    int res = 0;
+    for(; i > 0; i -= i&(-i))
+        for(int v = j; v > 0; v -= v&(-v)) 
+            res += t[i][v];
+    return res;
+}
+
 int solve() {
-    
+    cin >> n >> q;    
+    FOR(n) {
+        string s; cin >> s;
+        FOR(j, n) {
+            if (s[j] == '*') {
+                update(i+1, j+1);
+            }
+        }
+    }
+
+    auto count = [&](int y1, int x1, int y2, int x2) {
+        int topLeft = get(x1-1, y1-1);
+        int botRight = get(x2, y2);
+
+        int topRight = get(x2, y1-1);
+        int botLeft = get(x1-1, y2);
+
+        return botRight - topRight - botLeft + topLeft;
+    };
+
+    FOR(q) {
+        int x1, y1, x2, y2;
+        cin >> y1 >> x1 >> y2 >> x2;
+        cout << count(x1, y1, x2, y2) << '\n';
+    }
+    // cout << get(4, 3);
     return 0; 
 }
 

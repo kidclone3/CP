@@ -57,30 +57,36 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int minmove (const string &s) {
+    int n = s.size();
+    int x, y, i, j, u, v; // x is the smallest string before y
+    for (x = 0, y = 1; y < n; ++y) {
+        i = u = x;
+        j = v = y;
+        while (s[i] == s[j]) {
+            ++u, ++v;
+            if (++i == n) i = 0;
+            if (++j == n) j = 0;
+            if (i == x) break; // all string are equal
+        }
+        if (s[i] <= s[j]) y = v;
+        else {
+            x = y;
+            if (u > v) y = u;
+        }
+    }
+    return x;
+}
+
 int solve() {
-    
+    string s; cin >> s;
+    int x = minmove(s);
+    string s1 = s.substr(0, x);
+    string s2 = s.substr(x, s.size() - x + 1);
+    cout << s2 + s1;
     return 0; 
 }
 

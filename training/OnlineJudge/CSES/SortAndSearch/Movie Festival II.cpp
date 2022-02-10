@@ -57,30 +57,48 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+bool cmp(ii &a, ii &b) {
+    return a.second == b.second ? a.first < b.first : a.second < b.second;
+}
+
 int solve() {
-    
+    int n, k; cin >> n >> k;
+    vii a(n);
+    FOR(n) {
+        cin >> a[i].fi >> a[i].se;
+    }
+    sort(all(a), cmp);
+    multiset<int> watching;
+    int ans = 0;
+    FOR(n) {
+        if (watching.empty()) {
+            ans++;
+            watching.insert(a[i].se);
+        } else {
+            auto tmp = watching.lower_bound(a[i].fi);
+            if (*tmp == a[i].fi) {
+                watching.erase(tmp);
+                watching.insert(a[i].se);
+                ans++;
+                continue;
+            } 
+            if (tmp == watching.begin()) {
+                if (watching.size() < k) {
+                    watching.insert(a[i].se);
+                    ans++;
+                }
+                continue;
+            }
+            --tmp;
+            watching.erase(tmp);
+            watching.insert(a[i].se);
+            ans++;
+        }
+    }
+    cout << ans;
     return 0; 
 }
 

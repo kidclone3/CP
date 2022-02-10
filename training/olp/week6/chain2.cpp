@@ -57,30 +57,58 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+class Trie {
+public:
+    struct Node {
+        Node *c[26];
+        int f; // finish
+        Node() {
+            FOR(26) c[i] = NULL;
+            f = 0;
+        }
+    };
+    Node *root = new Node();
+    int ans;
+    void Add(const string &s) {
+        Node *p = root;
+        int n = s.size();
+        FOR(n) {
+            int nxt = s[i] - 'a';
+            if (p->c[nxt] == NULL) p->c[nxt] = new Node();
+            p = p->c[nxt];
+        }
+        p->f = 1;
+    }
+
+    void DFS(Node *a, int cnt) {
+        if (a->f == 1) {
+            cnt++;
+            ans = max(ans, cnt);
+        }
+        FOR(26) {
+            if (a->c[i] != NULL) DFS(a->c[i], cnt);
+        }
+    }
+
+    int Find() {
+        ans = 0;
+        DFS(root, 0);
+        return ans;
+    }
+};
+
+Trie T;
+
 int solve() {
-    
+    int n; cin >> n;
+    FOR(n) {
+        string s; cin >> s;
+        T.Add(s);
+    }
+    cout << T.Find();
     return 0; 
 }
 

@@ -1,0 +1,4 @@
+\babel@toc {vietnamese}{}\relax 
+\contentsline {section}{\numberline {1}Giới thiệu}{1}{section.1}%
+\contentsline {section}{\numberline {2}Sử dụng tiếng Việt trong gói lệnh listings}{1}{section.2}%
+\contentsline {section}{\numberline {3}Cài đặt tùy chọn literate trong lệnh lstset để hiển thị các ký tự đặc biệt}{2}{section.3}%

@@ -57,30 +57,26 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int powMod(int x, int n) {
+    int ans = 1;
+    for(x %= 13; n; x = x*x % 13, n >>= 1)
+        if (n & 1) ans = ans * x % 13;
+    return ans;
+}
+
 int solve() {
-    
+    string s; cin >> s;
+    reverse(all(s));
+    int ans = 0;
+    FOR(s.size()) {
+        int digit = s[i] - '0';
+        ans += digit * powMod(10, i) % 13;
+        ans %= 13;
+    }
+    cout << (ans == 0 ? "YES" : "NO");
     return 0; 
 }
 

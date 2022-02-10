@@ -57,35 +57,40 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const ll MOD = 123456789;
+
+ll powMod(ll x, ll n) {
+    ll ans = 1;
+    for(x %= MOD; n; x = x * x % MOD, n >>= 1) 
+        if (n & 1) ans = ans * x % MOD;
+    return ans;
+}
+
+ll g(ll p, ll n) {
+    if (n == 0) return 1LL;
+    if (n == 1) return 1LL + p;
+    if (n & 1LL) return (p * g(p, n-1) + 1LL) % MOD;
+    else return ((1LL+powMod(p, n>>1LL)) * (g(p, n>>1) - 1) + 1) % MOD;
+}
+
 int solve() {
-    
+    ll n; cin >> n; 
+    if (n == 0 || n == 1) return cout << "0\n", 0;
+    ll ans = g(4, n/2-1);
+    if (n&1LL) ans = 2*ans % MOD;
+    cout << ans << "\n";
+    // ll ans = g(4, n);
+    // cout << n << " " << ans << '\n'; 
     return 0; 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
 }

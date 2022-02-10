@@ -57,30 +57,55 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+// const int MOD = 1337377;
+const int MOD = 1e9+7;100
+int add(const int &a, const int &b) {
+    return a+b >= MOD ? a+b - MOD : a+b;
+}
+
+struct Trie{
+    Trie *c[26];
+    Trie() {
+        FOR(26) c[i] = NULL;
+    }
+    bool isEnd = 0;
+};
+
+Trie* root = new Trie();
+
+void TrieInsert(const string &s) {
+    int n = s.size();
+    Trie *p = root;
+    FOR(n) {
+        int nxt = s[i] - 'a';
+        if (p->c[nxt] == NULL) p->c[nxt] = new Trie();
+        p = p->c[nxt];
+    }
+    p->isEnd = true;
+}
+
 int solve() {
-    
+    string s; cin >> s;
+    int n; cin >> n;
+    FOR(n) {
+        string x; cin >> x;
+        TrieInsert(x);
+    } 
+    n = s.size();
+    vi f(n+5, 0);
+    f[0] = 1;
+    FOR(i, n) {
+        Trie *p = root;
+        for(int j = i; j < n; ++j) {
+            if (p->c[s[j]-'a'] == NULL) break;
+            p = p->c[s[j]-'a'];
+            if (p->isEnd == true) f[j+1] = add(f[j+1], f[i]);
+        }
+    }
+    cout << f[n];
     return 0; 
 }
 

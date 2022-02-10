@@ -58,21 +58,6 @@ void printPair(T &x)
     cout << "\n";
 };
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
 // template <class T>
 // using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
@@ -80,7 +65,40 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n, m; cin >> n >> m;
+    set<ii> st;
+    FOR1(n) {
+        int x; cin >> x;
+        st.insert({x, i});
+    }
+    vii queries(m);
+    vi ans(m, 0);
+    FOR(m) {
+        int x; cin >> x;
+        queries[i] = {x, i};
+        // auto it = st.lower_bound({x, 0});
+        // if (it == st.end()) cout << 0 << " ";
+        // else {
+        //     cout << it->second << " ";
+        //     ii tmp2 = {it->first-x, it->second};
+        //     st.erase(it);
+        //     st.insert(tmp2);
+        // }
+    }
+    sort(all(queries));
+    reverse(all(queries));
+    FOR(m) {
+        int x, pos;
+        tie(x, pos) = queries[i];
+        auto it = st.lower_bound({x, 0});
+        if (it != st.end()) {
+            ans[pos] = it->second;
+            ii tmp2 = {it->first-x, it->second};
+            st.erase(it);
+            st.insert(tmp2);
+        }
+    }
+    print(ans);
     return 0; 
 }
 

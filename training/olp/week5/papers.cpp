@@ -57,30 +57,43 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const ll MOD = 1e9+7;
+
+ll powMod(ll x, ll n) {
+    ll ans = 1;
+    for(x %= MOD; n; x = x*x % MOD, n >>= 1) {
+        if (n &1) ans = ans * x % MOD;
+    }
+    return ans;
+}
+
+ll nCk(ll n, ll k) {
+    ll top = 1, down = 1;
+    for(ll i = n-k+1; i <= n; ++i) {
+        top = top*i % MOD;
+    }
+    for (ll i = 1; i <= k; ++i) {
+        down = down * i % MOD;
+    }
+    // cout << top << " " << down << "\n";
+    down = powMod(down, MOD-2);
+    // cout << top << " " << down << "\n";
+    return top * down % MOD;
+}
+
 int solve() {
-    
+
+    // Cthuc: (n+k-1)C(k-1) với k = số lượng các phần tử. 
+    // Ở trong bài, n = m - tổng a[i]
+    // k = n.
+    ll m, n; cin >> m >> n;
+    ll x;
+    FOR(n) cin >> x, m -=x;
+    if (m < 0) return cout << 0, 0;
+    cout << nCk(m+n-1, n-1);
     return 0; 
 }
 

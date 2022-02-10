@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
-// #include <ext/pb_ds/assoc_container.hpp>
-// #include <ext/pb_ds/tree_policy.hpp>
-// using namespace __gnu_pbds;
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
 using namespace std;
 
 
@@ -58,29 +58,50 @@ void printPair(T &x)
     cout << "\n";
 };
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template <class T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+struct range {
+    int l, r, index;
+    bool operator < (const range &other) {
+        return l == other.l ? r > other.r : l < other.l;
+    }
+};
+
 int solve() {
-    
+    int n; cin >> n;
+    vector<range> ranges(n);
+    vi contains(n);
+    vi contained(n);
+    ordered_set<pair<int, int>> rightBoundaries;
+
+    FOR(n) {
+        int l, r; cin >> l >> r;
+        ranges[i].l = l;
+        ranges[i].r = r;
+        ranges[i].index = i;
+    }
+    sort(all(ranges));
+    FOR(n) {
+        rightBoundaries.insert({ranges[i].r, -1*i});
+        contained[ranges[i].index] = rightBoundaries.size() - rightBoundaries.order_of_key({ranges[i].r, -1*i}) - 1;
+    }
+    rightBoundaries.clear();
+    FOR(i, n-1, -1, -1) {
+        rightBoundaries.insert({ranges[i].r, -1*i});
+        contains[ranges[i].index] = rightBoundaries.order_of_key({ranges[i].r, -1*i});
+    }
+    // print(contains);
+    EACH(it, contains) {
+        cout << (it > 0 ? 1 : 0) << " ";
+    }
+    cout << "\n";
+    EACH(it, contained) {
+        cout << (it > 0 ? 1 : 0) << " ";
+    }
     return 0; 
 }
 

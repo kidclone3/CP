@@ -57,30 +57,69 @@ void printPair(T &x)
     }
     cout << "\n";
 };
-
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
-
-// template <class T>
-// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+struct Trie {
+    // f = finish = số xâu kết thúc tại node này.
+    // g = số xâu đi qua node này.
+    int f, g;
+    Trie * c[2];
+    Trie() {
+        c[0] = c[1] = NULL;
+        f = g = 0;
+    }
+};
+
+Trie* root = new Trie();
+
+int layer = 0;
+
+void dfs(Trie *a = root) {
+    a->g = a->f;
+    FOR(i, 2) {
+        if (a->c[i] != NULL) {
+            layer ++;
+            dfs(a->c[i]);
+            layer --;
+            a->g += a->c[i]->g;
+        }
+    }
+}
+
+void TrieInsert(const vi &a) {
+    Trie *p = root;
+    int n = a.size();
+    FOR(n) {
+        if (p->c[a[i]] == NULL) p->c[a[i]] = new Trie();
+        p = p->c[a[i]];
+    }
+    p->f++;
+}
+
 int solve() {
-    
+    int m, n; cin >> m >> n;
+    FOR(j, m) {
+        int nn; cin >> nn;
+        vi b(nn);
+        FOR(nn) cin >> b[i];
+        TrieInsert(b);
+    }
+    dfs();
+    FOR(j, n) {
+        int nn; cin >> nn;
+        vi c(nn);
+        FOR(nn) cin >> c[i];
+        Trie* p = root;
+        int i, ans = 0;
+        for(i = 0; i < nn; ++i) {
+            if (p->c[c[i]] == NULL) break;
+            p = p->c[c[i]];
+            ans += p->f;
+        }
+        if (i == nn) ans += p->g - p->f;
+        cout << ans << "\n";
+    }
     return 0; 
 }
 
