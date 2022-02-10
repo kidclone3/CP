@@ -124,7 +124,10 @@ int solve() {
     // print(st);
     sort(all(st));
     // print(st);
-    unordered_map<int, int, custom_hash> mp;
+    // unordered_map<int, int, custom_hash> mp;
+    unordered_map<int, int> mp;
+    mp.max_load_factor(0.25);
+    mp.reserve(1<<20);
     int i = 1;
     EACH(it, st) {
         if (mp[it] == 0)
