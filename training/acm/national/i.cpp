@@ -87,8 +87,47 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const vector<string> hs = {"dp", "graph", "mathgeo", "ds", "adhoc"};
+
+bool minus_p(vii &a, int p) {
+    a[p].first = max(0, a[p].first-1);
+    a[p].second -= 1;
+    return a[p].second > -1;
+}
+
 int solve() {
-    
+    int n; cin >> n;
+    vector<pair<int, vi>> arr(n);
+    FOR(n) {
+        cin >> arr[i].first;
+        FOR(j, arr[i].first) {
+            string s; cin >> s;
+            FOR(k, 5) if (hs[k] == s) {
+                arr[i].second.push_back(k);
+                break;
+            }
+        }
+    }
+    // EACH(it, arr) cout << it.second.size() << "\n";
+    // first = min, second = max;
+    vii tags(5);
+       
+    FOR(5) {
+        cin >> tags[i].first >> tags[i].second;
+    }
+    int ans = 0;
+    FOR(n) {
+        int nn = arr[i].first;
+        // print(arr[i].second);
+        FOR(j, nn) {
+            int jj = arr[i].second[j];
+            if (!minus_p(tags, jj))
+                return cout << 0, 0;
+            else ans++;
+        }
+    }
+    printPair(tags);
+    cout << ans;
     return 0; 
 }
 
@@ -97,3 +136,4 @@ int main()
     IOS;
     solve();
 }
+

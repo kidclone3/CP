@@ -87,8 +87,49 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e7+5;
+
+vi prime;
+vi lpf(N, 2);
+
+void sieve() {
+    prime.assign(1,2);
+    lpf[1] = -2;
+    for(int i = 3; i <= N; i+=2) {
+        if (lpf[i] == 2) prime.push_back(lpf[i] = i);
+        for(int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && i * prime[j] <= N; ++j) {
+            lpf[prime[j]*i] = prime[j];
+        }
+    }
+}
+
 int solve() {
-    
+    unordered_map<int, int> mp;
+    mp.max_load_factor(0.25);
+    mp.reserve(1<<20);
+    int n; cin >> n;
+    sieve();
+    // print(prime);
+    vi a(n);
+    auto decompose = [&](ll x) {
+        ll tmp = 1;
+        while(x > 1) {
+            tmp *= lpf[x];
+            x /= lpf[x];
+        }
+        return tmp;
+    }
+    FOR(n) {
+        cin >> a[i];
+        mp[decompose(a[i])]++;
+    }
+    ll ans = 0LL;
+    EACH(it, mp) {
+        if (it.second >= 2)
+            ans += 1LL*it.second*(it.second-1)/2;
+    }
+    cout << lpf[6] << "\n";
+    cout << ans;
     return 0; 
 }
 
@@ -97,3 +138,4 @@ int main()
     IOS;
     solve();
 }
+

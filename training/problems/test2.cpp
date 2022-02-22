@@ -88,7 +88,7 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    cout << "Hello World";
     return 0; 
 }
 
@@ -97,3 +97,4 @@ int main()
     IOS;
     solve();
 }
+

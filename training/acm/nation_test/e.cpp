@@ -7,8 +7,8 @@ using namespace std;
 
 // Disable this pragma by default because of debugging
 // 2 pragma lines give compiler information to use SIMD instruction for optimize code.
-// #pragma GCC target("avx2")
-// #pragma GCC optimize("O3")
+#pragma GCC target("avx2")
+#pragma GCC optimize("O3")
 
 
 #define pb push_back
@@ -88,7 +88,26 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    ll x; cin >> x;
+    int n;
+    cin >> n;
+    vl a(n);
+    FOR(n) {
+        cin >> a[i];
+    }
+    set<int> st(all(a));
+    vl b(all(st));
+    vl f(x+5, 0);
+    f[0] = 1LL;
+    FOR(j, 0, b.size()) {
+        FOR(i, b[j], x+1) {
+            f[i] += f[i-b[j]];
+        }
+        // print(f);
+        // cout << "\n";
+    }
+    // print(f); 
+    cout << f[x];
     return 0; 
 }
 
@@ -97,3 +116,4 @@ int main()
     IOS;
     solve();
 }
+

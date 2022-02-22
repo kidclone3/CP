@@ -47,9 +47,9 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it << "\n";
     }
-    cout << "\n";
+    // cout << "\n";
 };
 template <class T>
 void printPair(T &x)
@@ -76,7 +76,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +87,56 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2e5+5;
+
+int n, q; 
+
+
+struct node{
+    int i, j, type, id;
+} a[N<<1];
+
+int t[N<<1];
+
+void upd(int i, int val) {
+    for(; i <= n; i += i&(-i)) t[i] += val;
+}
+
+int get(int i) {
+    int res = 0;
+    for(; i > 0; i -= i&(-i)) res += t[i];
+    return res;
+}
+
+bool cmp(const node &u, const node &v) {
+    return u.j == v.j ? u.type < v.type : u.j < v.j;
+}
+
 int solve() {
-    
+    unordered_map<int, int> lastPos;
+    lastPos.max_load_factor(0.25)    ;
+    lastPos.reserve(1<<20);
+
+    cin >> n >> q;
+    FOR1(n) cin >> a[i].i, a[i].j = i, a[i].type = -1;
+    FOR1(q) cin >> a[i+n].i >>  a[i+n].j, a[i+n].id = i;
+
+    sort(a+1, a+n+q+1, cmp);
+
+    vi ans(q);
+
+    // cout << lastPos[100];
+
+    FOR1(n+q) {
+        if (a[i].type == -1) {
+            upd(a[i].j, 1);
+            if (lastPos[a[i].i] > 0) upd(lastPos[a[i].i], -1);
+            lastPos[a[i].i] = a[i].j;
+        } else {
+            ans[a[i].id-1] = get(a[i].j) - get(a[i].i-1);
+        }
+    }
+    print(ans);
     return 0; 
 }
 

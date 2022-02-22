@@ -61,6 +61,16 @@ void printPair(T &x)
     cout << "\n";
 };
 
+template <class T>
+void printPair2(T &x)
+{
+    for (auto &it : x)
+    {
+        cout << "(" << it.first << ", {" << it.second.first << " " << it.second.second << "} ) ";
+    }
+    cout << "\n";
+};
+
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
         // http://xorshift.di.unimi.it/splitmix64.c
@@ -87,7 +97,100 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+#define add1 st.insert({it1_f, it1_s})
+#define add2 st.insert({it2_f, it2_s})
+const int N = 1e3+5;
+int cnt[N];
+
+// first = vi tri, second = so luong.
+
+
 int solve() {
+    int n; cin >> n;
+    vii pos[n+5], pp(n*n);
+    vi a(n*n), cc(n*n);
+    FOR(n*n) {
+        cin >> a[i];
+        cnt[a[i]]++;
+        pp[i] = {a[i], i};
+    }
+    sort(all(pp));
+    set<ii> st;
+    FOR(n+5) {
+        if (cnt[i]) st.insert({cnt[i], i});
+    }
+    bool ok = true;
+    int p = 1;
+    
+    while(!st.empty()) {
+        auto it1 = prev(st.end());
+        int it1_f, it1_s;
+        tie(it1_f, it1_s) = *it1;
+        if (st.size() == 1) {
+            if (it1_f % n != 0) {
+                ok = false;
+                break;
+            } else {
+                // tru n.
+                it1_f -= n;
+                pos[it1_s].push_back({p, n});
+                
+                st.erase(it1);
+                // Neu du thi nhet lai vao.
+                if (it1_f > 0) {
+                    add1;
+                    p++;
+                }
+            }
+            continue;
+        }
+        // auto it2 = prev(prev(st.end()));
+        auto it2 = st.begin();
+        int it2_f, it2_s;
+        tie(it2_f, it2_s) = *it2;
+        if (it2_f % n == 0) {
+            it2_f -= n;
+            st.erase(it2);
+            pos[it2_s].push_back({p, n});
+            if (it2_f > 0) {
+                add2;
+            }
+            
+        } else {
+            int rem = n - it2_f % n;
+            if (it1_f < rem) {
+                ok = false;
+                break;
+            }
+            pos[it2_s].push_back({p, it2_f % n});
+            pos[it1_s].push_back({p, rem});
+            it2_f -= it2_f%n;
+            it1_f -= rem;
+            st.erase(it1);
+            st.erase(it2);
+            if (it1_f > 0) add1;
+            if (it2_f > 0) add2;
+        }
+        p++;
+    }
+
+    // print(a);
+    // printPair(pp);
+    if (ok) {
+        cout << "YES\n";
+        int i = 0;
+        EACH(it, pos) {
+            while(!it.empty()) {
+                int str = i;
+                for(; i < str + it.back().second; ++i) {
+                    cc[pp[i].second]=it.back().first;
+                }
+                it.pop_back();
+            }
+        }
+        print(cc);
+    }
+    else cout << "NO\n";
     
     return 0; 
 }
@@ -97,3 +200,4 @@ int main()
     IOS;
     solve();
 }
+

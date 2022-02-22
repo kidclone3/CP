@@ -76,7 +76,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,13 +87,62 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+class bit {
+    public:
+    int t[N];
+    int n;
+    bit(int _n): n(_n) {}
+    void update(int i, int val) {
+        for(; i <= n; i += i&(-i)) t[i] += val;
+    }
+    int get(int i) {
+        int res = 0;
+        for(; i > 0; i -= i&(-i)) res += t[i];
+        return res;
+    }
+    int get(int l, int r) {
+        return get(r) - get(l-1);
+    }
+};
+
 int solve() {
-    
-    return 0; 
+    int n; cin >> n;
+    vi a(n);
+    map<int, set<int>> mp;
+    bit odd(n), even(n);
+    FOR(n) {
+        cin >> a[i];
+        if (a[i]&1) odd.update(i+1, 1);
+        else even.update(i+1, 1);
+        mp[a[i]].insert(i);
+    }
+    int left = 0;
+    while(left < n) {
+        auto it = mp.begin()->first;
+        if (mp[it].empty()) {
+            mp.erase(it);
+            if (a[left] == it) left++;
+            continue;
+        }
+        int pos = *mp[it].begin();
+        mp[it].erase(pos);
+        if (pos == left) left++; 
+        else {
+            if ((a[pos] + a[pos-1]) &1) {
+                mp[a[pos-1]].erase(pos-1);
+                mp[a[pos-1]].insert(pos);
+                swap(a[pos], a[pos-1]);
+            } else break;
+        }
+    }
+    return left == n;
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--)
+    cout << (solve() ? "yes" : "no") << "\n";
 }

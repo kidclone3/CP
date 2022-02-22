@@ -87,8 +87,56 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+int n, q; 
+const int N = 1e3+5;
+int t[N][N];
+
+void update(int x, int y, int val) {
+    for(; x <= n; x += x &(-x))
+        for(int v = y; v <= n; v += v&(-v))
+            t[x][v] += val;
+}
+
+int get(int x, int y) {
+    int res = 0;
+    for (; x > 0; x -= x&(-x))
+        for(int v = y; v > 0; v -= v&(-v))
+            res += t[x][v]; 
+    return res;
+}
+
+int forest[N][N];
+
+int get(int x1, int y1, int x2, int y2) {
+    int top_left, top_right, bot_left, bot_right;
+    top_left = get(x1-1, y1-1);
+    top_right = get(x2, y1-1);
+    bot_left = get(x1-1, y2);
+    bot_right = get(x2, y2);
+    return bot_right - top_right - bot_left + top_left;
+}
+
 int solve() {
-    
+    cin >> n >> q;
+
+    FOR(n) {
+        string s; cin >> s;
+        FOR(j, n) if (s[j] == '*') update(i+1, j+1, 1), forest[i][j] = 1;
+    }
+    FOR(q) {
+        int qq; cin >> qq;
+        if (qq == 1) {
+            int x, y;
+            cin >> x >> y;
+            if (forest[x-1][y-1] == 1) update(x, y, -1); else update(x, y, 1);
+            forest[x-1][y-1] ^= 1;
+        } else {
+            int x1, x2, y1, y2;
+            cin >> y1 >> x1 >> y2 >> x2;
+            cout << get(y1, x1, y2, x2)  << "\n";
+        }
+        
+    }
     return 0; 
 }
 
@@ -97,3 +145,4 @@ int main()
     IOS;
     solve();
 }
+

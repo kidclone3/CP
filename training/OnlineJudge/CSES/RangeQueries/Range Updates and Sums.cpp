@@ -87,8 +87,100 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2e5+5;
+
+ll t[4*N], d[4*N];
+int n, q;
+ll a[N], b[4*N];
+// I Had to use slow segtree. WLOG.
+void build(int id = 1, int l = 0, int r = n-1) {
+    if (l == r) {
+        t[id] = a[l];
+        return;
+    }
+    int m = (l+r)>>1;
+    build(id << 1, l, m);
+    build(id << 1 | 1, m+1, r);
+    t[id] = t[id<<1] + t[id<<1|1];
+}
+
+void push(int id) {
+    t[id<<1] += d[id];
+    t[id<<1|1] += d[id];
+    d[id<<1] += d[id];
+    d[id<<1|1] += d[id];
+    d[id] = 0;
+}
+
+void update(int id, int l, int r, ll val, int l0 = 0, int r0 = n-1) {
+    if (r0 < l || r < l0) return;
+    if (l <= l0 && r0 <= r) {
+        t[id] += val;
+        d[id] += val;
+        return;
+    }
+    int mid = (l0+r0) >> 1;
+    push(id);
+    update(id << 1, l, r, val, l0, mid);
+    update(id << 1 | 1, l, r, val, mid+1, r0);
+    t[id] = t[id<<1] + t[id<<1|1];
+}
+
+ll get(int id, int l, int r, int l0 = 0, int r0 = n-1) {
+    if (r0 < l || r < l0) return 0LL;
+    if (l <= l0 && r0 <= r) return t[id];
+    push(id);
+    int mid = (l0+r0) >> 1;
+    return get(id << 1, l, r, l0, mid) + get(id << 1 | 1, l, r, mid+1, r0);
+}
+
+// This is for query 2.
+
+void push2(int id) {
+    b[id<<1] += d[id];
+    b[id<<1|1] += d[id];
+    d[id<<1] = d[id<<1|1] = d[id];
+    d[id] = 0;
+}
+
+void update2(int id, int l, int r, ll val, int l0 = 0, int r0 = n-1) {
+    if (r0 < l || r < l0) return;
+    if (l <= l0 && r0 <= r) {
+        b[id] += val;
+        d[id] = val;
+        return;
+    }
+    int mid = (l0+r0) >> 1;
+    if (d[id] != 0)
+        push2(id);
+    update2(id << 1, l, r, val, l0, mid);
+    update2(id << 1 | 1, l, r, val, mid+1, r0);
+    b[id] = b[id << 1] + b[id << 1 | 1];
+    t[id] = b[id];
+}
+
 int solve() {
-    
+    cin >> n >> q;
+    FOR(n) cin >> a[i];
+    build();
+    // h = sizeof(int) * 8 - __builtin_clz(n);
+    FOR(q) {
+        int qq; 
+        int u,v;
+        ll x;
+        cin >> qq >> u >> v;
+        u--, v--;
+        if (qq == 1) {
+            cin >> x; 
+            update(1, u, v, x);
+        } else if (qq == 2) {
+            cin >> x; 
+            memset(b, 0, 4*(n+5)*sizeof(b[0]));
+            update2(1, u, v, x);
+        } else {
+            cout << get(1, u, v) << '\n';
+        }
+    } 
     return 0; 
 }
 
@@ -97,3 +189,4 @@ int main()
     IOS;
     solve();
 }
+

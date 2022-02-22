@@ -78,8 +78,6 @@ struct custom_hash {
 
 // Small tips on unordered_map to not be tle:
 // unordered_map<int, int> mp;
-// mp.max_load_factor(0.25);
-// mp.reserve(1<<20);
 
 // template <class T>
 // using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
@@ -87,13 +85,37 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+unordered_map<ll, int> mp;
+vl ans;
+ll n;
+
+void backtrack(ll x) {
+    ll xx = sqrt(x);
+    if (mp[xx]) return;
+    mp[xx] ++;
+    if (n % (xx*(xx+1))) ans.push_back(xx);
+    backtrack(xx);
+    backtrack(xx+1);
+}
+
 int solve() {
-    
+    cin >> n; 
+    ans.clear();
+    mp.clear();
+    backtrack(n);
+    sort(all(ans));
+    if (ans.empty()) cout << "-1\n";
+    else print(ans);
     return 0; 
 }
 
 int main()
 {
     IOS;
+    mp.max_load_factor(0.25);
+    mp.reserve(1<<20);
+    int t; cin >> t;
+    while(t--)
     solve();
 }
+

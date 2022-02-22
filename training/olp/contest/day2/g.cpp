@@ -88,7 +88,18 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n, m; cin >> n >> m;
+    ll a[n+5] = {0};
+    FOR(m) {
+        int l, r; ll v; cin >> l >> r >> v;
+        a[--l] += v;
+        a[r] -= v;
+    }
+    ll curr = 0;
+    for(int i = 0; i < n; ++i) {
+        curr += a[i];
+        cout << curr << " ";
+    }
     return 0; 
 }
 
@@ -97,3 +108,4 @@ int main()
     IOS;
     solve();
 }
+

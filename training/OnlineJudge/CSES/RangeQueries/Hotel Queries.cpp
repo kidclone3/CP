@@ -64,41 +64,46 @@ void printPair(T &x)
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2e5+5;
+int t[2*N];
+int n, q;
+
+void build() {
+    FOR(i, n-1, 0, -1) t[i] = max(t[i<<1], t[i<<1|1]);
+}
+void upd(int p, int val) {
+    for(t[p+=n] = val; p > 1; p >>=1) t[p>>1] = max(t[p], t[p^1]);
+}
+int qry(int l, int r) { // max on interval [l, r);
+    int res = 0;
+    for(l+=n, r+=n; l < r; l >>= 1, r >>= 1) {
+        if (l&1) res = max(res, t[l++]);
+        if (r&1) res = max(res, t[--r]);
+    }
+    return res;
+}
+
 int solve() {
-    int n, m; cin >> n >> m;
-    set<ii> st;
-    FOR1(n) {
+    cin >> n >> q;
+    FOR(n) cin >> t[i+n];
+    build();
+    FOR(q) {
         int x; cin >> x;
-        st.insert({x, i});
-    }
-    vii queries(m);
-    vi ans(m, 0);
-    FOR(m) {
-        int x; cin >> x;
-        queries[i] = {x, i};
-        // auto it = st.lower_bound({x, 0});
-        // if (it == st.end()) cout << 0 << " ";
-        // else {
-        //     cout << it->second << " ";
-        //     ii tmp2 = {it->first-x, it->second};
-        //     st.erase(it);
-        //     st.insert(tmp2);
-        // }
-    }
-    sort(all(queries));
-    reverse(all(queries));
-    FOR(m) {
-        int x, pos;
-        tie(x, pos) = queries[i];
-        auto it = st.lower_bound({x, 0});
-        if (it != st.end()) {
-            ans[pos] = it->second;
-            ii tmp2 = {it->first-x, it->second};
-            st.erase(it);
-            st.insert(tmp2);
+        int l = 0, r = n-1;
+        int answer = -1;
+        while(l <= r) {
+            int mid = (l+r)/2;
+            if (qry(l, mid+1) >= x) {
+                answer = mid;
+                r = mid-1;
+            } else l = mid+ 1;
+        }
+        if (answer == -1) cout << 0 << " ";
+        else {
+            upd(answer, t[n+answer] - x);
+            cout << answer + 1 << " ";
         }
     }
-    print(ans);
     return 0; 
 }
 

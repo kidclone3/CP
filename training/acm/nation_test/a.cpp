@@ -78,8 +78,6 @@ struct custom_hash {
 
 // Small tips on unordered_map to not be tle:
 // unordered_map<int, int> mp;
-// mp.max_load_factor(0.25);
-// mp.reserve(1<<20);
 
 // template <class T>
 // using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
@@ -87,8 +85,41 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int MOD = 1e9+7;
+const int BASE = 351;
+
+int hash2(const vi &a) {
+    int p = 1;
+    int res = 0;
+    FOR(a.size()) {
+        res = (res + (ll) a[i]*1LL * p % MOD) % MOD;
+        p = 1LL*p*BASE % MOD;
+    }
+    return res;
+}
+
 int solve() {
-    
+    int n, m, d;
+    cin >> n >> m >> d;
+    map<int, bool> mp;
+    // mp.max_load_factor(0.25);
+    // mp.reserve(1<<20);
+    // getline(cin, s);
+    vi s(d+1);
+
+    FOR(n) {
+        FOR(j, d+1) cin >> s[i];
+        mp[hash2(s)] = true;
+    }
+
+    // getline(cin, s);
+    cin.ignore();
+    FOR(m) {
+        FOR(j, d+1) cin >> s[i];
+        if (mp[hash2(s)]) cout << "BAD";
+        else cout << "GOOD";
+        cout << "\n";
+    }
     return 0; 
 }
 
@@ -97,3 +128,4 @@ int main()
     IOS;
     solve();
 }
+

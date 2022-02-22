@@ -87,8 +87,41 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e3;
+
+vi prime, lpf(N, 2);
+
+void sieve() {
+    prime.assign(1,2);
+    lpf[1] = -2;
+    for(int i = 3; i <= N; i+=2) {
+        if (lpf[i] == 2) 
+            prime.push_back(lpf[i] = i);
+        for(int j = 0; j < (int) prime.size() && prime[j] <= lpf[i] && i*prime[j] <= N; ++j) {
+            lpf[prime[j]*i] = prime[j];
+        }
+    } 
+}
+
+
 int solve() {
-    
+    sieve();
+    int n; cin >> n;
+
+    auto check = [&](int a) {
+        int tmp = 0;
+        while(a > 0) {
+            int x = a % 10;
+            tmp += x*x;
+            a /= 10;
+        } 
+        return lpf[tmp] == tmp;
+    };
+    n++;
+    // print(prime);
+    // print(lpf);
+    while(!check(n)) n++;
+    cout << n;
     return 0; 
 }
 
@@ -97,3 +130,4 @@ int main()
     IOS;
     solve();
 }
+

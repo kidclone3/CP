@@ -6,10 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// 2 pragma lines give compiler information to use SIMD instruction for optimize code.
-// #pragma GCC target("avx2")
-// #pragma GCC optimize("O3")
-
+// #pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -47,9 +44,9 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cout << it << " ";
+        cout << it << "\n";
     }
-    cout << "\n";
+    // cout << "\n";
 };
 template <class T>
 void printPair(T &x)
@@ -76,7 +73,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +84,31 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5+5;
+ll lis[N];
+
+bool cmp(ll a, ll b) {return a > b;}
+
 int solve() {
-    
+    // memset(lis, -1, sizeof lis);
+    lis[0] = LLONG_MAX;
+    int n, q; cin >> n >> q;
+    vl a(n);
+    vi f(n+5, 0);
+    FOR(n) cin >> a[i];
+
+    FOR(i, n-1, -1, -1) {
+        auto it = lower_bound(lis, lis+n+1, a[i], cmp) - lis;
+        f[i] = it-1;
+        // lis[it] = a[i];
+        if (lis[it-1] > a[i] && a[i] > lis[it]) lis[it] = a[i];
+    }
+    // FOR(n+1) cout << f[i] << " \n"[i==n];
+    // print(f);    
+    FOR(q) {
+        int qq; cin >> qq;
+        cout << f[qq-1] << "\n";
+    }
     return 0; 
 }
 

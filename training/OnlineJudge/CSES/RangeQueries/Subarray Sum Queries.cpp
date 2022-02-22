@@ -76,7 +76,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +87,66 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2e5+5;
+const int S = 1<<18;
+
+int n, q;
+
+struct Node {
+    ll sum, prefix, suffix, sub;
+    // Node() {
+    //     sum = prefix = suffix = sub = LLONG_MIN;
+    // }
+    Node(ll _sum, ll _pref, ll _suff, ll _sub) {
+        sum = _sum;
+        prefix = _pref;
+        suffix = _suff;
+        sub = _sub;
+    }
+
+    Node(ll x = 0) : sum(x), prefix(max(0LL, x)), suffix(max(0LL, x)), sub(max({sum, prefix, suffix})) {}
+
+    friend Node operator + (const Node &a, const Node &b) {
+        return {a.sum + b.sum, max(a.prefix, a.sum + b.prefix), max(b.suffix, a.suffix + b.sum), max({a.sub, b.sub, a.suffix +b.prefix})};
+    }
+} t[S<<1];
+
+ll arr[N];
+
+void build(int k = 1, int l = 0, int r = n-1) {
+    if (l == r) {t[k] = Node(arr[l]); return;}
+    int m = (l+r)>>1;
+    build(k<<1, l, m);
+    build(k<<1|1, m+1, r);
+    t[k] = t[k<<1] + t[k<<1|1];
+}
+
+void upd(int p, ll val, int k = 1, int l = 0, int r = n-1) {
+    if (l == r) {
+        t[k] = Node(val);
+        return;
+    }
+    int m = (l+r)>>1;
+    if (p <= m) upd(p, val, k<<1, l, m);
+    else upd(p, val, k<<1|1, m+1, r);
+    t[k] = t[k<<1] + t[k<<1|1];
+}
+
+Node qry() {return t[1];}
+
 int solve() {
-    
+    cin >> n >> q;
+    FOR(n) {
+        cin >> arr[i];
+    }
+    build();
+    FOR(q) {
+        int p; ll x;
+        cin >> p >> x;
+        p--;
+        upd(p, x);
+        cout << qry().sub << '\n';
+    }
     return 0; 
 }
 

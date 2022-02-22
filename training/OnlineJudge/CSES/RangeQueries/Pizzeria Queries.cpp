@@ -76,7 +76,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +87,63 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
+template<class T> struct SegTree {
+    const int N = 2e5+5;
+    int n; 
+    T upb = 1e9;
+    vector<T> t; 
+    SegTree() {}
+    SegTree(int _n) : n(_n), t(2*n, upb) {}
     
+    T F(T a, T b) {return min(a, b);}
+
+    void build() {
+        for(int i = n-1; i > 0; --i) t[i] = F(t[i<<1], t[i<<1|1]);
+    }
+
+    void upd(int p, T val) {
+        for(t[p+=n] = val; p > 1; p >>=1) t[p>>1] = F(t[p], t[p^1]);
+    }
+
+    T qry(int l, int r) { // min on interval [l, r)
+        T res = upb;
+        for(l += n, r += n; l < r; l >>= 1, r >>= 1) {
+            if (l & 1) res = F(res, t[l++]);
+            if (r & 1) res = F(res, t[--r]);
+        }
+        return res;
+    }
+};
+
+int solve() {
+    int n, q; cin >> n >> q;
+    vi a(n);
+    SegTree<int> down(n), up(n);
+    FOR(n) {
+        cin >> a[i];
+        down.t[i+n] = a[i] - i;
+        up.t[i+n] = a[i] + i;
+    }
+    down.build();
+    up.build();
+    FOR(q) {
+        int typ; cin >> typ;
+        if (typ == 2) {
+            int pos; cin >> pos;
+            pos--;
+            int D = down.qry(0, pos+1) + pos;
+            int U = up.qry(pos, n) - pos;
+            cout << min(D, U) << "\n";
+        } else {
+            int pos, x;
+            cin >> pos >> x;
+            pos--;
+            a[pos] = x;
+            down.upd(pos, x-pos);
+            up.upd(pos, x+pos);
+        }
+    }
+    // print(up.t);
     return 0; 
 }
 

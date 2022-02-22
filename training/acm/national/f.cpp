@@ -87,8 +87,16 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+ll powM(ll x, ll n) {
+    ll res = 1LL;
+    for(; n > 0; x = x*x, n >>= 1) 
+        if (n & 1) res = res * x;
+    return res;
+}
+
 int solve() {
-    
+    ll n; cin >> n;
+    cout << powM(2, n-1);
     return 0; 
 }
 
@@ -97,3 +105,4 @@ int main()
     IOS;
     solve();
 }
+

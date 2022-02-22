@@ -49,3 +49,7 @@
 
 #etc
 # *.png
+
+# Neovim cache.
+.ccls*
+.vimspector*

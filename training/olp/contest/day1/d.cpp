@@ -6,10 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// 2 pragma lines give compiler information to use SIMD instruction for optimize code.
-// #pragma GCC target("avx2")
-// #pragma GCC optimize("O3")
-
+// #pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -76,7 +73,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +84,30 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 2*1e5+5;
+ll mp[N];
+
 int solve() {
-    
+    int n;
+    cin >> n;
+    vl a(n);
+
+    FOR(n) cin >> a[i], mp[a[i]]++; 
+    ll ans = 0;
+
+    FOR(n+1) {
+        if (mp[i]>=2) {
+            ans += mp[i]*(mp[i]-1)/2;
+        }
+    }
+    // cout << ans;
+    // FOR(n) cout << mp[a[i]] << " \n"[i==n-1];
+    FOR(n) {
+        ll tmp = mp[a[i]];
+        ll tmp2 = mp[a[i]]-1;
+        cout << ans - tmp*(tmp-1)/2 + tmp2*(tmp2-1)/2 << "\n"[i==n-1];
+    }
+    // cout << ans;
     return 0; 
 }
 

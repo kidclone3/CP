@@ -6,10 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// 2 pragma lines give compiler information to use SIMD instruction for optimize code.
-// #pragma GCC target("avx2")
-// #pragma GCC optimize("O3")
-
+// #pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -76,7 +73,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -88,7 +85,39 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n, q; cin >> n >> q;
+    vl a(n), f(n, 0);
+    FOR(n) cin >> a[i];
+    f[n-1] = 0;
+    ll mx = a[n-1];
+    ll mx_i = n-1;
+    FOR(i, n-2, -1, -1) {
+        if (a[i] > mx) {
+            mx = a[i];
+            mx_i = i;
+        } else {
+            f[i] = f[mx_i]+1;
+        }
+        // FOR(j, i+1, n) {
+        //     if (a[j] > a[i]) {
+        //         f[i] = f[j]+1;
+        //         break;
+        //     }
+        // }
+        // if (f[i] == -1) f[i] = 0;
+    }
+    FOR(q) {
+        int qq; cin >> qq;
+        --qq;
+        cout << f[qq] << "\n";
+
+        // int cnt = 0;
+        // int mx = a[qq];
+        // FOR(j, qq, n) {
+        //     if (a[j]>mx) cnt++, mx = a[j];
+        // }
+        // cout << cnt << "\n";
+    }
     return 0; 
 }
 

@@ -88,7 +88,18 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    // int r, c; cin >> r >> c;
+    // vector<string> board(r);
+    // FOR(r) {
+    //     cin >> board[i];
+    // }
+    // cout << ('P'-'C');
+        cout << "input 2 char\n";
+    string ss;
+        cin >> ss;
+        // cout << ss[0]-'A' << " " << ss[1] - 'A' << "\n";
+    FOR(i, ss.size()) cout << ss[i] - 'A' << " \n"[i == ss.size()-1];
+        cout << ss[0] - ss[1] <<"\n";
     return 0; 
 }
 
@@ -97,3 +108,4 @@ int main()
     IOS;
     solve();
 }
+

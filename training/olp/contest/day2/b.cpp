@@ -6,10 +6,7 @@ using namespace std;
 
 
 // Disable this pragma by default because of debugging
-// 2 pragma lines give compiler information to use SIMD instruction for optimize code.
-// #pragma GCC target("avx2")
-// #pragma GCC optimize("O3")
-
+// #pragma GCC optimize("O3,unroll-loops")
 
 #define pb push_back
 #define vi vector<int>
@@ -76,7 +73,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -87,8 +84,47 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+const int N = 1e5;  // limit for array size
+int n;  // array size
+int t[2 * N];
+
+void build() {  // build the tree
+  for (int i = n - 1; i > 0; --i) t[i] = __gcd(t[i<<1], t[i<<1|1]);
+}
+
+void modify(int p, int value) {  // set value at position p
+  for (t[p += n] = value; p > 1; p >>= 1) t[p>>1] = __gcd(t[p], t[p^1]);
+}
+
+int query(int l, int r) {  // sum on interval [l, r)
+  int res = 0;
+  for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+    if (l&1) res = __gcd(res, t[l++]);
+    if (r&1) res = __gcd(res, t[--r]);
+  }
+  return res;
+}
+
 int solve() {
-    
+    cin >> n;
+    FOR(n) cin >> t[i+n];
+    build();
+    int l = 0;
+    int ans = INT_MAX;
+    int ans_l = 0, ans_r = 0;
+    FOR(n) {
+        if (query(l, i+1) == 1) {
+            while(query(l, i+1) == 1 && l < i) l++;
+            l--;
+            if (i-l+1  < ans) {
+                ans = i-l+1;
+                ans_l = l+1;
+                ans_r = i+1;
+            }
+        }
+    }
+    if (ans_l == ans_r && ans_r == 0) cout << -1;
+    else cout << ans << " " << ans_l << " " <<ans_r;
     return 0; 
 }
 

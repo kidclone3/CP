@@ -88,7 +88,17 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int m, n, k;
+    cin >> m >> n >> k;
+    map<int, int> mp;
+    int x; 
+    FOR(m) FOR(j, n) cin >> x, mp[x]++;
+    vii tmp;
+    EACH(it, mp) tmp.emplace_back(it.first, it.second);
+    sort(all(tmp), [](ii a, ii b) { return a.second > b.second;});
+    int res = 0;
+    FOR(k)  res += tmp[i].second;
+    cout << res;
     return 0; 
 }
 
@@ -97,3 +107,4 @@ int main()
     IOS;
     solve();
 }
+

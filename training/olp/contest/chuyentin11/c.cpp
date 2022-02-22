@@ -88,12 +88,23 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n, k; cin >> n >> k;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    int cnt = 1;
+    FOR(n) {
+        if (i) if (a[i] - a[i-1] > k) cnt++;
+    }
+    cout << cnt << '\n';
     return 0; 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
 }
+

@@ -76,7 +76,7 @@ struct custom_hash {
     }
 };
 
-// Small tips on unordered_map to not be tle:
+// Small tips on ordered_map to not be tle:
 // unordered_map<int, int> mp;
 // mp.max_load_factor(0.25);
 // mp.reserve(1<<20);
@@ -88,12 +88,36 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n; cin >> n;
+    vi a(n), b(n);
+    FOR(n) cin >> a[i], b[i] = a[i];
+    sort(all(b));
+    int mn = a[0], mn_i = 0, start = 0;
+    // print(b);
+    FOR(n) {
+        if (a[i] != b[i]) {
+            mn = a[i];
+            mn_i = i;
+            start = i;
+            break;
+        }
+    }
+    FOR(i, start+1, n) {
+        if (a[i] <= mn) {
+            mn = a[i];
+            mn_i = i;
+        }
+    }
+    // cout << start << " " << mn_i << " " << mn << "\n";
+    reverse(a.begin()+start, a.begin() + mn_i+1);
+    print(a);
     return 0; 
 }
 
 int main()
 {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
 }

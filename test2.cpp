@@ -87,8 +87,36 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
+
 int solve() {
-    
+  int n; ll k;
+  cin >> n >> k;
+  vi a(n);
+  FOR(n) cin >> a[i];
+  ll left = 1, right = 1e18;
+  ll ans = 1;
+
+  auto check = [&](ll x) {
+    ll res = 0;
+    FOR(n) {
+      res += ((a[i]-1)/x + 1) * x - a[i];
+    }
+    cout << x << " "<< res << "\n";
+    return res <= k;
+  };
+  FOR(j,1, 20) check(j);
+  while  (0 ==1)  ;
+//     right = 100;
+//   while (left <= right) {
+//     ll mid = (left + right) >> 1;
+//     if (check(mid)) {
+//       ans = mid;
+//       left = mid + 1;
+//     } else right = mid - 1;
+//   }
+//   cout << ans;
+    // hello;
+    // nic 
     return 0; 
 }
 
