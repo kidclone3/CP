@@ -89,31 +89,20 @@ int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
     int n; cin >> n;
-    ll left, right; cin >> left >> right;
-    ll a[n+5];
-    FOR1(n) cin >> a[i];
-    sort(a+1, a+n+1);
-    auto mid = [&](ll x2, ll x1) {
-        ll dis = x2 - x1;
-        return x1 + dis/2 + (dis&1);
-    };
-    int l = 1, r = n;
-    while(r >= 2 && a[r] > right ) r--;
-    while(l <= n-1 && a[l] < left) l++;
-    // cout << l << " " << r << '\n';
-    a[0] = a[1];
-    a[n+1] = a[n];
-    // cout << l << " " << r << '\n';
-    set<pair<ll, ll>> st;
-    st.insert({min(abs(left-a[l]), abs(left-a[l-1])), left});
-    st.insert({min(abs(right-a[r]), abs(right-a[r+1])), right});
-    for(int i = r; i > l; --i) {
-        ll m_mid = mid(a[i], a[i-1]);
-        ll dis = min(abs(m_mid - a[i]), abs(m_mid - a[i-1]));
-        st.insert({dis, m_mid});
+    vi a(n);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    map<int, int> mp;
+    FOR(n) if (mp.find(a[i]) == mp.end())  mp[a[i]] = i;
+    // print(a);
+    int ans = a[n-1]+a[n-2]+a[n-3] - (a[n-1]^a[n-2]^a[n-3]);
+    FOR(i, n-1, 0) FOR(j, i-1, -1) {
+        int tmp = a[i]^a[j];
+        if (mp.find(tmp) != mp.end()) {
+            if (mp[tmp] != i && mp[tmp] != j) ans = max(ans, a[i]+a[j]+a[tmp]);
+        }
     }
-    cout << prev(st.end())->second;
-    // printPair(st);
+    cout << ans;
     return 0; 
 }
 

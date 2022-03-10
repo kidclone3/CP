@@ -77,4 +77,10 @@ int main()
 		cout << a << endl;
 		cout << b << endl;
 	}
+	int pos = 0;
+	for (int i = 31; i >= 0; --i) if (x & (1 << i)) {
+		pos = i;
+		break;
+	}
+	
 }

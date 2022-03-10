@@ -88,38 +88,26 @@ int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    int n; cin >> n;
-    ll left, right; cin >> left >> right;
-    ll a[n+5];
-    FOR1(n) cin >> a[i];
-    sort(a+1, a+n+1);
-    auto mid = [&](ll x2, ll x1) {
-        ll dis = x2 - x1;
-        return x1 + dis/2 + (dis&1);
-    };
-    int l = 1, r = n;
-    while(r >= 2 && a[r] > right ) r--;
-    while(l <= n-1 && a[l] < left) l++;
-    // cout << l << " " << r << '\n';
-    a[0] = a[1];
-    a[n+1] = a[n];
-    // cout << l << " " << r << '\n';
-    set<pair<ll, ll>> st;
-    st.insert({min(abs(left-a[l]), abs(left-a[l-1])), left});
-    st.insert({min(abs(right-a[r]), abs(right-a[r+1])), right});
-    for(int i = r; i > l; --i) {
-        ll m_mid = mid(a[i], a[i-1]);
-        ll dis = min(abs(m_mid - a[i]), abs(m_mid - a[i-1]));
-        st.insert({dis, m_mid});
+    int n, k; cin >> n >> k; 
+    vi a(n), f(n+1, 0);
+    vi mp(k+5, 0);
+    int ans = 0;
+    FOR(n) {
+        cin >> a[i];
+        f[i+1] = (f[i] + a[i]) % k;
+        if (f[i+1] == 0) ans++;
+        ans += mp[f[i+1]];
+        mp[f[i+1]]++;
     }
-    cout << prev(st.end())->second;
-    // printPair(st);
+    // print(f);
+    cout << ans << '\n';
     return 0; 
 }
 
 int main()
 {
     IOS;
-    solve();
+    int t; cin >> t;
+    while(t--) solve();
 }
 

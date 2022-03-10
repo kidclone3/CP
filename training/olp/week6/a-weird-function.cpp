@@ -87,39 +87,70 @@ struct custom_hash {
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
-int solve() {
-    int n; cin >> n;
-    ll left, right; cin >> left >> right;
-    ll a[n+5];
-    FOR1(n) cin >> a[i];
-    sort(a+1, a+n+1);
-    auto mid = [&](ll x2, ll x1) {
-        ll dis = x2 - x1;
-        return x1 + dis/2 + (dis&1);
-    };
-    int l = 1, r = n;
-    while(r >= 2 && a[r] > right ) r--;
-    while(l <= n-1 && a[l] < left) l++;
-    // cout << l << " " << r << '\n';
-    a[0] = a[1];
-    a[n+1] = a[n];
-    // cout << l << " " << r << '\n';
-    set<pair<ll, ll>> st;
-    st.insert({min(abs(left-a[l]), abs(left-a[l-1])), left});
-    st.insert({min(abs(right-a[r]), abs(right-a[r+1])), right});
-    for(int i = r; i > l; --i) {
-        ll m_mid = mid(a[i], a[i-1]);
-        ll dis = min(abs(m_mid - a[i]), abs(m_mid - a[i-1]));
-        st.insert({dis, m_mid});
+const int N = 2e6+5;
+ll bit[N];
+
+vector<ll> phi(N);
+
+
+void phi_1_to_n() {
+    int n = N;
+    phi[0] = 0;
+    phi[1] = 1;
+    for (int i = 2; i <= n; ++i) {
+        phi[i] = i-1;
     }
-    cout << prev(st.end())->second;
-    // printPair(st);
-    return 0; 
+    for(int i = 2; i <= n; ++i) {
+        for(int j = 2*i; j <= n; j+=i) {
+            phi[j] -= phi[i];
+        }
+    }
+}
+
+
+int lower(ll l) {
+    ll q = sqrt(2*l) + 3;
+    FOR(6) {
+        if (q*(q+1)/2 < l) return q+1;
+        q--;
+    }
+    return -1;
+}
+
+int upper(ll r) {
+    ll q = sqrt(2*r) - 3;
+    // Make a greatest round.
+    FOR(6) {
+        if (q*(q+1)/2 > r) return q-1;
+        q++;
+    }
+    return -1;
+}
+
+int solve() {
+    ll left, right;
+    cin >> left >> right;
+    int L, R;
+    L = lower(left);
+    R = upper(right);
+    return bit[R] - bit[L-1];
 }
 
 int main()
 {
     IOS;
-    solve();
+    phi_1_to_n();
+    // FOR(21) cout << phi[i] << " ";
+    // cout << '\n';
+    FOR1(N-3) {
+        if (i & 1) 
+            bit[i] = bit[i-1] + phi[i]*phi[(i+1)/2];
+        else {
+            bit[i] = bit[i-1] + phi[i/2]*phi[i+1];
+        }
+    }
+    int t; cin >> t;
+    while(t--)
+        solve();
 }
 

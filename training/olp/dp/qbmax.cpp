@@ -61,20 +61,20 @@ void printPair(T &x)
     cout << "\n";
 };
 
-struct custom_hash {
-    static uint64_t splitmix64(uint64_t x) {
-        // http://xorshift.di.unimi.it/splitmix64.c
-        x += 0x9e3779b97f4a7c15;
-        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
-        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
-        return x ^ (x >> 31);
-    }
-
-    size_t operator()(uint64_t x) const {
-        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        return splitmix64(x + FIXED_RANDOM);
-    }
-};
+// struct custom_hash {
+//     static uint64_t splitmix64(uint64_t x) {
+//         // http://xorshift.di.unimi.it/splitmix64.c
+//         x += 0x9e3779b97f4a7c15;
+//         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+//         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+//         return x ^ (x >> 31);
+//     }
+//
+//     size_t operator()(uint64_t x) const {
+//         static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+//         return splitmix64(x + FIXED_RANDOM);
+//     }
+// };
 
 // Small tips on unordered_map to not be tle:
 // unordered_map<int, int> mp;
@@ -84,36 +84,33 @@ struct custom_hash {
 // template <class T>
 // using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
-int dx[] = {1,1,0,-1,-1,-1, 0, 1};
-int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
+int dx[] = {0, -1, 1};
+int dy[] = {1, 1, 1};
+
+const int N = 100+5;
+int a[N][N], f[N][N];
 
 int solve() {
-    int n; cin >> n;
-    ll left, right; cin >> left >> right;
-    ll a[n+5];
-    FOR1(n) cin >> a[i];
-    sort(a+1, a+n+1);
-    auto mid = [&](ll x2, ll x1) {
-        ll dis = x2 - x1;
-        return x1 + dis/2 + (dis&1);
-    };
-    int l = 1, r = n;
-    while(r >= 2 && a[r] > right ) r--;
-    while(l <= n-1 && a[l] < left) l++;
-    // cout << l << " " << r << '\n';
-    a[0] = a[1];
-    a[n+1] = a[n];
-    // cout << l << " " << r << '\n';
-    set<pair<ll, ll>> st;
-    st.insert({min(abs(left-a[l]), abs(left-a[l-1])), left});
-    st.insert({min(abs(right-a[r]), abs(right-a[r+1])), right});
-    for(int i = r; i > l; --i) {
-        ll m_mid = mid(a[i], a[i-1]);
-        ll dis = min(abs(m_mid - a[i]), abs(m_mid - a[i-1]));
-        st.insert({dis, m_mid});
-    }
-    cout << prev(st.end())->second;
-    // printPair(st);
+    int n, m; cin >> n >> m;
+
+    FOR(n) FOR(j, m) cin >> a[i][j];
+
+    FOR(j, m-1, -1, -1) 
+        FOR(i, n-1, -1, -1) {
+            int tmp = INT_MIN;
+            f[i][j] = a[i][j];
+            FOR(k, 3) {
+                int x = i + dx[k];
+                int y = j + dy[k];
+                if (0 <= x && x < n && 0 <= y && y < m) 
+                    tmp = max(tmp, f[x][y]); 
+            } 
+            if (j < m - 1) f[i][j] += tmp;
+        }
+    int ans = INT_MIN;
+    FOR(n) ans = max(ans, f[i][0]);
+    // FOR(n) FOR(j, m) cout << f[i][j] << " \n"[j == m-1];
+    cout << ans;
     return 0; 
 }
 
