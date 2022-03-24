@@ -3,7 +3,9 @@
 **/
 
 #include <bits/stdc++.h>
-
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
 using namespace std;
 
 
@@ -60,11 +62,66 @@ void printPair(T &x)
     cout << "\n";
 };
 
+// struct custom_hash {
+//     static uint64_t splitmix64(uint64_t x) {
+//         // http://xorshift.di.unimi.it/splitmix64.c
+//         x += 0x9e3779b97f4a7c15;
+//         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+//         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+//         return x ^ (x >> 31);
+//     }
+//
+//     size_t operator()(uint64_t x) const {
+//         static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+//         return splitmix64(x + FIXED_RANDOM);
+//     }
+// };
+
+// Small tips on unordered_map to not be tle:
+// unordered_map<int, int> mp;
+// mp.max_load_factor(0.25);
+// mp.reserve(1<<20);
+
+// template <class T>
+// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    // Naive approach.
+    // increase till find.
+    // Skip that way
+
+    // DP approach: generate + use merge sort
+    int n; cin >> n;
+    int ugly[n+5];
+    int i2, i3, i5;
+    i2 = i3 = i5 = 0;
+    int next_multiple_2 = 2;
+    int next_multiple_3 = 3;
+    int next_multiple_5 = 5;
+    int next_ugly_no = 1;
+
+    ugly[0] = 1; 
+    for(int i = 1; i <= n; ++i) {
+        next_ugly_no = min({next_multiple_2, next_multiple_3, next_multiple_5});
+        ugly[i]= next_ugly_no;
+
+        if (next_multiple_2 == next_ugly_no) {
+            i2++;
+            next_multiple_2 = ugly[i2]*2;
+        }
+        if (next_multiple_3 == next_ugly_no) {
+            i3++;
+            next_multiple_3 = ugly[i3]*3;
+        }
+        if (next_multiple_5 == next_ugly_no) {
+            i5++;
+            next_multiple_5 = ugly[i5]*5;
+        }
+    }
+    cout << ugly[n-1] << '\n';
     return 0; 
 }
 
@@ -73,3 +130,4 @@ int main()
     IOS;
     solve();
 }
+

@@ -3,7 +3,9 @@
 **/
 
 #include <bits/stdc++.h>
-
+// #include <ext/pb_ds/assoc_container.hpp>
+// #include <ext/pb_ds/tree_policy.hpp>
+// using namespace __gnu_pbds;
 using namespace std;
 
 
@@ -60,11 +62,49 @@ void printPair(T &x)
     cout << "\n";
 };
 
+// struct custom_hash {
+//     static uint64_t splitmix64(uint64_t x) {
+//         // http://xorshift.di.unimi.it/splitmix64.c
+//         x += 0x9e3779b97f4a7c15;
+//         x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+//         x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+//         return x ^ (x >> 31);
+//     }
+//
+//     size_t operator()(uint64_t x) const {
+//         static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+//         return splitmix64(x + FIXED_RANDOM);
+//     }
+// };
+
+// Small tips on unordered_map to not be tle:
+// unordered_map<int, int> mp;
+// mp.max_load_factor(0.25);
+// mp.reserve(1<<20);
+
+// template <class T>
+// using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+
 int dx[] = {1,1,0,-1,-1,-1, 0, 1};
 int dy[] = {0,1,1, 1, 0,-1,-1,-1};  // S,SE,E,NE,N,NW,W,SW neighbors
 
 int solve() {
-    
+    int n; cin >> n;
+    vi a(n);
+    vector<bool> mark(n, 0);
+    FOR(n) cin >> a[i];
+    sort(all(a));
+    int l = 0, r = 1;
+    int ans = n;
+    while(r < n) {
+        if (a[l] < a[r]) {
+            mark[r] = 1;
+            ++l;
+            --ans;
+        }
+        ++r;
+    }
+    cout << ans;
     return 0; 
 }
 
@@ -73,3 +113,4 @@ int main()
     IOS;
     solve();
 }
+
