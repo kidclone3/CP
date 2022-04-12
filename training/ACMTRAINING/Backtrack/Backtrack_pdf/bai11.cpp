@@ -60,16 +60,41 @@ void printPair(T &x)
     cerr << "\n";
 };
 int solve() {
+    int n; cin >> n;
+    vi top(n), bot(n);
+    FOR(n) cin >> top[i] >> bot[i];
+    int ans = INT_MAX;
+    int gen_min = -1;
+    FOR(i, 0, (1<<n)) {
+        int sum_top = 0, sum_bot = 0;
+        for(int j = 0; j < n; ++j) {
+            if ((i >> j) & 1) { // 1 la quay
+                sum_top += bot[i];
+                sum_bot += top[i];
+            } else {
+                sum_top += top[i];
+                sum_bot += bot[i]; 
+            }
+        }
+        int tmp = abs(sum_top-sum_bot);
+        if (tmp < ans) {
+            ans = tmp;
+            gen_min = i;
+        }
+    }
+    cout << __builtin_popcount(gen_min);
+    cerr << "ans: " << ans << " gen_min: " << gen_min;
     return 0;
 }
 int main() {
     IOS;
 #ifndef ONLINE_JUDGE
-	freopen("in", "r", stdin);
-	freopen("out", "w", stdout);
+    freopen("in", "r", stdin);
+    freopen("out", "w", stdout);
 #else
-	// online submission
+    // online submission
 #endif
     solve();
     return 0; 
 }
+

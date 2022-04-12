@@ -60,16 +60,29 @@ void printPair(T &x)
     cerr << "\n";
 };
 int solve() {
+    int w, n; cin >> w >> n;
+    vi a(n), c(n);
+    int ans = -1;
+    for(int i = 0; i < n; ++i) cin >> a[i] >> c[i];
+    for(int i = 1; i < (1<<n); ++i) {
+        int sum_W = 0;
+        int sum_V = 0;
+        for(int k = 0; (1<<k) <= i; ++k) {
+            if ((i>>k) & 1) {
+                sum_W += a[i];
+                sum_V += c[i];
+            }
+        }
+        if (sum_W <= w) {
+            ans = max(ans, sum_V);
+        }
+    }
+    cout << ans;
     return 0;
 }
 int main() {
     IOS;
-#ifndef ONLINE_JUDGE
-	freopen("in", "r", stdin);
-	freopen("out", "w", stdout);
-#else
-	// online submission
-#endif
     solve();
     return 0; 
 }
+
