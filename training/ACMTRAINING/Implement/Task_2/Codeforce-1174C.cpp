@@ -59,7 +59,22 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
+vi sieve(int n) {
+    vi ans(n+2, 1);
+    int x = 2;
+    for(int i = 3; i <= n; i+=2) {
+        if (ans[i] != 1) continue;
+        for(int j = i; j <= n; j+=i) {
+            ans[j] = x;
+        }
+        x++;
+    }
+    return ans;
+}
 int solve() {
+    int n; cin >> n;
+    vi ans = sieve(n);
+    FOR(i, 2, n+1) cout << ans[i] << " ";
     return 0;
 }
 int main() {
@@ -67,3 +82,4 @@ int main() {
     solve();
     return 0; 
 }
+

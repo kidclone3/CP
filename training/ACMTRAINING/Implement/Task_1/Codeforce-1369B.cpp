@@ -46,24 +46,44 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cerr << it << " ";
+        cout << it << " ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 template <class T>
 void printPair(T &x)
 {
     for (auto &it : x)
     {
-        cerr << "(" << it.first << ", " << it.second <<") ";
+        cout << "(" << it.first << ", " << it.second <<") ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 int solve() {
+    int n; cin >> n;
+    string s; cin >> s;
+    int l = -1;
+    FOR(i, n) if (s[i] == '1') {
+        l = i;
+        break;
+    }
+    if (l == -1) return cout << s << "\n", 0;
+    int r = -1; // Right most 0 position.
+    FOR(i, l, n) {
+        if (s[i] == '0') {
+            r = i; 
+        }
+    }
+    if (r == -1) // if there isn't any 0 => cout original string.
+        return cout << s << "\n", 0;
+    cout << s.substr(0, l) << s.substr(r, n-r) << '\n';
     return 0;
 }
 int main() {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
     return 0; 
 }
+

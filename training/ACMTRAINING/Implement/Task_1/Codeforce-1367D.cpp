@@ -46,24 +46,71 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cerr << it << " ";
+        cout << it << " ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 template <class T>
 void printPair(T &x)
 {
     for (auto &it : x)
     {
-        cerr << "(" << it.first << ", " << it.second <<") ";
+        cout << "(" << it.first << ", " << it.second <<") ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 int solve() {
+    string s; cin >> s;
+    sort(all(s));
+    reverse(all(s));
+    int n; cin >> n;
+    vi a(n);
+    FOR(n) cin >> a[i];
+    string ans(n, '.');
+    int l = 0; // left most element index of candidates characters.
+    vi pos_0;
+    while(true) {
+        if (l >= (int) s.size()) break;
+        if (pos_0.empty())
+            FOR(n) {
+                if (a[i] == 0) {
+                    pos_0.push_back(i);
+                    a[i] = -1;
+                }
+            }
+        if (pos_0.empty()) break;
+        int r = l+1;
+        while(r < (int)s.size() && s[r] == s[l]) r++;
+        r--;
+        // print(pos_0);
+        // cout << l << " " << r << "\n";
+        //
+        // cout << "-----------";
+        // print(a);
+        if ((int) pos_0.size() <= r-l+1) {
+            EACH(it, pos_0) ans[it] = s[l];
+            l = r+1;
+        } else {
+            l = r+1;
+            continue;
+        }
+        FOR(n) {
+            if (a[i] > 0) {
+                EACH(it, pos_0) a[i] -= abs(i - it);
+            }
+        }
+        pos_0.clear();
+    } 
+    // cout << '\t';
+    cout << ans << "\n";
+    // cout << "\n";
     return 0;
 }
 int main() {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
     return 0; 
 }
+

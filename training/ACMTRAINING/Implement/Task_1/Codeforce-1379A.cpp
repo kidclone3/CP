@@ -46,24 +46,73 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cerr << it << " ";
+        cout << it << " ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 template <class T>
 void printPair(T &x)
 {
     for (auto &it : x)
     {
-        cerr << "(" << it.first << ", " << it.second <<") ";
+        cout << "(" << it.first << ", " << it.second <<") ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
+const string aba = "abacaba";
+
+bool acceptable(string &s) {
+    FOR(7) if (s[i] == '?' || s[i] == aba[i]) continue; else return false;
+    return true;
+}
+
+void fillOther(string &s) {
+    EACH(it, s) if (it == '?') it = 'z';
+}
+
+bool check(string &s) {
+    int cnt = 0;
+    FOR(i, s.size()-6) {
+        string ss = s.substr(i, 7);
+        if (acceptable(ss)) cnt++;
+    }
+    return cnt == 1;
+}
+
 int solve() {
+    int n; cin >> n;
+    string s; cin >> s;
+    if (n == 7) {
+        if (acceptable(s)) {
+            return cout << "Yes\n"<<aba<<'\n', 0;
+        }
+        else return cout << "No\n",0;
+    } else {
+        FOR(i, n-6) {
+            string ss = s.substr(i, 7);
+            if (acceptable(ss)) {
+                string s1, s2;
+                s1 = s.substr(0, i);
+                s2 = s.substr(i+7, n-i);
+                fillOther(s1);
+                fillOther(s2);
+                string s3 = s1+aba+s2;
+                if (check(s3)) {
+                    cout << "Yes\n";
+                    cout << s3 << "\n";
+                    return 0;
+                }
+            }
+        }
+    }
+    cout << "No\n";
     return 0;
 }
 int main() {
     IOS;
+    int t; cin >> t;
+    while(t--)
     solve();
     return 0; 
 }
+

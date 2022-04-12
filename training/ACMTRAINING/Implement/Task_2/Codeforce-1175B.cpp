@@ -46,20 +46,62 @@ void print(T &x)
 {
     for (auto &it : x)
     {
-        cerr << it << " ";
+        cout << it << " ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
 template <class T>
 void printPair(T &x)
 {
     for (auto &it : x)
     {
-        cerr << "(" << it.first << ", " << it.second <<") ";
+        cout << "(" << it.first << ", " << it.second <<") ";
     }
-    cerr << "\n";
+    cout << "\n";
 };
+const ll over = (1LL<<32)-1;
 int solve() {
+    int n; cin >> n;
+    // ll ans = 0LL;
+    // ll tmp = 0LL;
+    stack<ll> st_op, st_num;
+    // st_num.push(0LL);
+    FOR(n) {
+        string command;
+        ll param;
+        cin >> command;
+        if (command == "for") {
+            cin >> param;
+            st_op.push(param);
+            st_num.push(0LL);
+        } else if (command == "add") {
+            
+            ll tmp = 0;
+            if (!st_num.empty()) tmp = st_num.top(), st_num.pop();
+            tmp++;
+            // st_num.pop();
+            st_num.push(tmp);
+        }
+        else if (command == "end") {
+            ll tmp = st_num.top();
+            tmp *= st_op.top();
+            st_op.pop(); st_num.pop();
+            if (!st_num.empty()) {
+                // tmp += st_num.top();
+                // st_num.pop();
+                // st_num.push(tmp);
+                st_num.top() += tmp;
+            } else st_num.push(tmp);
+        }
+        if (st_num.top() > over) {
+            return cout << "OVERFLOW!!!", 0;
+        }
+        // cout << st_ op.size() << " " << st_num.size() << '\n';
+        // print(st_op);
+        // cout << "------------\n";
+        // print(st_num);
+    }
+    cout << st_num.top();
     return 0;
 }
 int main() {
@@ -67,3 +109,4 @@ int main() {
     solve();
     return 0; 
 }
+

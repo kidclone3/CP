@@ -59,7 +59,30 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
+string s; 
+string tmp = "";
+vector<string> ans;
+map<string, bool> mp;
+void backtrack(int i, int k, int last) {
+    if ((int)tmp.size() == k) {
+        if (!mp[tmp]) {
+            mp[tmp] = true;
+            ans.push_back(tmp);
+        }
+        return;
+    }
+    for(int j = last+1; j < (int) s.size(); ++j) {
+        tmp.push_back(s[j]);
+        backtrack(i+1, k, j);
+        tmp.pop_back();
+    }
+}
+
 int solve() {
+    cin >> s;
+    FOR(k, 1, s.size()+1)
+        backtrack(0, k, -1);
+    EACH(it, ans) cout << it << '\n';
     return 0;
 }
 int main() {
@@ -67,3 +90,4 @@ int main() {
     solve();
     return 0; 
 }
+

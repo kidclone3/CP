@@ -60,6 +60,23 @@ void printPair(T &x)
     cerr << "\n";
 };
 int solve() {
+    int n; cin >> n;
+    vt<tuple<ll, ll, ll>> a(n); // sort theo do lech.
+    
+    FOR(n) {
+        ll l, r;
+        cin >> l >> r;
+        a[i] = {l-r, l, r};
+    }
+    sort(all(a));
+    reverse(all(a));
+    ll ans = 0LL;
+    FOR(n) {
+        ll sub, l, r;
+        tie(sub, l, r) = a[i];
+        ans += l*i + r*(n-i-1);
+    }
+    cout << ans;
     return 0;
 }
 int main() {
@@ -67,3 +84,4 @@ int main() {
     solve();
     return 0; 
 }
+
