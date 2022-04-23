@@ -60,31 +60,36 @@ void printPair(T &x)
     cerr << "\n";
 };
 
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
+int ans = 1;
+const int N = 1e5 + 5;
+bitset<N> mark;
+vi tmp;
+
+void out() {
+    int prod = 1;
+    EACH(it, tmp) prod *= it;
+    ans = max(ans, prod);
+    // print(tmp);
 }
 
-int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+void backtrack(int x) {
+    if (x == 0) {
+        out();
+        return;
     }
+    for(int i = x; i >= 1; --i) {
+        if (mark[i]) continue;
+        tmp.push_back(i);
+        mark[i] = 1;
+        backtrack(x-i);
+        mark[i] = false;
+        tmp.pop_back();
+    }
+}
+int solve() {
+    int s; cin >> s;
+    ans = s;
+    backtrack(s);
     cout << ans;
     return 0;
 }

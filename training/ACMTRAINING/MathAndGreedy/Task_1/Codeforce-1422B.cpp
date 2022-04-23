@@ -59,33 +59,31 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
     int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
-    }
-    cout << ans;
+    vvl a(n, vl(m));
+    FOR(n) 
+        FOR(j, m)
+            cin >> a[i][j];
+    ll ans = 0LL;
+    int nn = n, mm = m;
+    if (n&1) nn += 1;
+    if (m&1) mm += 1;
+    FOR(i, nn/2)
+        FOR(j, mm/2) {
+            vl tmp(4);
+            tmp[0] = a[i][j];
+            tmp[1] = a[n-i-1][j];
+            tmp[2] = a[i][m-j-1];
+            tmp[3] = a[n-i-1][m-j-1];
+            sort(all(tmp));
+            ll mean = (tmp[1] + tmp[2])/2;
+            ll add = abs(a[i][j] - mean) + abs(a[n-i-1][j] - mean) + abs(a[i][m-j-1]-mean) + abs(a[n-i-1][m-j-1]-mean);
+            if (i == n-i-1 || j == m-j-1) {
+                ans += add/2;
+            } else ans += add;
+        }
+    cout << ans << '\n';
     return 0;
 }
 int main() {
@@ -96,6 +94,8 @@ int main() {
 #else
 	// online submission
 #endif
+    int t; cin >> t;
+    while(t--)
     solve();
     return 0; 
 }

@@ -59,33 +59,27 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    int n, k; cin >> n >> k;
+    vi a(n), b(k);
+    FOR(n) cin >> a[i];
+    FOR(k) cin >> b[i];
+    sort(all(a));
+    sort(all(b));
+    reverse(b.begin() + count(all(b), 1), b.end());
+    ll ans = 0LL;
+    int l = 0, r = n-1;
+    // print(b);
+    EACH(it, b) {
+        if (it == 1) {
+            ans += 2*a[r--];
+        } else {
+            ans += a[r--];
+            ans += a[l];
+            l += it-1;
+        }
     }
-    cout << ans;
+    cout << ans <<'\n';
     return 0;
 }
 int main() {
@@ -96,7 +90,9 @@ int main() {
 #else
 	// online submission
 #endif
-    solve();
+    int t; cin >> t;
+    while(t--)
+        solve();
     return 0; 
 }
 

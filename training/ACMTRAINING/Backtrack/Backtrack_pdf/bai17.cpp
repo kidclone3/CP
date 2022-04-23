@@ -59,43 +59,54 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
+vector<int> ans;
+vector<int> tmp;
+void out() {
+    if (ans.empty() || tmp.size() < ans.size()) ans = tmp;
+    return;
 }
 
-int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+bool fracGreater(int x, int m, int n) {
+    return n > m*x;
+}
+ii fracSub(int x, int m, int n) {
+    int top = m*x-n;
+    int bot = n*x;
+    int gcd = __gcd(top, bot);
+    return {top/gcd, bot/gcd};
+}
+int N, M;
+void backtrack(int x, int m, int n) {
+    if (m == 0) {
+        out();
+        return;
     }
-    cout << ans;
+    if (!ans.empty() && tmp.size() > ans.size()) return;
+    for(int i = min(n, N); i >= x; --i) {
+        if (fracGreater(i, m, n)) continue;
+        ii tmp2 = fracSub(i, m, n);
+        tmp.push_back(i);
+        backtrack(i, tmp2.fi, tmp2.se);
+        tmp.pop_back();
+    }
+}
+int solve() {
+    int n, m; cin >> m >> n;
+    M = m;
+    N = n;
+    backtrack(2, m, n);
+    cout << ans.size() <<'\n';
+    EACH(it, ans) cout << it << " ";
     return 0;
 }
 int main() {
     IOS;
-#ifndef ONLINE_JUDGE
-	freopen("in", "r", stdin);
-	freopen("out", "w", stdout);
-#else
-	// online submission
-#endif
+// #ifndef ONLINE_JUDGE
+// 	freopen("in", "r", stdin);
+// 	freopen("out", "w", stdout);
+// #else
+// 	// online submission
+// #endif
     solve();
     return 0; 
 }

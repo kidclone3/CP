@@ -59,33 +59,56 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    int n; cin >> n;
+    vi a(n+1);
+    set<int> give, receive;
+    FOR1(n) give.insert(i), receive.insert(i);
+    FOR1(n) {
+        cin >> a[i];
+        if (a[i]) {
+            give.erase(i);
+            receive.erase(a[i]);
+        }
     }
-    cout << ans;
+    if (give.empty()) {
+        FOR1(n) cout << a[i] << " ";
+        return 0;
+    }
+    set<int> dup, non_dup; // dup = duplicate;
+    EACH(it, give) {
+        if (receive.find(it) != receive.end()) {
+            dup.insert(it);
+        } else non_dup.insert(it);
+    }
+    while (!dup.empty()) {
+        if (dup.size() >= 2) {
+            auto it = dup.begin();
+            auto it2 = next(it);
+            a[*it] = *it2;
+            receive.erase(*it2);
+            non_dup.insert(*it2);
+            dup.erase(it2);
+            dup.erase(it);
+        } else {
+            auto it = dup.begin();
+            auto it2 = non_dup.begin();
+
+            a[*it2] = *it;
+            receive.erase(*it);
+            non_dup.insert(*it);
+            dup.erase(it);
+            non_dup.erase(it2);
+        }
+    }
+    while (!non_dup.empty()) {
+        auto it = non_dup.begin();
+        auto it2 = receive.begin();
+        a[*it] = *it2;
+        receive.erase(it2);
+        non_dup.erase(it);
+    }
+    FOR1(n) cout << a[i] << " ";
     return 0;
 }
 int main() {

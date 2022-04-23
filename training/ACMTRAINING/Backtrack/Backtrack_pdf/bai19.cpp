@@ -59,33 +59,42 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
-int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+vector<string> ans;
+void backtrack(int x) {
+    if (x == 1) {
+        return;
     }
-    cout << ans;
+    if (x & 1) {
+        ans.push_back("/3");
+        backtrack(x * 3 + 1);
+    } else {
+        ans.push_back("*2");
+        backtrack(x/2);
+    }
+}
+int solve() {
+    int n; cin >> n;
+    // backtrack(n);
+    // reverse(all(ans));
+    // cout << 1;
+    // EACH(it, ans) cout << it;
+    
+    // Cach 2, iterate.
+    FOR(i, 1<<20) {
+        int tmp = 1;
+        for(int j = 1; (1<<j) <= i; ++j) {
+            if ((i>>j) &1) tmp *= 2;
+            else tmp /= 3;
+        }
+        if (tmp == n) {
+            cout << 1;
+            for(int j = 1; (1<<j) <= i; ++j) {
+                if ((i>>j)&1) cout << "*2";
+                else cout << "/3";
+            }
+            break;
+        }
+    }
     return 0;
 }
 int main() {

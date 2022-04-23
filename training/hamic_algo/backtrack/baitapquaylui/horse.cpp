@@ -73,7 +73,7 @@ void backtrack(pair<int, int> pos) {
                 path.push_back(curr);
                 backtrack(curr);
                 check[curr.first][curr.second] = 0;
-                path.pop_back();
+                path.pop_back( );
             }
             else if (curr == make_pair(0, 0) && path.size() == N*N) {
                 out();

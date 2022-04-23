@@ -59,44 +59,53 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    vector<string> grid(4);
+    FOR(4) {
+        cin >> grid[i];
     }
-    cout << ans;
+    int ans = INT_MAX;
+    for(int i = 0; i < (1<<16); ++i) {
+        vt<vi> b(4, vi(4, 0));
+        FOR(i1, 4) 
+            FOR(j1, 4)
+                if (grid[i1][j1] == 'n') b[i1][j1] = 1;
+        for(int j = 0; (1<<j) <= i; ++j) {
+            int tmp = i;
+            if ((tmp >> j) & 1) {
+                int x = j/4;
+                int y = j%4;
+                b[x][y] = 1 - b[x][y];
+                FOR(k, 4) {
+                    int xx = x + d4x[k];
+                    int yy = y + d4y[k];
+                    if (0 <= xx && xx < 4 && 0 <= yy && yy < 4) {
+
+                        b[xx][yy] = 1-b[xx][yy];
+                    }
+                }
+            }
+        }
+        
+        int cnt = 0;
+        FOR(i1, 4) FOR(j1, 4) cnt += b[i1][j1];
+        if (cnt == 0 || cnt == 16) {
+            ans = min(ans, __builtin_popcount(i));
+        }
+    }
+    cout << (ans == INT_MAX ? -1 : ans);
     return 0;
 }
 int main() {
     IOS;
-#ifndef ONLINE_JUDGE
-	freopen("in", "r", stdin);
-	freopen("out", "w", stdout);
-#else
-	// online submission
-#endif
+// #ifndef ONLINE_JUDGE
+// 	freopen("in", "r", stdin);
+// 	freopen("out", "w", stdout);
+// #else
+// 	// online submission
+// #endif
     solve();
+    // cout << "test";
     return 0; 
 }
 

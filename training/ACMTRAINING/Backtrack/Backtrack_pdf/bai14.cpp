@@ -59,33 +59,47 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    int n, d; cin >> n >> d;
+    multiset<int> a;
+    int x;
+    /*
+logic:
+    For each largest possible element, we will choose another largest possible element 
+    to add to same CD.
+    With that greedy strategy, our solution will be smallest.
+Prove: 
+    If we choose another element (not the largest possible), there could be exist a case 
+    such that smallest element + largest element in a same CD, which could not add any more 
+    element.
+   */
+    FOR(n) cin >> x, a.insert(x);
+    if (*prev(a.end()) > d) return cout << -1, 0; // tach.
+    vt<vi> ans;
+    while (!a.empty()) {
+        auto it = prev(a.end());
+        int sum = d - *it;
+        vi tmp;
+        tmp.push_back(*it);
+        a.erase(it);
+        if (!a.empty()) {
+            auto next = a.upper_bound(sum);
+            while (next != a.begin()) {
+                --next;    
+                sum -= *next;
+                tmp.push_back(*next);
+                a.erase(next);
+                next = a.upper_bound(sum);
+            }
+        }
+        sort(all(tmp));
+        ans.push_back(tmp);
     }
-    cout << ans;
+    cout << ans.size() << '\n';
+    EACH(it, ans) {
+        EACH(it2, it) cout << it2 << " ";
+        cout << "\n";
+    }
     return 0;
 }
 int main() {

@@ -59,33 +59,18 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    int n; cin >> n;
+    vvl a(n, vl(n));
+    FOR(i, n) {
+        FOR(j, n) {
+            cin >> a[i][j];
+        }
     }
-    cout << ans;
+    FOR(n) {
+        ll ans = a[i][(i+1) % n] * a[i][(i+2) % n] / a[(i+1) % n][(i+2) % n];
+        cout << (ll) sqrt(ans) << " ";
+    }
     return 0;
 }
 int main() {

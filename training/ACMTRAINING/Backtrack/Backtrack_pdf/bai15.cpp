@@ -59,33 +59,42 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    string s; cin >> s; 
+    // First, need to move all 'A' characters to the heads.
+    vi a;
+    int n = s.size();
+    FOR(n) {
+        if (s[i] == 'A') a.push_back(i);
     }
-    cout << ans;
+    int l = 0;
+    int cnt = 0;
+    for(; l < n; ++l) {
+        if (l > a.back()) break; // nothing left to do.
+        if (s[l] == 'A') continue;
+        if (s[l] != 'A') {
+            swap(s[l], s[a.back()]);
+            a.pop_back();
+            cnt++;
+        }
+    }
+    // cerr << "s: " << s <<" cnt: " << cnt <<'\n';
+    // Second, find and move all B letters.
+    vi b;
+    FOR(n) {
+        if (s[i] == 'B') b.pb(i);
+    }
+    for(; l < n; ++l) {
+        if (l > b.back()) break;
+        if (s[l] == 'B') continue;
+        if (s[l] != 'B') {
+            swap(s[l], s[b.back()]);
+            b.pop_back();
+            cnt++;
+        }
+    }
+    // cerr << "s: " << s <<" cnt: " << cnt <<'\n';
+    cout << cnt;
     return 0;
 }
 int main() {

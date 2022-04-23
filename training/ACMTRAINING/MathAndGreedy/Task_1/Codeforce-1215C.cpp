@@ -59,34 +59,48 @@ void printPair(T &x)
     }
     cerr << "\n";
 };
-
-int apply(int i, vvi a) { // ko pass = &, vi can copy mang.
-    int n = a.size();
-    int m = a[0].size();
-    for(int j = 0; (1<<j) <= i; ++j) {
-        if (!((i>>j)&1)) continue;
-        if (j < n) { // bien doi theo hang.
-            FOR(z, m) a[j][z] ^= 1;
-        } else {
-            FOR(z, n) a[z][j-n] ^= 1;
-        }
-    } 
-    int ans = 0;
-    EACH(it, a) ans += count(all(it), 1);
-    return ans;
-}
-
 int solve() {
-    int n, m; cin >> n >> m;
-    vvi a(n, vi(m));
-    FOR(n) FOR(j, m) cin >> a[i][j];
-    // Backtrack theo toa do.
-    int ans = 0;
-    for(int i = 0; i < (1<<(n+m)); ++i) {
-        ans = max(ans, apply(i, a));
+    int n; cin >> n;
+    string s1, s2;
+    cin >> s1 >> s2;
+    
+    vi diff_a, diff_b;
+
+    FOR(n) if (s1[i] != s2[i]) {
+        if (s1[i] == 'a')
+            diff_a.push_back(i);
+        else diff_b.push_back(i);
     }
-    cout << ans;
+    vii ans;
+    while (diff_a.size() >= 2) {
+        int l = diff_a.back();
+        diff_a.pop_back();
+        int r = diff_a.back();
+        diff_a.pop_back();
+        ans.push_back({l, r});
+    }
+    while (diff_b.size() >= 2) {
+        int l = diff_b.back();
+        diff_b.pop_back();
+        int r = diff_b.back();
+        diff_b.pop_back();
+        ans.push_back({l, r});
+    }
+    if (diff_a.size() && diff_b.size()) {
+        ans.push_back({diff_b[0], diff_b[0]});
+        int l = diff_a[0], r = diff_b[0];
+        ans.push_back({l, r});
+        diff_b.pop_back();
+        diff_a.pop_back(); 
+    }
+    if (diff_a.empty() && diff_b.empty()) {
+        cout << ans.size() <<'\n';
+        EACH(it, ans) cout << it.fi+1 << " " << it.se+1<< '\n';
+    } else {
+        cout << "-1";
+    }
     return 0;
+    
 }
 int main() {
     IOS;
