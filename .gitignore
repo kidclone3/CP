@@ -53,3 +53,5 @@
 # Neovim cache.
 .ccls*
 .vimspector*
+
+# Useless files
