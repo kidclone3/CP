@@ -1,11 +1,11 @@
 #!/bin/zsh
 # prepare
-g++-11 -o a1 FenwickTree.cpp 
-g++-11 -o a2 SegmentTree.cpp 
-g++-11 -o a3 SegmentTree2.cpp
+g++-11 -o fenWick FenwickTree.cpp 
+g++-11 -o segment1 SegmentTree.cpp 
+g++-11 -o segment2 SegmentTree2.cpp
 
 echo "FenwickTree measure= "
-./a1
+./fenwick ""
 echo ""
 echo "Fast Segment tree measure = "
 ./a2
