@@ -22,8 +22,8 @@ def generate(n, q, dir):
 # generate(N, N, "input.txt")
 
 # first, generate 1000 test with N = 1e3
-for i in range(int(1e3)):
-    generate(int(1e3), int(1e3), f"data/1e3_{i}.txt")
+#for i in range(int(1e3)):
+#    generate(int(1e3), int(1e3), f"data/1e3_{i}.txt")
 # second, generate 1000 test with N = 1e5
 for i in range(int(1e5)):
     generate(int(1e5), int(1e5), f"data/1e5_{i}.txt")
