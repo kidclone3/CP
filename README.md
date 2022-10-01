@@ -1,9 +1,9 @@
 # Welcome to Duy's codes. Have a good experience with bunch of templated codes.
 Now I was rearrange my folders and files for easier in reading.
-It has 4 languages:
+It has 2 languages:
 + CPP (almost)
-+ Java (in java folder)
-+ Linux Shell (shell + script)
-+ Python (xla + OnlineJudge/atcoder)
++ Python ([python](./python) + [training](./training))
 
-Almost time, my codes are in training and OnlineJudge.
+Used directories are located in [OLD](./OLD)
+
+Almost time, my CP codes are in training. Another folders are for my classes.
