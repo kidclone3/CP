@@ -1,0 +1,2515 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta name="theme-color" content="#323754">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><script type="text/javascript">(window.NREUM||(NREUM={})).init={privacy:{cookies_enabled:false},ajax:{deny_list:["bam.nr-data.net"]}};(window.NREUM||(NREUM={})).loader_config={xpid:"VQIPUlRaABAGU1NXAgIAVlw=",licenseKey:"9b2cefefd1",applicationID:"672553708"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var i,o=t("ee"),a=t(27),s={};try{i=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,i.indexOf("dev")!==-1&&(s.dev=!0),i.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&o.on("internal-error",function(t){r(t.stack)}),s.dev&&o.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,s){try{p?p-=1:i(s||new UncaughtException(t,e,n),!0)}catch(f){try{o("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function i(t,e){var n=e?null:c.now();o("err",[t,n])}var o=t("handle"),a=t(28),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError";if(!c.disabled){var p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(10),t(9),"addEventListener"in window&&t(6),c.xhrWrappable&&t(11),d=!0)}s.on("fn-start",function(t,e,n){d&&(p+=1)}),s.on("fn-err",function(t,e,n){d&&!n[l]&&(f(n,l,function(){return!0}),this.thrown=!0,i(n))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){o("ierr",[t,c.now(),!0])})}},{}],3:[function(t,e,n){var r=t("loader");r.disabled||(r.features.ins=!0)},{}],4:[function(t,e,n){function r(){var t=new PerformanceObserver(function(t,e){var n=t.getEntries();s(v,[n])});try{t.observe({entryTypes:["resource"]})}catch(e){}}function i(t){if(s(v,[window.performance.getEntriesByType(w)]),window.performance["c"+l])try{window.performance[h](m,i,!1)}catch(t){}else try{window.performance[h]("webkit"+m,i,!1)}catch(t){}}function o(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var a=t("ee"),s=t("handle"),c=t(10),f=t(9),u=t(5),d=t(19),l="learResourceTimings",p="addEventListener",h="removeEventListener",m="resourcetimingbufferfull",v="bstResource",w="resource",g="-start",y="-end",x="fn"+g,b="fn"+y,E="bstTimer",R="pushState",S=t("loader");if(!S.disabled){S.features.stn=!0,t(8),"addEventListener"in window&&t(6);var O=NREUM.o.EV;a.on(x,function(t,e){var n=t[0];n instanceof O&&(this.bstStart=S.now())}),a.on(b,function(t,e){var n=t[0];n instanceof O&&s("bst",[n,e,this.bstStart,S.now()])}),c.on(x,function(t,e,n){this.bstStart=S.now(),this.bstType=n}),c.on(b,function(t,e){s(E,[e,this.bstStart,S.now(),this.bstType])}),f.on(x,function(){this.bstStart=S.now()}),f.on(b,function(t,e){s(E,[e,this.bstStart,S.now(),"requestAnimationFrame"])}),a.on(R+g,function(t){this.time=S.now(),this.startPath=location.pathname+location.hash}),a.on(R+y,function(t){s("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),u()?(s(v,[window.performance.getEntriesByType("resource")]),r()):p in window.performance&&(window.performance["c"+l]?window.performance[p](m,i,d(!1)):window.performance[p]("webkit"+m,i,d(!1))),document[p]("scroll",o,d(!1)),document[p]("keypress",o,d(!1)),document[p]("click",o,d(!1))}}},{}],5:[function(t,e,n){e.exports=function(){return"PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver}},{}],6:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&i(e)}function i(t){s.inPlace(t,[u,d],"-",o)}function o(t,e){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(i(window),i(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1];if(null!==n&&("function"==typeof n||"object"==typeof n)){var r=c(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?s(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],7:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=o(arguments),e={};i.emit(n+"before-start",[t],e);var a;e[m]&&e[m].dt&&(a=e[m].dt);var s=r.apply(this,t);return i.emit(n+"start",[t,a],s),s.then(function(t){return i.emit(n+"end",[null,t],s),t},function(t){throw i.emit(n+"end",[t],s),t})})}var i=t("ee").get("fetch"),o=t(28),a=t(27);e.exports=i;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,l=s.Response,p=s.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,e){r(d[h],e,f),r(l[h],e,f)}),r(s,"fetch",c),i.on(c+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),i.emit(c+"done",[null,e],n)}else i.emit(c+"done",[t],n)}))},{}],8:[function(t,e,n){var r=t("ee").get("history"),i=t("wrap-function")(r);e.exports=r;var o=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;o&&o.pushState&&o.replaceState&&(a=o),i.inPlace(a,["pushState","replaceState"],"-")},{}],9:[function(t,e,n){var r=t("ee").get("raf"),i=t("wrap-function")(r),o="equestAnimationFrame";e.exports=r,i.inPlace(window,["r"+o,"mozR"+o,"webkitR"+o,"msR"+o],"raf-"),r.on("raf-start",function(t){t[0]=i(t[0],"fn-")})},{}],10:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function i(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var o=t("ee").get("timer"),a=t("wrap-function")(o),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=o,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),o.on(c+u,r),o.on(s+u,i)},{}],11:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function i(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,y,"fn-",s)}function o(t){x.push(t),m&&(E?E.then(a):w?w(a):(R=-R,S.data=R))}function a(){for(var t=0;t<x.length;t++)r([],x[t]);x.length&&(x=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(6);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=t(19),p=NREUM.o,h=p.XHR,m=p.MO,v=p.PR,w=p.SI,g="readystatechange",y=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],x=[];e.exports=u;var b=window.XMLHttpRequest=function(t){var e=new h(t);try{u.emit("new-xhr",[e],e),e.addEventListener(g,i,l(!1))}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(h,b),b.prototype=h.prototype,d.inPlace(b.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),o(e)}),u.on("open-xhr-start",r),m){var E=v&&v.resolve();if(!w&&!v){var R=1,S=document.createTextNode(R);new m(a).observe(S,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===g||a()})},{}],12:[function(t,e,n){function r(t){if(!s(t))return null;var e=window.NREUM;if(!e.loader_config)return null;var n=(e.loader_config.accountID||"").toString()||null,r=(e.loader_config.agentID||"").toString()||null,f=(e.loader_config.trustKey||"").toString()||null;if(!n||!r)return null;var h=p.generateSpanId(),m=p.generateTraceId(),v=Date.now(),w={spanId:h,traceId:m,timestamp:v};return(t.sameOrigin||c(t)&&l())&&(w.traceContextParentHeader=i(h,m),w.traceContextStateHeader=o(h,v,n,r,f)),(t.sameOrigin&&!u()||!t.sameOrigin&&c(t)&&d())&&(w.newrelicHeader=a(h,m,v,n,r,f)),w}function i(t,e){return"00-"+e+"-"+t+"-01"}function o(t,e,n,r,i){var o=0,a="",s=1,c="",f="";return i+"@nr="+o+"-"+s+"-"+n+"-"+r+"-"+t+"-"+a+"-"+c+"-"+f+"-"+e}function a(t,e,n,r,i,o){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:i,id:t,tr:e,ti:n}};return o&&r!==o&&(s.d.tk=o),btoa(JSON.stringify(s))}function s(t){return f()&&c(t)}function c(t){var e=!1,n={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=NREUM.init.distributed_tracing),t.sameOrigin)e=!0;else if(n.allowed_origins instanceof Array)for(var r=0;r<n.allowed_origins.length;r++){var i=h(n.allowed_origins[r]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){e=!0;break}}return e}function f(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.enabled}function u(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.exclude_newrelic_header}function d(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&NREUM.init.distributed_tracing.cors_use_newrelic_header!==!1}function l(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.cors_use_tracecontext_headers}var p=t(24),h=t(14);e.exports={generateTracePayload:r,shouldGenerateTrace:s}},{}],13:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);return e.protocol&&"data"===e.protocol?void g("Ajax/DataUrl/Excluded"):void(e.aborted||(n.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):o(this,t),n.cbTime=this.cbTime,s("xhr",[e,n,this.startTime,this.endTime,"xhr"],this)))}}function i(t,e){var n=c(e),r=t.params;r.hostname=n.hostname,r.port=n.port,r.protocol=n.protocol,r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.parsedOrigin=n,t.sameOrigin=n.sameOrigin}function o(t,e){t.params.status=e.status;var n=v(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable&&!a.disabled){var s=t("handle"),c=t(14),f=t(12).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(20),m=t(18),v=t(15),w=t(19),g=t(21).recordSupportability,y=NREUM.o.REQ,x=window.XMLHttpRequest;a.features.xhr=!0,t(11),t(7),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,e.params=this.params||{},e.metrics=this.metrics||{},t.addEventListener("load",function(n){o(e,t)},w(!1)),h&&(h>34||h<10)||t.addEventListener("progress",function(t){e.lastSize=t.loaded},w(!1))}),u.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=f(this.parsedOrigin);if(n){var r=!1;n.newrelicHeader&&(e.setRequestHeader("newrelic",n.newrelicHeader),r=!0),n.traceContextParentHeader&&(e.setRequestHeader("traceparent",n.traceContextParentHeader),n.traceContextStateHeader&&e.setRequestHeader("tracestate",n.traceContextStateHeader),r=!0),r&&(this.dt=n)}}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],i=this;if(n&&r){var o=m(r);o&&(n.txSize=o)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||i.loadCaptureCalled||(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var s=0;s<l;s++)e.addEventListener(d[s],this.listener,w(!1))}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("xhr-resolved",function(){this.endTime=a.now()}),u.on("addEventListener-end",function(t,e){e instanceof x&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof x&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof x&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,e],e)}),u.on("fetch-before-start",function(t){function e(t,e){var n=!1;return e.newrelicHeader&&(t.set("newrelic",e.newrelicHeader),n=!0),e.traceContextParentHeader&&(t.set("traceparent",e.traceContextParentHeader),e.traceContextStateHeader&&t.set("tracestate",e.traceContextStateHeader),n=!0),n}var n,r=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url?n=t[0].url:window.URL&&t[0]&&t[0]instanceof URL&&(n=t[0].href),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var i=f(this.parsedOrigin);if(i&&(i.newrelicHeader||i.traceContextParentHeader))if("string"==typeof t[0]||window.URL&&t[0]&&t[0]instanceof URL){var o={};for(var a in r)o[a]=r[a];o.headers=new Headers(r.headers||{}),e(o.headers,i)&&(this.dt=i),t.length>1?t[1]=o:t.push(o)}else t[0]&&t[0].headers&&e(t[0].headers,i)&&(this.dt=i)}),u.on("fetch-start",function(t,e){this.params={},this.metrics={},this.startTime=a.now(),this.dt=e,t.length>=1&&(this.target=t[0]),t.length>=2&&(this.opts=t[1]);var n,r=this.opts||{},o=this.target;if("string"==typeof o?n=o:"object"==typeof o&&o instanceof y?n=o.url:window.URL&&"object"==typeof o&&o instanceof URL&&(n=o.href),i(this,n),"data"!==this.params.protocol){var s=(""+(o&&o instanceof y&&o.method||r.method||"GET")).toUpperCase();this.params.method=s,this.txSize=m(r.body)||0}}),u.on("fetch-done",function(t,e){if(this.endTime=a.now(),this.params||(this.params={}),"data"===this.params.protocol)return void g("Ajax/DataUrl/Excluded");this.params.status=e?e.status:0;var n;"string"==typeof this.rxSize&&this.rxSize.length>0&&(n=+this.rxSize);var r={txSize:this.txSize,rxSize:n,duration:a.now()-this.startTime};s("xhr",[this.params,r,this.startTime,this.endTime,"fetch"],this)})}},{}],14:[function(t,e,n){var r={};e.exports=function(t){if(t in r)return r[t];if(0===(t||"").indexOf("data:"))return{protocol:"data"};var e=document.createElement("a"),n=window.location,i={};e.href=t,i.port=e.port;var o=e.href.split("://");!i.port&&o[1]&&(i.port=o[1].split("/")[0].split("@").pop().split(":")[1]),i.port&&"0"!==i.port||(i.port="https"===o[0]?"443":"80"),i.hostname=e.hostname||n.hostname,i.pathname=e.pathname,i.protocol=o[0],"/"!==i.pathname.charAt(0)&&(i.pathname="/"+i.pathname);var a=!e.protocol||":"===e.protocol||e.protocol===n.protocol,s=e.hostname===document.domain&&e.port===n.port;return i.sameOrigin=a&&(!e.hostname||s),"/"===i.pathname&&(r[t]=i),i}},{}],15:[function(t,e,n){function r(t,e){var n=t.responseType;return"json"===n&&null!==e?e:"arraybuffer"===n||"blob"===n||"json"===n?i(t.response):"text"===n||""===n||void 0===n?i(t.responseText):void 0}var i=t(18);e.exports=r},{}],16:[function(t,e,n){function r(){}function i(t,e,n,r){return function(){return u.recordSupportability("API/"+e+"/called"),o(t+e,[f.now()].concat(s(arguments)),n?null:this,r),n?void 0:this}}var o=t("handle"),a=t(27),s=t(28),c=t("ee").get("tracer"),f=t("loader"),u=t(21),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var l=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",h=p+"ixn-";a(l,function(t,e){d[e]=i(p,e,!0,"api")}),d.addPageAction=i(p,"addPageAction",!0),d.setCurrentRouteName=i(p,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(h+"tracer",[f.now(),t,n],r),function(){if(c.emit((i?"":"no-")+"fn-start",[f.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=i(h,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),u.recordSupportability("API/noticeError/called"),o("err",[t,f.now(),!1,e])}},{}],17:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],18:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],19:[function(t,e,n){var r=!1;try{var i=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,i),window.removeEventListener("testPassive",null,i)}catch(o){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],20:[function(t,e,n){var r=0,i=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);i&&(r=+i[1]),e.exports=r},{}],21:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return o("storeMetric",n,null,"api"),n}function i(t,e){var n=[s,t,{name:t},e];return o("storeEventMetrics",n,null,"api"),n}var o=t("handle"),a="sm",s="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:s},recordSupportability:r,recordCustom:i}},{}],22:[function(t,e,n){function r(){return s.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,s=t(29);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],23:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?p("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&p("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(f&&f<r.startTime)return;var i=[r],o=a({});o&&i.push(o),p("lcp",i)}}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||p("cls",[t])})}function a(t){var e=navigator.connection||navigator.mozConnection||navigator.webkitConnection;if(e)return e.type&&(t["net-type"]=e.type),e.effectiveType&&(t["net-etype"]=e.effectiveType),e.rtt&&(t["net-rtt"]=e.rtt),e.downlink&&(t["net-dlink"]=e.downlink),t}function s(t){if(t instanceof w&&!y){var e=Math.round(t.timeStamp),n={type:t.type};a(n),e<=h.now()?n.fid=h.now()-e:e>h.offset&&e<=Date.now()?(e-=h.offset,n.fid=h.now()-e):e=h.now(),y=!0,p("timing",["fi",e,n])}}function c(t){"hidden"===t&&(f=h.now(),p("pageHide",[f]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,d,l,p=t("handle"),h=t("loader"),m=t(26),v=t(19),w=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){u=new PerformanceObserver(r);try{u.observe({entryTypes:["paint"]})}catch(g){}d=new PerformanceObserver(i);try{d.observe({entryTypes:["largest-contentful-paint"]})}catch(g){}l=new PerformanceObserver(o);try{l.observe({type:"layout-shift",buffered:!0})}catch(g){}}if("addEventListener"in document){var y=!1,x=["click","keydown","mousedown","pointerdown","touchstart"];x.forEach(function(t){document.addEventListener(t,s,v(!1))})}m(c)}},{}],24:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var i,o="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<o.length;s++)i=o[s],"x"===i?a+=t().toString(16):"y"===i?(i=3&t()|8,a+=i.toString(16)):a+=i;return a}function i(){return a(16)}function o(){return a(32)}function a(t){function e(){return n?15&n[r++]:16*Math.random()|0}var n=null,r=0,i=window.crypto||window.msCrypto;i&&i.getRandomValues&&Uint8Array&&(n=i.getRandomValues(new Uint8Array(t)));for(var o=[],a=0;a<t;a++)o.push(e().toString(16));return o.join("")}e.exports={generateUuid:r,generateSpanId:i,generateTraceId:o}},{}],25:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}e.exports={agent:i,version:o,match:r}},{}],26:[function(t,e,n){function r(t){function e(){t(s&&document[s]?document[s]:document[o]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,i(!1))}var i=t(19);e.exports=r;var o,a,s;"undefined"!=typeof document.hidden?(o="hidden",a="visibilitychange",s="visibilityState"):"undefined"!=typeof document.msHidden?(o="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(o="webkitHidden",a="webkitvisibilitychange",s="webkitVisibilityState")},{}],27:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],28:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],29:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?f(t,c,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!p.aborted||o){t&&a&&t(n,r,i);for(var s=e(i),c=m(n),f=c.length,u=0;u<f;u++)c[u].apply(s,r);var l=d[y[n]];return l&&l.push([x,n,r,s]),s}}function o(t,e){g[t]=m(t).concat(e)}function h(t,e){var n=g[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return g[t]||[]}function v(t){return l[t]=l[t]||i(n)}function w(t,e){p.aborted||u(t,function(t,n){e=e||"feature",y[n]=e,e in d||(d[e]=[])})}var g={},y={},x={on:o,addEventListener:o,removeEventListener:h,emit:n,get:v,listeners:m,context:e,buffer:w,abort:s,aborted:!1};return x}function o(t){return f(t,c,a)}function a(){return new r}function s(){(d.api||d.feature)&&(p.aborted=!0,d=p.backlog={})}var c="nr@context",f=t("gos"),u=t(27),d={},l={},p=e.exports=i();e.exports.getOrSetContext=o,p.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!O++){var t=S.info=NREUM.info,e=m.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();c(E,function(e,n){t[e]||(t[e]=n)});var n=a();s("mark",["onload",n+S.offset],null,"api"),s("timing",["load",n]);var r=m.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=p+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===m.readyState&&o()}function o(){s("mark",["domContent",a()+S.offset],null,"api")}var a=t(22),s=t("handle"),c=t(27),f=t("ee"),u=t(25),d=t(17),l=t(19),p=d.getConfiguration("ssl")===!1?"http":"https",h=window,m=h.document,v="addEventListener",w="attachEvent",g=h.XMLHttpRequest,y=g&&g.prototype,x=!1;NREUM.o={ST:setTimeout,SI:h.setImmediate,CT:clearTimeout,XHR:g,REQ:h.Request,EV:h.Event,PR:h.Promise,MO:h.MutationObserver};var b=""+location,E={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1216.min.js"},R=g&&y&&y[v]&&!/CriOS/.test(navigator.userAgent),S=e.exports={offset:a.getLastTimestamp(),now:a,origin:b,features:{},xhrWrappable:R,userAgent:u,disabled:x};if(!x){t(16),t(23),m[v]?(m[v]("DOMContentLoaded",o,l(!1)),h[v]("load",r,l(!1))):(m[w]("onreadystatechange",i),h[w]("onload",r)),s("mark",["firstbyte",a.getLastTimestamp()],null,"api");var O=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,f){function nrWrapper(){var o,a,u,l;try{a=this,o=d(arguments),u="function"==typeof r?r(o,a):r||{}}catch(p){i([p,"",[o,a,c],u],t)}s(n+"start",[o,a,c],u,f);try{return l=e.apply(a,o)}catch(h){throw s(n+"err",[o,a,h],u,f),h}finally{s(n+"end",[o,a,l],u,f)}}return a(e)?e:(n||(n=""),nrWrapper[l]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var s,c,f,u="-"===r.charAt(0);for(f=0;f<e.length;f++)c=e[f],s=t[c],a(s)||(t[c]=n(s,u?c+r:r,i,c,o))}function s(n,r,o,a){if(!h||e){var s=h;h=!0;try{t.emit(n,r,o,e,a)}catch(c){i([c,n,r,o],t)}h=s}}return t||(t=u),n.inPlace=r,n.flag=l,n}function i(t,e){e||(e=u);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)p.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[l])}function s(t,e){var n=e(t);return n[l]=t,o(t,n,u),n}function c(t,e,n){var r=t[e];t[e]=s(r,n)}function f(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var u=t("ee"),d=t(28),l="nr@original",p=Object.prototype.hasOwnProperty,h=!1;e.exports=r,e.exports.wrapFunction=s,e.exports.wrapInPlace=c,e.exports.argsToArray=f},{}]},{},["loader",2,13,4,3]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"9b2cefefd1","applicationID":"672553708,561796461","transactionName":"MlwDZxBYVxUHWkNcVwsWJ0YMWk0PCVcYRUoKWw1WD0oXEA9cQEYCFUsAUBZQWgM5SkJXZxFWEVoBZkkUCVtbUFUW","queueTime":0,"applicationTime":244,"agent":""}</script>
+        <meta name="description" content="
+Solve practice problems for String Searching to test your programming skills. Also go through detailed tutorials to improve your understanding to the topic. | page 2
+" >
+        <link rel="canonical" href="https://www.hackerearth.com/practice/algorithms/string-algorithm/string-searching/practice-problems/2/" />
+        <meta name="msvalidate.01" content="1BF418E510B5A17A2D71685C571BF4EB" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+        
+        <meta name="referrer" content="strict-origin-when-cross-origin">
+        
+
+        
+        <script>
+          (function() {
+              if (window.BOOMR && window.BOOMR.version) {
+                  return;
+              }
+              var dom, doc, where, iframe = document.createElement("iframe"),
+                  win = window;
+
+              function boomerangSaveLoadTime(e) {
+                  win.BOOMR_onload = (e && e.timeStamp) || new Date().getTime();
+              }
+              if (win.addEventListener) {
+                  win.addEventListener("load", boomerangSaveLoadTime, false);
+              } else if (win.attachEvent) {
+                  win.attachEvent("onload", boomerangSaveLoadTime);
+              }
+
+              iframe.src = "javascript:false";
+              iframe.title = "";
+              iframe.role = "presentation";
+              (iframe.frameElement || iframe).style.cssText = "width:0;height:0;border:0;display: none;";
+              where = document.getElementsByTagName("script")[0];
+              where.parentNode.insertBefore(iframe, where);
+
+              try {
+                  doc = iframe.contentWindow.document;
+              } catch (e) {
+                  dom = document.domain;
+                  iframe.src = "javascript:var d=document.open();d.domain='" + dom + "';void(0);";
+                  doc = iframe.contentWindow.document;
+              }
+              doc.open()._l = function() {
+                  var js = this.createElement("script");
+                  if (dom) this.domain = dom;
+                  js.id = "boomr-if-as";
+                  js.src = "https://s.go-mpulse.net/boomerang/" +
+                      "QKZWA-3BVYP-7W6XK-6HKWZ-EFFZ4";
+                  BOOMR_lstart = new Date().getTime();
+                  this.body.appendChild(js);
+              };
+              doc.write('<body onload="document._l();">');
+              doc.close();
+          })();
+        </script>
+        
+
+
+        
+<meta name="google-site-verification" content="ozqyeStBcz4eehbY9Ohb_IUQcA4y8BKzzDCT-H1QPPc" />
+
+
+        
+        
+        <!-- google analytics start -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-34729975-1', 'auto');
+            ga('require', 'displayfeatures');
+            
+            ga('send', 'pageview');
+        </script>
+        <!-- google analytics end -->
+        
+        
+
+        
+        
+        <!-- Google Tag Manager -->
+        <script>
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-PBHB3B9');
+        </script>
+        <!-- End Google Tag Manager -->
+        
+        
+
+        <title>    String Searching Practice Problems | Algorithms | page 2    | HackerEarth  </title>
+
+        
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<!-- Facebook tags -->
+<meta property="og:title" content="String Searching Practice Problems Algorithms | HackerEarth"/>
+<meta property="og:image" content="https://static-fastly.hackerearth.com/static/hackerearth/images/logo/HE_cover.jpg" />
+<meta property="og:description" content="Solve practice problems for String Searching to test your programming skills. Also go through detailed tutorials to improve your understanding to the topic."/>
+<meta property="og:url" content="https://www.hackerearth.com/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level="/>
+<meta property="og:site_name" content="HackerEarth"/>
+<meta property="og:type" content="website"/>
+<!-- end Facbook tags -->
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@HackerEarth"/>
+<meta name="twitter:url" content="https://www.hackerearth.com/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level="/>
+<meta name="twitter:title" content="String Searching Practice Problems Algorithms | HackerEarth"/>
+<meta name="twitter:description" content="Solve practice problems for String Searching to test your programming skills. Also go through detailed tutorials to improve your understanding to the topic."/>
+<!-- end Twitter tags -->
+
+        
+        <link rel="shortcut icon" href="https://static-fastly.hackerearth.com/static/hackerearth/images/logo/HE_identity.png" type="image/x-icon">
+        
+
+        
+
+        
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/base/base_common_combined.5ecd205819b2.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/base/marketing_footer.d4e680a6c44d.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/js/tooltip/tipTip.4cc4f68d44b4.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/offline/offline-theme-slide.12bc3d4c96b4.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/css/font-awesome-4.7.0/css/font-awesome.min.269550530cc1.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/css/opensans/opensans.06e0aa7529dc.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/css/hack/hack.8b30169f8a8b.css"/>
+            <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/css/unicons.9eda5fc182c1.css"/>
+        
+
+        
+
+
+        
+
+        <!-- Make the static variable available for all js files -->
+        <script>
+            var STATIC_URL = "https://static-fastly.hackerearth.com/static/";
+            var RECAPTCHA_V3_SITE_KEY = "6LeyqcIZAAAAAOcy_5WJORJsuu9zmbZZxIRp4-em";
+            var ssEnabled = false;
+        </script>
+
+        <!-- Store CSRF_COOKIE -->
+        <script>
+            var CSRF_COOKIE_USED = "True";
+            var CSRF_COOKIE = "H7CNnpJDX96Xm9u3bNdepvXW9iYdewn5rIMqT4p9qLAHpS7dLw6rlIRZeTsg4cPE";
+        </script>
+
+        
+        
+        <script src="https://www.google.com/recaptcha/api.js?render=6LeyqcIZAAAAAOcy_5WJORJsuu9zmbZZxIRp4-em"></script>
+        
+
+        
+<link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/hackathon/problem1.f25c10029976.css"/>
+<link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/problems/practice_track1.57bb6fa1c527.css"/>
+
+
+    
+<script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch"}]);</script>
+                              <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="QKZWA-3BVYP-7W6XK-6HKWZ-EFFZ4",function(){function e(){if(!o){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,i.parentNode.appendChild(e),o=!0}}function t(e){o=!0;var n,t,a,r,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(i.parentNode,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",r=(a.frameElement||a).style,r.width=0,r.height=0,r.border=0,r.display="none",i.parentNode.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void(0);",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=12,window.BOOMR.url=n+"QKZWA-3BVYP-7W6XK-6HKWZ-EFFZ4";var i=document.currentScript||document.getElementsByTagName("script")[0],o=!1,r=document.createElement("link");if(r.relList&&"function"==typeof r.relList.supports&&r.relList.supports("preload")&&"as"in r)window.BOOMR.snippetMethod="p",r.href=window.BOOMR.url,r.rel="preload",r.as="script",r.addEventListener("load",e),r.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!o)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),i.parentNode.appendChild(r);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="eqbaqadb52h64jqacqjqaaiaabrruih5-f-f319a1e23-clienttons-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"32","ak.cp":"755788","ak.ai":parseInt("678462",10),"ak.ol":"0","ak.cr":65,"ak.ipv":6,"ak.proto":"http/1.1","ak.rid":"233a2b12","ak.r":33582,"ak.a2":n,"ak.m":"dsca","ak.n":"essl","ak.bpcip":"2402:800:61ee:8fee::","ak.cport":58829,"ak.gh":"118.214.167.78","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.csrc":"-","ak.acc":"reno","ak.t":"1662656765","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==D7XaGNANBwv9VR0JKJshedKd1pN1l23P06V2MVpqfesJ4OaLnW2S7sbO/VYZg3yeSnhBYHBj1L494D6piti5I4kpwPeW7ckv6P9JFuaTq6By8KFcULcAPLcdoBqPLC+Vhq3FKP1dJaqbpZl5TIRvsRELDvBYnaZ7MovKzvK3Dx0qwZRW241bQ5mNpBUvD+3Xp73zRzO34/QgsrTe9G8irgRsD9CGoV3PSEqaAjuN2+A2Y3pwZs3FBkXGQVdXD9Q07JCgpmnDxobe/Nobx/vhsntgdwgtRW7lTp3n632KFHIqCh3QdqaKGOEeJmT/dqONd+z0qsc2M94gy/IG0j+7kyTPjIBecYOQdw8zg4/a4AToW5cImIXqUT9zoHvZjDPcAknUSozMNkTM0myyO88jGc7HYUvp93nkCmJgdLEbs8Q=","ak.pv":"22","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+
+    <body >
+        
+            
+            
+<link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/base/notification_toast.8d9bf9c8e14b.css"/>
+<div class="notification-toast-container notification-top-center regular">
+    <div class="notification-errors">
+        <p id="notification-auth-error" class="error-item hidden no-margin">
+            <span class="fa fa-times less-margin-right"></span>Ensure that you are logged in and have the required permissions to access the test.
+        </p>
+        <p id="notification-server-error" class="error-item hidden no-margin">
+            <span class="fa fa-times less-margin-right"></span>A server error has occurred. Please refresh the page or try after some time.
+        </p>
+        <p id="notification-error" class="error-item hidden no-margin">
+            <span class="fa fa-times less-margin-right"></span>An error has occurred. Please refresh the page or try after some time.
+        </p>
+        <p id="notification-custom-error" class="error-item hidden no-margin"></p>
+        
+    </div>
+</div>
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/base/notification-toast.4ef32e7f16a7.js" crossorigin="anonymous" defer></script>
+
+        
+        
+        
+        <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PBHB3B9"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        
+        
+
+        <!-- Placeholder for any alert message on the site -->
+        
+        <div id="alert-message-holder">
+            
+
+            <!-- put a dummy message box so that it can be used when cloning
+                 and adding more -->
+            <div class="alert-message hidden">
+                <div class="message float-left"></div>
+                <div class="cross-holder float-left"><span class="small-cross sprites"></span></div>
+                <div class="clear"></div>
+            </div>
+        </div> <!-- end alert-message-holder -->
+
+        <!-- Placeholder for any error message on the site -->
+        
+        <div id="error-message-holder">
+            
+
+            <!-- put a dummy message box so that it can be used when cloning
+                 and adding more -->
+            <div class="error-message hidden">
+                <div class="message float-left"></div>
+                <div class="cross-holder float-left"><span class="small-cross sprites"></span></div>
+                <div class="clear"></div>
+            </div>
+        </div> <!-- end error-message-holder -->
+        
+        
+
+        
+    
+    
+        
+        <header class="header community-header">
+            <i class="fa fa-bars mobile-menu-btn"></i>
+            <nav class="navigation">
+                
+                <a href="https://www.hackerearth.com" class="logo logo-h-terminal  no-underline float-left track-header-logo"></a>
+                
+
+                
+                <ul class="nav-bar no-padding float-left tablet-hide">
+                    <!-- practice page -->
+                    <li id="problems" class="nav-bar-menu selected"><a class="track-header-problems" href="https://www.hackerearth.com/practice/">PRACTICE</a></li>
+                    <!-- challenges page -->
+                    <li id="challenges" class="nav-bar-menu "><a class="track-header-challenges" href="https://www.hackerearth.com/challenges/">COMPETE</a></li>
+                    <!--Jobs-->
+                    <li id="jobs" class="nav-bar-menu "><a class="track-header-jobs" href="https://www.hackerearth.com/jobs/">JOBS</a></li>
+                    <!--Leaderboard page-->
+                    <li id="leaderboard" class="nav-bar-menu "><a class="track-header-leaderboard" href="https://www.hackerearth.com/leaderboard/contests/rated/">LEADERBOARD
+                    </a></li>
+                </ul>
+                <ul class="nav-bar right-nav-bar no-padding float-right tablet-hide">
+                    
+                    
+                    <link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/search/search.e1ef7070302d.css"/>
+                    <li id="searchbar">
+                        <div id="search-icon-container" class="float-right">
+                            <i class="fa fa-search"></i>
+                        </div>
+                        <input id="searchbar-input" class="float-left" type="text" value="" name="q" autocomplete="off" spellcheck="false" placeholder="Search developers, problems, etc" ajax1="/search/AJAX/search/" ajax2="/search/search-results/" ></input>
+                        <div id="search-dropdown"></div>
+                    </li>
+                    
+                    
+
+                    
+
+                    
+
+                    
+
+                    
+                    <li class="nav-bar-menu login-menu-btn"><a target="login-modal" class="track-header-login show-modal">LOGIN</a></li>
+                    <li class="nav-bar-menu signup-menu-btn"><a target="login-modal" class="track-header-signup show-modal show-signup-in-modal">SIGN UP</a></li>
+                    
+
+                    <div class="clear"></div>
+                </ul> <!-- nav-bar -->
+                <div class="clear"></div>
+                
+            </nav> <!-- navigation -->
+
+            <i class="fa fa-filter challenge-filter-btn hidden"></i>
+
+        </header> <!-- header -->
+        
+    
+     <style>
+  #gdpr-modal {
+    position: absolute;
+    bottom: 0;
+  }
+</style>
+<div id="gdpr-modal" class="modal-window smaller-modal hidden">
+  
+
+<style>
+  #gdpr-modal-content {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #gdpr-modal-content .modal-header {
+    padding: 50px 55px 35px 55px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  #gdpr-modal-content .modal-footer {
+    padding: 25px 55px 90px;
+  }
+
+  #gdpr-modal-content .modal-content {
+    padding: 0 55px 5px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #gdpr-modal-content .modal-footer .checkbox-row {
+    font-size: 16px;
+    display: inline-flex;
+  }
+
+  #gdpr-modal-content a {
+    color: #0099ff;
+  }
+  
+  #gdpr-modal-content .button.disabled {
+    background: #f5f6f6 !important;
+  }
+</style>
+
+<div id="gdpr-modal-content">
+  
+<div class="modal-header">HackerEarth’s Privacy Policy and Terms of Service</div>
+  <div class="modal-content">
+      We care about your data privacy. HackerEarth uses the information that you provide to contact you about relevant content, products, and services. <br /> <br />
+
+      Our <a href="/privacy/" target="_blank">Privacy Policy</a> and <a href="/terms-of-service/" target="_blank">Terms of Service</a> will help you understand that you are in control of your data at HackerEarth.
+  </div>
+  <div class="modal-footer">
+    <div class="margin-bottom-15 regular checkbox-row">
+      <input type="checkbox" name="gdpr-tnc" />
+      I have read and I agree.
+    </div>
+    <div class="">
+      <input type="submit" name="submit" value="Proceed" class="button btn-blue fontawesome btn-largest disabled large" id="gdpr-submit" />
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+    
+
+    
+    
+    <div class="top-banner">
+        <p class="banner-text login-banner dark">
+        
+         Signup and get free access to 100+ Tutorials and Practice Problems <a class="button btn-orange-bright inline-block medium-margin-left show-modal show-signup-in-modal" target="login-modal">Start Now</a>
+        
+        </p>
+    </div>
+    
+    
+
+    
+
+    <div id="comment-share-modal" class="modal-window small-modal">
+        <div class="modal-header">
+            Comment permalink
+        </div>
+        <div class="modal-content">
+            <div class="comment-share-wrapper align-center">
+                <textarea class="comment-share-text" type="textbox" rows="4" readonly="readonly" onclick="this.select();"></textarea>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+    
+
+    <!-- This is the center page which has a fixed width of 1100px -->
+    
+<div class="layout-container">
+    <div class="gray-wide-container problem-track">
+        <div class="breadcrumb dark small no-margin">
+            <a href="/practice/" class="link-color"> All Tracks</a>
+            <i class="light fa fa-angle-right"></i>
+            <a href="/practice/algorithms/" class="link-color no-underline">Algorithms </a>
+            <i class="light fa fa-angle-right"></i>
+            <a href="/practice/algorithms/string-algorithm/" class="link-color no-underline"> String Algorithms </a>
+            <span class="dark sub-topic-name">
+                <i class="light fa fa-angle-right"></i>
+                <span class="sub-topic light weight-400">  String Searching </span>
+            </span>
+        </div>
+
+        <div class="left-section border-radius-3 light float-left small">
+            
+
+
+
+<div class="left-section-track-card">
+    <div class="track-name-card">
+        <div class="track-logo">
+            <img src="https://static-fastly.hackerearth.com/static/images/practice_tracks/algorithms@2x.png" class="track-icon" alt="Algorithms">
+        </div>
+        <div class="track-name">
+            <span class="larger-24 dark"> Algorithms</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    
+    <div class="leaderboard-card align-center pagelet-inview" id="user-track-rank" ajax="/pagelets/user-anatomy-rank/191/" target="user-track-rank" loader="true">
+
+    </div>
+    
+</div>
+
+
+<div class="mobile-select-topic-container">
+    <span class="small light">Topics: </span>
+    <div class="current-topic-container show-modal ellipsis v-align-middle" target="topic-select-modal">
+        <span class="dark regular">String Searching</span>
+        <i class="fa fa-caret-down regular dark"></i>
+    </div>
+</div>
+
+<div id="topic-select-modal" class="modal-window large-modal">
+    <div class="modal-content">
+        <div class="subtrack-list-container mobile">
+            <ul class="subtrack-list no-list-style">
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            Searching
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/searching/linear-search/" class="block dark no-underline left-nav-link ellipsis">Linear Search</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/searching/binary-search/" class="block dark no-underline left-nav-link ellipsis">Binary Search</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/searching/ternary-search/" class="block dark no-underline left-nav-link ellipsis">Ternary Search</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            Sorting
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/bubble-sort/" class="block dark no-underline left-nav-link ellipsis">Bubble Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/selection-sort/" class="block dark no-underline left-nav-link ellipsis">Selection Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/insertion-sort/" class="block dark no-underline left-nav-link ellipsis">Insertion Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/merge-sort/" class="block dark no-underline left-nav-link ellipsis">Merge Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/quick-sort/" class="block dark no-underline left-nav-link ellipsis">Quick Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/counting-sort/" class="block dark no-underline left-nav-link ellipsis">Counting Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/radix-sort/" class="block dark no-underline left-nav-link ellipsis">Radix Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/heap-sort/" class="block dark no-underline left-nav-link ellipsis">Heap Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/sorting/bucket-sort/" class="block dark no-underline left-nav-link ellipsis">Bucket Sort</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            Greedy Algorithms
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/greedy/basics-of-greedy-algorithms/" class="block dark no-underline left-nav-link ellipsis">Basics of Greedy Algorithms</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            Graphs
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/graph-representation/" class="block dark no-underline left-nav-link ellipsis">Graph Representation</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/breadth-first-search/" class="block dark no-underline left-nav-link ellipsis">Breadth First Search</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/depth-first-search/" class="block dark no-underline left-nav-link ellipsis">Depth First Search</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/minimum-spanning-tree/" class="block dark no-underline left-nav-link ellipsis">Minimum Spanning Tree</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/shortest-path-algorithms/" class="block dark no-underline left-nav-link ellipsis">Shortest Path Algorithms</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/flood-fill-algorithm/" class="block dark no-underline left-nav-link ellipsis">Flood-fill Algorithm</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/articulation-points-and-bridges/" class="block dark no-underline left-nav-link ellipsis">Articulation Points and Bridges</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/biconnected-components/" class="block dark no-underline left-nav-link ellipsis">Biconnected Components</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/strongly-connected-components/" class="block dark no-underline left-nav-link ellipsis">Strongly Connected Components</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/topological-sort/" class="block dark no-underline left-nav-link ellipsis">Topological Sort</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/hamiltonian-path/" class="block dark no-underline left-nav-link ellipsis">Hamiltonian Path</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/maximum-flow/" class="block dark no-underline left-nav-link ellipsis">Maximum flow</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/minimum-cost-maximum-flow/" class="block dark no-underline left-nav-link ellipsis">Minimum Cost Maximum Flow</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/graphs/min-cut/" class="block dark no-underline left-nav-link ellipsis">Min-cut</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            String Algorithms
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/string-algorithm/basics-of-string-manipulation/" class="block dark no-underline left-nav-link ellipsis">Basics of String Manipulation</a></li>
+                                
+                                <li class="selected ">
+                                    
+                                    <a href="/practice/algorithms/string-algorithm/string-searching/" class="block dark no-underline left-nav-link ellipsis">String Searching</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/string-algorithm/z-algorithm/" class="block dark no-underline left-nav-link ellipsis">Z Algorithm</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/string-algorithm/manachars-algorithm/" class="block dark no-underline left-nav-link ellipsis">Manachar’s Algorithm</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+                    
+                    <li class="subtrack">
+                        <div class="subtopic-name darker regular weight-700 pointer">
+                            Dynamic Programming
+                        </div>
+                        <div class="subtopics-container">
+                            <ul class="no-list-style subtopics-list dark weight-400 regular">
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/dynamic-programming/introduction-to-dynamic-programming-1/" class="block dark no-underline left-nav-link ellipsis">Introduction to Dynamic Programming 1</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/dynamic-programming/2-dimensional/" class="block dark no-underline left-nav-link ellipsis">2 Dimensional</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/dynamic-programming/state-space-reduction/" class="block dark no-underline left-nav-link ellipsis">State space reduction</a></li>
+                                
+                                <li >
+                                    
+                                    <a href="/practice/algorithms/dynamic-programming/bit-masking/" class="block dark no-underline left-nav-link ellipsis">Dynamic Programming and Bit Masking</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="subtrack-list-container">
+    <ul class="subtrack-list no-list-style">
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    Searching
+                    <i class="fa fa-angle fa-angle-down"></i>
+                </div>
+                <div class="subtopics-container hidden">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/searching/linear-search/" class="block dark no-underline left-nav-link ellipsis" title="Linear Search">Linear Search</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/searching/binary-search/" class="block dark no-underline left-nav-link ellipsis" title="Binary Search">Binary Search</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/searching/ternary-search/" class="block dark no-underline left-nav-link ellipsis" title="Ternary Search">Ternary Search</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    Sorting
+                    <i class="fa fa-angle fa-angle-down"></i>
+                </div>
+                <div class="subtopics-container hidden">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/bubble-sort/" class="block dark no-underline left-nav-link ellipsis" title="Bubble Sort">Bubble Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/selection-sort/" class="block dark no-underline left-nav-link ellipsis" title="Selection Sort">Selection Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/insertion-sort/" class="block dark no-underline left-nav-link ellipsis" title="Insertion Sort">Insertion Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/merge-sort/" class="block dark no-underline left-nav-link ellipsis" title="Merge Sort">Merge Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/quick-sort/" class="block dark no-underline left-nav-link ellipsis" title="Quick Sort">Quick Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/counting-sort/" class="block dark no-underline left-nav-link ellipsis" title="Counting Sort">Counting Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/radix-sort/" class="block dark no-underline left-nav-link ellipsis" title="Radix Sort">Radix Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/heap-sort/" class="block dark no-underline left-nav-link ellipsis" title="Heap Sort">Heap Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/sorting/bucket-sort/" class="block dark no-underline left-nav-link ellipsis" title="Bucket Sort">Bucket Sort</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    Greedy Algorithms
+                    <i class="fa fa-angle fa-angle-down"></i>
+                </div>
+                <div class="subtopics-container hidden">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/greedy/basics-of-greedy-algorithms/" class="block dark no-underline left-nav-link ellipsis" title="Basics of Greedy Algorithms">Basics of Greedy Algorithms</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    Graphs
+                    <i class="fa fa-angle fa-angle-down"></i>
+                </div>
+                <div class="subtopics-container hidden">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/graph-representation/" class="block dark no-underline left-nav-link ellipsis" title="Graph Representation">Graph Representation</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/breadth-first-search/" class="block dark no-underline left-nav-link ellipsis" title="Breadth First Search">Breadth First Search</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/depth-first-search/" class="block dark no-underline left-nav-link ellipsis" title="Depth First Search">Depth First Search</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/minimum-spanning-tree/" class="block dark no-underline left-nav-link ellipsis" title="Minimum Spanning Tree">Minimum Spanning Tree</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/shortest-path-algorithms/" class="block dark no-underline left-nav-link ellipsis" title="Shortest Path Algorithms">Shortest Path Algorithms</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/flood-fill-algorithm/" class="block dark no-underline left-nav-link ellipsis" title="Flood-fill Algorithm">Flood-fill Algorithm</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/articulation-points-and-bridges/" class="block dark no-underline left-nav-link ellipsis" title="Articulation Points and Bridges">Articulation Points and Bridges</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/biconnected-components/" class="block dark no-underline left-nav-link ellipsis" title="Biconnected Components">Biconnected Components</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/strongly-connected-components/" class="block dark no-underline left-nav-link ellipsis" title="Strongly Connected Components">Strongly Connected Components</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/topological-sort/" class="block dark no-underline left-nav-link ellipsis" title="Topological Sort">Topological Sort</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/hamiltonian-path/" class="block dark no-underline left-nav-link ellipsis" title="Hamiltonian Path">Hamiltonian Path</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/maximum-flow/" class="block dark no-underline left-nav-link ellipsis" title="Maximum flow">Maximum flow</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/minimum-cost-maximum-flow/" class="block dark no-underline left-nav-link ellipsis" title="Minimum Cost Maximum Flow">Minimum Cost Maximum Flow</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/graphs/min-cut/" class="block dark no-underline left-nav-link ellipsis" title="Min-cut">Min-cut</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    String Algorithms
+                    <i class="fa fa-angle fa-angle-up"></i>
+                </div>
+                <div class="subtopics-container ">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/string-algorithm/basics-of-string-manipulation/" class="block dark no-underline left-nav-link ellipsis" title="Basics of String Manipulation">Basics of String Manipulation</a>
+                            
+                            </li>
+                        
+                        <li class="selected ">
+                            
+                            
+                                <span class="block dark no-underline ellipsis left-nav-span" title="String Searching">String Searching</span>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/string-algorithm/z-algorithm/" class="block dark no-underline left-nav-link ellipsis" title="Z Algorithm">Z Algorithm</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/string-algorithm/manachars-algorithm/" class="block dark no-underline left-nav-link ellipsis" title="Manachar’s Algorithm">Manachar’s Algorithm</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+            
+            <li class="subtrack">
+                <div class="subtopic-name darker regular weight-700 pointer">
+                    Dynamic Programming
+                    <i class="fa fa-angle fa-angle-down"></i>
+                </div>
+                <div class="subtopics-container hidden">
+                    <ul class="no-list-style subtopics-list dark weight-400 regular">
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/dynamic-programming/introduction-to-dynamic-programming-1/" class="block dark no-underline left-nav-link ellipsis" title="Introduction to Dynamic Programming 1">Introduction to Dynamic Programming 1</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/dynamic-programming/2-dimensional/" class="block dark no-underline left-nav-link ellipsis" title="2 Dimensional">2 Dimensional</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/dynamic-programming/state-space-reduction/" class="block dark no-underline left-nav-link ellipsis" title="State space reduction">State space reduction</a>
+                            
+                            </li>
+                        
+                        <li >
+                            
+                            
+                                <a href="/practice/algorithms/dynamic-programming/bit-masking/" class="block dark no-underline left-nav-link ellipsis" title="Dynamic Programming and Bit Masking">Dynamic Programming and Bit Masking</a>
+                            
+                            </li>
+                        
+                    </ul>
+                </div>
+            </li>
+            
+        
+    </ul>
+</div>
+
+        </div>
+        <div class="right-section">
+            <div class="right-section-header">
+                <h1 class="dark no-margin larger-24 weight-600">String Searching</h1>
+                <ul class="no-list-style caps weight-700 regular tutorial-problems-tab tab-underline-blue">
+                    
+                    <li class="tab standard-margin-right">
+                    <span class="tab-name tab-dark inline-block no-underline selected" link="/practice/algorithms/string-algorithm/string-searching/practice-problems/" id="practice-link">problems</span>
+                    </li>
+                    
+                    
+                        <li class="standard-margin-right tab">
+                            <a href="/practice/algorithms/string-algorithm/string-searching/tutorial/" class="tab-name tab-dark inline-block no-underline" id="tutorial-tab">tutorial</a>
+                        </li>
+                    
+
+                    
+                    <li class="clear"></li>
+                </ul>
+            </div>
+            <div class="right-section-content darker regular">
+                <div class="opacity-loader hidden">
+                    <div class="dots-loader"></div>
+                </div>
+                <div id="problems-list-container" class="problems-list">
+                    <div class="solve-probs">
+                        
+                        <div class="head">
+                            <h2 class="dark regular inline-block weight-400">Solve Problems</h2>
+                            <div class="problem-filter-container float-right">
+                                <div class="problem-filter-wrapper">
+                                
+                                <div class="float-right diff-filter">
+                                    <span class="float-left dark small weight-400">Difficulty :</span>
+                                    <label for="diff-filter">
+                                        <select class="dark caps small" id="diff-filter">
+                                            <option value="">All</option>
+                                            
+                                            <option  value="easy">Easy</option>
+                                            
+                                            <option  value="medium">Medium</option>
+                                            
+                                            <option  value="hard">Hard</option>
+                                            
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="prob-list-container">
+                            
+                                <ul class="prob-list" id="prob-list">
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/jump-and-achieve-1-4588741c/">Rectangle matrices</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">509</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">75%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Easy</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/jump-and-achieve-1-4588741c/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+                                    <li class="prob recommendation" id="recommendation">
+                                        <span class="title bold" id="challenge-title"></span>
+                                        <span class="view-challenge hide" id="view-challenge"><a href="#" id="event-link" class="button btn-blue  btn-small event-view">Participate</a></span>
+                                    </li>
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/prefix-and-substring-queries-87616b64/">Prefix and substring queries</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">114</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">38%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Hard</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/prefix-and-substring-queries-87616b64/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/palindrome-queries-eefd5c23/">Palindrome queries</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">711</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">80%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Medium</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/palindrome-queries-eefd5c23/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/common-prime-5a915755/">Common Prime</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">3116</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">87%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Easy</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/common-prime-5a915755/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/lost-in-strings-11fa4a5d/">Lost in strings</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">1167</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">86%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Hard</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/lost-in-strings-11fa4a5d/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/minimum-rotations-8d545eb1/">Minimum rotations</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">567</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">70%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Easy</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/minimum-rotations-8d545eb1/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/missing-string-c28c0934/">Missing String</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">312</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">30%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Medium</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/missing-string-c28c0934/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/the-flight-optimization-0267b2b5/">Flight Search</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">1965</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">51%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Easy</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/the-flight-optimization-0267b2b5/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/string-4-d1093b86/">String</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">5085</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">65%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Easy</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/string-4-d1093b86/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                    
+
+                                    <li class="prob ">
+                                        <i class="fa fa-circle prob-indicator tool-tip" title="Unattempted"></i>
+                                        <div class="prob-left float-left">
+                                        <h4 class="prob-title dark weight-600"><a class="dark" href="/problem/algorithm/forming-almost-similar-string-d551fc3d/">Almost Same String</a></h4>                                        <p class="prob-desc smaller light">
+                                            <span>ATTEMPTED BY: <b class="weight-500 small">746</b></span>
+                                            <span>SUCCESS RATE: <b class="weight-500 small">22%</b></span>
+                                            <span>LEVEL: <b class="weight-500 small">Medium</b></span>
+                                            </p>
+                                        </div>
+                                        <div class="prob-right float-right">
+                                            
+                                            <a href="/problem/algorithm/forming-almost-similar-string-d551fc3d/" class="regular block prob-solve-now-link">SOLVE NOW</a>
+                                            <!-- <button class="regular block prob-solve-now-link button btn-blue-outline btn-small">SOLVE NOW</button> -->
+                                            
+                                        </div>
+                                        <div class="clear"></div>
+                                        <!-- </a> -->
+                                    </li>
+                                    
+                                </ul>
+                                <div class="pagination align-center regular medium-margin standard-margin-right medium-margin-bottom">
+                                    <span class="step-links">
+                                        
+                                        
+                                        <!-- For pages greater than 3 -->
+                                            
+                                                
+                                                <a class="load-prob-pagination arrow" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/1/?sort_by=partially solved&p_level=">
+                                                    <i class="fa fa-angle-double-left dark"></i>
+                                                </a>
+                                                <a class="load-prob-pagination arrow" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/1/?sort_by=partially solved&p_level=">
+                                                    <i class="fa fa-angle-left dark"></i>
+                                                </a>
+                                                <a id="p1" class="load-prob-pagination" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/1/?sort_by=partially solved&p_level=">
+                                                    <span class="number dark">1</span>
+                                                </a>
+                                                
+                                            
+
+                                            <span class="current weight-700">2</span>
+
+                                            
+                                                
+                                                <a id="p3" class="load-prob-pagination" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/3/?sort_by=partially solved&p_level=">
+                                                    <span class="number dark">3</span>
+                                                </a>
+                                                <a class="load-prob-pagination arrow" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/3/?sort_by=partially solved&p_level=">
+                                                    <i class="fa fa-angle-right dark"></i>
+                                                </a>
+                                                <a class="load-prob-pagination arrow" href="/practice/algorithms/string-algorithm/string-searching/practice-problems/4/?sort_by=partially solved&p_level=">
+                                                    <i class="fa fa-angle-double-right dark"></i>
+                                                </a>
+                                                
+                                            
+                                        
+                                        
+                                    </span>
+                                </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- include modal window for login/signup -->
+    
+        
+
+<div id="login-modal" class="modal-window smaller-modal hidden challenges-signup">
+    <div class="modal-header">
+        <div class="login-form bold heading">Log in</div>
+        <div class="signup-form-div hidden bold heading">Sign up</div>
+        <div class="password-reset hidden bold heading">Reset Password</div>
+    </div>
+    <div class="modal-content">
+
+        <div class="login-form">
+            
+                
+
+
+<div class="modal-social-login align-center">
+    
+        <div class="social-auth-row">
+            
+                <a url='/zeus/facebook/login/?display=popup&next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=facebook&source=practice&purpose=login' title="Facebook" class="button btn-facebook btn-medium show-popup inline-block margin-top-8 less-margin-right less-margin-bottom" minimal="true">
+            
+                <i class="fa fa-facebook"></i>
+                <span class="regular less-margin-left">
+                    Log in with Facebook
+                </span>
+            </a>
+
+            
+                <a url='/zeus/github/login/?next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=github&source=practice&purpose=login' title="GitHub" class="button btn-github btn-medium show-popup inline-block margin-top-8 less-margin-right" minimal="true">
+            
+                <i class="fa fa-github"></i>
+                <span class="regular less-margin-left">
+                    Log in with GitHub
+                </span>
+            </a>
+        </div>
+        
+            <a url='/zeus/google/login/?next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=google&source=practice&purpose=login' title="Google" class="button btn-google button-medium show-popup margin-top-8 less-margin-right sign-up-btn-modified" minimal="true">
+        
+        <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/google_logo.png" alt="Google" style="vertical-align: middle">
+        <span class="regular roboto-font-family">
+            Sign in with Google
+        </span>
+        </a>
+    
+    <div class="clear"></div>
+</div>
+<div class="align-center medium-margin">
+    <span class="large light">or</span>
+</div>
+
+            
+            <form id="modal-login-form" name="login-form" method="POST" class="ajax-form medium-margin" ajax="/AJAX/login/">
+                
+
+
+
+
+    
+
+        
+
+        
+        <div class="wrapper small-wrapper">
+            
+            <input type="text" name="login" placeholder="Username or Email" required id="id_login" />
+        </div>
+        <div class="wrapper small-wrapper">
+            <input type="password" name="password" placeholder="Password" required id="id_password" />
+        </div>
+        
+    
+    <input type="hidden" name="next" value="/practice/algorithms/string-algorithm/string-searching/practice-problems/2/"/>
+     <div>
+         <a href="#" class="link-3 show-hide-many login-signup-link" show="password-reset" hide="login-form">Forgot Password?</a>
+        <div class="clear"></div>
+    </div>
+    <div class="login-footer standard-margin">
+        <div>
+            <input type="submit" name="submit" clicked="Logging In.." value="Log in" class="button login-btn weight-600 large"/>
+        </div>
+        
+        <div class="align-center dark regular dont-have-account">
+            Don't have an account? <a href="#" class="login-signup-link show-hide-many regular bold" show="signup-form-div" hide="login-form"> Sign up</a>
+        </div>
+    </div>
+    
+    
+
+
+
+            </form>
+        </div>
+
+        <div class="signup-form-div hidden">
+            
+                
+
+
+<div class="modal-social-signup align-center">
+    
+        <div class="social-auth-row">
+            
+                <a id="social-login-button-fb" url='/zeus/facebook/login/?display=popup&next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=facebook&source=practice&purpose=signup' title="Facebook" class="button btn-facebook btn-medium show-popup inline-block margin-top-8 less-margin-right hidden" minimal="true">
+            
+                <i class="fa fa-facebook"></i>
+                <span class="regular weight-600 less-margin-left">
+                    Facebook
+                </span>
+            </a>
+            <a class="button btn-facebook btn-medium inline-block margin-top-8 less-margin-right less-margin-bottom social-login-button social-login-button-fb show-modal" target="gdpr-modal">
+                <i class="fa fa-facebook"></i>
+                <span class="regular less-margin-left">
+                    Sign up with Facebook
+                </span>
+            </a>
+
+            
+                <a id="social-login-button-github" url='/zeus/github/login/?next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=github&source=practice&purpose=signup' title="GitHub" class="button btn-github btn-medium inline-block margin-top-8 less-margin-right show-popup hidden" minimal="true">
+            
+                <i class="fa fa-github"></i>
+                <span class="regular weight-600 less-margin-left">
+                    GitHub
+                </span>
+            </a>
+            <a class="button btn-github btn-medium inline-block margin-top-8 less-margin-right social-login-button social-login-button-github show-modal" target="gdpr-modal">
+                <i class="fa fa-github"></i>
+                <span class="regular less-margin-left">
+                    Sign up with GitHub
+                </span>
+            </a>
+        </div>
+
+        
+            <a id="social-login-button-g" url='/zeus/google/login/?next=%2Fsocial-login-complete%2F%3Forigin_protocol%3Dhttps%26origin_host%3Dwww.hackerearth.com%26redirect%3D/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&amp;p_level=&update=google&source=practice&purpose=signup' title="Google" class="button btn-google btn-medium inline-block margin-top-8 less-margin-right show-popup hidden" minimal="true">
+        
+            <i class="fa fa-google-plus"></i>
+            <span class="regular weight-600 less-margin-left">
+                Google
+            </span>
+        </a>
+        <a class="button btn-google button-medium less-margin-right social-login-button social-login-button-g show-modal sign-up-btn-modified" target="gdpr-modal">
+            <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/google_logo.png" alt="Google" style="vertical-align: middle">
+            <span class="regular roboto-font-family">
+                Sign up with Google
+            </span>
+        </a>
+    
+    <div class="clear"></div>
+</div>
+<div class="align-center medium-margin">
+    <span class="large light">or</span>
+</div>
+
+            
+            
+            <form id="modal-signup-form" name="signup-form" method="POST" class="ajax-form medium-margin" ajax="/AJAX/hackerearth/signup/?source=practice&next=/practice/algorithms/string-algorithm/string-searching/practice-problems/2/">
+            
+                
+
+
+
+    
+        
+
+        
+        <div class="wrapper small-wrapper float-left">
+            <input type="text" name="first_name" placeholder="First Name" maxlength="30" required id="id_first_name" />
+        </div>
+
+        <div class="wrapper small-wrapper float-right">
+            <input type="text" name="last_name" placeholder="Last Name" maxlength="30" id="id_last_name" />
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="wrapper small-wrapper">
+            <input type="text" name="email" placeholder="Email" maxlength="75" required id="id_email" />
+        </div>
+        <div class="wrapper small-wrapper password-wrapper">
+            <input type="password" name="password" placeholder="Password" required id="id_password" />
+            
+
+<div class="password-tooltip hidden">
+    <div class="tooltip-heading align-center">Password requirements</div>
+    <ul>
+        <li id='js-alphabet'><span>An alphabet</span></li>
+        <li id='js-number'><span>A number</span></li>
+        <li id='js-special'><span>A special character</span></li>
+        <li id='js-length'><span>Minimum 8 characters</span></li>
+    </ul>
+</div>
+        </div>
+        <div class="wrapper small-wrapper signup-captcha">
+            <input type="hidden" name=g-recaptcha-response id="id_recaptcha">
+This site is protected by reCAPTCHA and the Google             <a href="https://policies.google.com/privacy">Privacy Policy</a>             and <a href="https://policies.google.com/terms">            Terms of Service</a> apply.
+        </div>
+
+    
+    <div class="signup-footer medium-margin">
+        <button id="signup-start-now" class="button login-btn weight-600 large disabled recaptcha-v3 " target="gdpr-modal"
+            
+            recaptcha-site-key="6LeyqcIZAAAAAOcy_5WJORJsuu9zmbZZxIRp4-em" data-action="signup" country-code="VN"
+            target-form="modal-signup-form"
+        >Sign up</button>
+        <div class="align-center regular dont-have-account">
+            Have an account? <a href="#" class="show-hide-many regular login-signup-link bold" show="login-form" hide="signup-form-div"> Log in</a>
+        </div>
+    </div>
+
+    <style>
+  #gdpr-modal {
+    position: absolute;
+    bottom: 0;
+  }
+</style>
+<div id="gdpr-modal" class="modal-window smaller-modal hidden">
+  
+
+<style>
+  #gdpr-modal-content {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #gdpr-modal-content .modal-header {
+    padding: 50px 55px 35px 55px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  #gdpr-modal-content .modal-footer {
+    padding: 25px 55px 90px;
+  }
+
+  #gdpr-modal-content .modal-content {
+    padding: 0 55px 5px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #gdpr-modal-content .modal-footer .checkbox-row {
+    font-size: 16px;
+    display: inline-flex;
+  }
+
+  #gdpr-modal-content a {
+    color: #0099ff;
+  }
+  
+  #gdpr-modal-content .button.disabled {
+    background: #f5f6f6 !important;
+  }
+</style>
+
+<div id="gdpr-modal-content">
+  
+<div class="modal-header">HackerEarth’s Privacy Policy and Terms of Service</div>
+  <div class="modal-content">
+      We care about your data privacy. HackerEarth uses the information that you provide to contact you about relevant content, products, and services. <br /> <br />
+
+      Our <a href="/privacy/" target="_blank">Privacy Policy</a> and <a href="/terms-of-service/" target="_blank">Terms of Service</a> will help you understand that you are in control of your data at HackerEarth.
+  </div>
+  <div class="modal-footer">
+    <div class="margin-bottom-15 regular checkbox-row">
+      <input type="checkbox" name="gdpr-tnc" />
+      I have read and I agree.
+    </div>
+    <div class="">
+      <input type="submit" name="submit" value="Proceed" class="button btn-blue fontawesome btn-largest disabled large" id="gdpr-submit" />
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/hackerearth/password-requirements.99680283a61f.js" crossorigin="anonymous" defer></script>
+<script type='text/javascript'>
+    window.onload = showPasswordTooltip($('.password-wrapper #id_password'), false);
+    showPasswordTooltip($('#password-error #id_password'), true);
+</script>
+
+
+            </form>
+        </div>
+
+        <div class="password-reset hidden">
+            <form name="password-reset" method="POST" class="ajax-form" ajax="/AJAX/password/reset/?next=/practice/algorithms/string-algorithm/string-searching/practice-problems/2/">
+                
+
+
+
+
+    
+    <p class="regular"> A password reset link will be sent to the following email id</p>
+    
+    <div class="wrapper">
+        
+        <input type="text" name="email" size="30" placeholder="Email" required id="id_email" />
+    </div>
+    
+    <div class="reset-footer medium-margin">
+        <input id="reset-password" type="submit" name="submit" clicked="Sending.." value="Send Password Reset Link" class="button login-btn weight-600"/>
+        <button id="login-link" class="login-link show-hide-many link-btn button-medium pointer bold" show="login-form" hide="password-reset">Back to login page</button>
+    </div>
+
+<script>
+    $('#reset-password').click(function(){
+        $('#login-link').addClass('hidden');
+    })
+</script>
+
+            </form>
+        </div>
+
+    </div>
+    <div class="gdpr-modal-content hidden">
+        
+
+<style>
+  #gdpr-modal-content {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  #gdpr-modal-content .modal-header {
+    padding: 50px 55px 35px 55px;
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  #gdpr-modal-content .modal-footer {
+    padding: 25px 55px 90px;
+  }
+
+  #gdpr-modal-content .modal-content {
+    padding: 0 55px 5px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  #gdpr-modal-content .modal-footer .checkbox-row {
+    font-size: 16px;
+    display: inline-flex;
+  }
+
+  #gdpr-modal-content a {
+    color: #0099ff;
+  }
+  
+  #gdpr-modal-content .button.disabled {
+    background: #f5f6f6 !important;
+  }
+</style>
+
+<div id="gdpr-modal-content">
+  
+<div class="modal-header">HackerEarth’s Privacy Policy and Terms of Service</div>
+  <div class="modal-content">
+      We care about your data privacy. HackerEarth uses the information that you provide to contact you about relevant content, products, and services. <br /> <br />
+
+      Our <a href="/privacy/" target="_blank">Privacy Policy</a> and <a href="/terms-of-service/" target="_blank">Terms of Service</a> will help you understand that you are in control of your data at HackerEarth.
+  </div>
+  <div class="modal-footer">
+    <div class="margin-bottom-15 regular checkbox-row">
+      <input type="checkbox" name="gdpr-tnc" />
+      I have read and I agree.
+    </div>
+    <div class="">
+      <input type="submit" name="submit" value="Proceed" class="button btn-blue fontawesome btn-largest disabled large" id="gdpr-submit" />
+    </div>
+  </div>
+</div>
+
+    </div>
+</div>
+
+    
+
+    <!-- override this block where we do not want the footer -->
+    
+    
+
+    
+
+
+
+
+
+<footer class="marketing-footer footer-large">
+    <div class="fixed-container">
+        <div class="primary-footer">
+            <div class="standard-margin-bottom contact-wrapper">
+                <div class="standard-margin-bottom">
+                    <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/assessment_marketing/he-footer-logo.svg" />
+                </div>
+                <ul class="no-style">
+                    <li>+1-650-461-4192</li>
+                    <li>
+                        <a href="mailto:contact@hackerearth.com" target="_blank">
+                            contact@hackerearth.com
+                        </a>
+                    </li>
+                </ul>
+                <ul class="social-links-container no-style">
+                    <li>
+                        <a href="https://www.facebook.com/HackerEarth/" target="_blank">
+                            <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/assessment_marketing/facebook-logo.svg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/HackerEarth?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" target="_blank">
+                            <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/assessment_marketing/twitter-logo.svg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/company/hackerearth/?originalSubdomain=in" target="_blank">
+                            <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/assessment_marketing/linkedin-logo.svg" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/channel/UCYU6nvKyRYnE5kiG9JXkXpA" target="_blank">
+                            <img src="https://static-fastly.hackerearth.com/static/hackerearth/images/assessment_marketing/youtube-logo.svg" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="standard-margin-bottom">
+                <h3 class="footer-heading">For Developers</h3>
+                <ul class="no-style">
+                    <li>
+                        <a href="https://www.hackerearth.com/challenges/hackathon/" target="_blank">
+                            Hackathons
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/challenges" target="_blank">
+                            Challenges
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/jobs/" target="_blank">
+                            Jobs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/practice/" target="_blank">
+                            Practice
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="standard-margin-bottom">
+                <h3 class="footer-heading">For Businesses</h3>
+                <ul class="no-style">
+                    <li>
+                        <a href="https://www.hackerearth.com/community-hackathons/" target="_blank">
+                            Hackathons
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/recruit/" target="_blank">
+                            Assessments
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/recruit/facecode/" target="_blank">
+                            FaceCode
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.hackerearth.com/recruit/learning-and-development/" target="_blank">
+                            Learning and Development
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="standard-margin-bottom">
+                <h3 class="footer-heading">Knowledge</h3>
+                <ul class="no-style">
+                    <li>
+                        <a href="https://www.hackerearth.com/practice/" target="_blank">
+                            Practice
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/practice/interviews/" target="_blank">
+                            Interview Prep
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/practice/codemonk/" target="_blank">
+                            Codemonk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://engineering.hackerearth.com/" target="_blank">
+                            Engineering Blog
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="standard-margin-bottom">
+                <h3 class="footer-heading">Company</h3>
+                <ul class="no-style">
+                    <li>
+                        <a href="https://www.hackerearth.com/team/" target="_blank">
+                            About us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/companies/hackerearth/jobs/" target="_blank">
+                            Careers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/press/" target="_blank">
+                            Press
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://help.hackerearth.com/hc/en-us" target="_blank">
+                            Support
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/reach-us/" target="_blank">
+                            Contact
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.hackerearth.com/privacy/" target="_blank">
+                            Privacy Policy
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <ul class="secondary-footer no-style">
+        <li>
+            
+            
+                &copy; 2022 HackerEarth All rights reserved
+            
+        </li>
+        <li>
+            <a href="https://www.hackerearth.com/terms-of-service/" target="_blank">
+                Terms of Service
+            </a>
+        </li>
+        <li>
+            <a href="https://www.hackerearth.com/privacy/" target="_blank">
+                Privacy Policy
+            </a>
+        </li>
+    </ul>
+</footer>
+
+
+
+    
+
+    <div class="expand-box" id="recruiter-box">
+        <div class="down-arrow"></div>
+        <ul class="no-margin">
+            
+            
+            
+            <a href="/logout/?next=/practice/algorithms/string-algorithm/string-searching/practice-problems/2/%3Fsort_by%3Dpartially%2520solved%26p_level%3D"><li>Logout</li></a>
+        </ul>
+    </div>
+
+    
+
+    <!-- Include notifications box -->
+    
+
+
+
+<div class="expand-box" id="notifications-box">
+    <div class="down-arrow"></div>
+    <div class="notifications-title-container">
+        <div class="float-left weight-600">Notifications</div>
+        <div class="float-right">
+            <a href="#" ajax="https://www.hackerearth.com/notifications/AJAX/mark-all-read/" class="notif-mark-all-read link smaller clicky-ajax">Mark All as Read</a>
+        </div>
+        <div class="clear"></div>
+    </div> <!-- notifications-title-container -->
+
+    <div class="notifications-container nice-scrollbar" id="notifications-container">
+    </div> <!-- notifications-container -->
+
+    <div class="smaller caps weight-600 align-center less-margin-2 less-margin-2-bottom">
+        <a class="link" href="https://www.hackerearth.com/notifications/">View All Notifications</a>
+    </div>
+</div> <!-- notifications-box -->
+
+
+    <!-- Load notification icon with unread count -->
+    <div id="header-notif-icon-trigger" class="load-pagelet hidden" target="header-notif-icon" ajax="/notifications/pagelets/header-notif-icon-count/" show-loader="false"></div>
+
+    
+
+    
+
+    
+    
+
+        
+        
+
+        <!-- Store any json returned for bigpipe -->
+        <div id="bigpipe-json" class="hidden">
+            
+        </div>
+
+        <!-- Store any html returned for feedback popup -->
+        <div id="user-feedback-popup" class="hidden"></div>
+
+        
+            <div id="common-notification">
+            </div>
+        
+
+        
+        
+
+        
+        <div id="external-link-modal" class="modal-window very-large-modal">
+            <div class="modal-content large dark align-left">
+                <div id="external-link-content-wrapper">
+                    <pre></pre>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- All the scripts go here -->
+        <script>
+            
+            var CURRENT_PATH = "https://www.hackerearth.com/practice/algorithms/string-algorithm/string-searching/practice-problems/2/?sort_by=partially%20solved&p_level=";
+            var HISTORY = '';
+            var DEFAULT_REAL_NUMBER_PRECISION = 2;
+            var DECIMAL_PRECISION_ERROR_TEXT = "Only {decimal_limit} decimal places allowed";
+            var SOMETHING_WENT_WRONG_ERROR_TEXT = "Something went wrong. Please try again later.";
+
+            // Make code constants available globally in JS
+            var MAP_LANG_TO_NAME = {"BASH": "Bash", "BEFUNGE": "Befunge", "C": "C", "CLOJURE": "Clojure", "CPP11": "C++11", "CPP": "C++", "CPP14": "C++14", "CPP17": "C++17", "CSHARP": "C#", "CSS": "CSS", "D": "D", "ERLANG": "Erlang", "FSHARP": "F#", "GO": "Go", "GROOVY": "Groovy", "HASKELL": "Haskell", "HTML": "HTML", "JAVA": "Java", "JAVA8": "Java 8", "JAVA14": "Java 14", "JAVASCRIPT": "JavaScript(Rhino)", "JAVASCRIPT_NODE": "JavaScript(Node.js)", "JAVASCRIPT_UI": "JavaScript", "JULIA": "Julia", "LISP": "Lisp", "LISP_SBCL": "Lisp (SBCL)", "LUA": "Lua", "LOLCODE": "LOLCODE", "MSSQL": "MSSQL", "MYSQL": "MySQL", "OBJECTIVEC": "Objective-C", "OCAML": "OCaml", "OCTAVE": "Octave", "PASCAL": "Pascal", "PERL": "Perl", "PHP": "PHP", "POSTGRESQL": "PostgreSQL", "PYTHON3": "Python 3", "PYTHON3_8": "Python 3.8", "PYTHON": "Python", "R": "R(RScript)", "RACKET": "Racket", "RUBY": "Ruby", "RUST": "Rust", "SCALA": "Scala", "SCALA_2118": "Scala 2.11.8", "SWIFT_4_1": "Swift-4.1", "SWIFT": "Swift", "TEXTFILE": "Text", "Text": "Text", "TYPESCRIPT": "TypeScript", "vp": "N/A", "VB": "Visual Basic", "WHENEVER": "Whenever", "ORACLE_DB": "Oracle_Db", "KOTLIN": "Kotlin"};
+            var MAP_NAME_TO_LANG = {"Bash": "BASH", "Befunge": "BEFUNGE", "C": "C", "Clojure": "CLOJURE", "C++11": "CPP11", "C++": "CPP", "C++14": "CPP14", "C++17": "CPP17", "C#": "CSHARP", "CSS": "CSS", "D": "D", "Erlang": "ERLANG", "F#": "FSHARP", "Go": "GO", "Groovy": "GROOVY", "Haskell": "HASKELL", "HTML": "HTML", "Java": "JAVA", "Java 8": "JAVA8", "Java 14": "JAVA14", "JavaScript(Rhino)": "JAVASCRIPT", "JavaScript(Node.js)": "JAVASCRIPT_NODE", "JavaScript": "JAVASCRIPT_UI", "Julia": "JULIA", "Lisp": "LISP", "Lisp (SBCL)": "LISP_SBCL", "Lua": "LUA", "LOLCODE": "LOLCODE", "MSSQL": "MSSQL", "MySQL": "MYSQL", "Objective-C": "OBJECTIVEC", "OCaml": "OCAML", "Octave": "OCTAVE", "Pascal": "PASCAL", "Perl": "PERL", "PHP": "PHP", "PostgreSQL": "POSTGRESQL", "Python 3": "PYTHON3", "Python 3.8": "PYTHON3_8", "Python": "PYTHON", "R(RScript)": "R", "Racket": "RACKET", "Ruby": "RUBY", "Rust": "RUST", "Scala": "SCALA", "Scala 2.11.8": "SCALA_2118", "Swift-4.1": "SWIFT_4_1", "Swift": "SWIFT", "Text": "Text", "TypeScript": "TYPESCRIPT", "N/A": "vp", "Visual Basic": "VB", "Whenever": "WHENEVER", "Oracle_Db": "ORACLE_DB", "Kotlin": "KOTLIN"};
+        </script>
+
+        
+
+        <!-- alljs: static_media/js/jquery-1.7.min.patched.js static_media/js/jquery.color.js static_media/js/jquery.elastic.js static_media/js/ajaxSend.js  static_media/js/jquery.inview.js  static_media/js/tooltip/jquery.tipTip.modified.js  static_media/offline/offline.min.js  static_media/js/watermark.min.js  static_media/history.js?v=0.1/scripts/bundled/html4html5/jquery.history.js  static_media/js/jquery.nicescroll.js  static_media/simplemodal/simplemodal.js static_media/js/jquery.sticky.js static_media/js/pusher.min.js static_media/js/ifvisible.min.js static_media/feeds/feeds.js static_media/base/progress_bar.js -->
+        
+
+
+<script>
+    UPLOADING_TEXT = "Uploading";
+    UPLOADED_TEXT = "Uploaded";
+    SAVING_TEXT = "Saving..";
+    UPLOAD_SUCCESS_MESSAGE = "File saved successfully.";
+    UPLOAD_ERROR_MESSAGE = "An error occured while saving, please try again in sometime.";
+</script>
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/alljs.e5bc5432d816.js" crossorigin="anonymous" ></script>
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/base/base1.0.1.dccda20e81a0.js" crossorigin="anonymous" ></script>
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/bigpipe/bigpipe.c6f19f153efc.js" crossorigin="anonymous" ></script>
+        
+
+
+<script type="text/javascript">
+var CONFIRM_COMMENT_DELETE = "Are you sure, you want to delete comment?";
+var COMMENT_NOT_DELETED = "Comment could not be deleted!";
+var CONFORM_COMMENT_MARK_SPAM = "Are you sure, you want to mark this comment as spam?";
+var COMMENT_NOT_MARKED_SPAM = "Comment could not be marked as spam!";
+var ENTER_15_CHARS = "Enter at least 15 characters";
+var JUST_X_MORE = "Just {count} more to go";
+</script>
+        <script>
+            var MAP_MARKER_SIGNUP_IMAGE = 'https://static-fastly.hackerearth.com/static/metrics/map-marker.png';
+            var MAP_MARKER_LOGIN_IMAGE = 'https://static-fastly.hackerearth.com/static/metrics/map-marker-login.png';
+            var AJAX_URL = '';
+        </script>
+        
+<script>
+    // firestore credentials
+    var firebaseConfig = {
+        apiKey:'AIzaSyD7oH2r4iyvysFx47-IVwrzdwIuw7Ici90',
+        authDomain:'he-production.firebaseapp.com',
+        databaseURL:'https://he-production.firebaseio.com',
+        projectId:'he-production',
+        storageBucket:'he-production.appspot.com',
+        messagingSenderId:'100736274227',
+        appId:'1:100736274227:web:fdd60d6929555af4d3b846'
+    };
+    window.firebaseConfig = firebaseConfig;
+</script>
+
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/firebase/firebase-app.a75f50850a09.js" crossorigin="anonymous" ></script>
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/firebase/firebase-firestore.ac7f12977426.js" crossorigin="anonymous" ></script>
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/realtime/firestore_realtime.551dabc1780c.js" crossorigin="anonymous" ></script>
+
+
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/base/history.9f9bce34e5c7.js" crossorigin="anonymous" ></script>
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/commentUtils.dadb11872038.js" crossorigin="anonymous" ></script>
+
+
+        
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/offline/offline.min.7ce195ae7071.js" crossorigin="anonymous" ></script>
+
+        <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_SVG"></script>
+
+
+<script type="text/x-mathjax-config">
+    var options = {
+      messageStyle: "none",
+      jax: ["input/TeX", "output/SVG", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [['$$','$$'], ['\\(', '\\)']],
+        displayMath: [['$$$', '$$$'], ['\\[', '\\]']],
+        preview: "none"
+      },
+      SVG: {
+        useGlobalCache: false
+      }
+    };
+
+    // modify the options only in case of assessments, since for proxima-nova mathjax renders very small
+    // text in chrome
+    if (window.isProximaNova) {
+      options = {
+        messageStyle: "none",
+        jax: ["input/TeX", "output/SVG", "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [['$$','$$'], ['\\(', '\\)']],
+          displayMath: [['$$$', '$$$'], ['\\[', '\\]']],
+          preview: "none"
+        },
+        SVG: {
+          useGlobalCache: false,
+          scale: MathJax.Hub.Browser.isChrome ? 175 : 100,
+          minScaleAdjust: 100
+        },
+        "HTML-CSS": {
+          minScaleAdjust: 100
+        },
+        "CommonHTML": {
+          minScaleAdjust: 100
+        }
+      }
+    }
+
+    MathJax.Hub.Config(options);
+</script>
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/mathjax.3489d4a1e549.js" crossorigin="anonymous" ></script>
+<script type="text/javascript">
+    window.addEventListener("load", function() {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    });
+</script>
+
+        <script>
+            Offline.options = {
+                interceptRequests: false,
+                requests: false,
+            };
+        </script>
+
+        
+
+        
+
+
+<script>
+
+$(document).ready(function (){
+    $('#header-notif-icon-trigger').click();
+
+    
+
+    
+    
+
+    
+
+    // show kone ge widget if not visited
+    
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    
+    var m_links = {};
+    var m_elements = {
+        '#modal-login-form input[type=submit]': 'Modal Email Login',
+        '#modal-signup-form input[type=submit]': 'Modal Email Signup',
+        '.modal-social-login .btn-facebook': 'Modal Facebook Login',
+        '.modal-social-login .btn-google': 'Modal Google Login',
+        '.modal-social-signup .btn-facebook': 'Modal Facebook Signup',
+        '.modal-social-signup .btn-google': 'Modal Google Signup',
+        '.top-banner .login-banner a': 'Signup after banner click',
+    };
+    
+    for (var key in m_elements) {
+        $(key).live('click', {'key': key }, function(e) {
+            var key = e.data.key;
+            mixpanel.track('Click', {'name': m_elements[key]});
+        });
+    }
+    for (var key in m_links) {
+        mixpanel.track_links(key, 'Click', {'name': m_links[key]});
+    }
+});
+</script>
+
+
+
+
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/search/search.1.0.f3e89277dbfc.js" crossorigin="anonymous" defer></script>
+
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/base/gdpr-modal.e3306212a68a.js" crossorigin="anonymous" ></script>
+
+
+
+        <script>
+            // Used in search
+            var is_user_logged_in = false;
+        </script>
+
+        
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/detect_timezone.12f6ba68823f.js" crossorigin="anonymous" ></script>
+        <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/js/mapped_tz.97a5c55af78d.js" crossorigin="anonymous" ></script>
+        <script>
+
+            function setTimezoneCookie(detected_user_tz) {
+                /* Sets the detected user timezone as a cookie in the browser.
+                   If someone changes it or removes it, a sanity check is
+                   performed and the cookie is reset.
+
+                   This cookie is set for ready availability of user timezone
+                   in the backend.
+                */
+
+                const USER_TIMEZONE_COOKIE = 'user_tz';
+                // Try to get the existing user timezone cookie stored
+                // in the browser.
+                user_tz = readCookie(USER_TIMEZONE_COOKIE);
+
+                // Flag to determine whether a new cookie has to be created.
+                create_cookie = false;
+
+                if(user_tz) {
+                    if(user_tz !== detected_user_tz) {
+                        // If someone has changed the cookie in some way, we
+                        // set a new cookie.
+                        eraseCookie(USER_TIMEZONE_COOKIE);
+                        create_cookie = true;
+                    }
+                } else {
+                    create_cookie = true;
+                }
+
+                // Create a new cookie if create_cookie flag is set.
+                createCookie(USER_TIMEZONE_COOKIE, detected_user_tz, 1);
+
+            }
+            $(document).ready(function(){
+                if (Intl && Intl.DateTimeFormat){
+                    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    // Map timezone name to a name that is familiar to our backend
+                    if (mapped_tz[timezone]) {
+                        timezone = mapped_tz[timezone] 
+                    }
+                } else {
+                    var timezone = jstz.determine_timezone();
+                    timezone = timezone.name();
+                }
+                // Set as a cookie in browser for easy access in backend.
+                setTimezoneCookie(timezone);
+
+                // Set as a js variable for easy access across frontend.
+                USER_TIMEZONE = timezone
+
+                
+
+                
+
+                
+                
+                
+                
+                
+
+                
+
+                
+                    $.ajax({
+                        type: "POST",
+                        url:"/users/AJAX/set-timezone/",
+                        data: {
+                        'timezone': timezone,
+                        },
+                    });
+                
+            });
+        </script>
+        
+
+        
+
+        <script type="text/javascript">
+            
+            $(document).ready(function(){
+                //mixpanel delegate links custom method
+                mixpanel.delegate_links = function (parent, selector, event_name, properties) {
+                    properties = properties || {};
+                    parent = parent || document.body;
+                    parent = $(parent);
+                    parent.on('click', selector, function (event) {
+                        var new_tab = event.which === 2 || event.metaKey || event.target.target === '_blank' || this.target === '_blank';
+                        properties.url = event.target.href || this.href;
+                        function callback() {
+                            if (new_tab) {
+                                return;
+                            }
+                            window.location = properties.url;
+                        }
+                        if (!new_tab) {
+                            event.preventDefault();
+                            setTimeout(callback, 300);
+                        }
+                        mixpanel.track(event_name, properties, callback);
+                    });
+                };
+            });
+            
+        </script>
+
+        
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/social_share/facebook.397e66b669e7.js" crossorigin="anonymous" ></script>
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/problems/problem.f6c9290c008d.js" crossorigin="anonymous" ></script>
+    <script type="text/javascript" src="https://static-fastly.hackerearth.com/static/problems/problem_topic.019e7b6e4cfa.js" crossorigin="anonymous" ></script>
+
+    <script type="text/javascript">
+        setTimeout(function(){var a=document.createElement("script");
+        var b=document.getElementsByTagName("script")[0];
+        a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/3865.js?"+Math.floor(new Date().getTime()/3600000);
+        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+
+        $(document).ready(function(){
+            var url = '/AJAX/last_visited_practice/';
+            var location = window.location.href;
+            var params = {
+                track : 'Algorithms',
+                topic : 'String Algorithms',
+                sub_topic :'String Searching',
+                url : encodeURI(location)
+            }
+            var liveEvents = null;
+            send_url(url,params);
+
+            ttl = new Date().getTime() + 24 * 60 * 60 * 1000
+
+            var oldRecommended = JSON.parse(localStorage.getItem('recommendation'));
+
+            if (!oldRecommended || !oldRecommended.items || oldRecommended['expire'] < new Date().getTime()) {
+                localStorage.setItem('recommendation', JSON.stringify({
+                    items: [liveEvents[0].id],
+                    expire: ttl
+                }))
+                $("#recommendation #challenge-title").html(liveEvents[0].company + " is hiring, checkout "+ liveEvents[0].title)
+                $("#recommendation #event-link").attr('href', liveEvents[0].link)
+                $("#recommendation #view-challenge").removeClass('hide')
+            } else {
+                var currentEvent;
+                liveEvents.forEach(function (arrayItem) {
+                    if(!oldRecommended.items.includes(arrayItem.id) && !currentEvent) {
+                        currentEvent = arrayItem;
+                        oldRecommended.items.push(arrayItem.id)
+                        return;
+                    }
+                });
+
+                if (currentEvent) {
+                    $("#recommendation #challenge-title").html(currentEvent.company + " is hiring, checkout " + currentEvent.title)
+                    $("#recommendation #event-link").attr('href', currentEvent.link)
+                    $("#recommendation #view-challenge").removeClass('hide')
+                    localStorage.setItem('recommendation', JSON.stringify(oldRecommended))
+                } else {
+                    $("#recommendation #challenge-title").html(liveEvents[0].company + " is hiring, checkout " + liveEvents[0].title)
+                    $("#recommendation #event-link").attr('href', liveEvents[0].link)
+                    $("#recommendation #view-challenge").removeClass('hide')
+                    localStorage.setItem('recommendation', JSON.stringify({
+                    items: [liveEvents[0].id],
+                    expire: ttl
+                }))
+                }
+            }
+
+        
+
+            $(".left-nav-link").each(function(){
+                var p_url = $(this).attr('href');
+                $(this).attr('href', p_url+'practice-problems/');
+            });
+
+            
+            
+        });
+    </script>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Hackerearth",
+                "item": "https://www.hackerearth.com"
+            },{
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Practice",
+                "item": "https://www.hackerearth.com/practice/"
+            },{
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Algorithms",
+                "item": "https://www.hackerearth.com/practice/algorithms/"
+            },{
+                "@type": "ListItem",
+                "position": 4,
+                "name": "String Algorithms",
+                "item": "https://www.hackerearth.com/practice/algorithms/string-algorithm/"
+            },{
+                "@type": "ListItem",
+                "position": 5,
+                "name": "String Searching",
+                "item": "https://www.hackerearth.com/practice/algorithms/string-algorithm/string-searching/"
+            }]
+        }
+    </script>
+
+
+        
+        <!-- mixpanel analytics start -->
+        <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);mixpanel.init("4c30b8635363027dfb780d5a61785112");
+        </script>
+        <!-- mixpanel analytics end -->
+        <script type="text/javascript">
+            
+                
+                    mixpanel.unregister("username");
+                    mixpanel.unregister("email");
+                    mixpanel.unregister("date_of_joining");
+                    mixpanel.unregister("user_bucket");
+                    mixpanel.unregister("company");
+                    mixpanel.unregister("is_recruiter");
+                    mixpanel.register({
+                        "url_path": "/practice/algorithms/string-algorithm/string-searching/practice-problems/2/"
+                    });
+                
+            
+        </script>
+        
+
+        
+        
+        <div id="fb-root"></div>
+        <script>
+            <!-- facebook button -->
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            <!-- twitter button -->
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+            <!-- google+ button -->
+            (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+        
+        
+
+        
+            
+
+<link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/cookie_consent/cookiebar.ffe531fab344.css"/>
+
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/cookie_consent/cookiebar.70181766db90.js" crossorigin="anonymous" ></script>
+
+
+        
+
+        
+            
+        
+
+        
+            <!-- Hackerearth Zendesk Widget -->
+
+
+
+
+<link rel="stylesheet" href="https://static-fastly.hackerearth.com/static/base/customer-support-widget.c878b5e2cd83.css"/>
+
+<script>
+    var COUNTRY_CODE = "VN";
+    var TRIAL_DAYS_LEFT =  0 ;
+    var INTERCOM_APP_ID = 'nofrzq7u';
+    var IS_INTERCOM_FEATUTRE_ENABLE = "True";
+
+    var isRecruiterDashboard = false;
+    var horizontalOffset = "-500px";
+    var zESettingsRecruiterDashboard = {
+        webWidget: {
+            launcher: {
+                label: {
+                    "en-US": "",
+                    "*": "",
+                }
+            },
+            offset: {
+                horizontal: horizontalOffset, /* To hide actual launcher widget */
+                vertical: "50px",
+                mobile: {
+                  horizontal: horizontalOffset,
+                },
+            },
+            position: {
+                horizontal: 'right',
+                vertical: 'top'
+            }
+        }
+    };
+
+    var zESettingsDefault = {
+        webWidget: {
+            launcher: {
+                label: {
+                    "en-US": "",
+                    "*": "",
+                }
+            },
+            offset: {
+                horizontal: horizontalOffset, /* To hide actual launcher widget */
+            }
+        }
+    };
+    if (isRecruiterDashboard) {
+        window.zESettings = zESettingsRecruiterDashboard;
+    } else {
+        window.zESettings = zESettingsDefault;
+    }
+    /*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="hackerearth.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
+    /*]]>*/
+
+    var ZENDESK_LOCALE = "en-US";
+    var USER_EMAIL = "";
+    var USER_NAME = "";
+    var ATTACHMENT_LABEL = "Attachments (Optional)";
+    var DESCRIPTION_LABEL = "How can we help you, {name}?";
+
+    
+</script>
+<script type="text/javascript" src="https://static-fastly.hackerearth.com/static/base/customer-support-widget.df6b5efa9ec6.js" crossorigin="anonymous" defer></script>
+
+
+    <div class="customer-support-icon">
+        <p>?</p>
+    </div>
+
+
+        
+    </body>
+</html>
+

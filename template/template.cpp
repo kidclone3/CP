@@ -62,7 +62,9 @@ template <class T> void printPair(T &x) {
   }
   cerr << "\n";
 };
-int solve() { return 0; }
+int solve() { 
+    return 0; 
+}
 int main() {
   IOS;
 #ifndef ONLINE_JUDGE

@@ -61,36 +61,64 @@ void printPair(T &x)
 };
 
 const int N = 2e5+5;
-const int sz;
-vl bit(N, 0LL), bit1(N), bit2(N);
+int n;
+vl bit(N), cnt(N);
 
-void build(vi &a) {
-    sz = a.size();
-    for(int i = 1; i < size; ++i) {
+void build(vl &a) {
+    n = a.size();
+    bit.resize(n);
+    cnt.resize(n);
+    for(int i = 1; i < n; ++i) {
         int j = i + (i & -i);
         bit[i] += a[i];
-        if (j < sz) bit[j] += bit[i];
+        if (j < n) bit[j] += bit[i];
     }
 }
 
-void updatePoint(int u, int v) {
-    for(int i=u; i < size; i += i & -i) bit[]
+void updatePoint(vl &b, int u, ll v) {
+    for(int i = u; i < n; i += i & -i) b[i] += v;
+}
+
+void update(int u, int v) {
+    updatePoint(bit, u, -(u - 1));
+    updatePoint(bit, v+1, u - 1);
+    updatePoint(cnt, u, 1);
+    updatePoint(cnt, v+1, -1);
+}
+
+ll get(vl &b, int p) {
+    ll ans = 0LL;
+    for(int i = p; i > 0; i -= i & -i) {
+        ans += b[i];
+    }
+    return ans;
+}
+
+ll getPrefixSum(int p) {
+    return get(bit, p) + p * get(cnt, p);
+}
+
+ll getRange(int l, int r) {
+    return getPrefixSum(r) -  getPrefixSum(l-1);
 }
 
 int solve() {
-    int n, q; cin >> n >> q;
+    int q; cin >> n >> q;
     vl a(n+1);
     FOR1(n) cin >> a[i];
     build(a);
     FOR(q) {
-        int qq, a, b;
-        cin >> qq >> a >> b;
+        int qq, l, r;
+        cin >> qq >> l >> r;
         if (qq == 1) {
-
+            update(l, r);
         } else {
-
+            cout << getRange(l, r) << '\n';
         }
     }
+    for(int i = 1; i < n; ++i) cout << getRange(i, i) <<" ";
+    print(bit);
+    print(cnt);
     return 0;
 }
 int main() {

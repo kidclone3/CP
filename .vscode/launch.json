@@ -4,14 +4,18 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
-    
         {
-            "name": "Python: Current File",
-            "type": "python",
+            "name": "C/C++: clang++ build and debug active file",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb",
+            "preLaunchTask": "C/C++: clang++ build active file"
         },
         {
             "name": "g++ - Build and debug active file",
@@ -35,6 +39,13 @@
             "preLaunchTask": "C/C++: g++ build and debug active file",
             // "preLaunchTask": "C/C++: g++ compile",
             "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
         }
     ]
 }
