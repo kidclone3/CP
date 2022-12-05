@@ -55,3 +55,4 @@
 .vimspector*
 
 # Useless files
+.*cache

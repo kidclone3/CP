@@ -6,7 +6,8 @@
 using namespace std;
 // using namespace __gnu_pbds;
 // typedef tree<int, null_type, less<int>, rb_tree_tag,
-// tree_order_statistics_node_update> ordered_tree; typedef tree<int, null_type,
+// tree_order_statistics_node_update> ordered_tree; 
+// typedef tree<int, null_type,
 // less_equal<int>, rb_tree_tag, tree_order_statistics_node_update>
 // multi_ordered_tree; tree.find_by_order(x); tree.order_of_key(x); remove
 // element in multi_ordered_tree: tree.erase(--tree.lower_bound(x));
@@ -73,6 +74,7 @@ int main() {
 #else
   // online submission
 #endif
+  
   solve();
   return 0;
 }

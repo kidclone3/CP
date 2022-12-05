@@ -1,3 +1,11 @@
+// #include <cassert>
+#include <bits/stdc++.h>
+// #include <array>
+// #include <iostream>
+// #include <vector>
+// #include <pair>
+using namespace std;
+
 // Binary Trie
 // Based on https://judge.yosupo.jp/submission/72657
 // Supports:
@@ -39,19 +47,19 @@ template<
 
     // return X: X ^ xor_val is minimum
     pair<Val, Node> min_element(Val xor_val = 0) {
-        assert(0 < size());
+        //assert(0 < size());
         return kth_element(0, xor_val);
     }
 
     // return X: X ^ xor_val is maximum
     pair<Val, Node> max_element(Val xor_val = 0) {
-        assert(0 < size());
+        //assert(0 < size());
         return kth_element(size() - 1, xor_val);
     }
 
     // return X: X ^ xor_val is K-th (0 <= K < size())
     pair<Val, Node> kth_element(Count k, Val xor_val = 0) {
-        assert(0 <= k && k < size());
+        //assert(0 <= k && k < size());
         int u = 0;
         Val x = 0;
         for (int i = B - 1; i >= 0; i--) {
@@ -85,8 +93,8 @@ template<
     vector<Node> nodes;
 
     int get_child(int p, int b) {
-        assert(0 <= p && p < (int) nodes.size());
-        assert(0 <= b && b < 2);
+        //assert(0 <= p && p < (int) nodes.size());
+        //assert(0 <= b && b < 2);
         if (nodes[p].child[b] == -1) {
             nodes[p].child[b] = nodes.size();
             nodes.push_back(Node{});
@@ -98,15 +106,42 @@ template<
         int u = 0;
         for (int i = B - 1; i >= 0; i--) {
             nodes[u].count += cnt;
-            assert(nodes[u].count >= 0);  // prevent over delete
+            //assert(nodes[u].count >= 0);  // prevent over delete
             int b = get_bit(x, i);
             u = get_child(u, b);
         }
         nodes[u].count += cnt;
-        assert(nodes[u].count >= 0);  // prevent over delete
+        //assert(nodes[u].count >= 0);  // prevent over delete
     }
 
     inline int get_bit(Val v, int bit) {
         return (v >> bit) & 1;
     }
 };
+int main() {
+    int n; cin >> n;
+    vector<long long> a(n);
+    BinaryTrie<long long, long long> bt;
+    bt.insert(0);
+    long long preXor = 0LL;
+    long long res = LLONG_MIN;
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+        preXor ^= a[i];
+        bt.insert(preXor);
+        res = max(res, bt.max_element(preXor).first);
+    }
+    cout << res;
+    // long long xor_sum = 0LL;
+    // for(int i = 0 ; i < n; ++i) {
+    //     xor_sum ^= a[i];
+    //     auto tmp = bt.max_element(xor_sum);
+    //     mx.push_back(tmp.first);
+    //     
+    // }
+    // mx.push_back(bt.max_element().first);
+    // auto ans = bt.max_element(); 
+    // cout << ans.first;
+    // for(auto &it: mx) cout << it << " ";
+    // cout << *max_element(begin(mx), end(mx));
+}
