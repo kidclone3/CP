@@ -1,0 +1,42 @@
+Các cô bò của Dum chuẩn bị tham gia cuộc thi Hoa hậu bò sữa. Các thí sinh phải chuẩn
+bị phần thi “Cô bò ăn ảnh” vì thế Dum quyết định sắm một cái máy ảnh mới. Chiếc
+máy của chú ta có thẻ nhớ dung lượng là d megabytes (MB). Tùy mức độ điều chỉnh
+máy ảnh mà có thể chụp những bức ảnh có chất lượng cao hay thấp, một bức ảnh có
+chất lượng thấp sẽ chiếm dung lượng là a MB của không gian trống trong thẻ nhớ,
+một bức ảnh có chất lượng cao sẽ chiếm dung lượng là b MB của không gian trống
+trong thẻ nhớ.
+Có 𝑵 cô bò sẽ được chụp ảnh (đánh số thứ tự từ 1 đến 𝑁), cô bò thứ i yêu cầu chụp
+xi bức ảnh chất lượng thấp và yi bức ảnh chất lượng cao. 
+Hãy giúp nhiếp ảnh gia Dum của chúng ta đưa ra phương án hợp lý để có thể phục
+vụ được nhiều cô bò nhất.
+INPUT:
+	Dòng 1: số nguyên n - số lượng cô bò.
+	Dòng 2: số nguyên d - dung lượng của thẻ nhớ.
+    Dòng 3: 2 số nguyên a, b - dung lượng của ảnh chất lượng thấp và chất lượng cao.
+    n dòng tiếp theo: Mỗi dòng có 2 số nguyên x, y - số ảnh chất lượng thấp và chất lượng cao.
+OUTPUT:
+	1 số duy nhất: số lượng cô bò tối đa được chụp ảnh.
+Giới hạn: 
+	n <= 1e5
+    a, b <= 1e4
+    x, y <= 1e3
+    d <= 1e9
+
+Example test:
+Input:
+    10
+    100
+    5 10
+    3 4
+    5 3
+    1 10
+    4 13
+    7 11
+    2 2
+    15 20
+    6 11
+    12 13
+    13 12
+    
+Output:
+    2

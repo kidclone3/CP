@@ -1,0 +1,62 @@
+// RMQ {{{
+//
+// Sparse table
+// Usage:
+// RMQ<int, _min> st(v);
+//
+// Note:
+// - doesn't work for empty range
+//
+// Tested:
+// - https://judge.yosupo.jp/problem/staticrmq
+
+#include <iostream>
+#include <vector>
+using namespace std;
+template <class T, T (*op)(T, T)> struct RMQ {
+  RMQ() = default;
+  RMQ(const vector<int> &v) : t{v}, n{(int)v.size()} {
+    for (int k = 1; (1 << k) <= n; ++k) {
+      t.emplace_back(n - (1 << k) + 1);
+      for (int i = 0; i + (1 << k) <= n; ++i) {
+        t[k][i] = op(t[k - 1][i], t[k - 1][i + (1 << (k - 1))]);
+      }
+    }
+  }
+  // get range [l, r-1]
+  // doesn't work for empty range
+  T get(int l, int r) const {
+    // assert(0 <= l && l < r && r <= n);
+    if (l == r)
+      return t[0][l];
+    int k = __lg(r - l);
+    return op(t[k][l], t[k][r - (1 << k)]);
+  }
+
+private:
+  vector<vector<T>> t;
+  int n;
+};
+template <class T> T _min(T a, T b) { return a < b ? a : b; }
+
+template <class T> T _max(T a, T b) { return a > b ? a : b; }
+
+template <class T> T _sum(T a, T b) { return a + b; }
+
+int main() {
+  int n, q;
+  cin >> n >> q;
+  vector<int> a(n);
+  for (int i = 0; i < n; ++i)
+    cin >> a[i];
+  RMQ<int, _sum> rmq(a);
+  while (q) {
+    q--;
+    int l, r;
+    cin >> l >> r;
+    l--;
+    r--;
+    cout << rmq.get(l, r) << "\n";
+  }
+  return 0;
+}

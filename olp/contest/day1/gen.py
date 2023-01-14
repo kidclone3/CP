@@ -1,0 +1,13 @@
+import random
+# n = 2*int(1e5)
+n = random.randint(1, 10)
+q = random.randint(1, n)
+N = int(1e9)
+print(n, q)
+for i in range(n): print(random.randint(1, N), end = " ")
+print()
+for i in range(q): print(random.randint(1, n))
+# for i in range(1, 1, n+1): print(i)
+# for i in range(n): print(random.randint(1, N), end = " ")
+# print(n)
+# for i in range(n): print(random.randint(1, n))

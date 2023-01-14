@@ -1,0 +1,6 @@
+i.cpp:55:22: error: size of array ‘dp’ is not an integral constant-expression
+   55 | long double dp[maxN][maxN];
+      |                      ^~~~
+i.cpp:55:16: error: size of array ‘dp’ is not an integral constant-expression
+   55 | long double dp[maxN][maxN];
+      |                ^~~~
