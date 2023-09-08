@@ -5,7 +5,7 @@ const int d4x[] = {-1, 0, 1, 0},
           d8x[] = {-1, -1, -1, 0, 0, 1, 1, 1},
           d8y[] = {-1, 0, 1, -1, 1, -1, 0, 1},
           N = 2e3+1,
-          oo = 1e9;
+          inf = 1e9;
 int n, // number of vertices 
     m, // number of edges
     s, // start vertex

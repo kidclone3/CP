@@ -1,4 +1,4 @@
-const int oo = 1e9;
+const int inf = 1e9;
 vvii G;
 vi d;
 
@@ -30,7 +30,7 @@ int main(){
 
     int n, m;
     G = vvii(n+1);
-    d = vi(n+1, oo);
+    d = vi(n+1, inf);
     while(m--){
         int u, v, w;
         cin >> u >> v >> w;

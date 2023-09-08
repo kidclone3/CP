@@ -7,7 +7,7 @@
 using namespace std;
 
 const int N = 100005;
-const int oo = 0x3c3c3c3c;
+const int inf = 0x3c3c3c3c;
 
 int n, m, Num[N], Low[N], cnt = 0;
 vector<int> a[N];
@@ -32,7 +32,7 @@ void visit(int u) {
         do {
             v = st.top();
             st.pop();
-            Num[v] = Low[v] = oo;  // remove v from graph
+            Num[v] = Low[v] = inf;  // remove v from graph
         } while (v != u);
     }
 }
